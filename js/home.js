@@ -5,6 +5,9 @@ $("#largeImage").ready(function() {
 
 $(document).ready(function() {
 	editArrow();
+	setTimeout(function() {
+		editArrow();
+	}, 1000);
 });
 
 $(window).resize(function() {
@@ -13,11 +16,13 @@ $(window).resize(function() {
 
 function editArrow() {
 	var top = parseInt($("#bigImage").css('margin-top'));
-	if (top) {
+	if (top > 0 && $("#largeImage").height()*0.12 > 0) {
 		$("#arrow").css("top", top + $("#largeImage").height()*0.12);
 	} else {
 		$("#arrow").css("top", 89 + $("#largeImage").height()*0.12);
-		editArrow();
+		setTimeout(function() {
+			editArrow();
+		}, 100);
 	}
 }
 
