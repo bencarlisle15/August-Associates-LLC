@@ -5,9 +5,6 @@ $("#largeImage").ready(function() {
 
 $(document).ready(function() {
 	editArrow();
-	setTimeout(function() {
-		editArrow();
-	}, 1000);
 });
 
 $(window).resize(function() {
@@ -15,7 +12,13 @@ $(window).resize(function() {
 });
 
 function editArrow() {
-	$("#arrow").css("top", parseInt($("#bigImage").css('margin-top')) + $("#largeImage").height()*0.12);
+	var top = parseInt($("#bigImage").css('margin-top'));
+	if (top) {
+		$("#arrow").css("top", top + $("#largeImage").height()*0.12);
+	} else {
+		$("#arrow").css("top", 89 + $("#largeImage").height()*0.12);
+		editArrow();
+	}
 }
 
 function submitSearch() {
