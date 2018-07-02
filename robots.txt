@@ -1,0 +1,12 @@
+User-Agent: *
+Disallow:
+Allow: /
+Allow: /find-homes
+Allow: /sell-your-home
+Allow: /mortgage
+Allow: /agents/joseph
+Allow: /agents/wendy
+Allow: /testimonials
+Allow: /contact
+
+Sitemap: https://www.augustassociatesllc.net/sitemap_location.xml

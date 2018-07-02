@@ -1,0 +1,22 @@
+.errorPage {
+	width: 100%;
+}
+
+.errorCode {
+	font-size: 36pt;
+}
+
+#homeNav {
+	border: 1px solid;
+}
+
+.errorPage > * {
+	margin: 20px auto;
+	display: block;
+	width: 50%;
+	z-index: 4;
+}
+
+.errorWhatToDo {
+	text-align: center;
+}

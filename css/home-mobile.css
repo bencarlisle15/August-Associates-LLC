@@ -1,0 +1,137 @@
+#linkButtons > * {
+	text-align: center;
+	text-decoration: none;
+}
+
+#socialButtons {
+	display: flex;
+	flex-direction: row;
+	margin-bottom: 50px;
+}
+
+#homeNav {
+	border: 1px solid;
+}
+
+#fbLike {
+	margin-top: 12px;
+	height: 20px ;
+}
+
+#contactForm {
+	display: flex;
+	flex-direction: column;
+	margin: 10px;
+	width: calc(100%-10px);
+	margin-bottom: 30px;
+}
+
+#contactFormName, #contactFormEmail, #contactFormPhone, #contactFormText, #contactFormSubmit {
+	padding: 12px 20px;
+	margin: 8px 0;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	box-sizing: border-box;
+}
+
+#searchForm {
+	border-radius: 5px;
+	padding: 8px;
+}
+
+#searchFirstLine, #searchSecondLine, #searchSubmitWrapper {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+#searchForm > * > *, #searchSubmit {
+	padding: 12px 4px;
+	margin: 8px 4px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	box-sizing: border-box;
+	min-width: 100px;
+	flex: 1;
+}
+
+#infoWrapper {
+	margin: 0px;
+}
+
+#whoInfo, #missionInfo {
+	min-width: 200px;
+	margin: 10px;
+}
+
+#imageWrapper {
+	display: flex;
+	justify-content: center;
+	padding-top: 100px;
+}
+
+#infoTitle, #infoText {
+	flex: 1;
+}
+
+#infoText > * {
+	text-align: center;
+}
+
+#ourInfo, #ourInfo > * {
+	background-color:transparent;
+	font-size: 14pt;
+	margin: 10px;
+}
+
+#infoWrapper > a:link {
+	color: #73BC46;
+	background-color: transparent;
+	text-decoration: none;
+}
+
+#infoWrapper > a:visited {
+	color: gray;
+	background-color: transparent;
+	text-decoration: underline;
+}
+
+#infoWrapper > a:hover {
+	color: #45a049;
+	background-color: transparent;
+	text-decoration: underline;
+}
+
+#infoWrapper > a:active {
+	color: yellow;
+	background-color: transparent;
+	text-decoration: underline;
+}
+
+.caption {
+	text-align: center;
+}
+
+#linkButtons, #whoMissionInfo, #infoContact {
+	width: calc(100vw-10px);
+	display: flex;
+	flex-wrap: wrap;
+}
+
+#linkButtons > *, #whoMissionInfo > *, #infoContact > * {
+	flex: 1;
+	align-self: center;
+	min-width: 300px;
+}
+
+#houses {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	text-align: center;
+	justify-content: space-between;
+	width: 100%;
+}
+
+#houses > *{
+	margin: 10px auto;
+}

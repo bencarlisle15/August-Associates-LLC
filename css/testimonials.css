@@ -1,0 +1,154 @@
+iframe {
+	animation:fade 0.4s;
+	width: 100%;
+	min-height: 500px;
+}
+
+.testimonials {
+	width: 100%;
+}
+
+#testimonialsNav {
+	border: 1px solid;
+}
+
+#testimonialSlideshow {
+	position: relative;
+	margin: auto;
+	display: inline-block;
+	left: 50%;
+	width: 100%;
+	transform: translateX(-50%);
+	min-height: 500px;
+}
+
+#prev, #next {
+	cursor: pointer;
+	position: absolute;
+	padding: 16px;
+	color: white;
+	top: 45%;
+	font-weight: bold;
+	font-size: 18px;
+	transition: 0.6s ease;
+	background-color: rgba(0,0,0,0.5);
+	border-radius: 5px;
+	user-select: none;
+}
+
+#prev {
+	left: 0;
+	border-radius: 3px 0 0 3px;
+}
+
+#next {
+	right: 0;
+	border-radius: 3px 0 0 3px;
+}
+
+#prev:hover, #next:hover {
+	background-color: rgba(0,0,0,0.8);
+	margin-left: 8px;
+	margin-right: 8px;
+}
+
+.dot {
+	cursor: pointer;
+	height: 15px;
+	width: 15px;
+	margin: 10px 2px;
+	background-color: #bbb;
+	border-radius: 50%;
+	display: inline-block;
+	transition: background-color 0.6s ease;
+}
+
+.active {
+	height: 20px;
+	width: 20px;
+	background-color: #717171;
+}
+.dot:hover {
+	height: 20px;
+	width: 20px;
+	background-color: black;
+}
+
+.fade {
+	-webkit-animation-name: fade;
+	-webkit-animation-duration: 1.5s;
+	animation-name: fade;
+	animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+	from {opacity: .4}
+	to {opacity: 1}
+}
+
+@keyframes fade {
+	from {opacity: .4}
+	to {opacity: 1}
+}
+
+.testimonialWrapper {
+	width: 100%;
+	height: 392px;
+	border-radius: 5px;
+	border: 1px solid black;
+	padding: 10px;
+	animation:fade 0.4s;
+	max-width: 500px;
+}
+
+.testimonialName {
+	font-size: 20;
+	text-indent: 2.0em;
+}
+
+.testimonialText {
+	font-size: 20;
+}
+
+#testimonialsForm {
+	display: flex;
+	flex-direction: column;
+	margin: 0 auto;
+}
+
+#testimonialsFormName, #testimonialsFormText, #testimonialsFormSubmit {
+	padding: 12px 20px;
+	margin: 8px 0;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	box-sizing: border-box;
+}
+
+#testimonialsFormSubmit {
+	background-color: #73BC46;
+	color: white;
+	border: none;
+	cursor: pointer;
+}
+
+#testimonialsFormSubmit:hover {
+	background-color: #45a049;
+}
+
+#testimonialsWrapper {
+	display: flex;
+	max-width: 100%;
+	flex-wrap: wrap;
+	margin-bottom: 50px;
+}
+
+#testimonialsWrapper > * {
+	flex: 1;
+	justify-content: center;
+	margin: 10px;
+	min-width: 300px;
+}
+
+#testimonialsName {
+	text-align: center;
+}

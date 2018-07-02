@@ -1,0 +1,22 @@
+{
+	"name": "August Associates LLC",
+	"short_name": "August",
+	"start_url": "August Associates LLC",
+	"display": "standalone",
+	"theme_color": "#383493",
+	"background_color": "#EBF5F6",
+	"description": "August Associates is a real estate agency looking to help you buy or sell a home. North, South, East, West, your valued guide in real estate",
+	"icons": [{
+		"src": "images/icon.png",
+		"sizes": "32x32",
+		"type": "image/png"
+	}, {
+		"src": "images/august logo.png",
+		"sizes": "512x512",
+		"type": "image/png"
+	}, {
+		"src": "images/august splash.png",
+		"sizes": "750x750",
+		"type": "image/png"
+	}]
+}

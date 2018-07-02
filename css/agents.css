@@ -1,0 +1,24 @@
+.agentWrapper {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+.agentWrapper > * {
+	flex: 1;
+	justify-content: center;
+	align-self: center;
+	min-width: 300px;
+}
+
+.agentImageWrapper {
+	display: flex;
+}
+
+#agentsNav, #mobileAgentsWrapper {
+	border: 1px solid;
+}
+
+.agentParagraph {
+	margin-bottom: 50px;
+}

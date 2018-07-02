@@ -1,0 +1,17 @@
+.agentWrapper {
+	padding-top: 150px;
+	margin-bottom: 50px;
+}
+
+.agentWrapper > * {
+	justify-content: center;
+	min-width: 300px;
+}
+
+.agentImageWrapper {
+	display: flex;
+}
+
+#agentsNav, #mobileAgentsWrapper {
+	border: 1px solid;
+}

@@ -1,0 +1,90 @@
+#contactNav {
+	border: 1px solid;
+}
+
+#contactForm {
+	display: flex;
+	flex-direction: column;
+	margin: 0 auto;
+}
+
+#contactFormName, #contactFormEmail, #contactFormPhone, #contactFormText, #contactFormSubmit {
+	padding: 12px 20px;
+	margin: 8px 0;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+}
+
+#contactFormSubmit {
+	border: none;
+}
+
+#ourInfo, #ourInfo > * {
+	background-color:transparent;
+	font-size: 14pt;
+	margin: 10px !important;
+}
+
+#infoWrapper > a:link {
+	color: #73BC46;
+	background-color: transparent;
+	text-decoration: none;
+}
+
+#infoWrapper > a:visited {
+	color: gray;
+	background-color: transparent;
+	text-decoration: underline;
+}
+
+#infoWrapper > a:hover {
+	color: #45a049;
+	background-color: transparent;
+	text-decoration: underline;
+}
+
+#infoWrapper > a:active {
+	color: yellow;
+	background-color: transparent;
+	text-decoration: underline;
+}
+
+
+#contactWrapper {
+	display: flex;
+	flex-wrap: wrap;
+	max-width: 100%;
+	margin: 10px;
+	margin-bottom: 50px;
+}
+
+#contactWrapper > * {
+	flex: 1;
+	justify-content: center;
+	width: 100%;
+	min-width: 300px;
+	margin: auto;
+}
+
+#contactLogo {
+	justify-content: center;
+	align-self: center;
+	max-width: 50%;
+}
+
+@media only screen and (max-width: 500px) {
+	#contactLogo {
+		max-width: 75%;
+	}
+}
+
+#imageWrapper, #infoText {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+#infoText > * {
+	margin: 10px;
+	text-align: center;
+}
