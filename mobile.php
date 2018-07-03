@@ -129,6 +129,6 @@
 				data-param-url="https://plus.google.com/u/1/114941366286269838561" aria-label="Google+">
 			</amp-social-share>
 		</div>
-		<?php include('bin/footer.html');
+		<?php include('bin/footer.html'); ?>
 	</body>
 </html>

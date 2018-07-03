@@ -38,6 +38,7 @@ function submitForm() {
 	var zip = document.getElementById("formZip").value;
 	var state = document.getElementById("formState").value;
 	var totalAddress = addPluses(address) + "&citystatezip=" + zip+"&rentzestimate=true";
+	createCloudCMA();
 	document.getElementById("sellAverage").innerHTML = "Price not found";
 	document.getElementById("sellRange").innerHTML = "Price not found";
 	document.getElementById("sellAddress").innerHTML = address;
@@ -45,6 +46,25 @@ function submitForm() {
 	getHouseSellingInfo(totalAddress);
 	submitContactForm();
 }
+
+function createAddress() {
+	var address = document.getElementById("formAddress").value;
+	var city = document.getElementById("formCity").value;
+	var zip = document.getElementById("formZip").value;
+	var state = document.getElementById("formState").value;
+	return addPluses(address) + ",+" + addPluses(city) + ",+" + state + "+" + zip;
+}
+
+function createCloudCMA() {
+	$.post({
+		url: '../phpRequests/apiRequests.php',
+		data: {functionname: "sendCMA", sellerName: addPluses(document.getElementById("formName").value), address: createAddress(), email: addPluses(document.getElementById("formEmail").value)},
+		complete: function(data) {
+			console.log(data)
+		}
+	});
+}
+
 
 function insideClickHandler(e) {
 	if (!e) {
@@ -54,7 +74,7 @@ function insideClickHandler(e) {
 }
 
 function addPluses(str) {
-	return str.split(' ').join('-');
+	return str.split(' ').join('+');
 }
 
 function constructHouseSellingInfo(xml) {

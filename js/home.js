@@ -15,7 +15,15 @@ $(window).resize(function() {
 });
 
 function editArrow() {
-	$("#arrow").css("top", parseInt($("#bigImage").css('margin-top')) + $("#largeImage").height()*0.12);
+	var top = parseInt($("#bigImage").css('margin-top'));
+	if (top > 0 && $("#largeImage").height()*0.12 > 0) {
+		$("#arrow").css("top", top + $("#largeImage").height()*0.12);
+	} else {
+		$("#arrow").css("top", 89 + $("#largeImage").height()*0.12);
+		setTimeout(function() {
+			editArrow();
+		}, 100);
+	}
 }
 
 function submitSearch() {
