@@ -3,6 +3,8 @@
 				include('../css/agents-mobile.css');
 			?>
 		</style>
+		<title>Wendy Grave - August Associates LLC</title>
+		<meta name="description" content="Wendy is a realtor at August Associates LLC looking to help you buy or sell a home. August Associates, your valued guide in real estate." />
 		<link rel="canonical" href="http://www.augustassociatesllc.com/agents/wendy" />
 	</head>
 	<body>
