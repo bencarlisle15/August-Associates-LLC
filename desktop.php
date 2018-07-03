@@ -3,7 +3,7 @@
 			<?php include('css/home.css'); ?>
 		</style>
 		<title>August Associates LLC - Rhode Island Real Estate</title>
-		<meta name="keywords" content="august, associates, llc, real, estate, &quot;real estate&quot;, homes, ri, rhode, island, &quot;rhode island&quot;" />
+		<meta name="description" content="August Associates is a real estate agency looking to help you buy or sell a home. North, South, East, West, your valued guide in real estate" />
 	</head>
 	<body>
 		<?php include('bin/nav.php'); ?>
