@@ -36,6 +36,12 @@
 			$url = "http://www.zillow.com/webservice/GetSearchResults.htm?zws-id=" . Keys::$zillowAPI . "&address=" . $_POST['address'];
 			echo file_get_contents($url);
 			break;
+		case 'sendCMA':
+			require_once('keys.php');
+			$url = "https://www.cloudcma.com/cmas/widget?api_key=" . Keys::$cmaAPI . "&name=" . $_POST['sellerName'] . "&email_to=" . $_POST['email'] . "&address=" . $_POST['address'];
+			file_get_contents($url);
+			echo $url;
+			break;
 		default:
 			echo "An error has occured";
 			break;
