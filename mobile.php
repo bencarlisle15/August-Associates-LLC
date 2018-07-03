@@ -4,7 +4,7 @@
 			?>
 		</style>
 		<title>August Associates LLC - Rhode Island Real Estate</title>
-		<meta name="keywords" content="august, associates, llc, real, estate, &quot;real estate&quot;, homes, ri, rhode, island, &quot;rhode island&quot;" />
+		<meta name="description" content="August Associates is a real estate agency looking to help you buy or sell a home. North, South, East, West, your valued guide in real estate" />
 		<script async custom-element="amp-facebook-like" src="https://cdn.ampproject.org/v0/amp-facebook-like-0.1.js"></script>
 		<script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
 		<script async custom-element="amp-social-share" src="https://cdn.ampproject.org/v0/amp-social-share-0.1.js"></script>
