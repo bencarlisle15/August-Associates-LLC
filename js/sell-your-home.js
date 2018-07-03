@@ -58,10 +58,7 @@ function createAddress() {
 function createCloudCMA() {
 	$.post({
 		url: '../phpRequests/apiRequests.php',
-		data: {functionname: "sendCMA", sellerName: addPluses(document.getElementById("formName").value), address: createAddress(), email: addPluses(document.getElementById("formEmail").value)},
-		complete: function(data) {
-			console.log(data)
-		}
+		data: {functionname: "sendCMA", sellerName: addPluses(document.getElementById("formName").value), address: createAddress(), email: addPluses(document.getElementById("formEmail").value)}
 	});
 }
 

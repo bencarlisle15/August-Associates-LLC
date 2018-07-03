@@ -3,6 +3,8 @@
 				include('../css/agents-mobile.css');
 			?>
 		</style>
+		<title>Joseph McCarthy - August Associates LLC</title>
+		<meta name="description" content="Joseph is the owner of August Associates LLC looking to help you buy or sell a home. August Associates, your valued guide in real estate." />
 		<link rel="canonical" href="http://www.augustassociatesllc.com/agents/joseph" />
 	</head>
 	<body>
