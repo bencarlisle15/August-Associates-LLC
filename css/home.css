@@ -1,35 +1,15 @@
-p {
-	font-size: 16pt;
-	text-align:justify;
-	margin: 20px;
-}
-
-h2 {
-	text-align: center;
-}
-
 #homeNav {
 	border: 1px solid;
 }
 
-#houses > * {
-	cursor: pointer;
-}
-
-.houseImageWrapper {
+#imageWrapper {
 	display: flex;
-	flex-direction: column;
-	align-items: center;
-}
-
-#houses:hover > .houseImageWrapper:not(:hover) > .house {
-	filter: blur(2px);
-	opacity: 0.75;
+	justify-content: center;
 }
 
 #arrow {
 	position: absolute;
-	width: 11%;
+	width: 11.5%;
 	display: block;
 	margin: auto;
 	left: 0;
@@ -48,19 +28,22 @@ h2 {
 	}
 }
 
+.houseImageWrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	cursor: pointer;
+}
+
+#houses:hover > .houseImageWrapper:not(:hover) > .houseLink {
+	filter: blur(2px);
+	opacity: 0.75;
+}
+
 #contactForm {
 	display: flex;
 	flex-direction: column;
-	margin: 0px;
-	margin-left: auto;
-}
-
-#contactFormName, #contactFormEmail, #contactFormPhone, #contactFormText, #contactFormSubmit {
-	padding: 12px 20px;
-	margin: 8px 0;
-	border: 1px solid #ccc;
-	border-radius: 5px;
-	box-sizing: border-box;
+	margin: 0 auto;
 }
 
 #searchForm {
@@ -68,71 +51,38 @@ h2 {
 	padding: 8px;
 }
 
-#searchFirstLine, #searchSecondLine, #searchSubmitWrapper {
+.searchFormLine {
 	display: flex;
 	flex-wrap: wrap;
 }
 
-#searchForm > * > *, #searchSubmit {
-	padding: 12px 4px;
-	margin: 8px 4px;
-	border: 1px solid #ccc;
-	border-radius: 5px;
+.searchElement {
 	box-sizing: border-box;
 	min-width: 100px;
 	flex: 1;
+}
+
+#whoInfo, #missionInfo {
+	min-width: 200px;
+	margin: 10px;
+	font-size: 16pt;
+	text-align:justify;
 }
 
 #infoWrapper {
 	margin: 0px;
 }
 
-#whoInfo, #missionInfo {
-	min-width: 200px;
-	margin: 10px;
-}
-
-#imageWrapper {
-	display: flex;
-	justify-content: center;
-}
-
 #infoTitle, #infoText {
 	flex: 1;
 }
 
-#infoText > * {
+.infoElement {
 	text-align: center;
 }
 
-#ourInfo, #ourInfo > * {
-	background-color:transparent;
-	font-size: 14pt;
-	margin: 10px !important;
-}
-
-#infoWrapper > a:link {
-	color: #73BC46;
-	background-color: transparent;
+.infoElement > a:link {
 	text-decoration: none;
-}
-
-#infoWrapper > a:visited {
-	color: gray;
-	background-color: transparent;
-	text-decoration: underline;
-}
-
-#infoWrapper > a:hover {
-	color: #45a049;
-	background-color: transparent;
-	text-decoration: underline;
-}
-
-#infoWrapper > a:active {
-	color: yellow;
-	background-color: transparent;
-	text-decoration: underline;
 }
 
 #houses {
@@ -142,27 +92,18 @@ h2 {
 	flex-wrap: wrap;
 }
 
-#houses > * {
+.houseImageWrapper {
 	flex: 1;
-}
-
-#socialIcons {
-	display:flex;
-	justify-content:flex-end;
-	align-items:center;;
-}
-
-#socialIcons > * {
-	margin: 10px;
 }
 
 #facebookWrapper {
 	display:flex;
 	width: 500px;
+	max-width: 100%;
 	justify-content: center;
 }
 
-.house {
+.houseLink {
 	width: 100%;
 	height: auto;
 	border: 1px solid black;
@@ -174,13 +115,14 @@ h2 {
 }
 
 #linkButtons, #whoMissionInfo, #infoContact {
-	width: calc(100vw-10px);
+	max-width: 100%;
 	display: flex;
 	flex-wrap: wrap;
 	flex-direction: row;
 }
 
-#linkButtons > *, #whoMissionInfo > *, #infoContact > * {
+.linkButton, .whoSection, .infoSection {
 	flex: 1;
 	align-self: center;
+	margin: 5px;
 }

@@ -53,15 +53,13 @@ function getProperties() {
 
 function setGridHouses() {
 	$("#houses").empty();
-	$("#house").empty();
 	for(var i=0; i < res.length; i++) {
 		if (invalidHouse(res[i])) {
 			continue;
 		}
 		var id = res[i].mlsId;
 		var houseId = "#" + id;
-		createHouse(id, houseId, i);
-		resizeHouses();
+		createHouse(id, i);
 	}
 }
 
@@ -105,7 +103,7 @@ function setMapHouses() {
 		marker = new google.maps.Marker({
 			map: map,
 			icon: {
-				url: "https://i.imgur.com/zmbSqcI.png",
+				url: "/images/marker.png",
 				scaledSize: new google.maps.Size(75,50),
 				labelOrigin: new google.maps.Point(37.5, 18)
 			},
@@ -137,7 +135,7 @@ function setMapHouses() {
 		}
 		markers[marker] = id;
 		markerArray.push(marker);
-		marker.getLabel().text = round(res[idLookup[id]].listPrice);
+		marker.getLabel().text = roundToLetter(res[idLookup[id]].listPrice);
 	}
 
 		map.setCenter(new google.maps.LatLng(
@@ -149,32 +147,21 @@ function setMapHouses() {
 	}
 }
 
-function round(num) {
+function roundToLetter(num) {
 	if (num > 1000000) {
 		return String(Math.round(num / 10000)/100) + "M";
 	}
 	return String(Math.round(num / 100000)) + "K"
 }
 
-function createHouse(id, houseId, i) {
-	$("#houses").append("<div class = 'house' id = '" + id + "' onclick='openHouse(this.id)'><div class='houseWrapper'><img src='' id='houseImage' width = '300px' alt='Picture of House'></div><div id = 'nonImage'><h4 align='right' id='housePrice'></h4><p id = 'houseAddress'></p><p id = 'houseCity'></p><p id = 'houseDetails'></p></div></div>");
-	$(houseId + " #houseAddress").html(res[i].address.streetNumberText + " " + res[i].address.streetName);
-	$(houseId + " #houseCity").html(res[i].address.city);
-	$(houseId + " #houseDetails").html("<b>" + res[i].property.bedrooms + " beds, " + res[i].property.bathsHalf + " bathroom" + (res[i].property.bathsHalf != 1 ? 's':'') + "</b>");
-	$(houseId + " #housePrice").html(formatter.format(res[i].listPrice));
-	$(houseId + " #houseImage").attr("src", res[i].photos[0]);
+function createHouse(id, i) {
+	$("#houses").append("<div class='house' onclick='openHouse(" + id + ")'><img class='houseElement houseImage' width='300px' alt='Picture of House' src='" + res[i].photos[0] + "'><div class='houseInformation'><h4 align='right' class='houseElement'>" + formatter.format(res[i].listPrice) + "</h4><p class='houseElement'>" + res[i].address.streetNumberText + " " + res[i].address.streetName + "</p><p class='houseElement'>" + res[i].address.city + "</p><p class='houseElement'><b>" + res[i].property.bedrooms + " beds, " + res[i].property.bathsHalf + " bathroom" + (res[i].property.bathsHalf != 1 ? 's':'') + "</b></p></div></div>");
 }
 
 function showOverlay(marker) {
 	var id = markers[marker];
-	var houseId = "#mapHouse";
 	var i = idLookup[id];
-	$("#mapHouseWrapper").append("<div class ='house' id = 'mapHouse' onclick='openHouse(" + id + ")'><div class='houseWrapper'><img src='' alt='Picture of House' id='houseImage' width = '300px'></div><div id = 'nonImage'><h4 align='right' id='housePrice'></h4><p id = 'houseAddress'></p><p id = 'houseCity'></p><p id = 'houseDetails'></p></div></div>");
-	$(houseId + " #houseAddress").html(res[i].address.streetNumberText + " " + res[i].address.streetName);
-	$(houseId + " #houseCity").html(res[i].address.city);
-	$(houseId + " #houseDetails").html("<b>" + res[i].property.bedrooms + " beds, " + res[i].property.bathsHalf + " bathroom" + (res[i].property.bathsHalf != 1 ? 's':'') + "</b>");
-	$(houseId + " #housePrice").html(formatter.format(res[i].listPrice));
-	$(houseId + " #houseImage").attr("src", res[i].photos[0]);
+	$("#mapHouseWrapper").append("<div id='mapHouse' onclick='openHouse(" + id + ")'><img class='houseElement houseImage' width='300px' alt='Picture of House' src='" + res[i].photos[0] + "'><div class='houseInformation'><h4 align='right' class='houseElement'>" + formatter.format(res[i].listPrice) + "</h4><p class='houseElement'>" + res[i].address.streetNumberText + " " + res[i].address.streetName + "</p><p class='houseElement'>" + res[i].address.city + "</p><p class='houseElement'><b>" + res[i].property.bedrooms + " beds, " + res[i].property.bathsHalf + " bathroom" + (res[i].property.bathsHalf != 1 ? 's':'') + "</b></p></div></div>");
 	$("#mapHouseWrapper").css("display","block");
 }
 
@@ -270,13 +257,6 @@ function invalidHouse(res) {
 		}
 	}
 	return false;
-}
-
-function resizeHouses() {
-	var pageWidth = $("#houses").width();
-	var left = pageWidth%334;
-	$("#houses").css("width", pageWidth - left);
-	$(".house").css("max-width", (pageWidth)/Math.floor(pageWidth/334)-32);
 }
 
 function openHouse(id) {

@@ -10,31 +10,35 @@
 	<div id="yourHomeSection" class="section">
 		<div id="infoOverlay">
 			<div id="infoFormWrapper">
-				<h2 id ="formInfo">Enter Your Name and Email to View this Property</h2>
+				<h2 id="formTooManyUses">You Have Used Up Your Three Free Views</h2>
+				<h2 id="formInfo">Enter Your Name and Email to View this Property</h2>
 				<form id="infoForm" align="center" border="1px" action="javascript:submitInfoForm()">
-					<input type="text" id="infoFormName" placeholder="Name" required>
-					<input type="email" id="infoFormEmail" placeholder="Email" required>
-					<input type="tel" id="infoFormPhone" placeholder="Phone Number">
-					<button id="infoFormSubmit">Submit</button>
+					<input type="text" id="infoFormName" class="infoFormElement" placeholder="Name" required>
+					<input type="email" id="infoFormEmail" placeholder="Email" class="infoFormElement" required>
+					<input type="tel" id="infoFormPhone" placeholder="Phone Number" class="infoFormElement">
+					<button id="infoFormSubmit" class="infoFormElement">Submit</button>
 				</form>
 			</div>
 		</div>
-		<div id = "infoWrapper">
+		<div id="infoWrapper">
 			<div id="houseSlideshow">
 				<a onclick="plusSlides(-1)" id="prev">&#10094;</a>
 				<a onclick="plusSlides(1)" id="next">&#10095;</a>
 			</div>
 			<div style="text-align:center" id="dots">
 			</div>
-			<h2 id="address" align = "center"></h1>
+			<h1 id="address" align = "center"></h1>
+			<h2 id="price">Price not Found</h2>
 			<div id="tableAndDescription">
+				<div id="descriptionAndContact">
+					<h2 id="interested" style="font-weight: bold">Interested in this Home?</h2>
+					<h2>Call us at <a href="tel:4014610700">(401) 461-0700</a> or Email us at <a href="mailto:jmccarthy@necompass.com">jmccarthy@necompass.com</a> to get in touch with an agent</h2>
+					<p id="description">Description not Found</p>
+				</div>
 				<table id="table">
 				</table>
-				<div id="descriptionAndMap">
-					<p id="description"></p>
-					<div id="map"></div>
-				</div>
 			</div>
+			<div id="map"></div>
 		</div>
 	</div>
 	<?php include('bin/footer.html'); ?>
