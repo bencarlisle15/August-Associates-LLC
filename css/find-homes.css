@@ -1,16 +1,3 @@
-.house {
-	border-radius: 5px;
-	border:1px solid black;
-	cursor: pointer;
-	flex: auto;
-	margin: 8px;
-	padding: 8px;
-	width: 300px;
-	height: 350px;
-	position: relative;
-	background-color: white;
-}
-
 #dots {
 	text-align:center;
 }
@@ -19,89 +6,50 @@
 	border: 1px solid;
 }
 
-#houses, #mapHouseWrapper {
+#housesWrapper {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+}
+
+#houses {
 	display: flex;
 	margin: auto;
 	flex-wrap: wrap;
+	flex-direction: row;
+	justify-content: center;
 }
 
-#searchBox {
-	margin: 10px;
-}
-
-#houses, #map {
-	margin-top: 100px;
-}
-
-#nonImage {
-	display: flex;
-	flex-direction: column;
-	position: absolute;
-	bottom: 0;
-	width: 300px;
-}
-
-.houseWrapper {
-	display: table-cell;
-	vertical-align: middle;
-	height: 231px
-}
-
-
-#housePrice, #houseAddress, #houseCity, #houseDetails, #houseImage {
-	display: block;
-	margin-top: 0px;
-	margin-bottom: 0px;
-	font-size: 12pt;
-}
-
-#houseAddress, #houseCity, #houseDetails {
-	margin: 0;
-}
-
-#searchForm {
-	border: 1px solid black;
+.house {
 	border-radius: 5px;
-	padding: 8px;
+	border:1px solid black;
+	cursor: pointer;
+	width: 300px;
+	height: 350px;
+	margin: 8px;
+	position: relative;
 	background-color: white;
 }
 
-#searchFirstLine, #searchSecondLine, #searchSubmitWrapper {
+.houseImage {
+	border-radius: 4px 4px 0px 0px;
+}
+
+.houseElement {
+	display: block;
+	margin: 0px;
+	font-size: 12pt;
+}
+
+.houseInformation {
 	display: flex;
-	flex-wrap: wrap;
+	flex-direction: column;
+	position: absolute;
+	bottom: 8px;
+	width: 284px;
+	margin: 8px;
 }
 
-#searchForm > * > *, #searchSubmit {
-	padding: 12px 4px;
-	margin: 8px 4px;
-	border: 1px solid #ccc;
-	border-radius: 5px;
-	min-width: 100px;
-	flex: 1;
-}
-
-#searchSubmit {
-	border: none;
-}
-
-#mapGridSwitch {
-	padding: 16px;
-	background-color: #888888;
-	float: right;
-	margin: 16px;
-}
-
-#homesSection {
-	padding-bottom: 50px;
-}
-
-#mapGridSwitch:hover {
-	background-color: #666666;
-}
-
-#map {
-	display: none;
-}
 #mapHouseWrapper {
 	position: fixed;
 	display: none;
@@ -117,14 +65,60 @@
 }
 
 #mapHouse {
+	border-radius: 5px;
+	border:1px solid black;
+	cursor: pointer;
+	width: 300px;
+	height: 350px;
+	background-color: white;
 	position:absolute;
 	top: 50%;
 	left: 50%;
 	display:inline-block;
 	transform: translate(-50%,-50%);
-	-ms-transform: translate(-50%,-50%);
-	background-color: rgb(255,255,255);
-	opacity:1;
+}
+
+#searchBox {
+	margin: 10px;
+}
+
+#searchForm {
+	border: 1px solid black;
 	border-radius: 5px;
-	padding: 30px;
+	padding: 8px;
+	background-color: white;
+}
+
+.searchFormLine {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.searchElement {
+	padding: 12px 4px;
+	margin: 8px 4px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	box-sizing: border-box;
+	min-width: 100px;
+	flex: 1;
+}
+
+#searchSubmit {
+	border: none;
+}
+
+#mapGridSwitch {
+	padding: 16px;
+	background-color: #888888;
+	float: right;
+	margin: 16px;
+}
+
+#mapGridSwitch:hover {
+	background-color: #666666;
+}
+
+#map {
+	display: none;
 }

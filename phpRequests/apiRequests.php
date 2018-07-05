@@ -16,8 +16,8 @@
 				$mail->Host = "mail.augustassociatesllc.net";
 				$mail->Port = 465;
 				$mail->IsHTML(false);
-				$mail->Username = Keys::$gmailUser;
-				$mail->Password = Keys::$gmailPassword;
+				$mail->Username = getUser();
+				$mail->Password = getPassword();
 				$mail->SetFrom("support@augustassociatesllc.net");
 				$mail->FromName = "August Associates LLC";
 				$mail->Subject = "Website Form";
@@ -33,17 +33,21 @@
 		break;
 		case 'getEstimate':
 			require_once('keys.php');
-			$url = "http://www.zillow.com/webservice/GetSearchResults.htm?zws-id=" . Keys::$zillowAPI . "&address=" . $_POST['address'];
+			$url = "http://www.zillow.com/webservice/GetSearchResults.htm?zws-id=" . getZillowAPI() . "&address=" . $_POST['address'];
 			echo file_get_contents($url);
 			break;
 		case 'sendCMA':
 			require_once('keys.php');
-			$url = "https://www.cloudcma.com/cmas/widget?api_key=" . Keys::$cmaAPI . "&name=" . $_POST['sellerName'] . "&email_to=" . $_POST['email'] . "&address=" . $_POST['address'];
+			$url = "https://www.cloudcma.com/cmas/widget?api_key=" . getCmaAPI() . "&name=" . $_POST['sellerName'] . "&email_to=" . $_POST['email'] . "&address=" . $_POST['address'];
 			file_get_contents($url);
 			echo $url;
 			break;
+		case 'ipCheck':
+			require_once('keys.php');
+			echo in_array($_SERVER['REMOTE_ADDR'], getIpAddresses());
+			break;
 		default:
-			echo "An error has occured";
+			echo $_POST['functionname'];
 			break;
 	}
 ?>

@@ -10,13 +10,10 @@
 	border: 1px solid;
 }
 
-.errorPage > * {
+.errorElement {
 	margin: 20px auto;
 	display: block;
 	width: 50%;
 	z-index: 4;
-}
-
-.errorWhatToDo {
 	text-align: center;
 }

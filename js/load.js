@@ -30,12 +30,22 @@ function navSizeChange(increase) {
 
 function editHeight() {
 	var navHeight = $("nav").height();
-	if (navHeight == 0) {
+	var footerHeight =$("footer").height();
+	if (!navHeight) {
 		$(document).ready(function() {
 			editHeight();
 		});
 		return;
+	} else {
+		$("body").children().eq(1).css("margin-top", navHeight + 20);
+		$("nav").css("top", 0);
 	}
-	$("body").children().eq(1).css("margin-top", navHeight + 20);
-	$("nav").css("top", 0);
+	if (!footerHeight) {
+		$(document).ready(function() {
+			editHeight();
+		});
+		return;
+	} else {
+		$("body").css("padding-bottom", footerHeight + 20);
+	}
 }

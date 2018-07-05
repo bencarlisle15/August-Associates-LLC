@@ -8,57 +8,14 @@
 	margin: 0 auto;
 }
 
-#contactFormName, #contactFormEmail, #contactFormPhone, #contactFormText, #contactFormSubmit {
-	padding: 12px 20px;
-	margin: 8px 0;
-	border: 1px solid #ccc;
-	border-radius: 5px;
-}
-
-#contactFormSubmit {
-	border: none;
-}
-
-#ourInfo, #ourInfo > * {
-	background-color:transparent;
-	font-size: 14pt;
-	margin: 10px !important;
-}
-
-#infoWrapper > a:link {
-	color: #73BC46;
-	background-color: transparent;
-	text-decoration: none;
-}
-
-#infoWrapper > a:visited {
-	color: gray;
-	background-color: transparent;
-	text-decoration: underline;
-}
-
-#infoWrapper > a:hover {
-	color: #45a049;
-	background-color: transparent;
-	text-decoration: underline;
-}
-
-#infoWrapper > a:active {
-	color: yellow;
-	background-color: transparent;
-	text-decoration: underline;
-}
-
-
 #contactWrapper {
 	display: flex;
 	flex-wrap: wrap;
 	max-width: 100%;
 	margin: 10px;
-	margin-bottom: 50px;
 }
 
-#contactWrapper > * {
+.contactWrapperSection {
 	flex: 1;
 	justify-content: center;
 	width: 100%;
@@ -78,13 +35,17 @@
 	}
 }
 
+.infoElement > a:link {
+	text-decoration: none;
+}
+
 #imageWrapper, #infoText {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 }
 
-#infoText > * {
+.infoElement {
 	margin: 10px;
 	text-align: center;
 }

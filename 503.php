@@ -8,11 +8,11 @@
 	<body>
 		<?php include('bin/nav.php'); ?>
 		<div class="errorPage">
-			<h1 class="errorCode">503</h1>
-			<h2 class="errorDescription">Oops, looks like this page is down for maintenance, check back soon.</h2>
-			<h3 class="errorWhatToDo">You should probably head back to the homepage or report a problem if you want</h3>
-			<button id="errorHome" onclick="window.location.href='/'">Home</button>
-			<button id="errorReport" onclick="window.location.href='/contact.php'">Report a Problem</button>
+			<h1 class="errorCode errorElement">503</h1>
+			<h2 class="errorDescription errorElement">Oops, looks like this page is down for maintenance, check back soon.</h2>
+			<h3 class="errorWhatToDo errorElement">You should probably head back to the homepage or report a problem if you want</h3>
+			<button class="errorHome errorElement" onclick="window.location.href='/'">Home</button>
+			<button class="errorReport errorElement" onclick="window.location.href='/contact.php'">Report a Problem</button>
 		</div>
 		<?php include('bin/footer.html'); ?>
 	</body>

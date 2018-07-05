@@ -13,49 +13,49 @@
 			<img id='arrow' src='/images/arrow.webp' alt='Arrow'/>
 		</div>
 		<div id="linkButtons" class="section">
-			<a class="button" href="/find-homes">Find Your Perfect Home</a>
-			<a class="button" href="/sell-your-home">Find Out Whay Your Home is Worth</a>
-			<a class="button" href="/testimonials">See Our Testimonials</a>
+			<a class="linkButton button" href="/find-homes">Find Your Perfect Home</a>
+			<a class="linkButton button" href="/sell-your-home">Find Out Whay Your Home is Worth</a>
+			<a class="linkButton button" href="/testimonials">See Our Testimonials</a>
 		</div>
 		<div id="houses" class="section">
-			<div id="cranstonWrapper" class="houseImageWrapper" onclick="window.location.href='/find-homes?searchCities=Cranston'">
-				<img class="image house" id="cranston" alt="Cranston Image" src="/images/cranston.webp"/>
+			<div class="houseImageWrapper" onclick="window.location.href='/find-homes?searchCities=Cranston'">
+				<img class="houseLink" alt="Cranston Image" src="/images/cranston.webp"/>
 				<p class="caption">Cranston</p>
 			</div>
-			<div id="warwickWrapper" class="houseImageWrapper" onclick="window.location.href='/find-homes?searchCities=Warwick'">
-				<img class="image house" id="warwick" alt="Warwick Image" src="/images/warwick.webp"/>
+			<div class="houseImageWrapper" onclick="window.location.href='/find-homes?searchCities=Warwick'">
+				<img class="houseLink" alt="Warwick Image" src="/images/warwick.webp"/>
 				<p class="caption">Warwick</p>
 			</div>
-			<div id="northKingstownWrapper" class="houseImageWrapper" onclick="window.location.href='/find-homes?searchCities=North-Kingstown'">
-				<img class="image house" id="northKingstown" alt="North Kingstown Image" src="/images/nk.webp"/>
+			<div class="houseImageWrapper" onclick="window.location.href='/find-homes?searchCities=North-Kingstown'">
+				<img class="houseLink" alt="North Kingstown Image" src="/images/nk.webp"/>
 				<p class="caption">North Kingstown</p>
 			</div>
-			<div id="eastGreenwichWrapper" class="houseImageWrapper" onclick="window.location.href='/find-homes?searchCities=East-Greenwich'">
-				<img class="image house" id="eastGreenwich" alt="East Greenwich Image" src="/images/east.webp"/>
+			<div class="houseImageWrapper" onclick="window.location.href='/find-homes?searchCities=East-Greenwich'">
+				<img class="houseLink" alt="East Greenwich Image" src="/images/east.webp"/>
 				<p class="caption">East Greenwich</p>
 			</div>
-			<div id="providenceWrapper" class="houseImageWrapper" onclick="window.location.href='/find-homes?searchCities=Providence'">
-				<img class="image house" id="providence" alt="Providence Image" src="/images/providence.webp"/>
+			<div class="houseImageWrapper" onclick="window.location.href='/find-homes?searchCities=Providence'">
+				<img class="houseLink" alt="Providence Image" src="/images/providence.webp"/>
 				<p class="caption">Providence</p>
 			</div>
 		</div>
-		<div id="whoMissionInfo">
-			<div id='whoWrapper'>
+		<div id="whoMissionInfo" class="section">
+			<div id='whoWrapper' class="whoSection">
 				<h2 id='whoTitle'>Who We Are</h2>
 				<p id='whoInfo'>Lorem ipsum nam porta nibh non arcu aliquet lobortis. Integer a egestas sem. Suspendisse lacinia erat sit amet turpis tempus auctor. Pellentesque cursus augue sapien, vitae consectetur diam lobortis ut. Pellentesque cursus augue sapien, vitae consectetur diam lobortis ut.</p>
 			</div>
-			<div id='missionWrapper'>
+			<div id='missionWrapper' class="whoSection">
 				<h2 id='missionTitle'>Our Mission</h2>
 				<p id='missionInfo'>Lorem ipsum nam porta nibh non arcu aliquet lobortis. Integer a egestas sem. Suspendisse lacinia erat sit amet turpis tempus auctor. Pellentesque cursus augue sapien, vitae consectetur diam lobortis ut. Pellentesque cursus augue sapien, vitae consectetur diam lobortis ut.</p>
 			</div>
 		</div>
 		<div id="searchBox">
 			<form id= "searchForm" action="javascript:submitSearch()">
-				<div id="searchFirstLine">
-					<input type="text" id="searchAddresses" placeholder="Addresses">
-					<input type="text" id="searchCities" placeholder="Cities">
-					<input type="text" id="searchZips" placeholder="Zipcodes">
-					<select id="searchPropertyType">
+				<div class="searchFormLine">
+					<input type="text" id="searchAddresses" placeholder="Addresses" class="searchElement">
+					<input type="text" id="searchCities" placeholder="Cities" class="searchElement">
+					<input type="text" id="searchZips" placeholder="Zipcodes" class="searchElement">
+					<select id="searchPropertyType" class="searchElement">
 						<option value="" selected>Property Type</option>
 						<option value="resedential">Resedential</option>
 						<option value="rental">Rental</option>
@@ -66,48 +66,42 @@
 						<option value="farm">Farm</option>
 					</select>
 				</div>
-				<div id="searchSecondLine">
-					<input type="number" id="searchMinPrice" placeholder="Min Price">
-					<input type="number" id="searchMaxPrice" placeholder="Max Price">
-					<input type="number" id="searchBeds" placeholder="Min Bedrooms">
-					<input type="number" id="searchBaths" placeholder="Min Bathrooms">
-					<input type="number" id="searchMinFeet" placeholder="Min Square Feet">
-					<input type="number" id="searchMaxFeet" placeholder="Max Square Feet">
+				<div class="searchFormLine">
+					<input type="number" id="searchMinPrice" placeholder="Min Price" class="searchElement">
+					<input type="number" id="searchMaxPrice" placeholder="Max Price" class="searchElement">
+					<input type="number" id="searchBeds" placeholder="Min Bedrooms" class="searchElement">
+					<input type="number" id="searchBaths" placeholder="Min Bathrooms" class="searchElement">
+					<input type="number" id="searchMinFeet" placeholder="Min Square Feet" class="searchElement">
+					<input type="number" id="searchMaxFeet" placeholder="Max Square Feet" class="searchElement">
 				</div>
-				<div id="searchSubmitWrapper">
-					<button id="searchSubmit">Search</button>
+				<div id="searchSubmitWrapper" class="searchFormLine">
+					<button id="searchSubmit" class="searchElement">Search</button>
 				</div>
 			</form>
 		</div>
 		<div id="infoContact" class="section">
-			<div id="infoWrapper">
-				<h2 id="infoTitle">Our Info</h2>
+			<div id="infoWrapper" class="infoSection">
+				<h1 id="infoTitle">Our Info</h1>
 				<div id="infoText">
-					<p><b>Phone: </b>(401) 487-1510</p>
-					<p><b>Email: </b><a href="mailto:jmccarthy@necompass.com">jmccarthy@necompass.com</a></p>
-					<p><b>Address: </b><a href="https://www.google.com/maps/place/946+Park+Ave,+Cranston,+RI+02910/@41.7808564,-71.4423498,17z/data=!3m1!4b1!4m5!3m4!1s0x89e44f0e74f416a7:0x9bb4c58a58a98e90!8m2!3d41.7808564!4d-71.4401611">946 Park Avenue, Cranston, RI</a></p>
+					<p class="infoElement"><b>Phone: </b> (401) 487-1510</p>
+					<p class="infoElement"><b>Email: </b><a href="mailto:jmccarthy@necompass.com">jmccarthy@necompass.com</a></p>
+					<p class="infoElement"><b>Address: </b><a href="https://www.google.com/maps/place/946+Park+Ave,+Cranston,+RI+02910/@41.7808564,-71.4423498,17z/data=!3m1!4b1!4m5!3m4!1s0x89e44f0e74f416a7:0x9bb4c58a58a98e90!8m2!3d41.7808564!4d-71.4401611">946 Park Avenue, Cranston, RI</a></p>
 				</div>
 			</div>
-			<div id="contactWrapper">
+			<div id="contactWrapper" class="infoSection">
 				<h2 id="contactTitle">Contact Us</h2>
-				<form id="contactForm" border="1px" action="javascript:submitContactForm()">
-					<input type="text" id="contactFormName" placeholder="Name" required>
-					<input type="email" id="contactFormEmail" placeholder="Email">
-					<input type="tel" id="contactFormPhone" placeholder="Phone Number">
-					<textarea rows="10" id="contactFormText" placeholder="Enter your Message Here" required></textarea>
-					<button id="contactFormSubmit">Submit</button>
+				<form id="contactForm" align="center" border="1px" action="javascript:submitContactForm()">
+					<input type="text" id="contactFormName" placeholder="Name" class="contactFormElement" required>
+					<input type="email" id="contactFormEmail" placeholder="Email" class="contactFormElement">
+					<input type="tel" id="contactFormPhone" placeholder="Phone Number" class="contactFormElement">
+					<textarea rows="10" id="contactFormText" placeholder="Enter your Message Here" class="contactFormElement" required></textarea>
+					<button id="contactFormSubmit" class="contactFormElement">Submit</button>
 				</form>
 			</div>
-			<div id="facebookWrapper">
+			<div id="facebookWrapper" class="infoSection">
 				<iframe title="Facebook Page" src="https://www.facebook.com/plugins/page?href=https%3A%2F%2Fwww.facebook.com%2FJoseph-McCarthy-Real-Estate-Broker-642396402607701%2F&tabs=timeline&width=500&height=500&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=true&appId" style="width: 500px; height:500px;" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
 			</div>
 		</div>
-		<!-- <div id="socialIcons" width="100%" height="25px">
-			<h4>Facebook</h4>
-			<h4>Twitter</h4>
-			<h4>LinkedIn</h4>
-			<h4>Google+</h4>
-		</div> -->
 		<?php include('bin/footer.html'); ?>
 	</body>
 </html>

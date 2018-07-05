@@ -1,8 +1,30 @@
 var url = window.location.href;
-var id = url.includes("?id=") ? url.substring(url.indexOf("?id=")+4) : id=1005181;
+if (url.includes("?id=")) {
+	var id = url.substring(url.indexOf("?id=")+4);
+} else {
+	window.location.replace('/404');
+}
+var formatter = new Intl.NumberFormat('en-US', {
+	style: 'currency',
+	currency: 'USD',
+});
+$.post({
+	url: '/phpRequests/apiRequests.php',
+	data: {functionname: 'ipCheck'},
+	complete: function(data) {
+		if (!sessionStorage.houseNumber || data.responseJSON) {
+			sessionStorage.houseNumber = 1;
+		} else if (sessionStorage.houseNumber < 2) {
+			sessionStorage.houseNumber++;
+		} else {
+			addInformationForm();
+		}
+	}
+})
+
 $.ajax({
 	url:'phpRequests/getRets.php',
-	complete: function (r) {
+	complete: function(r) {
 		res = findMlsId(JSON.parse(r.responseJSON), id);
 		if (res == null) {
 			return;
@@ -15,7 +37,7 @@ $.ajax({
 			$("#dots").append("<span class='dot' onclick='showSlides(" + i + ")'></span>");
 			$(document).on('ready', setWrapperWidth(i));
 		}
-
+		$("#price").html("Price: " + formatter.format(res.listPrice));
 		var keys = {"roof": "Roof", "area": "Area (sqft)", "bathsHalf": "Bathrooms", "stories": "Stories", "fireplaces": "Fireplaces", "heating": "Heating", "bedrooms": "Bedrooms", "pool": "Pool", "water": "Water View", "yearBuilt": "Year Built", "additionalRooms": "Additional Rooms"}
 
 		for(var key in keys) {
@@ -29,7 +51,6 @@ $.ajax({
 		}
 		initMap(res.address.full +", " + res.address.city + ", " + res.address.state);
 		showSlides(0);
-		addInformationForm();
 	}
 });
 
@@ -81,11 +102,10 @@ function findMlsId(r, id) {
 function addInformationForm() {
 	$("#infoOverlay").css("display", "block");
 	$("#infoWrapper").css("color", "transparent");
-	$("#infoWrapper").css("user-select", "none");
-	$("#infoWrapper").css("cursor", "default");
-	$("#table").css("color", "transparent")
-	$("#description").css("display", "none");
 	$("#infoWrapper").css("text-shadow", "0 0 20px rgba(0,0,0,5)");
+	$("#infoWrapper").css("user-select", "none");
+	$("#infoWrapper a").css("visibility", "hidden");
+	$("#infoWrapper").css("cursor", "default");
 	$("#map").css("visibility", "hidden");
 }
 
@@ -94,10 +114,9 @@ function removeInformationForm() {
 	$("#infoWrapper").css("color", "inherit");
 	$("#infoWrapper").css("user-select", "inherit");
 	$("#infoWrapper").css("cursor", "inherit");
-	$("#table").css("color", "inherit")
-	$("#description").css("display", "inherit");
 	$("#infoWrapper").css("text-shadow", "inherit");
 	$("#map").css("visibility", "inherit");
+	$("#infoWrapper a").css("visibility", "inherit");
 }
 
 function submitInfoForm() {
@@ -146,7 +165,6 @@ function initMap(address) {
 		center: {lat: -34.397, lng: 150.644},
 		zoom: 17
 	});
-	$("#map").height($("#map").width());
 	new google.maps.Geocoder().geocode({
 		'address': address
 	}, function (results, status) {
