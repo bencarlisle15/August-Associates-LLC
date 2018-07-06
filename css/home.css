@@ -30,6 +30,7 @@
 
 .houseImageWrapper {
 	display: flex;
+	flex: 1;
 	flex-direction: column;
 	align-items: center;
 	cursor: pointer;
@@ -39,6 +40,26 @@
 	filter: blur(2px);
 	opacity: 0.75;
 }
+
+#houses {
+	display: flex;
+	margin: 0px;
+	padding: 0px;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+.houseLink {
+	width: 100%;
+	height: auto;
+	border: 1px solid black;
+	background-color: black;
+}
+
+.caption {
+	text-align: center;
+}
+
 
 #contactForm {
 	display: flex;
@@ -60,6 +81,7 @@
 	box-sizing: border-box;
 	min-width: 100px;
 	flex: 1;
+	margin: 4px;
 }
 
 #whoInfo, #missionInfo {
@@ -85,17 +107,6 @@
 	text-decoration: none;
 }
 
-#houses {
-	display: flex;
-	width: calc(100vw-10px);
-	flex-direction: row;
-	flex-wrap: wrap;
-}
-
-.houseImageWrapper {
-	flex: 1;
-}
-
 #facebookWrapper {
 	display:flex;
 	width: 500px;
@@ -103,16 +114,6 @@
 	justify-content: center;
 }
 
-.houseLink {
-	width: 100%;
-	height: auto;
-	border: 1px solid black;
-	background-color: black;
-}
-
-.caption {
-	text-align: center;
-}
 
 #linkButtons, #whoMissionInfo, #infoContact {
 	max-width: 100%;

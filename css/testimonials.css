@@ -1,4 +1,4 @@
-iframe {
+.testimonialFrame {
 	animation:fade 0.4s;
 	width: 100%;
 	min-height: 500px;

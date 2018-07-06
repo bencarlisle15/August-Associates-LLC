@@ -22,9 +22,7 @@
 	left: 50%;
 	display:inline-block;
 	transform: translate(-50%,-50%);
-	-ms-transform: translate(-50%,-50%);
-	background-color: rgb(255,255,255);
-	opacity:1;
+	background-color: white;
 	border-radius: 5px;
 	cursor: default;
 	padding: 30px;
@@ -40,27 +38,7 @@
 	flex-wrap: wrap;
 }
 
-#mortgageHouseCost, #mortgageDownPayment, #mortgageYears, #mortgageInterest, #mortgageSubmit {
-	flex: auto;
-	display: block;
-	padding: 12px 20px;
-	margin: 8px 0px 0px 8px;
-	border: 1px solid #ccc;
-	border-radius: 5px;
-	box-sizing: border-box;
-}
-
-#mortgageDownPayment, #mortgageInterest {
-	margin-left: 8px;
-}
-
-#mortgageSubmit {
-	background-color: #73BC46;
-	color: white;
-	border: none;
-	cursor: pointer;
-}
-
-#mortgageSubmit:hover {
-	background-color: #45a049;
+.mortgageElement {
+	flex: 1;
+	margin: 8px;
 }

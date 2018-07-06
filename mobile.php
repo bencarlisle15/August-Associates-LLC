@@ -13,7 +13,7 @@
 	<body>
 		<?php include('bin/nav.php'); ?>
 		<div id='imageWrapper'>
-			<amp-img class='image' width='350px' height='350px' id='whoLogo' alt='August Associates Logo' src='/images/august splash.png'/>
+			<amp-img width='350px' height='350px' id='whoLogo' alt='August Associates Logo' src='/images/august splash.png'/>
 		</div>
 		<div id='whoWrapper'>
 			<h2 id='whoTitle'>Who We Are</h2>
@@ -24,49 +24,50 @@
 			<p id='missionInfo'>Lorem ipsum nam porta nibh non arcu aliquet lobortis. Integer a egestas sem. Suspendisse lacinia erat sit amet turpis tempus auctor. Pellentesque cursus augue sapien, vitae consectetur diam lobortis ut. Pellentesque cursus augue sapien, vitae consectetur diam lobortis ut.</p>
 		</div>
 		<div id="linkButtons" class="section">
-			<a class="button" href="/find-homes">Find Your Perfect Home</a>
-			<a class="button" href="/sell-your-home">Find Out Whay Your Home is Worth</a>
-			<a class="button" href="/testimonials">See Our Testimonials</a>
+			<a class="linkButton button" href="/find-homes">Find Your Perfect Home</a>
+			<a class="linkButton button" href="/sell-your-home">Find Out Whay Your Home is Worth</a>
+			<a class="linkButton button" href="/testimonials">See Our Testimonials</a>
 		</div>
 		<div id="houses" class="section">
-			<div id="cranstonWrapper" class="houseImageWrapper">
+			<div class="houseImageWrapper">
 				<a href="/find-homes?searchCities=Cranston" class="houseLink">
-					<amp-img class="image house" id="cranston" width="160px" height="100" alt="Cranston Image" src="/images/cranston.jpg"/>
+					<amp-img class="houseImage" width="160px" height="100" alt="Cranston Image" src="/images/cranston.jpg"/>
 				</a>
 				<p class="caption">Cranston</p>
 			</div>
-			<div id="warwickWrapper" class="houseImageWrapper">
+			<div class="houseImageWrapper">
 				<a href="/find-homes?searchCities=Warwick" class="houseLink">
-					<amp-img class="image house" id="warwick" width="160px" height="100" alt="Warwick Image" src="/images/warwick.jpg"/>
+					<amp-img class="houseImage" width="160px" height="100" alt="Warwick Image" src="/images/warwick.jpg"/>
 				</a>
 				<p class="caption">Warwick</p>
 			</div>
-			<div id="northKingstownWrapper" class="houseImageWrapper">
+			<div class="houseImageWrapper">
 				<a href="/find-homes?searchCities=North-Kingstown" class="houseLink">
-					<amp-img class="image house" id="northKingstown" width="160px" height="100" alt="North Kingstown Image" src="/images/nk.jpg"/>
+					<amp-img class="houseImage" width="160px" height="100" alt="North Kingstown Image" src="/images/nk.jpg"/>
 				</a>
 				<p class="caption">North Kingstown</p>
 			</div>
-			<div id="eastGreenwichWrapper" class="houseImageWrapper">
+			<div class="houseImageWrapper">
 				<a href="/find-homes?searchCities=East-Greenwich" class="houseLink">
-					<amp-img class="image house" id="eastGreenwich" width="160px" height="100" alt="East Greenwich Image" src="/images/east.jpg"/>
+					<amp-img class="houseImage" width="160px" height="100" alt="East Greenwich Image" src="/images/east.jpg"/>
 				</a>
 				<p class="caption">East Greenwich</p>
 			</div>
-			<div id="providenceWrapper" class="houseImageWrapper">
+			<div class="houseImageWrapper">
 				<a href="/find-homes?searchCities=Providence" class="houseLink">
-					<amp-img class="image house" id="providence" width="160px" height="100" alt="Providence Image" src="/images/providence.jpg"/>
+					<amp-img class="houseImage" width="160px" height="100" alt="Providence Image" src="/images/providence.jpg"/>
 				</a>
 				<p class="caption">Providence</p>
 			</div>
 		</div>
-		<div id="searchBox">
+		<div id="searchBox" class="section">
+			<h2 id="searchHomes">Search Homes</h2>
 			<form id= "searchForm" method="POST" target="_top" action-xhr="/phpRequests/submitSearchForm.php">
-				<div id="searchFirstLine">
-					<input type="text" id="searchAddresses" name="searchAddresses" placeholder="Addresses">
-					<input type="text" id="searchCities" name="searchCities" placeholder="Cities">
-					<input type="text" id="searchZips" name="searchZips" placeholder="Zipcodes">
-					<select id="searchPropertyType" name="searchPropertyType">
+				<div class="searchFormLine">
+					<input type="text" id="searchAddresses" placeholder="Addresses" class="searchElement">
+					<input type="text" id="searchCities" placeholder="Cities" class="searchElement">
+					<input type="text" id="searchZips" placeholder="Zipcodes" class="searchElement">
+					<select id="searchPropertyType" class="searchElement">
 						<option value="" selected>Property Type</option>
 						<option value="resedential">Resedential</option>
 						<option value="rental">Rental</option>
@@ -77,25 +78,25 @@
 						<option value="farm">Farm</option>
 					</select>
 				</div>
-				<div id="searchSecondLine">
-					<input type="number" id="searchMinPrice" name="searchMinPrice" placeholder="Min Price">
-					<input type="number" id="searchMaxPrice" name="searchMaxPrice" placeholder="Max Price">
-					<input type="number" id="searchBeds" name="searchBeds" placeholder="Min Bedrooms">
-					<input type="number" id="searchBaths" name="searchBaths" placeholder="Min Bathrooms">
-					<input type="number" id="searchMinFeet" name="searchMinFeet" placeholder="Min Square Feet">
-					<input type="number" id="searchMaxFeet" name="searchMaxFeet" placeholder="Max Square Feet">
+				<div class="searchFormLine">
+					<input type="number" id="searchMinPrice" placeholder="Min Price" class="searchElement">
+					<input type="number" id="searchMaxPrice" placeholder="Max Price" class="searchElement">
+					<input type="number" id="searchBeds" placeholder="Min Bedrooms" class="searchElement">
+					<input type="number" id="searchBaths" placeholder="Min Bathrooms" class="searchElement">
+					<input type="number" id="searchMinFeet" placeholder="Min Square Feet" class="searchElement">
+					<input type="number" id="searchMaxFeet" placeholder="Max Square Feet" class="searchElement">
 				</div>
-				<div id="searchSubmitWrapper">
-					<button id="searchSubmit">Search</button>
+				<div id="searchSubmitWrapper" class="searchFormLine">
+					<button id="searchSubmit" class="searchElement">Search</button>
 				</div>
 			</form>
 		</div>
 		<div id="infoWrapper">
 			<h2 id="infoTitle">Our Info</h2>
 			<div id="infoText">
-				<p><b>Phone: </b>(401) 487-1510</p>
-				<p><b>Email: </b><a href="mailto:jmccarthy@necompass.com">jmccarthy@necompass.com</a></p>
-				<p><b>Address: </b><a href="https://www.google.com/maps/place/946+Park+Ave,+Cranston,+RI+02910/@41.7808564,-71.4423498,17z/data=!3m1!4b1!4m5!3m4!1s0x89e44f0e74f416a7:0x9bb4c58a58a98e90!8m2!3d41.7808564!4d-71.4401611">946 Park Avenue, Cranston, RI</a></p>
+				<p class="infoElement"><b>Phone: </b> (401) 487-1510</p>
+				<p class="infoElement"><b>Email: </b><a href="mailto:jmccarthy@necompass.com">jmccarthy@necompass.com</a></p>
+				<p class="infoElement"><b>Address: </b><a href="https://www.google.com/maps/place/946+Park+Ave,+Cranston,+RI+02910/@41.7808564,-71.4423498,17z/data=!3m1!4b1!4m5!3m4!1s0x89e44f0e74f416a7:0x9bb4c58a58a98e90!8m2!3d41.7808564!4d-71.4401611">946 Park Avenue, Cranston, RI</a></p>
 			</div>
 		</div>
 		<div id="contactWrapper">

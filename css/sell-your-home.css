@@ -22,87 +22,24 @@
 	left: 50%;
 	display:inline-block;
 	transform: translate(-50%,-50%);
-	-ms-transform: translate(-50%,-50%);
-	background-color: rgb(255,255,255);
-	opacity:1;
+	background-color: white;
 	max-width: 100%;
 	border-radius: 5px;
 	cursor: default;
 	padding: 30px;
-	word-wrap: break-word;
-}
-
-#sellInfo > * {
-	word-wrap: break-word;
-	text-align: center;
-}
-
-#sellAverage, #sellRange, #sellAddress, #sellCity {
-	padding: 10px;
-	white-space: nowrap;
-	align: center;
-	font-size: 150%;
-}
-
-#sellAddress, #sellCity, #sellAverage {
-	align: center;
-	padding: 0;
-}
-
-#sellAddress {
-	margin-top: 10px;
-}
-
-#sellCity {
-	padding-bottom: 0px;
-}
-
-#sellAverage, #sellRange {
-	padding-bottom: 15px;
 }
 
 #sellHouseForm {
 	display: flex;
 	flex-direction: column;
-	justify-content: space-evenly;
-	overflow-x: hidden;
-	margin: 10px;
-}
-
-#formName, #formEmail, #formAddress, #formCity, #formZip, #formState, #formSubmit {
-	padding: 12px 20px ;
-	margin: 8px 0px;
-	border: 1px solid #ccc;
-	border-radius: 5px;
-	min-width: 0px;
-	overflow-x: hidden;
 }
 
 #formLine {
 	display: flex;
+	flex-wrap: wrap;
 }
 
-#formCity {
-	flex: 2;
-}
-
-#formZip {
-	flex: 2;
-	margin-left: 8px;
-	margin-right: 8px;
-}
-
-#formState {
+.formLineElement {
+	margin: 8px;
 	flex: 1;
-}
-
-#formSubmit {
-	background-color: #73BC46;
-	color: white;
-	border: none;
-	cursor: pointer;
-}
-
-#formSubmit:hover {
-	background-color: #45a049;
 }

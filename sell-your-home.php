@@ -18,13 +18,13 @@
 				</div>
 			</div>
 			<form id="sellHouseForm" align="center" border="1px" action="javascript:submitForm()">
-				<input type="text" id = "formName" placeholder="Name" required>
-				<input type="email" id = "formEmail" placeholder="Email">
-				<input type="text" id="formAddress" placeholder="Address" required>
+				<input type="text" id = "formName" placeholder="Name" class="formLineElement" required>
+				<input type="email" id="formEmail" class="formLineElement" placeholder="Email">
+				<input type="text" id="formAddress" placeholder="Address" class="formLineElement" required>
 				<div id = "formLine">
-					<input type="text" id="formCity" placeholder="City" required>
-					<input type="number" id="formZip" placeholder="Zipcode" required>
-					<select id="formState">
+					<input type="text" id="formCity" class="formLineElement" placeholder="City" required>
+					<input type="number" class="formLineElement" id="formZip" placeholder="Zipcode" required>
+					<select id="formState" class="formLineElement">
 						<option value="AL">AL</option>
 						<option value="AK">AK</option>
 						<option value="AR">AR</option>
@@ -78,7 +78,7 @@
 						<option value="WY">WY</option>
 					</select>
 				</div>
-				<button id="formSubmit">Submit</button>
+				<button id="formSubmit" class="formLineElement">Submit</button>
 			</form>
 		</div>
 		<?php include('bin/footer.html'); ?>
