@@ -4,8 +4,10 @@
 
 #houseSlideshow {
 	margin: 0px auto;
-	max-width: 800px;
+	max-width: 1000px;
 	padding: 0px;
+	height: auto;
+	width: auto;
 	position: relative;
 }
 
@@ -15,8 +17,8 @@
 }
 
 .houseImage {
-	max-width: 100%;
-	width: auto;
+	max-width: 1000px;
+	width: 100%;
 }
 
 #prev, #next {
@@ -29,6 +31,7 @@
 	font-size: 18px;
 	background-color: rgba(0,0,0,0.5);
 	border-radius: 5px;
+	user-select: none;
 }
 
 #prev {

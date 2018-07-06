@@ -3,23 +3,6 @@ var formatter = new Intl.NumberFormat('en-US', {
 	currency: 'USD',
 });
 
-$("#formLine").ready(changeFormSize);
-$("#formLine").resize(changeFormSize);
-
-function changeFormSize() {
-	if (parseInt($("#formLine").css('width')) < 300) {
-		$("#formLine, #formCity, #formZip, #formState").css('display', "block");
-		$("#formCity, #formZip, #formState").css('width', "100%");
-		$("#formZip").css('margin-left', '0');
-		$("#formZip").css('margin-right', '0');
-	} else {
-		$("#formLine, #formCity, #formZip, #formState").css('display', 'default');
-		$("#formCity, #formZip, #formState").css('width', "default");
-		$("#formZip").css('margin-left', '8px');
-		$("#formZip").css('margin-right', '8px');
-	}
-}
-
 function submitContactForm() {
 	$.post({
 		url: '../phpRequests/apiRequests.php',

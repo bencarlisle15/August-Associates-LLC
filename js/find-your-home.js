@@ -8,6 +8,7 @@ var formatter = new Intl.NumberFormat('en-US', {
 	style: 'currency',
 	currency: 'USD',
 });
+
 $.post({
 	url: '/phpRequests/apiRequests.php',
 	data: {functionname: 'ipCheck'},
@@ -33,10 +34,10 @@ $.ajax({
 		$("#description").html(res.remarks);
 		$("#houseImage").attr("src","")
 		for (var i = 0; i < res.photos.length; i++) {
-			$("#prev").before("<div class='houseWrapper' id='houseWrapper" + i + "'><img src='" + res.photos[i] + "' alt = 'Picture of the House' class = 'houseImage' id='house" + i + "'></div>");
+			$("#prev").before("<div class='houseWrapper'><img src='" + res.photos[i] + "' alt = 'Picture of the House' class = 'houseImage'></div>");
 			$("#dots").append("<span class='dot' onclick='showSlides(" + i + ")'></span>");
-			$(document).on('ready', setWrapperWidth(i));
 		}
+		$(document).on('ready', setImageHeight());
 		$("#price").html("Price: " + formatter.format(res.listPrice));
 		var keys = {"roof": "Roof", "area": "Area (sqft)", "bathsHalf": "Bathrooms", "stories": "Stories", "fireplaces": "Fireplaces", "heating": "Heating", "bedrooms": "Bedrooms", "pool": "Pool", "water": "Water View", "yearBuilt": "Year Built", "additionalRooms": "Additional Rooms"}
 
@@ -53,6 +54,10 @@ $.ajax({
 		showSlides(0);
 	}
 });
+
+$(window).on('resize', function() {
+	setImageHeight();
+})
 
 function findMlsId(r, id) {
 	for (var i = 0; i < r.length; i++) {
@@ -77,7 +82,7 @@ function findMlsId(r, id) {
 // 		for (var i = 0; i < res.photos.length; i++) {
 // 			$("#prev").before("<div class='houseWrapper' id='houseWrapper" + i + "'><img src='" + res.photos[i] + "' alt = 'Picture of the House' class = 'houseImage' id='house" + i + "'></div>");
 // 			$("#dots").append("<span class='dot' onclick='showSlides(" + i + ")'></span>");
-// 			$(document).on('ready', setWrapperWidth(i));
+// 			$(document).on('ready', setWrapperHeight(i));
 // 		}
 //
 // 		var keys = {"roof": "Roof", "area": "Area (sqft)", "bathsHalf": "Bathrooms", "stories": "Stories", "fireplaces": "Fireplaces", "heating": "Heating", "bedrooms": "Bedrooms", "pool": "Pool", "water": "Water View", "yearBuilt": "Year Built", "additionalRooms": "Additional Rooms"}
@@ -139,18 +144,37 @@ function insideClickHandler(e) {
 	e.cancelBubble = true;
 }
 
-var wrapperWidth = -1;
-
-function setWrapperWidth(num) {
-	var wrapper = $("#houseWrapper" + num);
-	var house = $("#house" + num);
-	if (wrapperWidth == -1) {
-		wrapperWidth = wrapper.width();
+function setImageHeight() {
+	var maxRatio = 0;
+	var height;
+	var max;
+	var images = $(".houseImage");
+	for (var i = 0; i < images.length; i++) {
+		var image = new Image();
+		image.src = $(images[i]).attr("src");
+		if (!image.naturalWidth || !image.naturalHeight) {
+			$(document).ready(function() {
+				setImageHeight();
+			});
+			return;
+		}
+		height = image.naturalHeight/image.naturalWidth;
+		if (maxRatio < height) {
+			maxRatio = height;
+		}
 	}
-	var height = 480*wrapperWidth/640;
-	house.width(wrapperWidth);
-	wrapper.height(height);
-	wrapper.width(wrapperWidth);
+	max = maxRatio * $("#houseSlideshow").width();
+	if (!max) {
+		$(document).ready(function() {
+			setImageHeight();
+		});
+		return;
+	}
+	var wrappers = $(".houseWrapper");
+	for (var i = 0; i < wrappers.length; i++) {
+		height = $(wrappers[i]).height(max);
+	}
+	$("#houseSlideshow").height(max);
 }
 
 function addAttribute(key, keyName, value) {

@@ -16,7 +16,7 @@ function addTestimonials() {
 	console.log(frameWidth)
 	var testimonials = ["https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2FYronelis%2Fposts%2F1989657454379754%3A0&width=", "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fgeorgina.kalwak%2Fposts%2F10211519031843485%3A0&width=","https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fphoebea.zuromski%2Fposts%2F1480339765332976%3A0&width=","https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fjacqueline.leroux%2Fposts%2F10209053628479961%3A0&width=", "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmichele.l.caprio%2Fposts%2F10155114566912277%3A0&width=",  "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fdrjohndemello%2Fposts%2F10206646836329813%3A0&width="]
 	for (var i=0; i < testimonials.length; i++) {
-		$("#prev").before("<iframe title='Facebook Testimonial' src='" + testimonials[i] + frameWidth + "' onload='removeLoading()' style='border:none;overflow:hidden' scrolling='no' frameborder='0' allowTransparency='true' allow='encrypted-media'></iframe>")
+		$("#prev").before("<iframe title='Facebook Testimonial' class='testimonialFrame' src='" + testimonials[i] + frameWidth + "' onload='removeLoading()' style='border:none;overflow:hidden' scrolling='no' frameborder='0' allowTransparency='true' allow='encrypted-media'></iframe>")
 		$("#dots").append("<span class='dot' onclick='showSlides(" + i + ")'></span>");
 	}
 	showSlides(0);

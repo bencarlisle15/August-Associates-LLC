@@ -49,7 +49,8 @@
 				<p id='missionInfo'>Lorem ipsum nam porta nibh non arcu aliquet lobortis. Integer a egestas sem. Suspendisse lacinia erat sit amet turpis tempus auctor. Pellentesque cursus augue sapien, vitae consectetur diam lobortis ut. Pellentesque cursus augue sapien, vitae consectetur diam lobortis ut.</p>
 			</div>
 		</div>
-		<div id="searchBox">
+		<div id="searchBox" class="section">
+			<h2 id="searchHomes">Search Homes</h2>
 			<form id= "searchForm" action="javascript:submitSearch()">
 				<div class="searchFormLine">
 					<input type="text" id="searchAddresses" placeholder="Addresses" class="searchElement">
@@ -81,7 +82,7 @@
 		</div>
 		<div id="infoContact" class="section">
 			<div id="infoWrapper" class="infoSection">
-				<h1 id="infoTitle">Our Info</h1>
+				<h2 id="infoTitle">Our Info</h2>
 				<div id="infoText">
 					<p class="infoElement"><b>Phone: </b> (401) 487-1510</p>
 					<p class="infoElement"><b>Email: </b><a href="mailto:jmccarthy@necompass.com">jmccarthy@necompass.com</a></p>
