@@ -75,6 +75,7 @@ function initMap(address) {
 	});
 	$("#map").width("100%")
 	$("#map").height($("#map").width()/2);
+	$("iframe").attr("title", "Map");
 	setMapHouses();
 }
 

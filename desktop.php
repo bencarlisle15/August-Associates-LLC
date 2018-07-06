@@ -8,8 +8,7 @@
 	<body>
 		<?php include('bin/nav.php'); ?>
 		<div id='bigImage'>
-			<img id="largeImage" src='/images/large august logo.webp' width='100%' alt='August Associates Logo' id='bigLogo' style="display: block; z-index: 1;"/>
-			<img id="smallImage" src='/images/small august logo.webp' width='100%' alt='August Associates Logo' id='bigLogo'/>
+			<img id="largeImage" src='/images/large august logo.webp' width='100%' alt='August Associates Logo' id='bigLogo'/>
 			<img id='arrow' src='/images/arrow.webp' alt='Arrow'/>
 		</div>
 		<div id="linkButtons" class="section">

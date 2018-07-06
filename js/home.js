@@ -1,8 +1,3 @@
-$("#largeImage").ready(function() {
-	$('#smallImage').remove();
-	$('#largeImage').css('display', 'block');
-});
-
 $(document).ready(function() {
 	editArrow();
 	setTimeout(function() {
