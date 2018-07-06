@@ -198,6 +198,7 @@ function initMap(address) {
 			position: results[0].geometry.location
 		});
 	});
+	$("iframe").attr("title", "Map");
 }
 
 var currentSlide = 0;

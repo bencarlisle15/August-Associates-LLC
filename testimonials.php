@@ -10,7 +10,7 @@
 		<div id="testimonialsSection" class="section">
 			<h1 id="testimonialsName">Testimonials</h1>
 			<div id="testimonialsWrapper">
-				<div id="testimonials">
+				<div id="testimonialsImages">
 					<div style="text-align:center" id="dots">
 					</div>
 					<div id="testimonialSlideshow">

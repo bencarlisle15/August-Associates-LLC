@@ -63,7 +63,6 @@
 	position: absolute;
 	padding: 10px;
 	margin-top: 10px;
-	opacity: 0;
 	width: 190px;
 	height: auto;
 	right: -20px;
@@ -83,11 +82,11 @@
 	border-radius: 5px 0px 0px 5px;
 }
 
-#menuToggle input:checked ~ #menuBackground {
+#checkBox:checked ~ #menuBackground {
 	display: block;
 }
 
-#menuToggle span {
+.line {
 	display: block;
 	width: 33px;
 	height: 4px;
@@ -108,30 +107,30 @@
 	transform-origin: 0% 100%;
 }
 
-#menuToggle input:checked ~ #span1 {
+#checkBox:checked ~ #span1 {
 	transform: rotate(45deg) translate(2px);
 }
 
 
-#menuToggle input:checked ~ #span2 {
+#checkBox:checked ~ #span2 {
 	opacity: 0;
 }
 
-#menuToggle input:checked ~ #span3 {
+#checkBox:checked ~ #span3 {
 	transform: rotate(-45deg) translate(-2px);
 }
 
-#menuToggle input:checked ~ ul {
+#checkBox:checked ~ ul {
 	transform: none;
 }
 
-#menuToggle input:checked ~ #menu {
+#checkBox:checked ~ #menu {
 	opacity: 1;
 	display: flex;
 	transition: opacity .1s ease-out;
 }
 
-#menu > *, #mobileAgentsNav {
+.mobileNavitem {
 	color: #383493;
 	flex: 1;
 	width: auto;
@@ -140,7 +139,7 @@
 	border-radius: 5px;
 }
 
-#menu > *:hover {
+.mobileNavitem:hover {
 	border: 1px solid #383493;
 }
 
@@ -155,7 +154,7 @@
 	background-color: white;
 }
 
-#mobileAgentsList > * {
+.mobileSubNavitem {
 	display: block;
 	padding: 5px;
 	color: #383493;
@@ -163,11 +162,11 @@
 
 }
 
-#mobileAgentsWrapper:hover #mobileAgentsList {
+#mobileAgentsWrapper:hover > #mobileAgentsList {
 	display: block;
 }
 
-#mobileAgentsList > *:hover {
+.mobileSubNavitem:hover {
 	background-color: #aaaaaa;
 }
 
@@ -185,7 +184,6 @@ body {
 	height: 100%;
 	display:table;
 	table-layout:fixed;
-	padding-bottom: 50px;
 }
 
 textarea {
@@ -212,7 +210,7 @@ nav {
 	margin-left: 10px;
 }
 
-#augustSloganWrapper > * {
+#augustName, #augustSlogan {
 	margin: 0px;
 }
 
@@ -221,11 +219,14 @@ nav {
 	flex-direction: row;
 	width: auto;
 	overflow-y: hidden;
-	overflow-x: auto;
 	margin-right: 10px;
 }
 
-#menuItems > *, #agentsNav {
+#agentsWrapper {
+	display: flex;
+}
+
+.desktopNavitem {
 	color:white;
 	flex: 1;
 	width: 100%;
@@ -243,21 +244,21 @@ nav {
 	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
 	z-index: 1;
 	background-color: white;
+	margin-top: 50px;
 }
 
-#agentsList > * {
+.desktopSubNavitem {
 	display: block;
 	padding: 5px;
 	color: #383493;
 	text-decoration: none;
-
 }
 
-#agentsWrapper:hover #agentsList {
+#agentsWrapper:hover > #agentsList {
 	display: block;
 }
 
-#agentsList > *:hover {
+.desktopSubNavitem:hover {
 	background-color: #aaaaaa;
 }
 
@@ -304,7 +305,7 @@ button:hover, .button:hover {
 	font-size: 12pt;
 }
 
-#siteMap > * {
+.footerLink {
 	font-size: 12pt;
 	color: #cccccc;
 	margin-left: 5px;
@@ -330,7 +331,7 @@ p {
 	font-size: 10pt;
 }
 
-#menuItems > *:hover {
+.desktopNavitem:hover {
 	color: #cccccc;
 	border-color: #cccccc;
 }

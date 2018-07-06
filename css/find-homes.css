@@ -110,13 +110,13 @@
 
 #mapGridSwitch {
 	padding: 16px;
-	background-color: #888888;
+	background-color: #555555;
 	float: right;
 	margin: 16px;
 }
 
 #mapGridSwitch:hover {
-	background-color: #666666;
+	background-color: #333333;
 }
 
 #map {
