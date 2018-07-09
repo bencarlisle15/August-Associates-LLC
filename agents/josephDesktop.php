@@ -26,7 +26,6 @@
 
 <script>
 	<?php
-		include('../bin/jquery.js');
 		include('../js/load.js');
 	?>
 </script>

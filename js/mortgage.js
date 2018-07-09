@@ -1,8 +1,3 @@
-var formatter = new Intl.NumberFormat('en-US', {
-	style: 'currency',
-	currency: 'USD',
-});
-
 function submitMortgageForm() {
 	var interest = document.getElementById("mortgageInterest").value/1200;
 	var years = document.getElementById("mortgageYears").value;
@@ -14,6 +9,10 @@ function submitMortgageForm() {
 		addMortgageOverlay();
 	} else {
 		var mortgageMonthlyCost = (houseCost-downPayment)*interest*interestPowered/(interestPowered-1);
+		var formatter = new Intl.NumberFormat('en-US', {
+			style: 'currency',
+			currency: 'USD',
+		});
 		document.getElementById("mortgageMonthlyCost").innerHTML = "Your Monthly Cost is " + formatter.format(mortgageMonthlyCost);
 		addMortgageOverlay();
 	}
@@ -28,18 +27,8 @@ function insideClickHandler(e) {
 
 function addMortgageOverlay() {
 	document.getElementById("mortgageOverlay").style.display = "block";
-	document.getElementById("mortgageDownPayment").style.opacity = "0.25";
-	document.getElementById("mortgageHouseCost").style.opacity = "0.25";
-	document.getElementById("mortgageInterest").style.opacity = "0.25";
-	document.getElementById("mortgageYears").style.opacity = "0.25";
-	document.getElementById("mortgageSubmit").style.opacity = "0.25";
 }
 
 function removeMortgageOverlay() {
 	document.getElementById("mortgageOverlay").style.display = "none";
-	document.getElementById("mortgageDownPayment").style.opacity = "1";
-	document.getElementById("mortgageHouseCost").style.opacity = "1";
-	document.getElementById("mortgageInterest").style.opacity = "1";
-	document.getElementById("mortgageYears").style.opacity = "1";
-	document.getElementById("mortgageSubmit").style.opacity = "1";
 }

@@ -1,13 +1,8 @@
-var formatter = new Intl.NumberFormat('en-US', {
-	style: 'currency',
-	currency: 'USD',
-});
-
 function submitContactForm() {
-	$.post({
-		url: '../phpRequests/apiRequests.php',
-		data: {functionname: 'sendEmail', body: createBody()}
-	});
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", '/phpRequests/apiRequests.php', true);
+	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+	xhr.send("functionname=sendEmail&body=" + createBody());
 }
 
 function createBody() {
@@ -20,13 +15,12 @@ function submitForm() {
 	var city = document.getElementById("formCity").value;
 	var zip = document.getElementById("formZip").value;
 	var state = document.getElementById("formState").value;
-	var totalAddress = addPluses(address) + "&citystatezip=" + zip+"&rentzestimate=true";
-	createCloudCMA();
+	createCloudCMA(address, city, zip, state);
 	document.getElementById("sellAverage").innerHTML = "Price not found";
 	document.getElementById("sellRange").innerHTML = "Price not found";
 	document.getElementById("sellAddress").innerHTML = address;
 	document.getElementById("sellCity").innerHTML = city + ", " + state + ", " + zip;
-	getHouseSellingInfo(totalAddress);
+	getHouseSellingInfo(address, zip);
 	submitContactForm();
 }
 
@@ -38,11 +32,11 @@ function createAddress() {
 	return addPluses(address) + ",+" + addPluses(city) + ",+" + state + "+" + zip;
 }
 
-function createCloudCMA() {
-	$.post({
-		url: '../phpRequests/apiRequests.php',
-		data: {functionname: "sendCMA", sellerName: addPluses(document.getElementById("formName").value), address: createAddress(), email: addPluses(document.getElementById("formEmail").value)}
-	});
+function createCloudCMA(address, city, zip, state) {
+	// var xhr = new XMLHttpRequest();
+	// xhr.open("POST", '/phpRequests/apiRequests.php', true);
+	// xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+	// xhr.send("functionname=sendCMA&sellerName=" + document.getElementById("formName").value + "&address=" + address + "&city=" + city + "&zip=" + zip + "&state=" + state + "&email=" + document.getElementById("formEmail").value);
 }
 
 
@@ -57,9 +51,12 @@ function addPluses(str) {
 	return str.split(' ').join('+');
 }
 
-function constructHouseSellingInfo(xml) {
-	var xmlText = xml.responseText;
+function constructHouseSellingInfo(xmlText) {
 		if (xmlText.indexOf("<zestimate>") >= 0) {
+			var formatter = new Intl.NumberFormat('en-US', {
+				style: 'currency',
+				currency: 'USD',
+			});
 			var zestimateText = xmlText.substring(xmlText.indexOf("<zestimate>"), xmlText.indexOf("</zestimate>"));
 			var average = zestimateText.substring(zestimateText.indexOf("<amount currency=\"USD\">")+23, zestimateText.indexOf("</amount>"));
 			var low = zestimateText.substring(zestimateText.indexOf("<low currency=\"USD\">")+20, zestimateText.indexOf("</low>"));
@@ -69,14 +66,16 @@ function constructHouseSellingInfo(xml) {
 		}
 	addSellOverlay();
 }
-function getHouseSellingInfo(totalAddress) {
-	$.post({
-		url: '../phpRequests/apiRequests.php',
-		data: {functionname: 'getEstimate', address: totalAddress},
-		complete: function(data) {
-			constructHouseSellingInfo(data);
+function getHouseSellingInfo(address, zip) {
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", '/phpRequests/apiRequests.php', true);
+	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+	xhr.onreadystatechange = function () {
+		if (this.readyState == 4) {
+			constructHouseSellingInfo(this.responseText);
 		}
-	});
+	}
+	xhr.send("functionname=getEstimate&address=" + address + "&zip=" + zip);
 }
 
 function addSellOverlay() {

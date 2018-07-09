@@ -2,14 +2,14 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
-		<!-- <?php
-			header("Content-Security-Policy: default-src 'none'; font-src 'self'; img-src 'self'; object-src 'none'; script-src 'self'; style-src 'self'");
-			header('Strict-Transport-Security','max-age=31536000; includeSubDomains; preload');
-			header('Access-Control-Allow-Origin: *');
-			header("X-Frame-Options: SAMEORIGIN");
-			header("X-Content-Type-Options: nosniff");
-			header("X-XSS-Protection: 1; mode=block");
-		?> -->
+		<?php
+			// header("Content-Security-Policy: default-src 'none'; font-src 'self'; img-src 'self'; object-src 'none'; script-src 'self'; style-src 'self'");
+			// header('Strict-Transport-Security','max-age=31536000; includeSubDomains; preload');
+			// header('Access-Control-Allow-Origin: *');
+			// header("X-Frame-Options: SAMEORIGIN");
+			// header("X-Content-Type-Options: nosniff");
+			// header("X-XSS-Protection: 1; mode=block");
+		?>
 		<link rel="manifest" href="/manifest.webmanifest">
 		<meta name="theme-color" content="#383493">
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
