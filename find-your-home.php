@@ -48,7 +48,6 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTXHu0_banpDsOMFQSDHOxoqdooVQxreI"></script>
 <script>
 	<?php
-		include('bin/jquery.js');
 		include('js/load.js');
 		include('js/find-your-home.js');
 	?>

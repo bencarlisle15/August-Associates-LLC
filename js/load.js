@@ -17,6 +17,10 @@ window.addEventListener("resize", function() {
 	editHeight()
 });
 
+function getWidth(elem) {
+	return parseInt(window.getComputedStyle(document.querySelector(elem), null).width);
+}
+
 function getHeight(elem) {
 	return parseInt(window.getComputedStyle(document.querySelector(elem), null).height);
 }

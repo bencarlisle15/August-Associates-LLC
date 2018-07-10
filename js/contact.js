@@ -1,8 +1,8 @@
 function submitContactForm() {
-	$.post({
-		url: 'phpRequests/apiRequests.php',
-		data: {functionname: 'sendEmail', body: createBody()}
-	});
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", '/phpRequests/apiRequests.php', true);
+	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+	xhr.send("functionname=sendEmail&body=" + createBody());
 	document.getElementById("contactForm").reset();
 }
 

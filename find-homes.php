@@ -17,13 +17,13 @@
 						<input type="text" id="searchZips" placeholder="Zipcodes" class="searchElement">
 						<select id="searchPropertyType" class="searchElement">
 							<option value="" selected>Property Type</option>
-							<option value="resedential">Resedential</option>
-							<option value="rental">Rental</option>
-							<option value="multifamily">Multifamily	</option>
-							<option value="condominium">Condo</option>
-							<option value="commerical">Commerical</option>
-							<option value="land">Land</option>
-							<option value="farm">Farm</option>
+							<option value="RES">Resedential</option>
+							<option value="RNT">Rental</option>
+							<option value="MLF">Multifamily	</option>
+							<option value="CND">Condo</option>
+							<option value="CRE">Commerical</option>
+							<option value="LND">Land</option>
+							<option value="FRM">Farm</option>
 						</select>
 					</div>
 					<div class="searchFormLine">
@@ -56,7 +56,6 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTXHu0_banpDsOMFQSDHOxoqdooVQxreI"></script>
 <script>
 	<?php
-		include('bin/jquery.js');
 		include('js/load.js');
 		include('js/find-homes.js');
 	?>

@@ -20,15 +20,18 @@ var formatter = new Intl.NumberFormat('en-US', {
 // 		initMap();
 // 	}
 // });
-$.ajax({
-	url:'phpRequests/getRets.php',
-	complete: function (r) {
-		res = JSON.parse(r.responseJSON);
+var xhr = new XMLHttpRequest();
+xhr.open("POST", '/phpRequests/getRets.php', true);
+xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+xhr.onreadystatechange = function () {
+	if (this.readyState == 4) {
+		res = JSON.parse(JSON.parse(this.responseText));
 		editSettings();
 		setGridHouses();
 		initMap();
 	}
-});
+}
+xhr.send();
 
 function editSettings() {
 	var url = window.location.href;
@@ -38,13 +41,13 @@ function editSettings() {
 		for (var i = 0; i < queries.length; i++) {
 			var key = queries[i].substring(0, queries[i].indexOf("="));
 			var val = queries[i].substring(queries[i].indexOf("=") + 1);
-			$("#" + key).val(val);
+			document.getElementById(key).value = val;
 		}
 	}
 }
 
 function getProperties() {
-	if ($("#mapGridSwitch").val() == "grid") {
+	if (document.getElementById("mapGridSwitch").value == "grid") {
 		setGridHouses();
 	} else {
 		setMapHouses()
@@ -52,14 +55,17 @@ function getProperties() {
 }
 
 function setGridHouses() {
-	$("#houses").empty();
+	var node = document.getElementById("houses");
+	for (var child = node.firstChild; child; child = node.firstChild) {
+		node.removeChild(child);
+	}
 	for(var i=0; i < res.length; i++) {
 		if (invalidHouse(res[i])) {
 			continue;
 		}
 		var id = res[i].mlsId;
-		var houseId = "#" + id;
-		createHouse(id, i);
+		var houseId = id;
+		document.getElementById("houses").append(createHouse(id, i));
 	}
 }
 
@@ -69,13 +75,13 @@ var map;
 var markerArray = []
 
 function initMap(address) {
-	map = new google.maps.Map(document.getElementById('map'), {
+	var mapElement = document.getElementById("map");
+	map = new google.maps.Map(mapElement, {
 		center: {lat: -34.397, lng: 150.644},
 		zoom: 7
 	});
-	$("#map").width("100%")
-	$("#map").height($("#map").width()/2);
-	$("iframe").attr("title", "Map");
+	mapElement.style.width =  document.body.clientWidth + "px";
+	mapElement.style.height =  document.body.clientWidth/2 + "px";
 	setMapHouses();
 }
 
@@ -156,39 +162,72 @@ function roundToLetter(num) {
 }
 
 function createHouse(id, i) {
-	$("#houses").append("<div class='house' onclick='openHouse(" + id + ")'><img class='houseElement houseImage' width='300px' alt='Picture of House' src='" + res[i].photos[0] + "'><div class='houseInformation'><h4 align='right' class='houseElement'>" + formatter.format(res[i].listPrice) + "</h4><p class='houseElement'>" + res[i].address.streetNumberText + " " + res[i].address.streetName + "</p><p class='houseElement'>" + res[i].address.city + "</p><p class='houseElement'><b>" + res[i].property.bedrooms + " beds, " + res[i].property.bathsHalf + " bathroom" + (res[i].property.bathsHalf != 1 ? 's':'') + "</b></p></div></div>");
+	var house = document.createElement("div");
+	var houseImage = document.createElement("img");
+	var houseInfo = document.createElement("div");
+	var price = document.createElement("h4");
+	var address = document.createElement("p");
+	var city = document.createElement("p");
+	var bb = document.createElement("p");
+	house.classList.add("house");
+	house.setAttribute("onclick", "openHouse(" + id + ")");
+	houseImage.classList.add("houseElement");
+	houseImage.classList.add("houseImage");
+	houseImage.style.width = "300px";
+	houseImage.alt = "Picture of House";
+	houseImage.src = res[i].photos[0];
+	houseInfo.classList.add("houseInformation");
+	price.classList.add("houseElement");
+	price.align = "right";
+	price.innerHTML = formatter.format(res[i].listPrice);
+	address.classList.add("houseElement");
+	address.innerHTML = res[i].address.streetNumberText + " " + res[i].address.streetName;
+	city.classList.add("houseElement");
+	city.innerHTML = res[i].address.city;
+	bb.classList.add("houseElement");
+	bb.innerHTML = res[i].property.bedrooms + " beds, " + res[i].property.bathsHalf + " bathroom" + (res[i].property.bathsHalf != 1 ? 's':'');
+	houseInfo.append(price);
+	houseInfo.append(address);
+	houseInfo.append(city);
+	houseInfo.append(bb);
+	house.append(houseImage);
+	house.append(houseInfo);
+	return house;
 }
 
 function showOverlay(marker) {
 	var id = markers[marker];
 	var i = idLookup[id];
-	$("#mapHouseWrapper").append("<div id='mapHouse' onclick='openHouse(" + id + ")'><img class='houseElement houseImage' width='300px' alt='Picture of House' src='" + res[i].photos[0] + "'><div class='houseInformation'><h4 align='right' class='houseElement'>" + formatter.format(res[i].listPrice) + "</h4><p class='houseElement'>" + res[i].address.streetNumberText + " " + res[i].address.streetName + "</p><p class='houseElement'>" + res[i].address.city + "</p><p class='houseElement'><b>" + res[i].property.bedrooms + " beds, " + res[i].property.bathsHalf + " bathroom" + (res[i].property.bathsHalf != 1 ? 's':'') + "</b></p></div></div>");
-	$("#mapHouseWrapper").css("display","block");
+	var house = createHouse(id, i);
+	house.id = "mapHouse";
+	document.getElementById("mapHouseWrapper").append(house);
+	document.getElementById("mapHouseWrapper").style.display = "block";
 }
 
 function removeHouseOverlay() {
-	$("#mapHouseWrapper").css("display","none");
+	document.getElementById("mapHouseWrapper").style.display = "none";
 }
 
 function switchView() {
-	if ($("#mapGridSwitch").val() =="grid") {
-		$("#mapGridSwitch").val("map")
-		$("#mapGridSwitch").html("Switch to Grid View")
-		$("#houses").css("display", "none");
-		$("#map").css("display", "block");
+	var mapGridSwitch = document.getElementById("mapGridSwitch");
+	if (mapGridSwitch.value =="grid") {
+		mapGridSwitch.value = "map";
+		mapGridSwitch.innerHTML = "Switch to Grid View";
+		document.getElementById("houses").style.display = "none";
+		document.getElementById("map").style.display = "block";
 
 	} else {
-		$("#mapGridSwitch").val("grid");
-		$("#mapGridSwitch").html("Switch to Map View");
-		$("#map").css("display", "none");
-		$("#houses").css("display", "flex");
+		mapGridSwitch.value = "grid";
+		mapGridSwitch.innerHTML = "Switch to Map View";
+		document.getElementById("map").style.display = "none";
+		document.getElementById("houses").style.display = "flex";
 	}
 }
 
 function emptyForm() {
-	var ids = ["searchAddresses", "searchCities", "searchZips", "searchPropertyType", "searchMinPrice", "searchMaxPrice", "searchBeds", "searchBaths", "searchMinFeet", "searchMaxFeet"]
+	var ids = ["searchAddresses", "searchCities", "searchZips", "searchPropertyType", "searchMinPrice", "searchMaxPrice", "searchBeds", "searchBaths", "searchMinFeet", "searchMaxFeet"];
 	for (id in ids) {
-		if ($("#" + ids[id]).val() != '' && $("#" + ids[id]).val() != null) {
+		if (document.getElementById(ids[id]).value != '' && document.getElementById(ids[id]).value != null) {
 			return false;
 		}
 	}
@@ -196,64 +235,61 @@ function emptyForm() {
 }
 
 function invalidHouse(res) {
-	var ids = {"searchPropertyType": "type", "searchMinPrice": "minprice", "searchMaxPrice": "maxprice", "searchMinFeet": "minarea", "searchMaxFeet": "maxarea", "searchBaths": "minbaths", "searchBeds": "minbeds"}
-
-	if ($("#searchPropertyType").val() != "") {
-		if ($("#searchPropertyType").val().toLowerCase != res.property.type) {
+	if (document.getElementById("searchPropertyType").value != "") {
+		if (document.getElementById("searchPropertyType").value != res.property.type) {
+			return true;
+		}
+	}
+	if (document.getElementById("searchMinPrice").value != "") {
+		if (parseInt(document.getElementById("searchMinPrice").value) > res.listPrice) {
 			return true;
 		}
 	}
 
-	if ($("#searchMinPrice").val() != "") {
-		if (parseInt($("#searchMinPrice").val()) > res.listingPrice) {
+	if (document.getElementById("searchMaxPrice").value != "") {
+		if (parseInt(document.getElementById("searchMaxPrice").value) < res.listPrice) {
 			return true;
 		}
 	}
 
-	if ($("#searchMaxPrice").val() != "") {
-		if (parseInt($("#searchMaxPrice").val()) < res.listingPrice) {
+	if (document.getElementById("searchMinFeet").value != "") {
+		if (parseInt(document.getElementById("searchMinFeet").value) > res.property.area) {
 			return true;
 		}
 	}
 
-	if ($("#searchMinFeet").val() != "") {
-		if (parseInt($("#searchMinFeet").val()) > res.property.area) {
+	if (document.getElementById("searchMaxFeet").value != "") {
+		if (parseInt(document.getElementById("searchMaxFeet").value) < res.property.area) {
 			return true;
 		}
 	}
 
-	if ($("#searchMaxFeet").val() != "") {
-		if (parseInt($("#searchMaxFeet").val()) < res.property.area) {
+	if (document.getElementById("searchBeds").value != "") {
+		if (parseInt(document.getElementById("searchBeds").value) > res.property.bedrooms) {
 			return true;
 		}
 	}
 
-	if ($("#searchBeds").val() != "") {
-		if (parseInt($("#searchBeds").val()) > res.property.bedrooms) {
+	if (document.getElementById("searchBaths").value != "") {
+		if (parseInt(document.getElementById("searchBaths").value) > res.property.bathsHalf) {
 			return true;
 		}
 	}
 
-	if ($("#searchBaths").val() != "") {
-		if (parseInt($("#searchBaths").val()) > res.property.bathsHalf) {
+	if (document.getElementById("searchAddresses").value != "") {
+		if (!document.getElementById("searchAddresses").value.toLowerCase().includes(res.address.streetNumberText + " " + res.address.streetName.toLowerCase())) {
 			return true;
 		}
 	}
 
-	if ($("#searchAddresses").val() != "") {
-		if (!$("#searchAddresses").val().toLowerCase().includes(res.address.streetNumberText + " " + res.address.streetName.toLowerCase())) {
+	if (document.getElementById("searchCities").value != "") {
+		if (!document.getElementById("searchCities").value.toLowerCase().includes(res.address.city.toLowerCase())) {
 			return true;
 		}
 	}
 
-	if ($("#searchCities").val() != "") {
-		if (!$("#searchCities").val().toLowerCase().includes(res.address.city.toLowerCase())) {
-			return true;
-		}
-	}
-
-	if ($("#searchZips").val() != "") {
-		if (!$("#searchZips").val().includes(res.address.postalCode)) {
+	if (document.getElementById("searchZips").value != "") {
+		if (!document.getElementById("searchZips").value.includes(res.address.postalCode)) {
 			return true;
 		}
 	}

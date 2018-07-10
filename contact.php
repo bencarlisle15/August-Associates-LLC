@@ -3,7 +3,8 @@
 			<?php include('css/contact.css'); ?>
 		</style>
 		<title>August Associates LLC - Contact Us</title>
-		<meta name="description" content="Contact us for any questions or concerns. August Associates, your valued guide in real estate." />	</head>
+		<meta name="description" content="Contact us for any questions or concerns. August Associates, your valued guide in real estate." />
+	</head>
 	<body>
 		<?php include('bin/nav.php'); ?>
 		<div id="contactSection" class="section">
@@ -39,7 +40,6 @@
 
 <script>
 	<?php
-		include('bin/jquery.js');
 		include('js/load.js');
 		include('js/contact.js');
 	?>
