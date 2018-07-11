@@ -1,20 +1,20 @@
-$(document).ready(function() {
+document.addEventListener('DOMContentLoaded', function() {
 	editArrow();
 	setTimeout(function() {
 		editArrow();
 	}, 1000);
 });
 
-$(window).resize(function() {
+window.addEventListener("resize", function() {
 	editArrow()
 });
 
 function editArrow() {
-	var top = parseInt($("#bigImage").css('margin-top'));
-	if (top > 0 && $("#largeImage").height()*0.12 > 0) {
-		$("#arrow").css("top", top + $("#largeImage").height()*0.11);
+	var top = parseInt(document.getElementById("bigImage").style.marginTop);
+	if (top > 0 && getHeight("#largeImage")*0.12 > 0) {
+		document.getElementById("arrow").style.top = top + getHeight("#largeImage")*0.11 + "px";
 	} else {
-		$("#arrow").css("top", 89 + $("#largeImage").height()*0.12);
+		document.getElementById("arrow").style.top = 89 + getHeight("#largeImage")*0.11 + "px";
 		setTimeout(function() {
 			editArrow();
 		}, 100);
@@ -37,10 +37,10 @@ function buildUrl() {
 }
 
 function submitContactForm() {
-	$.post({
-		url: 'phpRequests/apiRequests.php',
-		data: {functionname: 'sendEmail', body: createBody()}
-	});
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", '/phpRequests/apiRequests.php', true);
+	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+	xhr.send("functionname=sendEmail&body=" + createBody());
 	document.getElementById("contactForm").reset();
 }
 

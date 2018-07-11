@@ -33,21 +33,28 @@
 		break;
 		case 'getEstimate':
 			require_once('keys.php');
-			$url = "http://www.zillow.com/webservice/GetSearchResults.htm?zws-id=" . getZillowAPI() . "&address=" . $_POST['address'];
+			$url = "http://www.zillow.com/webservice/GetSearchResults.htm?zws-id=" . getZillowAPI() . "&address=" . addPluses($_POST['address']) . "&citystatezip=" . $_POST['zip'] . "&rentzestimate=true";
 			echo file_get_contents($url);
 			break;
 		case 'sendCMA':
 			require_once('keys.php');
-			$url = "https://www.cloudcma.com/cmas/widget?api_key=" . getCmaAPI() . "&name=" . $_POST['sellerName'] . "&email_to=" . $_POST['email'] . "&address=" . $_POST['address'];
+			$url = "https://www.cloudcma.com/cmas/widget?api_key=" . getCmaAPI() . "&name=" . addPluses($_POST['sellerName']) . "&email_to=" . addPluses($_POST['email']) . "&address=" . createAddress($_POST['address'], $_POST['city'], $_POST['state'], $_POST['zip']);
 			file_get_contents($url);
-			echo $url;
 			break;
 		case 'ipCheck':
 			require_once('keys.php');
 			echo in_array($_SERVER['REMOTE_ADDR'], getIpAddresses());
 			break;
 		default:
-			echo $_POST['functionname'];
+			echo isset($_POST['functionname']);
 			break;
+	}
+
+	function addPluses($str) {
+		return str_replace(' ', '+', $str);;
+	}
+
+	function createAddress($address, $city, $state, $zip) {
+		return addPluses($address) . ",+" . addPluses($city) . ",+" . $state . "+" . $zip;
 	}
 ?>

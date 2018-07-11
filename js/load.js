@@ -6,46 +6,43 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 ga('create', 'UA-XXXX-Y', 'auto');
 ga('send', 'pageview');
 
-$(document).ready(function() {
+document.addEventListener('DOMContentLoaded', function() {
 	editHeight();
 	setTimeout(function() {
 		editHeight();
 	}, 1000);
 });
 
-$(window).resize(function() {
+window.addEventListener("resize", function() {
 	editHeight()
 });
 
+function getWidth(elem) {
+	return parseInt(window.getComputedStyle(document.querySelector(elem), null).width);
+}
 
-$("nav").hover(function() {
-	navSizeChange(true);
-}, function() {
-	navSizeChange(false);
-})
-
-function navSizeChange(increase) {
-	$("nav").height($("#desktopNav").height() + (increase ? 10 : -10));
+function getHeight(elem) {
+	return parseInt(window.getComputedStyle(document.querySelector(elem), null).height);
 }
 
 function editHeight() {
-	var navHeight = $("nav").height();
-	var footerHeight =$("footer").height();
+	var navHeight = getHeight("nav");
+	var footerHeight = getHeight("footer")
 	if (!navHeight) {
-		$(document).ready(function() {
+		document.addEventListener('DOMContentLoaded', function() {
 			editHeight();
 		});
 		return;
 	} else {
-		$("body").children().eq(1).css("margin-top", navHeight + 20);
-		$("nav").css("top", 0);
+		document.body.childNodes[3].style.marginTop = navHeight + 20 + "px";
+		document.getElementsByTagName("nav")[0].style.top = "0px";
 	}
 	if (!footerHeight) {
-		$(document).ready(function() {
+		document.addEventListener('DOMContentLoaded', function() {
 			editHeight();
 		});
 		return;
 	} else {
-		$("body").css("padding-bottom", footerHeight + 20);
+		document.body.style.paddingBottom = footerHeight + 20 + "px";
 	}
 }

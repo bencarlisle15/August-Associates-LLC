@@ -1,29 +1,52 @@
 addTestimonials()
 
-/*"<div class='testimonialWrapper'><p class='testimonialText'><i>\"I was incredibly impressed with Pam's goal oriented action. She obtained a full asking price cash offer on my house within DAYS of listing, just as she hoped to when I signed on with Benefit.\"</i></p><p class='testimonialName'>-Karin</p></div>"*/
+/*"<div class='testimonialFrame'><p class='testimonialText'><i>\"I was incredibly impressed with Pam's goal oriented action. She obtained a full asking price cash offer on my house within DAYS of listing, just as she hoped to when I signed on with Benefit.\"</i></p><p class='testimonialName'>-Karin</p></div>"*/
 
 function addTestimonials() {
-	var frameWidth = ($("body").width() - 20)/2-40;
+	var frameWidth = (document.body.clientWidth - 20)/2-40;
 	if (frameWidth < 200) {
-		frameWidth = $("body").width()-20;
+		frameWidth =  document.body.clientWidth;-20;
 	}
 	if (frameWidth > 750) {
 		frameWidth = 750;
 	}
 	frameWidth = Math.round(frameWidth);
-	$("#prev").before("<p id='loading' style='text-align:center; font-size: 20pt; position: absolute;'>Loading testimonials...</p>");
-	$("#testimonialSlideshow").css("max-width", frameWidth);
-	console.log(frameWidth)
+	var loading = document.createElement("p");
+	loading.id="loading";
+	loading.style.textAlign = "center";
+	loading.style.fontSize = "20pt";
+	loading.style.position = "absolute";
+	loading.innerHTML = "Loading testimonials...";
+	var testimonialSlideshow = document.getElementById("testimonialSlideshow");
+	testimonialSlideshow.insertBefore(loading, testimonialSlideshow.firstChild);
+	testimonialSlideshow.style.maxWidth = frameWidth + "px";
 	var testimonials = ["https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2FYronelis%2Fposts%2F1989657454379754%3A0&width=", "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fgeorgina.kalwak%2Fposts%2F10211519031843485%3A0&width=","https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fphoebea.zuromski%2Fposts%2F1480339765332976%3A0&width=","https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fjacqueline.leroux%2Fposts%2F10209053628479961%3A0&width=", "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fmichele.l.caprio%2Fposts%2F10155114566912277%3A0&width=",  "https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fdrjohndemello%2Fposts%2F10206646836329813%3A0&width="]
-	for (var i=0; i < testimonials.length; i++) {
-		$("#prev").before("<iframe title='Facebook Testimonial' class='testimonialFrame' src='" + testimonials[i] + frameWidth + "' onload='removeLoading()' style='border:none;overflow:hidden' scrolling='no' frameborder='0' allowTransparency='true' allow='encrypted-media'></iframe>")
-		$("#dots").append("<span class='dot' onclick='showSlides(" + i + ")'></span>");
+	var dots = document.getElementById("dots");
+	var testimonial;
+	var dot;
+	for (var i = 0; i < testimonials.length; i++) {
+		testimonial = document.createElement("iframe");
+		testimonial.title = "Facebook Testimonial";
+		testimonial.classList.add("testimonialFrame");
+		testimonial.src = testimonials[i] + frameWidth;
+		testimonial.setAttribute("scrolling", "no");
+		testimonial.setAttribute("frameborder", "0");
+		testimonial.setAttribute("allowTransparency", "true");
+		testimonial.setAttribute("allow", "encrypted-media");
+		if (!i) {
+			testimonial.setAttribute("onload", "removeLoading()");
+		}
+		testimonialSlideshow.append(testimonial);
+		dot = document.createElement("span");
+		dot.classList.add("dot");
+		dot.setAttribute("onclick", "showSlides(" + i + ")");
+		dots.appendChild(dot);
 	}
 	showSlides(0);
 }
 
 function removeLoading() {
-	$("#loading").remove();
+	document.getElementById("testimonialSlideshow").removeChild(document.getElementById("loading"));
 }
 
 var currentSlide = 0;
@@ -31,19 +54,11 @@ function plusSlides(n) {
 	showSlides(currentSlide+n);
 }
 
-// var interval = setInterval(function() {
-// 	plusSlides(1);
-// }, 5000);
-
 function showSlides(n) {
 	var i;
 	var slideIndex;
-	var slides = $("iframe, .testimonialWrapper");
+	var slides = document.getElementsByClassName("testimonialFrame");
 	var dots = document.getElementsByClassName("dot");
-	// clearInterval(interval);
-	// interval = setInterval(function() {
-	// 	plusSlides(1);
-	// }, 5000);
 	if (slides.length == 0 || dots.length == 0) {
 		return;
 	}
@@ -56,19 +71,17 @@ function showSlides(n) {
 	}
 	for (i = 0; i < slides.length; i++) {
 		slides[i].style.display = "none";
-	}
-	for (i = 0; i < dots.length; i++) {
-		dots[i].className = dots[i].className.replace("active", "");
+		dots[i].className = dots[i].className.replace(" active", "");
 	}
 	slides[currentSlide].style.display = "block";
 	dots[currentSlide].className += " active";
 }
 
 function submitTestimonialsForm() {
-	$.post({
-		url: 'phpRequests/apiRequests.php',
-		data: {functionname: 'sendEmail', body: createBody()}
-	});
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", '/phpRequests/apiRequests.php', true);
+	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+	xhr.send("functionname=sendEmail&body=" + createBody());
 	document.getElementById("testimonialsForm").reset();
 }
 

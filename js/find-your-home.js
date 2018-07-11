@@ -9,11 +9,12 @@ var formatter = new Intl.NumberFormat('en-US', {
 	currency: 'USD',
 });
 
-$.post({
-	url: '/phpRequests/apiRequests.php',
-	data: {functionname: 'ipCheck'},
-	complete: function(data) {
-		if (!sessionStorage.houseNumber || data.responseJSON) {
+var xhr = new XMLHttpRequest();
+xhr.open("POST", '/phpRequests/apiRequests.php', true);
+xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+xhr.onreadystatechange = function () {
+	if (this.readyState == 4) {
+		if (!sessionStorage.houseNumber || !this.responseText) {
 			sessionStorage.houseNumber = 1;
 		} else if (sessionStorage.houseNumber < 2) {
 			sessionStorage.houseNumber++;
@@ -21,24 +22,38 @@ $.post({
 			addInformationForm();
 		}
 	}
-})
+}
+xhr.send("functionname=ipCheck");
 
-$.ajax({
-	url:'phpRequests/getRets.php',
-	complete: function(r) {
-		res = findMlsId(JSON.parse(r.responseJSON), id);
-		if (res == null) {
-			return;
-		}
-		$("#address").html(res.address.streetNumber + " " + res.address.streetName +", " + res.address.city + ", " + res.address.state + ", " + res.address.postalCode)
-		$("#description").html(res.remarks);
-		$("#houseImage").attr("src","")
+var xhr = new XMLHttpRequest();
+xhr.open("GET", '/phpRequests/getRets.php', true);
+xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+xhr.onreadystatechange = function () {
+	if (this.readyState == 4) {
+		res = findMlsId(JSON.parse(JSON.parse(this.responseText)), id);
+		document.getElementById("address").innerHTML = res.address.streetNumber + " " + res.address.streetName +", " + res.address.city + ", " + res.address.state + ", " + res.address.postalCode;
+		document.getElementById("description").innerHTML = res.remarks;
+		var houseSlideshow = document.getElementById("houseSlideshow");
+		var houseWrapper;
+		var image;
+		var dot
+		var dots = document.getElementById("dots");
 		for (var i = 0; i < res.photos.length; i++) {
-			$("#prev").before("<div class='houseWrapper'><img src='" + res.photos[i] + "' alt = 'Picture of the House' class = 'houseImage'></div>");
-			$("#dots").append("<span class='dot' onclick='showSlides(" + i + ")'></span>");
+			houseWrapper = document.createElement("div");
+			image = document.createElement("img");
+			houseWrapper.classList.add("houseWrapper");
+			image.src = res.photos[i];
+			image.alt = "Picture of the House";
+			image.classList.add("houseImage");
+			houseWrapper.append(image);
+			houseSlideshow.append(houseWrapper);
+			dot = document.createElement("span");
+			dot.classList.add("dot");
+			dot.setAttribute("onclick", "showSlides(" + i + ")");
+			dots.append(dot);
 		}
-		$(document).on('ready', setImageHeight());
-		$("#price").html("Price: " + formatter.format(res.listPrice));
+		document.addEventListener('DOMContentLoaded', setImageHeight());
+		document.getElementById("price").innerHTML = "Price: " + formatter.format(res.listPrice);
 		var keys = {"roof": "Roof", "area": "Area (sqft)", "bathsHalf": "Bathrooms", "stories": "Stories", "fireplaces": "Fireplaces", "heating": "Heating", "bedrooms": "Bedrooms", "pool": "Pool", "water": "Water View", "yearBuilt": "Year Built", "additionalRooms": "Additional Rooms"}
 
 		for(var key in keys) {
@@ -53,9 +68,10 @@ $.ajax({
 		initMap(res.address.full +", " + res.address.city + ", " + res.address.state);
 		showSlides(0);
 	}
-});
+}
+xhr.send();
 
-$(window).on('resize', function() {
+window.addEventListener("resize", function() {
 	setImageHeight();
 })
 
@@ -105,30 +121,38 @@ function findMlsId(r, id) {
 
 
 function addInformationForm() {
-	$("#infoOverlay").css("display", "block");
-	$("#infoWrapper").css("color", "transparent");
-	$("#infoWrapper").css("text-shadow", "0 0 20px rgba(0,0,0,5)");
-	$("#infoWrapper").css("user-select", "none");
-	$("#infoWrapper a").css("visibility", "hidden");
-	$("#infoWrapper").css("cursor", "default");
-	$("#map").css("visibility", "hidden");
+	var infoWrapper = document.getElementById("infoWrapper");
+	document.getElementById("infoOverlay").style.display = "block";
+	infoWrapper.style.color = "transparent";
+	infoWrapper.style.textShadow = "0 0 20px rgba(0,0,0,5)";
+	infoWrapper.style.userSelect = "none";
+	infoWrapper.style.cursor = "default";
+	document.getElementById("map").style.visibility = "hidden";
+	var links = document.getElementById("descriptionAndContact").getElementsByTagName("a");
+	for (var i = 0; i < links.length; i++) {
+		links[i].style.visibility = "hidden";
+	}
 }
 
 function removeInformationForm() {
-	$("#infoOverlay").css("display", "none");
-	$("#infoWrapper").css("color", "inherit");
-	$("#infoWrapper").css("user-select", "inherit");
-	$("#infoWrapper").css("cursor", "inherit");
-	$("#infoWrapper").css("text-shadow", "inherit");
-	$("#map").css("visibility", "inherit");
-	$("#infoWrapper a").css("visibility", "inherit");
+	var infoWrapper = document.getElementById("infoWrapper");
+	document.getElementById("infoOverlay").style.display = "none";
+	infoWrapper.style.color = "inherit";
+	infoWrapper.style.userSelect = "inherit";
+	infoWrapper.style.cursor = "inherit";
+	infoWrapper.style.textShadow = "inherit";
+	document.getElementById("map").style.visibility = "inherit";
+	var links = document.getElementById("descriptionAndContact").getElementsByTagName("a");
+	for (var i = 0; i < links.length; i++) {
+		links[i].style.visibility = "visible";
+	}
 }
 
 function submitInfoForm() {
-	$.post({
-		url: 'phpRequests/apiRequests.php',
-		data: {functionname: 'sendEmail', body: createBody()}
-	});
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", '/phpRequests/apiRequests.php', true);
+	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+	xhr.send("functionname=sendEmail&body=" + createBody());
 	removeInformationForm();
 }
 
@@ -146,42 +170,53 @@ function insideClickHandler(e) {
 
 function setImageHeight() {
 	var maxRatio = 0;
-	var height;
 	var max;
-	var images = $(".houseImage");
+	var images = document.getElementsByClassName("houseImage");
+	var imageArray = [];
+	var loaded = 0;
 	for (var i = 0; i < images.length; i++) {
-		var image = new Image();
-		image.src = $(images[i]).attr("src");
-		if (!image.naturalWidth || !image.naturalHeight) {
-			$(document).ready(function() {
-				setImageHeight();
-			});
-			return;
+		imageArray.push(new Image());
+		imageArray[i].onload = function() {
+			loaded++;
+			var height = this.naturalHeight/this.naturalWidth;
+			if (maxRatio < height) {
+				maxRatio = height;
+			}
+		};
+		imageArray[i].src = images[i].src;
+	}
+	(function checkLoaded() {
+		if (loaded == images.length) {
+			max = maxRatio * getWidth("#houseSlideshow");
+			max = Math.round(max);
+			if (!max) {
+				return;
+			}
+			var wrappers = document.getElementsByClassName("houseWrapper");
+			for (var i = 0; i < wrappers.length; i++) {
+				wrappers[i].style.height = max + "px";
+			}
+			document.getElementById("houseSlideshow").style.height = max + "px";
+		} else {
+			window.setTimeout(checkLoaded, 1);
 		}
-		height = image.naturalHeight/image.naturalWidth;
-		if (maxRatio < height) {
-			maxRatio = height;
-		}
-	}
-	max = maxRatio * $("#houseSlideshow").width();
-	if (!max) {
-		$(document).ready(function() {
-			setImageHeight();
-		});
-		return;
-	}
-	var wrappers = $(".houseWrapper");
-	for (var i = 0; i < wrappers.length; i++) {
-		height = $(wrappers[i]).height(max);
-	}
-	$("#houseSlideshow").height(max);
+	})();
 }
 
 function addAttribute(key, keyName, value) {
 	if (value == null || value == "None" || value == 0 || value == "0") {
 		return;
 	}
-	$("#table").append("<tr id = '" + key + "'><th id='key" + key + "' class='keys'>" + keyName + "</th><td id='value" + key + "'  class='values'>" + String(value).replace(",", ", ") + "</td></tr>");
+	var row = document.createElement("tr");
+	var header = document.createElement("th");
+	var data = document.createElement("td");
+	header.classList.add("keys");
+	header.innerHTML = keyName;
+	data.classList.add("values");
+	data.innerHTML = String(value).replace(",", ", ");
+	row.append(header);
+	row.append(data);
+	document.getElementById("table").append(row);
 }
 
 function initMap(address) {
@@ -198,7 +233,6 @@ function initMap(address) {
 			position: results[0].geometry.location
 		});
 	});
-	$("iframe").attr("title", "Map");
 }
 
 var currentSlide = 0;

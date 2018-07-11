@@ -87,7 +87,6 @@
 
 <script>
 	<?php
-		include('bin/jquery.js');
 		include('js/load.js');
 		include('js/sell-your-home.js');
 	?>

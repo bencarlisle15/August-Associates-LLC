@@ -8,8 +8,8 @@
 	<body>
 		<?php include('bin/nav.php'); ?>
 		<div id='bigImage'>
-			<img id="largeImage" src='/images/large august logo.webp' width='100%' alt='August Associates Logo' id='bigLogo'/>
-			<img id='arrow' src='/images/arrow.webp' alt='Arrow'/>
+			<img id="largeImage" src='/images/large august logo.png' width='100%' alt='August Associates Logo' id='bigLogo'/>
+			<img id='arrow' src='/images/arrow.png' alt='Arrow'/>
 		</div>
 		<div id="linkButtons" class="section">
 			<a class="linkButton button" href="/find-homes">Find Your Perfect Home</a>
@@ -18,23 +18,23 @@
 		</div>
 		<div id="houses" class="section">
 			<div class="houseImageWrapper" onclick="window.location.href='/find-homes?searchCities=Cranston'">
-				<img class="houseLink" alt="Cranston Image" src="/images/cranston.webp"/>
+				<img class="houseLink" alt="Cranston Image" src="/images/cranston.jpg"/>
 				<p class="caption">Cranston</p>
 			</div>
 			<div class="houseImageWrapper" onclick="window.location.href='/find-homes?searchCities=Warwick'">
-				<img class="houseLink" alt="Warwick Image" src="/images/warwick.webp"/>
+				<img class="houseLink" alt="Warwick Image" src="/images/warwick.jpg"/>
 				<p class="caption">Warwick</p>
 			</div>
 			<div class="houseImageWrapper" onclick="window.location.href='/find-homes?searchCities=North-Kingstown'">
-				<img class="houseLink" alt="North Kingstown Image" src="/images/nk.webp"/>
+				<img class="houseLink" alt="North Kingstown Image" src="/images/nk.jpg"/>
 				<p class="caption">North Kingstown</p>
 			</div>
 			<div class="houseImageWrapper" onclick="window.location.href='/find-homes?searchCities=East-Greenwich'">
-				<img class="houseLink" alt="East Greenwich Image" src="/images/east.webp"/>
+				<img class="houseLink" alt="East Greenwich Image" src="/images/east.jpg"/>
 				<p class="caption">East Greenwich</p>
 			</div>
 			<div class="houseImageWrapper" onclick="window.location.href='/find-homes?searchCities=Providence'">
-				<img class="houseLink" alt="Providence Image" src="/images/providence.webp"/>
+				<img class="houseLink" alt="Providence Image" src="/images/providence.jpg"/>
 				<p class="caption">Providence</p>
 			</div>
 		</div>
@@ -107,7 +107,6 @@
 </html>
 	<script>
 		<?php
-			include('bin/jquery.js');
 			include('js/load.js');
 			include('js/home.js');
 		?>
