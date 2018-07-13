@@ -4,7 +4,7 @@
 
 #houseSlideshow {
 	margin: 0px auto;
-	max-width: 1000px;
+	max-width: 600px;
 	padding: 0px;
 	height: auto;
 	width: auto;
@@ -12,12 +12,12 @@
 }
 
 .houseWrapper {
-	max-width: 1000px;
+	max-width: 600px;
 	width: auto;
 }
 
 .houseImage {
-	max-width: 1000px;
+	max-width: 600px;
 	width: 100%;
 	height: auto;
 	max-height: 100%;

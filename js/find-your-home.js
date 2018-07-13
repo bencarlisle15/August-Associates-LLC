@@ -14,7 +14,7 @@ xhr.open("POST", '/phpRequests/apiRequests.php', true);
 xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 xhr.onreadystatechange = function () {
 	if (this.readyState == 4) {
-		if (!sessionStorage.houseNumber || !this.responseText) {
+		if (!sessionStorage.houseNumber || this.responseText) {
 			sessionStorage.houseNumber = 1;
 		} else if (sessionStorage.houseNumber < 2) {
 			sessionStorage.houseNumber++;
@@ -26,23 +26,24 @@ xhr.onreadystatechange = function () {
 xhr.send("functionname=ipCheck");
 
 var xhr = new XMLHttpRequest();
-xhr.open("GET", '/phpRequests/getRets.php', true);
+xhr.open("POST", '/phpRequests/getAllRets.php', true);
 xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 xhr.onreadystatechange = function () {
 	if (this.readyState == 4) {
-		res = findMlsId(JSON.parse(JSON.parse(this.responseText)), id);
-		document.getElementById("address").innerHTML = res.address.streetNumber + " " + res.address.streetName +", " + res.address.city + ", " + res.address.state + ", " + res.address.postalCode;
-		document.getElementById("description").innerHTML = res.remarks;
+		res = JSON.parse(JSON.parse(this.responseText));
+		res = res[0];
+		document.getElementById("address").innerHTML = res.FullStreetNum.toProperCase() +", " + res.City.toProperCase() + ", " + res.StateOrProvince.toProperCase() + ", " + res.PostalCode;
+		document.getElementById("description").innerHTML = res.PublicRemarks.toProperCase();
 		var houseSlideshow = document.getElementById("houseSlideshow");
 		var houseWrapper;
 		var image;
 		var dot
 		var dots = document.getElementById("dots");
-		for (var i = 0; i < res.photos.length; i++) {
+		for (var i = 0; i < res.PhotoCount; i++) {
 			houseWrapper = document.createElement("div");
 			image = document.createElement("img");
 			houseWrapper.classList.add("houseWrapper");
-			image.src = res.photos[i];
+			image.src = "/images/largeRets/" + res.MLSNumber + "/" + i + ".jpg";
 			image.alt = "Picture of the House";
 			image.classList.add("houseImage");
 			houseWrapper.append(image);
@@ -53,72 +54,22 @@ xhr.onreadystatechange = function () {
 			dots.append(dot);
 		}
 		document.addEventListener('DOMContentLoaded', setImageHeight());
-		document.getElementById("price").innerHTML = "Price: " + formatter.format(res.listPrice);
-		var keys = {"roof": "Roof", "area": "Area (sqft)", "bathsHalf": "Bathrooms", "stories": "Stories", "fireplaces": "Fireplaces", "heating": "Heating", "bedrooms": "Bedrooms", "pool": "Pool", "water": "Water View", "yearBuilt": "Year Built", "additionalRooms": "Additional Rooms"}
-
+		document.getElementById("price").innerHTML = "Price: " + formatter.format(res.ListPrice);
+		var sqftVal = parseInt(res.SqFtTotal ? res.SqFtTotal : res.ApproxLotSquareFoot);
+		addAttribute("Square Feet", sqftVal);
+		var keys = {"BathsTotal": "Bathrooms", "NumberOfLevels": "Stories", "Fireplace": "Fireplaces", "HeatingSystem": "Heating", "BedsTotal": "Bedrooms", "Pool": "Pool", "WaterAmenities": "Water Amenities", "YearBuilt": "Year Built", "GarageSpaces": "Garage Spaces"};
 		for(var key in keys) {
-			addAttribute(key, keys[key], res.property[key]);
+			addAttribute(keys[key], res[key]);
 		}
-		addAttribute("parking", "Parking", res.property.parking.description);
-		if (res.association.name != null) {
-			addAttribute("association", "Association", res.association.name)
-			addAttribute("associationFee", "Association Fee", res.association.fee)
-			addAttribute("associationAmenities", "Association Amenities", res.association.amenities)
-		}
-		initMap(res.address.full +", " + res.address.city + ", " + res.address.state);
+		initMap(res.FullStreetNum +", " + res.City + ", " + res.StateOrProvince);
 		showSlides(0);
 	}
 }
-xhr.send();
+xhr.send("MLSNumber=" + id);
 
 window.addEventListener("resize", function() {
 	setImageHeight();
 })
-
-function findMlsId(r, id) {
-	for (var i = 0; i < r.length; i++) {
-		if (r[i].mlsId == id) {
-			return r[i];
-		}
-	}
-	return null;
-}
-// $.ajax({
-// 	url: "https://api.simplyrets.com/properties/" + id,
-// 	type: 'GET',
-// 	dataType: 'json',
-// 	beforeSend: function(xhr) {
-// 		auth = "c2ltcGx5cmV0czpzaW1wbHlyZXRz";
-// 		xhr.setRequestHeader("Authorization", "Basic  " + auth);
-// 	},
-// 	success: function(res) {
-// 		$("#address").html(res.address.streetNumber + " " + res.address.streetName +", " + res.address.city + ", " + res.address.state + ", " + res.address.postalCode)
-// 		$("#description").html(res.remarks);
-// 		$("#houseImage").attr("src","")
-// 		for (var i = 0; i < res.photos.length; i++) {
-// 			$("#prev").before("<div class='houseWrapper' id='houseWrapper" + i + "'><img src='" + res.photos[i] + "' alt = 'Picture of the House' class = 'houseImage' id='house" + i + "'></div>");
-// 			$("#dots").append("<span class='dot' onclick='showSlides(" + i + ")'></span>");
-// 			$(document).on('ready', setWrapperHeight(i));
-// 		}
-//
-// 		var keys = {"roof": "Roof", "area": "Area (sqft)", "bathsHalf": "Bathrooms", "stories": "Stories", "fireplaces": "Fireplaces", "heating": "Heating", "bedrooms": "Bedrooms", "pool": "Pool", "water": "Water View", "yearBuilt": "Year Built", "additionalRooms": "Additional Rooms"}
-//
-// 		for(var key in keys) {
-// 			addAttribute(key, keys[key], res.property[key]);
-// 		}
-// 		addAttribute("parking", "Parking", res.property.parking.description);
-// 		if (res.association.name != null) {
-// 			addAttribute("association", "Association", res.association.name)
-// 			addAttribute("associationFee", "Association Fee", res.association.fee)
-// 			addAttribute("associationAmenities", "Association Amenities", res.association.amenities)
-// 		}
-// 		initMap(res.address.full +", " + res.address.city + ", " + res.address.state);
-// 		showSlides(0);
-// 		addInformationForm();
-// 	}
-// });
-
-
 
 function addInformationForm() {
 	var infoWrapper = document.getElementById("infoWrapper");
@@ -203,7 +154,7 @@ function setImageHeight() {
 	})();
 }
 
-function addAttribute(key, keyName, value) {
+function addAttribute(keyName, value) {
 	if (value == null || value == "None" || value == 0 || value == "0") {
 		return;
 	}

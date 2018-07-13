@@ -21,8 +21,8 @@
 				<div id= "addTestimonialsWrapper">
 					<h2 id="testimonialsAddText">Add Your Own</h2>
 					<form id="testimonialsForm" align="center" border="1px" action="javascript:submitTestimonialsForm()">
-						<input type="text" id="testimonialsFormName" placeholder="Name" required>
-						<textarea rows="10" id="testimonialsFormText" placeholder="Enter your Message Here" required></textarea>
+						<input type="text" title="Name" id="testimonialsFormName" placeholder="Name" required>
+						<textarea rows="10" title="Text" id="testimonialsFormText" placeholder="Enter your Message Here" required></textarea>
 						<button id="testimonialsFormSubmit">Submit</button>
 					</form>
 				</div>

@@ -12,27 +12,25 @@
 			<div id="searchBox">
 				<form id= "searchForm" action="javascript:getProperties()">
 					<div class="searchFormLine">
-						<input type="text" id="searchAddresses" placeholder="Addresses" class="searchElement">
-						<input type="text" id="searchCities" placeholder="Cities" class="searchElement">
-						<input type="text" id="searchZips" placeholder="Zipcodes" class="searchElement">
-						<select id="searchPropertyType" class="searchElement">
-							<option value="" selected>Property Type</option>
-							<option value="RES">Resedential</option>
-							<option value="RNT">Rental</option>
-							<option value="MLF">Multifamily	</option>
-							<option value="CND">Condo</option>
-							<option value="CRE">Commerical</option>
-							<option value="LND">Land</option>
-							<option value="FRM">Farm</option>
+						<input type="text" title="Addresses" id="searchAddresses" placeholder="Addresses" class="searchElement">
+						<input type="text" title="Cities" id="searchCities" placeholder="Cities" class="searchElement">
+						<input type="text" title="Zipcodes" id="searchZips" placeholder="Zipcodes" class="searchElement">
+						<select id="searchPropertyType" title="Property Type" class="searchElement">
+							<option title="Property Type" value="" selected>Property Type</option>
+							<option title="Single Family" value="Single Family">Single Family</option>
+							<option title="Rental" value="Rental">Rental</option>
+							<option title="Multi Family" value="	2-4 Units Multi Family">Multifamily	</option>
+							<option title="Condo" value="Condominium">Condo</option>
+							<option title="Vacant Land" value="Vacant Land">Vacant Land</option>
 						</select>
 					</div>
 					<div class="searchFormLine">
-						<input type="number" id="searchMinPrice" placeholder="Min Price" class="searchElement">
-						<input type="number" id="searchMaxPrice" placeholder="Max Price" class="searchElement">
-						<input type="number" id="searchBeds" placeholder="Min Bedrooms" class="searchElement">
-						<input type="number" id="searchBaths" placeholder="Min Bathrooms" class="searchElement">
-						<input type="number" id="searchMinFeet" placeholder="Min Square Feet" class="searchElement">
-						<input type="number" id="searchMaxFeet" placeholder="Max Square Feet" class="searchElement">
+						<input type="number" title="Min Price" id="searchMinPrice" placeholder="Min Price" class="searchElement">
+						<input type="number" title="Max Price" id="searchMaxPrice" placeholder="Max Price" class="searchElement">
+						<input type="number" title="Min Bedrooms" id="searchBeds" placeholder="Min Bedrooms" class="searchElement">
+						<input type="number" title="Min Bathrooms" id="searchBaths" placeholder="Min Bathrooms" class="searchElement">
+						<input type="number" title="Min Square Feet" id="searchMinFeet" placeholder="Min Square Feet" class="searchElement">
+						<input type="number" title="Max Square Feet" id="searchMaxFeet" placeholder="Max Square Feet" class="searchElement">
 					</div>
 					<div id="searchSubmitWrapper" class="searchFormLine">
 						<button id="searchSubmit" class="searchElement">Search</button>
@@ -43,9 +41,11 @@
 			<div id="housesWrapper">
 				<div id="houses">
 				</div>
+				<h2 id="loadingHomes" style="text-align: center">Loading More Homes...</h2>
 			</div>
 			<div id="mapHouseWrapper" onclick="removeHouseOverlay()">
 			</div>
+			<h3 id="loadingMap" style="display: none; text-align: center" width="100%">Loading Map...</h3>
 			<div id="map">
 			</div>
 		</div>

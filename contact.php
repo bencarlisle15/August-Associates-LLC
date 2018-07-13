@@ -25,10 +25,10 @@
 				<div id="contactFormWrapper" class="contactWrapperSection">
 					<h1 id="contactUsTitle">Contact Us</h1>
 					<form id="contactForm" align="center" border="1px" action="javascript:submitContactForm()">
-						<input type="text" id="contactFormName" placeholder="Name" class="contactFormElement" required>
-						<input type="email" id="contactFormEmail" placeholder="Email" class="contactFormElement">
-						<input type="tel" id="contactFormPhone" placeholder="Phone Number" class="contactFormElement">
-						<textarea rows="10" id="contactFormText" placeholder="Enter your Message Here" class="contactFormElement" required></textarea>
+						<input type="text" title="Name" id="contactFormName" placeholder="Name" class="contactFormElement" required>
+						<input type="email" title="Email" id="contactFormEmail" placeholder="Email" class="contactFormElement">
+						<input type="tel" title="Phone" id="contactFormPhone" placeholder="Phone Number" class="contactFormElement">
+						<textarea rows="10" title="Text" id="contactFormText" placeholder="Enter your Message Here" class="contactFormElement" required></textarea>
 						<button id="contactFormSubmit" class="contactFormElement">Submit</button>
 					</form>
 				</div>

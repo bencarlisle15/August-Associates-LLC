@@ -64,27 +64,27 @@
 			<h2 id="searchHomes">Search Homes</h2>
 			<form id= "searchForm" method="POST" target="_top" action-xhr="/phpRequests/submitSearchForm.php">
 				<div class="searchFormLine">
-					<input type="text" id="searchAddresses" placeholder="Addresses" class="searchElement">
-					<input type="text" id="searchCities" placeholder="Cities" class="searchElement">
-					<input type="text" id="searchZips" placeholder="Zipcodes" class="searchElement">
-					<select id="searchPropertyType" class="searchElement">
-						<option value="" selected>Property Type</option>
-						<option value="resedential">Resedential</option>
-						<option value="rental">Rental</option>
-						<option value="multifamily">Multifamily	</option>
-						<option value="condominium">Condo</option>
-						<option value="commerical">Commerical</option>
-						<option value="land">Land</option>
-						<option value="farm">Farm</option>
+					<input type="text" title="Addresses" id="searchAddresses" placeholder="Addresses" class="searchElement">
+					<input type="text" title="Cities" id="searchCities" placeholder="Cities" class="searchElement">
+					<input type="text" title="Zipcodes" id="searchZips" placeholder="Zipcodes" class="searchElement">
+					<select id="searchPropertyType" title="Property Type" class="searchElement">
+						<option title="Property Type" value="" selected>Property Type</option>
+						<option title="Resedential" value="RES">Resedential</option>
+						<option title="Rental" value="RNT">Rental</option>
+						<option title="Multifamily" value="MLF">Multifamily	</option>
+						<option title="condominium" value="CND">Condo</option>
+						<option title="Commerical" value="CRE">Commerical</option>
+						<option title="Land" value="LND">Land</option>
+						<option title="Farm" value="FRM">Farm</option>
 					</select>
 				</div>
 				<div class="searchFormLine">
-					<input type="number" id="searchMinPrice" placeholder="Min Price" class="searchElement">
-					<input type="number" id="searchMaxPrice" placeholder="Max Price" class="searchElement">
-					<input type="number" id="searchBeds" placeholder="Min Bedrooms" class="searchElement">
-					<input type="number" id="searchBaths" placeholder="Min Bathrooms" class="searchElement">
-					<input type="number" id="searchMinFeet" placeholder="Min Square Feet" class="searchElement">
-					<input type="number" id="searchMaxFeet" placeholder="Max Square Feet" class="searchElement">
+					<input type="number" title="Min Price" id="searchMinPrice" placeholder="Min Price" class="searchElement">
+					<input type="number" title="Max Price" id="searchMaxPrice" placeholder="Max Price" class="searchElement">
+					<input type="number" title="Min Bedrooms" id="searchBeds" placeholder="Min Bedrooms" class="searchElement">
+					<input type="number" title="Min Bathrooms" id="searchBaths" placeholder="Min Bathrooms" class="searchElement">
+					<input type="number" title="Min Square Feet" id="searchMinFeet" placeholder="Min Square Feet" class="searchElement">
+					<input type="number" title="Max Square Feet" id="searchMaxFeet" placeholder="Max Square Feet" class="searchElement">
 				</div>
 				<div id="searchSubmitWrapper" class="searchFormLine">
 					<button id="searchSubmit" class="searchElement">Search</button>
@@ -102,11 +102,11 @@
 		<div id="contactWrapper">
 			<h2 id="contactTitle">Contact Us</h2>
 			<form id="contactForm" method="POST"  action-xhr="/phpRequests/submitContactForm.php" target="_top" on="submit: contactForm.clear">
-				<input type="text" name="name" id="contactFormName" placeholder="Name" required>
-				<input type="email" name="email" id="contactFormEmail" placeholder="Email">
-				<input type="tel" name="phone" id="contactFormPhone" placeholder="Phone Number">
-				<textarea rows="10" name="text" id="contactFormText" placeholder="Enter your Message Here" required></textarea>
-				<button id="contactFormSubmit">Submit</button>
+				<input type="text" title="Name" id="contactFormName" placeholder="Name" class="contactFormElement" required>
+				<input type="email" title="Email" id="contactFormEmail" placeholder="Email" class="contactFormElement">
+				<input type="tel" title="Phone" id="contactFormPhone" placeholder="Phone Number" class="contactFormElement">
+				<textarea rows="10" title="Text" id="contactFormText" placeholder="Enter your Message Here" class="contactFormElement" required></textarea>
+				<button id="contactFormSubmit" class="contactFormElement">Submit</button>
 			</form>
 		</div>
 		<div id="socialButtons">
