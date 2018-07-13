@@ -16,12 +16,12 @@
 		</div>
 		<form id="mortgageForm" align="center" border="1px" action="javascript:submitMortgageForm()">
 			<div id = mortgageHouseAndDown>
-				<input type="number" id="mortgageHouseCost" class="mortgageElement" placeholder="House Cost" required>
-				<input type="number" id="mortgageDownPayment" class="mortgageElement" placeholder="Down Payment" required>
+				<input type="number" title="House Cost" id="mortgageHouseCost" class="mortgageElement" placeholder="House Cost" required>
+				<input type="number" title="Down Payment" id="mortgageDownPayment" class="mortgageElement" placeholder="Down Payment" required>
 			</div>
 			<div id="mortgageYearsAndInterest">
-				<input type="number" id="mortgageYears" class="mortgageElement" placeholder="Mortgage Length (Years)">
-				<input type="number" step="0.001" id="mortgageInterest" class="mortgageElement" placeholder="Yearly Interest (%)">
+				<input type="number" title="Mortgage Length (Years)" id="mortgageYears" class="mortgageElement" placeholder="Mortgage Length (Years)">
+				<input type="number" title="Yearly Interst (%)" step="0.001" id="mortgageInterest" class="mortgageElement" placeholder="Yearly Interest (%)">
 			</div>
 			<button id="mortgageSubmit" class="mortgageElement">Calculate</button>
 		</form>
