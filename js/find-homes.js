@@ -49,16 +49,20 @@ function initAllHomes(pageNumber) {
 	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 	xhr.onreadystatechange = function () {
 		if (this.readyState == 4) {
-			res = JSON.parse(JSON.parse(this.responseText));
-			if (!res || !res.length) {
+			if (!this.responseText) {
 				document.getElementById("loadingHomes").innerHTML = 'No Houses Found';
 			} else {
-				document.getElementById("loadingHomes").innerHTML = 'Loading More Homes...';
-				setGridHouses(res);
-				if (!pageNumber) {
-					initMap(res);
+				res = JSON.parse(JSON.parse(this.responseText));
+				if (!res || !res.length) {
+					document.getElementById("loadingHomes").innerHTML = 'No Houses Found';
 				} else {
-					setMapHouses(res);
+					document.getElementById("loadingHomes").innerHTML = 'Loading More Homes...';
+					setGridHouses(res);
+					if (!pageNumber) {
+						initMap(res);
+					} else {
+						setMapHouses(res);
+					}
 				}
 			}
 		}
