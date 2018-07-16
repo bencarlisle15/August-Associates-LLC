@@ -7,7 +7,6 @@
 			require_once('../vendor/phpmailer/phpmailer/src/SMTP.php');
 			require_once('keys.php');
 			try {
-				//to joseph.mccarthy@fivestreet.me
 				$mail = new PHPMailer\PHPMailer\PHPMailer();
 				$mail->IsSMTP();
 				$mail->SMTPDebug = 2;
@@ -16,13 +15,14 @@
 				$mail->Host = "mail.augustassociatesllc.net";
 				$mail->Port = 465;
 				$mail->IsHTML(false);
-				$mail->Username = getUser();
-				$mail->Password = getPassword();
+				$mail->Username = getMailUser();
+				$mail->Password = getMailPassword();
 				$mail->SetFrom("support@augustassociatesllc.net");
 				$mail->FromName = "August Associates LLC";
 				$mail->Subject = "Website Form";
 				$mail->Body = $_POST['body'];
 				$mail->AddAddress("augustassociatesllc@gmail.com");
+				// $mail->AddAddress("joseph.mccarthy@fivestreet.me");
 				$mail->Send();
 				echo 'success';
 			} catch (phpmailerException $e) {

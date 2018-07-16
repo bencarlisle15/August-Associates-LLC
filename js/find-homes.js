@@ -1,18 +1,17 @@
+window.onscroll = function(ev) {
+	if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight && document.getElementById("mapGridSwitch").value == "grid") {
+		initAllHomes(++pageNumber);
+	}
+};
+
 var formatter = new Intl.NumberFormat('en-US', {
 	style: 'currency',
 	currency: 'USD',
 });
 
 var pageNumber = 0;
-var xhr = new XMLHttpRequest();
 editSettings();
 initAllHomes(0);
-
-window.onscroll = function(ev) {
-	if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight && document.getElementById("mapGridSwitch").value == "grid") {
-		initAllHomes(++pageNumber);
-	}
-};
 
 function loadMoreHomes() {
 	initAllHomes(++pageNumber);
