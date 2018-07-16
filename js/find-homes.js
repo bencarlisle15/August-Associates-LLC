@@ -1,18 +1,17 @@
+window.onscroll = function(ev) {
+	if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight && document.getElementById("mapGridSwitch").value == "grid") {
+		initAllHomes(++pageNumber);
+	}
+};
+
 var formatter = new Intl.NumberFormat('en-US', {
 	style: 'currency',
 	currency: 'USD',
 });
 
 var pageNumber = 0;
-var xhr = new XMLHttpRequest();
 editSettings();
 initAllHomes(0);
-
-window.onscroll = function(ev) {
-	if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight && document.getElementById("mapGridSwitch").value == "grid") {
-		initAllHomes(++pageNumber);
-	}
-};
 
 function loadMoreHomes() {
 	initAllHomes(++pageNumber);
@@ -51,11 +50,16 @@ function initAllHomes(pageNumber) {
 	xhr.onreadystatechange = function () {
 		if (this.readyState == 4) {
 			res = JSON.parse(JSON.parse(this.responseText));
-			setGridHouses(res);
-			if (!pageNumber) {
-				initMap(res);
+			if (!res.length) {
+				document.getElementById("loadingHomes").innerHTML = 'No Houses Found';
 			} else {
-				setMapHouses(res);
+				document.getElementById("loadingHomes").innerHTML = 'Loading More Homes...';
+				setGridHouses(res);
+				if (!pageNumber) {
+					initMap(res);
+				} else {
+					setMapHouses(res);
+				}
 			}
 		}
 	}
@@ -66,11 +70,6 @@ function initAllHomes(pageNumber) {
 function setGridHouses(res) {
 	for(var i=0; i < res.length; i++) {
 		document.getElementById("houses").append(createHouse(res[i], i));
-	}
-	if (!res.length) {
-		document.getElementById("loadingHomes").innerHTML = 'No Houses Found';
-	} else {
-		document.getElementById("loadingHomes").innerHTML = 'Loading More Homes...';
 	}
 }
 

@@ -1,8 +1,14 @@
 <?php
-	$my_file = 'rets-data.json';
-	$handle = fopen($my_file, 'r');
-	$result = fread($handle,filesize($my_file));
-	fclose($handle);
+	ini_set('memory_limit', '-1');
+	require_once("keys.php");
+	// $my_file = 'rets-data.json';
+	// $handle = fopen($my_file, 'r');
+	// $result = fread($handle,filesize($my_file));
+	// fclose($handle);
+	$conn = new mysqli("localhost", getDBUser(), getDBPassword(), getDBName());
+	$query = "SELECT json_data FROM RetsData";
+	$resultQuery = mysqli_query($conn, $query);
+	$result = $resultQuery->fetch_assoc()['json_data'];
 	$json = json_decode($result, true);
 	foreach ($_POST as $key => $val) {
 		if ($key == "pageNumber") {
