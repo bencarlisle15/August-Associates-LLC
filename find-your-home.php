@@ -31,9 +31,9 @@
 			<h2 id="price">Price not Found</h2>
 			<div id="tableAndDescription">
 				<div id="descriptionAndContact">
+					<p id="description">Description not Found</p>
 					<h2 id="interested" style="font-weight: bold">Interested in this Home?</h2>
 					<h2>Call us at <a href="tel:4014610700">(401) 461-0700</a> or Email us at <a href="mailto:jmccarthy@necompass.com">jmccarthy@necompass.com</a> to get in touch with an agent</h2>
-					<p id="description">Description not Found</p>
 				</div>
 				<table id="table">
 				</table>

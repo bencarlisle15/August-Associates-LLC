@@ -45,7 +45,6 @@
 			</div>
 			<div id="mapHouseWrapper" onclick="removeHouseOverlay()">
 			</div>
-			<h3 id="loadingMap" style="display: none; text-align: center" width="100%">Loading Map...</h3>
 			<div id="map">
 			</div>
 		</div>

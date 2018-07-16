@@ -26,10 +26,14 @@ for ($q = 0; $q < sizeof($ar); $q++) {
 	// 	continue;
 	// }
 	$address = $a['FullStreetNum'] . "," . $ar[$q]["City"] . "," . $ar[$q]["StateOrProvince"] . "," . $ar[$q]["PostalCode"];
-	$geo = file_get_contents('http://maps.googleapis.com/maps/api/geocode/json?address='.urlencode($address).'&sensor=false');
+	$geo = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyBTXHu0_banpDsOMFQSDHOxoqdooVQxreI&address='.urlencode($address).'&sensor=false');
 	$geo = json_decode($geo, true);
-	$ar[$q]["Latitude"] = $geo['results'][0]['geometry']['location']['lat'];
-	$ar[$q]["Longitude"] = $geo['results'][0]['geometry']['location']['lng'];
+	if (!$geo['results']) {
+		var_dump($geo);
+	} else {
+		$ar[$q]["Latitude"] = $geo['results'][0]['geometry']['location']['lat'];
+		$ar[$q]["Longitude"] = $geo['results'][0]['geometry']['location']['lng'];
+	}
 	$photos = $rets->GetObject("Property", "Photo", $ar[$q]['Matrix_Unique_ID'], "*", 0);
 	if (!file_exists($dir)) {
 		mkdir($dir);

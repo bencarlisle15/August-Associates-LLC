@@ -24,7 +24,7 @@
 			$val = substr($val, 0 , -1);
 		}
 		for ($q = 0; $q < sizeof($json); $q++) {
-			if ($change == 0 && (is_int($json[$q][$key]) ? ($json[$q][$key] != $val) : (strtolower($json[$q][$key]) != strtolower($val) && strpos(strtolower($val), strtolower($json[$q][$key])) === false)) || $change == -1 && $json[$q][$key] > $val || $change == 1 && $json[$q][$key] < $val) {
+			if ($change == 0 && (is_int($json[$q][$key]) ? ($json[$q][$key] != $val) : (strtolower($json[$q][$key]) != strtolower($val) && $json[$q][$key] && $val && strpos(strtolower($val), strtolower($json[$q][$key])) === false)) || $change == -1 && $json[$q][$key] > $val || $change == 1 && $json[$q][$key] < $val) {
 				unset($json[$q]);
 				$q--;
 				$json = array_values($json);

@@ -1,27 +1,35 @@
+//when the user scrolls to the bottom while in grid mode
+var pageNumber = 0;
 window.onscroll = function(ev) {
 	if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight && document.getElementById("mapGridSwitch").value == "grid") {
+		//gets the next set of houses
 		initAllHomes(++pageNumber);
 	}
 };
 
+//styles currency
 var formatter = new Intl.NumberFormat('en-US', {
 	style: 'currency',
 	currency: 'USD',
 });
 
-var pageNumber = 0;
+//get info from url
 editSettings();
+//initialize all houses
 initAllHomes(0);
 
+//if for some reason it doesn't load automatically
 function loadMoreHomes() {
 	initAllHomes(++pageNumber);
 }
 
 function editSettings() {
 	var url = window.location.href;
+	//checks for params
 	if (url.indexOf("?") >= 0) {
 		var queryUrl = url.substring(url.indexOf("?") + 1).replace("-", " ");
 		var queries = queryUrl.split("&");
+		//splits into key and params and updates the search bar
 		for (var i = 0; i < queries.length; i++) {
 			var key = queries[i].substring(0, queries[i].indexOf("="));
 			var val = queries[i].substring(queries[i].indexOf("=") + 1);
@@ -30,15 +38,17 @@ function editSettings() {
 	}
 }
 
+//get properties based off of new query
 function getProperties() {
-	var node = document.getElementById("houses");
-	removeChildren(node);
+	//recusrively removes all children; theres probably a better solution but this one is quick enough and sufficient
+	removeChildren(document.getElementById("houses"));
 	function removeChildren(node) {
 		while (node.firstChild) {
 			removeChildren(node.firstChild);
 			node.removeChild(node.firstChild);
 		}
-	}
+	};
+	//remove the map markers
 	removeAllMarkers();
 	initAllHomes(0);
 }
@@ -50,13 +60,16 @@ function initAllHomes(pageNumber) {
 	xhr.onreadystatechange = function () {
 		if (this.readyState == 4) {
 			if (!this.responseText) {
+				//there was an error but the user doesn't need to know that
 				document.getElementById("loadingHomes").innerHTML = 'No Houses Found';
 			} else {
 				res = JSON.parse(JSON.parse(this.responseText));
 				if (!res || !res.length) {
+					//either error or query too specific
 					document.getElementById("loadingHomes").innerHTML = 'No Houses Found';
 				} else {
 					document.getElementById("loadingHomes").innerHTML = 'Loading More Homes...';
+					//set houses with grid and then init map if its the first time
 					setGridHouses(res);
 					if (!pageNumber) {
 						initMap(res);
@@ -67,33 +80,34 @@ function initAllHomes(pageNumber) {
 			}
 		}
 	}
+	//add params from searchbox so the php can sort it
 	var query = getQuery();
 	xhr.send("pageNumber=" + pageNumber + (query.length > 0 ? ("&" + query) : ""));
 }
 
 function setGridHouses(res) {
 	for(var i=0; i < res.length; i++) {
-		document.getElementById("houses").append(createHouse(res[i], i));
+		//creates new house
+		document.getElementById("houses").append(createHouse(res[i]));
 	}
 }
 
-var idLookup = {};
-var map;
+//array of all google map markers REQUIERD
 var markerArray = []
-var mapInited = false;
-
+var map;
 function initMap(res) {
 	var mapElement = document.getElementById("map");
 	map = new google.maps.Map(mapElement, {
-		center: {lat: -34.397, lng: 150.644},
+		center: {lat: 41.780856, lng: -71.440161},
 		zoom: 7
 	});
 	mapElement.style.width =  document.body.clientWidth + "px";
 	mapElement.style.height =  document.body.clientWidth/2 + "px";
-	removeAllMarkers();
+	//sets houses and markers
 	setMapHouses(res);
 }
 
+//removes all markers
 function removeAllMarkers() {
 	for (var i = 0; i < markerArray.length; i++) {
 		markerArray[i].setMap(null);
@@ -102,37 +116,39 @@ function removeAllMarkers() {
 }
 
 function setMapHouses(res) {
-	var marker;
-	var latMax=0;
-	var latMin=0;
-	var longMax=0;
-	var longMin=0;
-	var loaded = 0;
-	var i = 0;
+	//gets the max and min of the lat and lng of the markers in order to frame them
+	var location = {latMax: 0, latMin: 0, lngMax: 0, lngMin: 0};
 	res.forEach(function(resHouse) {
-		var address = resHouse.FullStreetNum + " " +  resHouse.City + ", " + resHouse.StateOrProvince + ", " + resHouse.PostalCode;
-		var id = resHouse.MLSNumber;
-		idLookup[id] = i++;
+		//get last and lng from house
 		var lat = resHouse.Latitude;
 		var lng = resHouse.Longitude;
+		//geocding errors are entirely possible
 		if (lat == null || lng == null) {
 			return;
 		}
-		marker = new google.maps.Marker({
+		//creates new marker
+		var marker = new google.maps.Marker({
 			map: map,
-			zIndex: id/1,
+			//cannot have same zIndex some zIndex is created by id
+			//why does I have resHouse.MLSNumber/1 you ask? because for some reason using just resHouse.MLSNumber draws an error  ¯\_(ツ)_/¯
+			zIndex: resHouse.MLSNumber/1,
 			icon: {
 				url: "/images/marker.png",
 				scaledSize: new google.maps.Size(75,50),
 				labelOrigin: new google.maps.Point(37.5, 18)
 			},
+			//positioned to coordinates
 			position: {lat: lat, lng: lng},
-			label: { color: 'black', fontSize: '16px', fontFamily: "open sans", text: ''}
+			//sets bubble text;
+			label: { color: 'black', fontSize: '16px', fontFamily: "Open Sans", text: roundToLetter(resHouse.ListPrice)}
 		});
+		//when a marker is clicked
 		marker.addListener('click', function() {
+			//checks if the map is centered on the marker already and is zoomed in significantly
 			if (map.getZoom() >= 14 && Math.abs(map.getCenter().lat() - this.getPosition().lat()) < 0.0000000000001 && Math.abs(map.getCenter().lng() - this.getPosition().lng()) < 0.0000000000001) {
-				showOverlay(this, res)
+				showOverlay(resHouse)
 			} else {
+				//moves to the marker and somes to it
 				map.panTo(this.getPosition());
 				if (map.getZoom() < 14) {
 					map.setZoom(14);
@@ -140,44 +156,42 @@ function setMapHouses(res) {
 
 			}
 		});
-		if (latMin == 0 || lat < latMin) {
-			latMin = lat;
+		//updates frame
+		if (location['latMin'] == 0 || lat < location['latMin']) {
+			location['latMin'] = lat;
 		}
-		if (latMax == 0 || lat > latMax) {
-			latMax = lat;
+		if (location['latMax'] == 0 || lat > location['latMax']) {
+			location['latMax'] = lat;
 		}
-		if (longMin == 0 || lng < longMin) {
-			longMin = lng;
+		if (location['lngMin'] == 0 || lng < location['lngMin']) {
+			location['lngMin'] = lng;
 		}
-		if (longMax == 0 || lng > longMax) {
-			longMax = lng;
+		if (location['lngMax'] == 0 || lng > location['lngMax']) {
+			location['lngMax'] = lng;
 		}
-		marker.id = id;
+		//adds marker to the array
 		markerArray.push(marker);
-		marker.getLabel().text = roundToLetter(resHouse.ListPrice);
 	});
+	//sets center and zoom from frame
 	map.setCenter(new google.maps.LatLng(
-		((latMax + latMin) / 2.0),
-		((longMax + longMin) / 2.0)
+		((location['latMax'] + location['latMin']) / 2.0),
+		((location['lngMax'] + location['lngMin']) / 2.0)
 	));
 	if (map.getZoom() < 8) {
 		map.setZoom(8)
 	}
-	document.getElementById("loadingMap").style.display = "none";
-	if (document.getElementById("mapGridSwitch").value == "map") {
-		document.getElementById("map").style.display = "block";
-	}
-	mapInited = true;
 }
 
+//Adds K and M to create the price
 function roundToLetter(num) {
-	if (num > 1000000) {
+	if (num > 950000) {
 		return String(Math.round(num / 1000000)) + "M";
 	}
 	return String(Math.round(num / 1000)) + "K"
 }
 
-function createHouse(resToUse, i) {
+//Creates house with html elements
+function createHouse(resToUse) {
 	var house = document.createElement("div");
 	var houseImage = document.createElement("img");
 	var houseInfo = document.createElement("div");
@@ -211,10 +225,9 @@ function createHouse(resToUse, i) {
 	return house;
 }
 
-function showOverlay(marker, res) {
-	var id = marker.id
-	var i = idLookup[id];
-	var house = createHouse(res[i]);
+//Adds the clicked house to an overlay
+function showOverlay(res) {
+	var house = createHouse(res);
 	house.id = "mapHouse";
 	document.getElementById("mapHouseWrapper").append(house);
 	document.getElementById("mapHouseWrapper").style.display = "block";
@@ -230,29 +243,18 @@ function switchView() {
 		mapGridSwitch.value = "map";
 		mapGridSwitch.innerHTML = "Switch to Grid View";
 		document.getElementById("houses").style.display = "none";
-		if (mapInited) {
-			document.getElementById("map").style.display = "block";
-		} else {
-			document.getElementById("loadingMap").style.display = "block";
-		}
+		document.getElementById("loadingHomes").style.display = "none";
+		document.getElementById("map").style.display = "block";
 	} else {
 		mapGridSwitch.value = "grid";
 		mapGridSwitch.innerHTML = "Switch to Map View";
 		document.getElementById("map").style.display = "none";
+		document.getElementById("loadingHomes").style.display = "block";
 		document.getElementById("houses").style.display = "flex";
 	}
 }
 
-function emptyForm() {
-	var ids = ["searchAddresses", "searchCities", "searchZips", "searchPropertyType", "searchMinPrice", "searchMaxPrice", "searchBeds", "searchBaths", "searchMinFeet", "searchMaxFeet"];
-	for (id in ids) {
-		if (document.getElementById(ids[id]).value != '' && document.getElementById(ids[id]).value != null) {
-			return false;
-		}
-	}
-	return true;
-}
-
+//checks the values of the search in order to generate a query
 function getQuery() {
 	var query = "";
 	if (document.getElementById("searchPropertyType").value != "") {
@@ -296,6 +298,7 @@ function getQuery() {
 	return query.length == 0 ? "" : query.substring(1);
 }
 
+//if a grid house is clicked
 function openHouse(id) {
 	window.location.href = "/find-your-home?id="+id;
 }
