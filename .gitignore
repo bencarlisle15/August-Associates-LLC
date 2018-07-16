@@ -8,3 +8,6 @@ error_log
 google1b708fda72a7fa57.html
 vendor/
 testing/
+images/rets/
+images/largeRets/
+.gitignore
