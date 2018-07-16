@@ -22,9 +22,9 @@ echo "Start Photos\n";
 for ($q = 0; $q < sizeof($ar); $q++) {
 	echo $q . " of " . count($ar) . "\n";
 	$dir = "../images/rets/" . $ar[$q]['MLSNumber'];
-	if (file_exists($dir)) {
-		continue;
-	}
+	// if (file_exists($dir)) {
+	// 	continue;
+	// }
 	$address = $a['FullStreetNum'] . "," . $ar[$q]["City"] . "," . $ar[$q]["StateOrProvince"] . "," . $ar[$q]["PostalCode"];
 	$geo = file_get_contents('http://maps.googleapis.com/maps/api/geocode/json?address='.urlencode($address).'&sensor=false');
 	$geo = json_decode($geo, true);
