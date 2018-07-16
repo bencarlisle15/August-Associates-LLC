@@ -50,7 +50,7 @@ function initAllHomes(pageNumber) {
 	xhr.onreadystatechange = function () {
 		if (this.readyState == 4) {
 			res = JSON.parse(JSON.parse(this.responseText));
-			if (!res.length) {
+			if (!res || !res.length) {
 				document.getElementById("loadingHomes").innerHTML = 'No Houses Found';
 			} else {
 				document.getElementById("loadingHomes").innerHTML = 'Loading More Homes...';
