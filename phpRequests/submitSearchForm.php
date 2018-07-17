@@ -12,9 +12,13 @@
 	foreach ($inputs as $input) {
 		$val = $_POST[$input];
 		if ($val != '') {
-			$urlAdd = $urlAdd . strlen($urlAdd) > 0 ? "&" : "?" . $input . "=" . $val;
+			$urlAdd = $urlAdd . strlen($urlAdd) > 0 ? "&" : "?" . $input . "=" . addPluses($val);
 		}
 	}
 	header('AMP-Redirect-To:' . $URL . '/find-homes.php' . $urlAdd);
 	echo json_encode("success");
+
+	function addPluses($str) {
+		return join('+ ', preg_split($str, (' ')));
+	}
 ?>

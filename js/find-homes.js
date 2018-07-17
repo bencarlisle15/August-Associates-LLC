@@ -7,6 +7,24 @@ window.onscroll = function(ev) {
 	}
 };
 
+//all currency input
+var vals = ["searchMinPrice","searchMaxPrice"];
+for (var i in vals) {
+	document.getElementById(vals[i]).addEventListener("keyup", function() {
+		this.value = formatCurrency(this.value);
+	});
+}
+
+//automatically updates currency input
+function formatCurrency(oldVal) {
+	var num = oldVal.replace(/(,)/g, '');
+	var val = num.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+	if (val.slice(0,1)!='$' && val != '') {
+		val = '$'+ val;
+	}
+	return val;
+}
+
 //styles currency
 var formatter = new Intl.NumberFormat('en-US', {
 	style: 'currency',
@@ -33,9 +51,16 @@ function editSettings() {
 		for (var i = 0; i < queries.length; i++) {
 			var key = queries[i].substring(0, queries[i].indexOf("="));
 			var val = queries[i].substring(queries[i].indexOf("=") + 1);
-			document.getElementById(key).value = val;
+			if (key == "searchMinPrice" || key == "searchMaxPrice") {
+				val = formatter.format(val);
+			}
+			document.getElementById(key).value = removePluses(val);
 		}
 	}
+}
+
+function removePluses(str) {
+	return str.split('+').join(' ');
 }
 
 //get properties based off of new query
@@ -261,11 +286,14 @@ function getQuery() {
 		query += "&PropertyType=" + document.getElementById("searchPropertyType").value;
 	}
 	if (document.getElementById("searchMinPrice").value != "") {
-		query += "&ListPrice=" + document.getElementById("searchMinPrice").value + ">";
+		query += "&ListPrice=" + document.getElementById("searchMinPrice").value.replace(/(,)/g, '').substr(1) + ">";
 	}
-
 	if (document.getElementById("searchMaxPrice").value != "") {
-		query += "&ListPrice=" + document.getElementById("searchMaxPrice").value + "<";
+		var key = "&ListPrice=";
+		if (query.includes(key)) {
+			key = "&ListPrice2=";
+		}
+		query += key + document.getElementById("searchMaxPrice").value.replace(/(,)/g, '').substr(1) + "<";
 	}
 
 	if (document.getElementById("searchMinFeet").value != "") {

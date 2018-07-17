@@ -13,6 +13,8 @@
 	foreach ($_POST as $key => $val) {
 		if ($key == "pageNumber") {
 			continue;
+		} else if ($key == "ListPrice2") {
+			$key = "ListPrice";
 		}
 		$lastChar = substr($val, -1);
 		$change = 0;

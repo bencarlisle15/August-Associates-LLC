@@ -25,14 +25,14 @@ for ($q = 0; $q < sizeof($ar); $q++) {
 	// if (file_exists($dir)) {
 	// 	continue;
 	// }
-	$address = $a['FullStreetNum'] . "," . $ar[$q]["City"] . "," . $ar[$q]["StateOrProvince"] . "," . $ar[$q]["PostalCode"];
-	$geo = file_get_contents('https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyBTXHu0_banpDsOMFQSDHOxoqdooVQxreI&address='.urlencode($address).'&sensor=false');
+	$url = 'http://dev.virtualearth.net/REST/v1/Locations?CountryRegion=US&adminDistrict=' . urlencode($ar[$q]["StateOrProvince"]) . '&postalCode=' . urlencode($ar[$q]["PostalCode"]) . '&addressLine=' . urlencode($ar[$q]["FullStreetNum"]) . '&maxResults=1&key=AqCiNn0TIMZxpKWaZIrRDMR0vPnl6l_5i87yU_abqwGokrBH5kXAl1AZvCfeICgH';
+	$geo = file_get_contents($url);
 	$geo = json_decode($geo, true);
-	if (!$geo['results']) {
-		var_dump($geo);
+	if (!$geo['resourceSets'][0]['resources'][0]['point']['coordinates']) {
+		echo 'Geocoding failed\n';
 	} else {
-		$ar[$q]["Latitude"] = $geo['results'][0]['geometry']['location']['lat'];
-		$ar[$q]["Longitude"] = $geo['results'][0]['geometry']['location']['lng'];
+		$ar[$q]["Latitude"] = $geo['resourceSets'][0]['resources'][0]['point']['coordinates'][0];
+		$ar[$q]["Longitude"] = $geo['resourceSets'][0]['resources'][0]['point']['coordinates'][1];
 	}
 	$photos = $rets->GetObject("Property", "Photo", $ar[$q]['Matrix_Unique_ID'], "*", 0);
 	if (!file_exists($dir)) {

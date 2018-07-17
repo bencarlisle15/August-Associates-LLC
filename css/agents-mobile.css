@@ -3,6 +3,10 @@
 	margin-bottom: 50px;
 }
 
+body {
+	margin-bottom: 1000px;
+}
+
 .agentWrapper > * {
 	justify-content: center;
 	min-width: 300px;
@@ -14,4 +18,8 @@
 
 #agentsNav, #mobileAgentsWrapper {
 	border: 1px solid;
+}
+
+.section {
+	margin-bottom: 50px;
 }

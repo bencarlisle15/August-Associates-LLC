@@ -13,7 +13,7 @@
 		</div>
 		<div id="linkButtons" class="section">
 			<a class="linkButton button" href="/find-homes">Find Your Perfect Home</a>
-			<a class="linkButton button" href="/sell-your-home">Find Out Whay Your Home is Worth</a>
+			<a class="linkButton button" href="/sell-your-home">Find Out What Your Home is Worth</a>
 			<a class="linkButton button" href="/testimonials">See Our Testimonials</a>
 		</div>
 		<div id="houses" class="section">
@@ -57,18 +57,16 @@
 					<input type="text" title="Zipcodes" id="searchZips" placeholder="Zipcodes" class="searchElement">
 					<select id="searchPropertyType" title="Property Type" class="searchElement">
 						<option title="Property Type" value="" selected>Property Type</option>
-						<option title="Resedential" value="RES">Resedential</option>
-						<option title="Rental" value="RNT">Rental</option>
-						<option title="Multifamily" value="MLF">Multifamily	</option>
-						<option title="condominium" value="CND">Condo</option>
-						<option title="Commerical" value="CRE">Commerical</option>
-						<option title="Land" value="LND">Land</option>
-						<option title="Farm" value="FRM">Farm</option>
+						<option title="Single Family" value="Single Family">Single Family</option>
+						<option title="Rental" value="Rental">Rental</option>
+						<option title="Multi Family" value="	2-4 Units Multi Family">Multifamily	</option>
+						<option title="Condo" value="Condominium">Condo</option>
+						<option title="Vacant Land" value="Vacant Land">Vacant Land</option>
 					</select>
 				</div>
 				<div class="searchFormLine">
-					<input type="number" title="Min Price" id="searchMinPrice" placeholder="Min Price" class="searchElement">
-					<input type="number" title="Max Price" id="searchMaxPrice" placeholder="Max Price" class="searchElement">
+					<input type="text" title="Min Price" id="searchMinPrice" placeholder="Min Price" class="searchElement">
+					<input type="text" title="Max Price" id="searchMaxPrice" placeholder="Max Price" class="searchElement">
 					<input type="number" title="Min Bedrooms" id="searchBeds" placeholder="Min Bedrooms" class="searchElement">
 					<input type="number" title="Min Bathrooms" id="searchBaths" placeholder="Min Bathrooms" class="searchElement">
 					<input type="number" title="Min Square Feet" id="searchMinFeet" placeholder="Min Square Feet" class="searchElement">

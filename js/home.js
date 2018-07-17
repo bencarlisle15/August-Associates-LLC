@@ -9,6 +9,24 @@ window.addEventListener("resize", function() {
 	editArrow()
 });
 
+//all currency input
+var vals = ["searchMinPrice","searchMaxPrice"];
+for (var i in vals) {
+	document.getElementById(vals[i]).addEventListener("keyup", function() {
+		this.value = formatCurrency(this.value);
+	});
+}
+
+//automatically updates currency input
+function formatCurrency(oldVal) {
+	var num = oldVal.replace(/(,)/g, '');
+	var val = num.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
+	if (val.slice(0,1)!='$' && val != '') {
+		val = '$'+ val;
+	}
+	return val;
+}
+
 function editArrow() {
 	var top = parseInt(document.getElementById("bigImage").style.marginTop);
 	if (top > 0 && getHeight("#largeImage")*0.12 > 0) {
@@ -30,10 +48,18 @@ function buildUrl() {
 	var urlAdd = "";
 	for (var i = 0; i < inputs.length; i++) {
 		if (inputs[i].value != '') {
-			urlAdd += urlAdd.length > 0 ? "&" : "?" + inputs[i].id + "=" + inputs[i].value;
+			var val = inputs[i].value;
+			if (inputs[i] == "#searchMinPrice" || inputs[i] == "#searchMaxPrice") {
+				val = val.replace(/(,)/g, '').substr(1);
+			}
+			urlAdd += urlAdd.length > 0 ? "&" : "?" + inputs[i].id + "=" + addPluses(val);
 		}
 	}
 	return urlAdd;
+}
+
+function addPluses(str) {
+	return str.split(' ').join('+');
 }
 
 function submitContactForm() {

@@ -25,8 +25,8 @@
 						</select>
 					</div>
 					<div class="searchFormLine">
-						<input type="number" title="Min Price" id="searchMinPrice" placeholder="Min Price" class="searchElement">
-						<input type="number" title="Max Price" id="searchMaxPrice" placeholder="Max Price" class="searchElement">
+						<input type="text" title="Min Price" id="searchMinPrice" placeholder="Min Price" class="searchElement">
+						<input type="text" title="Max Price" id="searchMaxPrice" placeholder="Max Price" class="searchElement">
 						<input type="number" title="Min Bedrooms" id="searchBeds" placeholder="Min Bedrooms" class="searchElement">
 						<input type="number" title="Min Bathrooms" id="searchBaths" placeholder="Min Bathrooms" class="searchElement">
 						<input type="number" title="Min Square Feet" id="searchMinFeet" placeholder="Min Square Feet" class="searchElement">
