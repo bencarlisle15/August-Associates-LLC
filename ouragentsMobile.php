@@ -4,8 +4,8 @@
 		?>
 		</style>
 		<title>Agents - August Associates LLC</title>
-		<meta name="description" content="Meet our agents looking to help you buy or sell a home. August Associates, your valued guide in real estate." />
-		<link rel="canonical" href="http://www.augustassociatesllc.com/ouragents" />
+		<meta name="description" content="Meet our agents looking to help you buy or sell a home. August Associates, your valued guide in real estate."/>
+		<link rel="canonical" href="http://www.augustassociatesllc.com/ouragents"/>
 	</head>
 	<body>
 		<?php include('bin/nav.php'); ?>
@@ -13,7 +13,7 @@
 			<div id="mainBrokerWrapper">
 				<div class="agentWrapper">
 					<div class="agentImageWrapper">
-						<amp-img class="agentImage" width="250" height="374" src="/images/joseph.jpg" alt="Joseph McCarthy"/>
+						<amp-img class="agentImage" width="250" height="374" src="/images/joseph.jpg" alt="Joseph McCarthy"></amp-img>
 					</div>
 					<div class="agentInfo">
 						<h1 class="agentName agentElement">Joseph McCarthy</h1>
@@ -26,7 +26,7 @@
 			<div id="allAgentsList">
 				<div class="agentWrapper">
 					<div class="agentImageWrapper">
-						<amp-img class="agentImage" width="250" height="280" src="/images/wendy.jpg" alt="Wendy Grave"/>
+						<amp-img class="agentImage" width="250" height="280" src="/images/wendy.jpg" alt="Wendy Grave"></amp-img>
 					</div>
 					<div class="agentInfo">
 						<h1 class="agentName agentElement">Wendy Grave</h1>
@@ -37,7 +37,7 @@
 				</div>
 				<div class="agentWrapper">
 					<div class="agentImageWrapper">
-						<amp-img class="agentImage" width="250" height="374" src="/images/joseph.jpg" alt="Joseph McCarthy"/>
+						<amp-img class="agentImage" width="250" height="374" src="/images/joseph.jpg" alt="Joseph McCarthy"></amp-img>
 					</div>
 					<div class="agentInfo">
 						<h1 class="agentName agentElement">Joseph McCarthy</h1>
@@ -48,7 +48,7 @@
 				</div>
 				<div class="agentWrapper">
 					<div class="agentImageWrapper">
-						<amp-img class="agentImage" width="250" height="280" src="/images/wendy.jpg" alt="Wendy Grave"/>
+						<amp-img class="agentImage" width="250" height="280" src="/images/wendy.jpg" alt="Wendy Grave"></amp-img>
 					</div>
 					<div class="agentInfo">
 						<h1 class="agentName agentElement">Wendy Grave</h1>
@@ -59,7 +59,7 @@
 				</div>
 				<div class="agentWrapper">
 					<div class="agentImageWrapper">
-						<amp-img class="agentImage" width="250" height="374" src="/images/joseph.jpg" alt="Joseph McCarthy"/>
+						<amp-img class="agentImage" width="250" height="374" src="/images/joseph.jpg" alt="Joseph McCarthy"></amp-img>
 					</div>
 					<div class="agentInfo">
 						<h1 class="agentName agentElement">Joseph McCarthy</h1>
@@ -70,7 +70,7 @@
 				</div>
 				<div class="agentWrapper">
 					<div class="agentImageWrapper">
-						<amp-img class="agentImage" width="250" height="280" src="/images/wendy.jpg" alt="Wendy Grave"/>
+						<amp-img class="agentImage" width="250" height="280" src="/images/wendy.jpg" alt="Wendy Grave"></amp-img>
 					</div>
 					<div class="agentInfo">
 						<h1 class="agentName agentElement">Wendy Grave</h1>
