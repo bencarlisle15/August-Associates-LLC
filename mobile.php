@@ -13,7 +13,7 @@
 	<body>
 		<?php include('bin/nav.php'); ?>
 		<div id='imageWrapper'>
-			<amp-img width='350px' height='350px' id='whoLogo' alt='August Associates Logo' src='/images/august%20splash.png'/>
+			<amp-img width='350px' height='350px' id='whoLogo' alt='August Associates Logo' src='/images/august%20splash.png'></amp-img>
 		</div>
 		<div id='whoWrapper'>
 			<h2 id='whoTitle'>Who We Are</h2>
@@ -31,31 +31,31 @@
 		<div id="houses" class="section">
 			<div class="houseImageWrapper">
 				<a href="/find-homes?searchCities=Cranston" class="houseLink">
-					<amp-img class="houseImage" width="160px" height="100" alt="Cranston Image" src="/images/cranston.jpg"/>
+					<amp-img class="houseImage" width="160px" height="100" alt="Cranston Image" src="/images/cranston.jpg"></amp-img>
 				</a>
 				<p class="caption">Cranston</p>
 			</div>
 			<div class="houseImageWrapper">
 				<a href="/find-homes?searchCities=Warwick" class="houseLink">
-					<amp-img class="houseImage" width="160px" height="100" alt="Warwick Image" src="/images/warwick.jpg"/>
+					<amp-img class="houseImage" width="160px" height="100" alt="Warwick Image" src="/images/warwick.jpg"></amp-img>
 				</a>
 				<p class="caption">Warwick</p>
 			</div>
 			<div class="houseImageWrapper">
 				<a href="/find-homes?searchCities=North-Kingstown" class="houseLink">
-					<amp-img class="houseImage" width="160px" height="100" alt="North Kingstown Image" src="/images/nk.jpg"/>
+					<amp-img class="houseImage" width="160px" height="100" alt="North Kingstown Image" src="/images/nk.jpg"></amp-img>
 				</a>
 				<p class="caption">North Kingstown</p>
 			</div>
 			<div class="houseImageWrapper">
 				<a href="/find-homes?searchCities=East-Greenwich" class="houseLink">
-					<amp-img class="houseImage" width="160px" height="100" alt="East Greenwich Image" src="/images/east.jpg"/>
+					<amp-img class="houseImage" width="160px" height="100" alt="East Greenwich Image" src="/images/east.jpg"></amp-img>
 				</a>
 				<p class="caption">East Greenwich</p>
 			</div>
 			<div class="houseImageWrapper">
 				<a href="/find-homes?searchCities=Providence" class="houseLink">
-					<amp-img class="houseImage" width="160px" height="100" alt="Providence Image" src="/images/providence.jpg"/>
+					<amp-img class="houseImage" width="160px" height="100" alt="Providence Image" src="/images/providence.jpg"></amp-img>
 				</a>
 				<p class="caption">Providence</p>
 			</div>
