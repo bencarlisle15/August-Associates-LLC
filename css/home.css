@@ -2,6 +2,10 @@
 	border: 1px solid;
 }
 
+#largeImage {
+	width: 100%;
+}
+
 #imageWrapper {
 	display: flex;
 	justify-content: center;
@@ -111,6 +115,12 @@
 	width: 500px;
 	max-width: 100%;
 	justify-content: center;
+}
+
+#facebookFrame {
+	width: 500px;
+	height:500px;
+	border: 0px;
 }
 
 

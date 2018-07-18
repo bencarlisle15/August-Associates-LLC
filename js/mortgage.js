@@ -31,22 +31,24 @@ function submitMortgageForm() {
 			style: 'currency',
 			currency: 'USD',
 		});
-		document.getElementById("mortgageMonthlyCost").innerHTML = "Your Monthly Cost is " + formatter.format(mortgageMonthlyCost);
-		addMortgageOverlay();
+		var mortgageOverlay = document.createElement("div");
+		var mortgageElement = document.createElement("h2");
+		var mortgageInfo = document.createElement("div");
+		mortgageOverlay.id = "mortgageOverlay";
+		mortgageOverlay.onclick = function() {
+			document.getElementById("mortgageSection").removeChild(document.getElementById("mortgageOverlay"));
+		}
+		mortgageInfo.id = "mortgageInfo";
+		mortgageInfo.onclick = function(e) {
+			var event = e ? e : window.event;
+			event.cancelBubble = true;
+		}
+		mortgageElement.id = "mortgageMonthlyCost";
+		mortgageElement.innerHTML = "Your Monthly Cost is " + formatter.format(mortgageMonthlyCost);
+		mortgageInfo.append(mortgageElement);
+		mortgageOverlay.append(mortgageInfo);
+		document.getElementById("mortgageSection").insertBefore(mortgageOverlay, document.getElementById("mortgageForm"));
+		document.getElementById("mortgageSubmit").focus();
+		document.getElementById("mortgageSubmit").blur();
 	}
-}
-
-function insideClickHandler(e) {
-	if (!e) {
-		var e = window.event;
-	}
-	e.cancelBubble = true;
-}
-
-function addMortgageOverlay() {
-	document.getElementById("mortgageOverlay").style.display = "block";
-}
-
-function removeMortgageOverlay() {
-	document.getElementById("mortgageOverlay").style.display = "none";
 }

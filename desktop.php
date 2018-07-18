@@ -8,7 +8,7 @@
 	<body>
 		<?php include('bin/nav.php'); ?>
 		<div id='bigImage'>
-			<img id="largeImage" src='/images/large august logo.png' width='100%' alt='August Associates Logo' id='bigLogo'/>
+			<img id="largeImage" src='/images/large%20august%20logo.png' alt='August Associates Logo'/>
 			<img id='arrow' src='/images/arrow.png' alt='Arrow'/>
 		</div>
 		<div id="linkButtons" class="section">
@@ -88,7 +88,7 @@
 			</div>
 			<div id="contactWrapper" class="infoSection">
 				<h2 id="contactTitle">Contact Us</h2>
-				<form id="contactForm" align="center" border="1px" action="javascript:submitContactForm()">
+				<form id="contactForm" border="1px" action="javascript:submitContactForm()">
 					<input type="text" title="Name" id="contactFormName" placeholder="Name" class="contactFormElement" required>
 					<input type="email" title="Email" id="contactFormEmail" placeholder="Email" class="contactFormElement">
 					<input type="tel" title="Phone" id="contactFormPhone" placeholder="Phone Number" class="contactFormElement">
@@ -97,7 +97,7 @@
 				</form>
 			</div>
 			<div id="facebookWrapper" class="infoSection">
-				<iframe title="Facebook Page" src="https://www.facebook.com/plugins/page?href=https%3A%2F%2Fwww.facebook.com%2FJoseph-McCarthy-Real-Estate-Broker-642396402607701%2F&tabs=timeline&width=500&height=500&small_header=true&adapt_container_width=true&hide_cover=true&show_facepile=true&appId" style="width: 500px; height:500px;" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+				<iframe id="facebookFrame" title="Facebook Page" src="https://www.facebook.com/plugins/page?href=https%3A%2F%2Fwww.facebook.com%2FJoseph-McCarthy-Real-Estate-Broker-642396402607701%2F&tabs=timeline&width=500&height=500&small_header=true&adapt_container_width=true&hide_cover=true&show_facepile=true&appId"></iframe>
 			</div>
 		</div>
 		<?php include('bin/footer.html'); ?>

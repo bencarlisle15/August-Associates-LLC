@@ -9,22 +9,14 @@
 		<?php include('bin/nav.php'); ?>
 		<div id="sellSection" class="section">
 			<h1 id="sellTitle">See How Much Your House is Worth</h1>
-			<div id="sellOverlay" onkeypress="removeSellOverlay()" onclick="removeSellOverlay()">
-				<div id="sellInfo" onclick="insideClickHandler()">
-					<h2 id="sellAddress"></h2>
-					<h2 id="sellCity"></h2>
-					<h3 id="sellAverage"></h3>
-					<h4 id="sellRange"></h4>
-				</div>
-			</div>
-			<form id="sellHouseForm" align="center" border="1px" action="javascript:submitForm()">
+			<form id="sellHouseForm" action="javascript:submitForm()">
 				<input type="text" title="Name" id="formName" placeholder="Name" class="formLineElement" required>
 				<input type="email" title="Email" id="formEmail" class="formLineElement" placeholder="Email">
 				<input type="text" title="Address" id="formAddress" placeholder="Address" class="formLineElement" required>
-				<div id = "formLine">
+				<div id="formLine">
 					<input type="text" title="City" id="formCity" class="formLineElement" placeholder="City" required>
 					<input type="number" title="Zipcode" class="formLineElement" id="formZip" placeholder="Zipcode" required>
-					<select title"State" id="formState" class="formLineElement">
+					<select title="State" id="formState" class="formLineElement">
 						<option title="AL" value="AL">AL</option>
 						<option title="AK" value="AK">AK</option>
 						<option title="AR" value="AR">AR</option>

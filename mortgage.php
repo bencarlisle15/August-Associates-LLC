@@ -9,13 +9,8 @@
 	<?php include('bin/nav.php'); ?>
 	<div id="mortgageSection" class="section">
 		<h1 id="mortgageTitle">See What You Would Pay Per Month</h1>
-		<div id="mortgageOverlay" onkeypress="removeMortgageOverlay()" onclick="removeMortgageOverlay()">
-			<div id="mortgageInfo" onclick="insideClickHandler()">
-				<h2 id="mortgageMonthlyCost" align="center"></h2>
-			</div>
-		</div>
-		<form id="mortgageForm" align="center" border="1px" action="javascript:submitMortgageForm()">
-			<div id = mortgageHouseAndDown>
+		<form id="mortgageForm" action="javascript:submitMortgageForm()">
+			<div id="mortgageHouseAndDown">
 				<input type="text" title="House Cost" id="mortgageHouseCost" class="mortgageElement" placeholder="House Cost" required>
 				<input type="text" title="Down Payment" id="mortgageDownPayment" class="mortgageElement" placeholder="Down Payment" required>
 			</div>
