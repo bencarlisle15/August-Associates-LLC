@@ -13,7 +13,7 @@
 	<body>
 		<?php include('bin/nav.php'); ?>
 		<div id='imageWrapper'>
-			<amp-img width='350px' height='350px' id='whoLogo' alt='August Associates Logo' src='/images/august splash.png'/>
+			<amp-img width='350px' height='350px' id='whoLogo' alt='August Associates Logo' src='/images/august%20splash.png'/>
 		</div>
 		<div id='whoWrapper'>
 			<h2 id='whoTitle'>Who We Are</h2>

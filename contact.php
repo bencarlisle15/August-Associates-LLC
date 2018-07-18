@@ -11,7 +11,7 @@
 			<div id="contactWrapper">
 				<div id="imageInfoWrapper" class="contactWrapperSection">
 					<div id="imageWrapper">
-						<img id="contactLogo" alt="August Associates Logo" src="/images/august splash.png"/>
+						<img id="contactLogo" alt="August Associates Logo" src="/images/august%20splash.png"/>
 					</div>
 					<div id="infoWrapper">
 						<h1 id="infoTitle">Our Info</h1>
@@ -24,7 +24,7 @@
 				</div>
 				<div id="contactFormWrapper" class="contactWrapperSection">
 					<h1 id="contactUsTitle">Contact Us</h1>
-					<form id="contactForm" align="center" border="1px" action="javascript:submitContactForm()">
+					<form id="contactForm" action="javascript:submitContactForm()">
 						<input type="text" title="Name" id="contactFormName" placeholder="Name" class="contactFormElement" required>
 						<input type="email" title="Email" id="contactFormEmail" placeholder="Email" class="contactFormElement">
 						<input type="tel" title="Phone" id="contactFormPhone" placeholder="Phone Number" class="contactFormElement">
