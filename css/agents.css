@@ -2,16 +2,31 @@
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
+	width: 45%;
+	min-width: 300px;
+	margin: 10px;
 }
 
-.agentWrapper > * {
-	flex: 1;
+#mainBrokerWrapper {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+.agentParagraph {
+	font-size: 12pt;
+}
+
+.agentImageWrapper, .agentInfo {
+	flex: 3;
 	justify-content: center;
 	align-self: center;
-	min-width: 300px;
+	min-width: 150px;
 }
 
 .agentImageWrapper {
+	flex: 1;
+	margin: 10px;
 	display: flex;
 }
 
@@ -21,4 +36,11 @@
 
 .agentParagraph {
 	margin-bottom: 50px;
+}
+
+#allAgentsList {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
 }

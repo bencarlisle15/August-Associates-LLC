@@ -1,54 +1,91 @@
-	<?php include('bin/head.php'); ?>
-	<style>
-		<?php include('css/find-your-home.css'); ?>
-	</style>
-	<title>August Associates LLC - Find Your Home</title>
-	<meta name="description" content="View your new home here. August Associates, your valued guide in real estate." />
-</head>
-<body>
-	<?php include('bin/nav.php'); ?>
-	<div id="yourHomeSection" class="section">
-		<div id="infoOverlay">
-			<div id="infoFormWrapper">
-				<h2 id="formTooManyUses">You Have Used Up Your Three Free Views</h2>
-				<h2 id="formInfo">Enter Your Name and Email to View this Property</h2>
-				<form id="infoForm" align="center" border="1px" action="javascript:submitInfoForm()">
-					<input type="text" id="infoFormName" class="infoFormElement" placeholder="Name" required>
-					<input type="email" id="infoFormEmail" placeholder="Email" class="infoFormElement" required>
-					<input type="tel" id="infoFormPhone" placeholder="Phone Number" class="infoFormElement">
-					<button id="infoFormSubmit" class="infoFormElement">Submit</button>
-				</form>
-			</div>
-		</div>
-		<div id="infoWrapper">
-			<div id="houseSlideshow">
-				<a onclick="plusSlides(-1)" id="prev">&#10094;</a>
-				<a onclick="plusSlides(1)" id="next">&#10095;</a>
-			</div>
-			<div style="text-align:center" id="dots">
-			</div>
-			<h1 id="address" align = "center"></h1>
-			<h2 id="price">Price not Found</h2>
-			<div id="tableAndDescription">
-				<div id="descriptionAndContact">
-					<h2 id="interested" style="font-weight: bold">Interested in this Home?</h2>
-					<h2>Call us at <a href="tel:4014610700">(401) 461-0700</a> or Email us at <a href="mailto:jmccarthy@necompass.com">jmccarthy@necompass.com</a> to get in touch with an agent</h2>
-					<p id="description">Description not Found</p>
+		<?php include('bin/head.php'); ?>
+		<style>
+			<?php include('css/find-your-home.css'); ?>
+		</style>
+		<title>August Associates LLC - Find Your Home</title>
+		<meta name="description" content="View your new home here. August Associates, your valued guide in real estate." />
+	</head>
+	<body>
+		<?php include('bin/nav.php'); ?>
+		<div id="yourHomeSection" class="section">
+			<div id="infoOverlay">
+				<div id="infoFormWrapper">
+					<h2 id="formTooManyUses">You Have Used Up Your Three Free Views</h2>
+					<h2 id="formInfo">Enter Your Name and Email to View this Property</h2>
+					<form id="infoForm" align="center" border="1px" action="javascript:submitInfoForm()">
+						<input type="text" id="infoFormName" class="infoFormElement" placeholder="Name" required>
+						<input type="email" id="infoFormEmail" placeholder="Email" class="infoFormElement" required>
+						<input type="tel" id="infoFormPhone" placeholder="Phone Number" class="infoFormElement">
+						<button id="infoFormSubmit" class="infoFormElement">Submit</button>
+					</form>
 				</div>
-				<table id="table">
-				</table>
 			</div>
-			<div id="map"></div>
+			<div id="infoWrapper">
+				<?php
+					ini_set('memory_limit', '-1');
+					require_once("phpRequests/keys.php");
+					$conn = new mysqli("localhost", getDBUser(), getDBPassword(), getDBName());
+					$query = "SELECT json_data FROM RetsData";
+					$resultQuery = mysqli_query($conn, $query);
+					$result = $resultQuery->fetch_assoc()['json_data'];
+					$json = json_decode($result, true);
+					for ($i = 0; $i < sizeof($json); $i++) {
+						if ($json[$i]['MLSNumber'] == $_GET['id']) {
+							$res = $json[$i];
+							break;
+						}
+					}
+					echo "<div id='houseSlideshow'>";
+							for ($i = 0; $i < $res['PhotoCount']; $i++) {
+								echo "<div class='houseWrapper'>
+									<img src='images/largeRets/" . $res['MLSNumber'] . "/" . $i . ".jpg' alt='Picture of the House' class='houseImage'/>
+								</div>";
+							}
+					echo "<a onclick='plusSlides(-1)' id='prev'>&#10094;</a>
+						<a onclick='plusSlides(1)'' id='next'>&#10095;</a>
+					</div>
+					<div style='text-align:center' id='dots'>";
+					for ($i = 0; $i < $res['PhotoCount']; $i++) {
+						echo "<span class='dot' onclick='showSlides(" . $i . ")'></span>";
+					}
+					echo "</div>
+					<h1 id='address' align = 'center'>" . ucwords(strtolower($res['FullStreetNum'])) . ", " . $res['City'] . ", " . $res['StateOrProvince'] . ", " . $res['PostalCode'] . "</h1>
+					<h2 id='price'>$" . number_format((float) $res['ListPrice']) . "</h2>
+					<div id='tableAndDescription'>
+						<div id='descriptionAndContact'>
+							<p id='description'>" .  ucwords(strtolower($res['PublicRemarks'])) . "</p>
+							<h2 id='interested' style='font-weight: bold'>Interested in this Home?</h2>
+							<h2>Call us at <a href='tel:4014610700'>(401) 461-0700</a> or Email us at <a href='mailto:jmccarthy@necompass.com'>jmccarthy@necompass.com</a> to get in touch with an agent</h2>
+						</div>
+						<table id='table'>";
+						$sqftVal = (int)($res['SqFtTotal'] ? $res['SqFtTotal'] : $res['ApproxLotSquareFoot']);
+						echo addAttribute("Square Feet", $sqftVal);
+						$keys = ["BathsTotal" => "Bathrooms", "NumberOfLevels" => "Stories", "Fireplace"=> "Fireplaces", "HeatingSystem"=> "Heating", "BedsTotal"=> "Bedrooms", "Pool"=> "Pool", "WaterAmenities"=> "Water Amenities", "YearBuilt"=> "Year Built", "GarageSpaces"=> "Garage Spaces"];
+						foreach ($keys as $key => $value) {
+							echo addAttribute($value, $res[$key]);
+						}
+						echo "</table>
+					</div>";
+					$address = $res['FullStreetNum'] . ", " . $res['City'] . ", " . $res['StateOrProvince'];
+					function addAttribute($keyName, $value) {
+						if ($value == null || $value == "None" || $value == 0 || $value == "0") {
+							return;
+						}
+						return "<tr><th class='keys'>" . $keyName . "</th><td class='values'>" . str_replace(",", ", ", $value) . "</td</tr>";
+					}
+				?>
+				<div id="map"></div>
+			</div>
 		</div>
-	</div>
-	<?php include('bin/footer.html'); ?>
-</body>
+		<?php include('bin/footer.html'); ?>
+	</body>
 </html>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTXHu0_banpDsOMFQSDHOxoqdooVQxreI"></script>
 <script>
-	<?php
-		include('js/load.js');
-		include('js/find-your-home.js');
-	?>
+<?php
+include('js/load.js');
+include('js/find-your-home.js');
+?>
+initMap('<?php echo $address ?>');
 </script>

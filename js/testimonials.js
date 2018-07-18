@@ -1,4 +1,4 @@
-addTestimonials()
+// addTestimonialsText()
 
 /*"<div class='testimonialFrame'><p class='testimonialText'><i>\"I was incredibly impressed with Pam's goal oriented action. She obtained a full asking price cash offer on my house within DAYS of listing, just as she hoped to when I signed on with Benefit.\"</i></p><p class='testimonialName'>-Karin</p></div>"*/
 
