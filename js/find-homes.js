@@ -33,7 +33,6 @@ var formatter = new Intl.NumberFormat('en-US', {
 
 //get info from url
 editSettings();
-// initAllHomes(0);
 //if for some reason it doesn't load automatically
 function loadMoreHomes() {
 	if (length >= 40) {
@@ -130,13 +129,8 @@ function initAllHomes(pageNumber) {
 				} else {
 					document.getElementById("loadingHomes").innerHTML = 'Loading More Homes...';
 					length = res.length;
-					//set houses with grid and then init map if its the first time
-					if (!pageNumber) {
-						initMap(res);
-					} else {
-						setGridHouses(res);
-						setMapHouses(res);
-					}
+					setGridHouses(res);
+					setMapHouses(res);
 				}
 			}
 		}

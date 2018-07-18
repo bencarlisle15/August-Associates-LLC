@@ -7,18 +7,14 @@
 	header("Access-Control-Allow-Origin: ". str_replace('.', '-', $URL . '/*') .".cdn.ampproject.org");
 	header("Access-Control-Allow-Credentials: true");
 	header("Access-Control-Expose-Headers: AMP-Access-Control-Allow-Source-Origin");
-	$inputs = array("searchAddresses", "searchCities", "searchZips", "searchPropertyType", "searchMinPrice", "searchMaxPrice", "searchMinFeet", "searchMaxFeet");
+	$inputs = ["searchAddresses", "searchCities", "searchZips", "searchPropertyType", "searchMinPrice", "searchMaxPrice", "searchMinFeet", "searchMaxFeet", "searchBeds", "searchBaths"];
 	$urlAdd = "";
 	foreach ($inputs as $input) {
 		$val = $_POST[$input];
 		if ($val != '') {
-			$urlAdd = $urlAdd . strlen($urlAdd) > 0 ? "&" : "?" . $input . "=" . addPluses($val);
+			$urlAdd .= (strlen($urlAdd) > 0 ? "&" : "?") . $input . "=" .  str_replace(' ', ' ', $val);
 		}
 	}
 	header('AMP-Redirect-To:' . $URL . '/find-homes.php' . $urlAdd);
-	echo json_encode("success");
-
-	function addPluses($str) {
-		return join('+ ', preg_split($str, (' ')));
-	}
+	echo json_encode("Success");
 ?>

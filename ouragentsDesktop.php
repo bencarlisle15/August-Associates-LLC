@@ -15,8 +15,10 @@
 						<img class="agentImage" src="/images/joseph.jpg" alt="Joseph McCarthy"/>
 					</div>
 					<div class="agentInfo">
-						<h1 class="agentName">Joseph McCarthy</h1>
-						<p class="agentParagraph">Joe has been in service & sales businesses for 24 years. In recent years, he has focused his knowledge & skills in the real estate industry. His ability to speak two languages (Spanish) has made it easier to communicate with a vast majority of people. Joe is intuitive and sensitive to everyone's needs for honest, sincere assistance in the sometimes - puzzling, home-buying & marketing quests.</p>
+						<h1 class="agentName agentElement">Joseph McCarthy</h1>
+						<p class="agentParagraph agentElement">Joe has been in service & sales businesses for 24 years. In recent years, he has focused his knowledge & skills in the real estate industry. His ability to speak two languages (Spanish) has made it easier to communicate with a vast majority of people. Joe is intuitive and sensitive to everyone's needs for honest, sincere assistance in the sometimes - puzzling, home-buying & marketing quests.</p>
+						<h3 class="agentEmail agentElement">Email: <a href="mailto:jmccarthy@necompass.com">jmccarthy@necompass.com</a></h3>
+						<h3 class="agentWebsite agentElement">Facebook: <a href="https://www.facebook.com/profile.php?id=100012283484334">facebook.com/profile.php?id=100012283484334</a></h3>
 					</div>
 				</div>
 			</div>
@@ -26,8 +28,10 @@
 						<img class="agentImage" src="/images/wendy.jpg" alt="Wendy Grave"/>
 					</div>
 					<div class="agentInfo">
-						<h1 class="agentName">Wendy Grave</h1>
-						<p class="agentParagraph">​Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum molestie volutpat cursus. Phasellus lobortis est quis arcu pellentesque consequat. In nec purus ornare, ultrices purus eu, tempor augue. Sed sollicitudin tortor nec nibh hendrerit, vitae luctus velit aliquam. Fusce ornare ultrices quam, et posuere leo sollicitudin id.</p>
+						<h1 class="agentName agentElement">Wendy Grave</h1>
+						<p class="agentParagraph agentElement">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum molestie volutpat cursus. Phasellus lobortis est quis arcu pellentesque consequat. In nec purus ornare, ultrices purus eu, tempor augue. Sed sollicitudin tortor nec nibh hendrerit, vitae luctus velit aliquam. Fusce ornare ultrices quam, et posuere leo sollicitudin id.</p>
+						<h3 class="agentEmail agentElement">Email: <a href="mailto:wgrave@necompass.com">wgrave@necompass.com</a></h3>
+						<h3 class="agentWebsite agentElement">Website: <a href="http://www.wendygrave.com">wendygrave.com</a></h3>
 					</div>
 				</div>
 				<div class="agentWrapper">
@@ -35,8 +39,10 @@
 						<img class="agentImage" src="/images/joseph.jpg" alt="Joseph McCarthy"/>
 					</div>
 					<div class="agentInfo">
-						<h1 class="agentName">Joseph McCarthy</h1>
-						<p class="agentParagraph">Joe has been in service & sales businesses for 24 years. In recent years, he has focused his knowledge & skills in the real estate industry. His ability to speak two languages (Spanish) has made it easier to communicate with a vast majority of people. Joe is intuitive and sensitive to everyone's needs for honest, sincere assistance in the sometimes - puzzling, home-buying & marketing quests.</p>
+						<h1 class="agentName agentElement">Joseph McCarthy</h1>
+						<p class="agentParagraph agentElement">Joe has been in service & sales businesses for 24 years. In recent years, he has focused his knowledge & skills in the real estate industry. His ability to speak two languages (Spanish) has made it easier to communicate with a vast majority of people. Joe is intuitive and sensitive to everyone's needs for honest, sincere assistance in the sometimes - puzzling, home-buying & marketing quests.</p>
+						<h3 class="agentEmail agentElement">Email: <a href="mailto:jmccarthy@necompass.com">jmccarthy@necompass.com</a></h3>
+						<h3 class="agentWebsite agentElement">Facebook: <a href="https://www.facebook.com/profile.php?id=100012283484334">facebook.com/profile.php?id=100012283484334</a></h3>
 					</div>
 				</div>
 				<div class="agentWrapper">
@@ -44,8 +50,10 @@
 						<img class="agentImage" src="/images/wendy.jpg" alt="Wendy Grave"/>
 					</div>
 					<div class="agentInfo">
-						<h1 class="agentName">Wendy Grave</h1>
-						<p class="agentParagraph">​Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum molestie volutpat cursus. Phasellus lobortis est quis arcu pellentesque consequat. In nec purus ornare, ultrices purus eu, tempor augue. Sed sollicitudin tortor nec nibh hendrerit, vitae luctus velit aliquam. Fusce ornare ultrices quam, et posuere leo sollicitudin id.</p>
+						<h1 class="agentName agentElement">Wendy Grave</h1>
+						<p class="agentParagraph agentElement">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum molestie volutpat cursus. Phasellus lobortis est quis arcu pellentesque consequat. In nec purus ornare, ultrices purus eu, tempor augue. Sed sollicitudin tortor nec nibh hendrerit, vitae luctus velit aliquam. Fusce ornare ultrices quam, et posuere leo sollicitudin id.</p>
+						<h3 class="agentEmail agentElement">Email: <a href="mailto:wgrave@necompass.com">wgrave@necompass.com</a></h3>
+						<h3 class="agentWebsite agentElement">Website: <a href="http://www.wendygrave.com">wendygrave.com</a></h3>
 					</div>
 				</div>
 				<div class="agentWrapper">
@@ -53,8 +61,10 @@
 						<img class="agentImage" src="/images/joseph.jpg" alt="Joseph McCarthy"/>
 					</div>
 					<div class="agentInfo">
-						<h1 class="agentName">Joseph McCarthy</h1>
-						<p class="agentParagraph">Joe has been in service & sales businesses for 24 years. In recent years, he has focused his knowledge & skills in the real estate industry. His ability to speak two languages (Spanish) has made it easier to communicate with a vast majority of people. Joe is intuitive and sensitive to everyone's needs for honest, sincere assistance in the sometimes - puzzling, home-buying & marketing quests.</p>
+						<h1 class="agentName agentElement">Joseph McCarthy</h1>
+						<p class="agentParagraph agentElement">Joe has been in service & sales businesses for 24 years. In recent years, he has focused his knowledge & skills in the real estate industry. His ability to speak two languages (Spanish) has made it easier to communicate with a vast majority of people. Joe is intuitive and sensitive to everyone's needs for honest, sincere assistance in the sometimes - puzzling, home-buying & marketing quests.</p>
+						<h3 class="agentEmail agentElement">Email: <a href="mailto:jmccarthy@necompass.com">jmccarthy@necompass.com</a></h3>
+						<h3 class="agentWebsite agentElement">Facebook: <a href="https://www.facebook.com/profile.php?id=100012283484334">facebook.com/profile.php?id=100012283484334</a></h3>
 					</div>
 				</div>
 				<div class="agentWrapper">
@@ -62,8 +72,10 @@
 						<img class="agentImage" src="/images/wendy.jpg" alt="Wendy Grave"/>
 					</div>
 					<div class="agentInfo">
-						<h1 class="agentName">Wendy Grave</h1>
-						<p class="agentParagraph">​Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum molestie volutpat cursus. Phasellus lobortis est quis arcu pellentesque consequat. In nec purus ornare, ultrices purus eu, tempor augue. Sed sollicitudin tortor nec nibh hendrerit, vitae luctus velit aliquam. Fusce ornare ultrices quam, et posuere leo sollicitudin id.</p>
+						<h1 class="agentName agentElement">Wendy Grave</h1>
+						<p class="agentParagraph agentElement">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum molestie volutpat cursus. Phasellus lobortis est quis arcu pellentesque consequat. In nec purus ornare, ultrices purus eu, tempor augue. Sed sollicitudin tortor nec nibh hendrerit, vitae luctus velit aliquam. Fusce ornare ultrices quam, et posuere leo sollicitudin id.</p>
+						<h3 class="agentEmail agentElement">Email: <a href="mailto:wgrave@necompass.com">wgrave@necompass.com</a></h3>
+						<h3 class="agentWebsite agentElement">Website: <a href="http://www.wendygrave.com">wendygrave.com</a></h3>
 					</div>
 				</div>
 			</div>

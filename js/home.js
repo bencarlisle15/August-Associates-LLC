@@ -44,7 +44,7 @@ function submitSearch() {
 }
 
 function buildUrl() {
-	var inputs = document.querySelectorAll("#searchAddresses, #searchCities, #searchZips, #searchPropertyType, #searchMinPrice, #searchMaxPrice, #searchMinFeet, #searchMaxFeet");
+	var inputs = document.querySelectorAll("#searchAddresses, #searchCities, #searchZips, #searchPropertyType, #searchMinPrice, #searchMaxPrice, #searchMinFeet, #searchMaxFeet, #searchBeds, #searchBaths");
 	var urlAdd = "";
 	for (var i = 0; i < inputs.length; i++) {
 		if (inputs[i].value != '') {
@@ -52,7 +52,7 @@ function buildUrl() {
 			if (inputs[i].id == "searchMinPrice" || inputs[i].id == "searchMaxPrice") {
 				val = val.replace(/(,)/g, '').substr(1);
 			}
-			urlAdd += urlAdd.length > 0 ? "&" : "?" + inputs[i].id + "=" + addPluses(val);
+			urlAdd += (urlAdd.length > 0 ? "&" : "?") + inputs[i].id + "=" + addPluses(val);
 		}
 	}
 	return urlAdd;

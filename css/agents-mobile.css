@@ -1,25 +1,53 @@
 .agentWrapper {
-	padding-top: 150px;
-	margin-bottom: 50px;
-}
-
-body {
-	margin-bottom: 1000px;
-}
-
-.agentWrapper > * {
-	justify-content: center;
-	min-width: 300px;
-}
-
-.agentImageWrapper {
 	display: flex;
+	flex-direction: column;
+	width: 45%;
+	min-width: 300px;
+	margin: 10px;
+	padding-bottom: 10px;
 }
 
-#agentsNav, #mobileAgentsWrapper {
+.agentSection {
+	padding-top: 150px;
+	padding-bottom: 50px;
+}
+
+#mainBrokerWrapper {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+.agentElement {
+	font-size: 12pt;
+	margin: 5px;
+}
+
+.agentName {
+	font-size: 16pt;
+}
+
+.agentInfo {
+	flex-direction: column;
+}
+
+.agentImageWrapper, .agentInfo {
+	display: flex;
+	flex: 3;
+	align-items: center;
+	justify-content: center;
+	align-self: center;
+	min-width: 150px;
+	margin: 0px;
+}
+
+#agentsNav {
 	border: 1px solid;
 }
 
-.section {
-	margin-bottom: 50px;
+#allAgentsList {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
 }
