@@ -4,8 +4,7 @@ Allow: /
 Allow: /find-homes
 Allow: /sell-your-home
 Allow: /mortgage
-Allow: /agents/joseph
-Allow: /agents/wendy
+Allow: /ouragents
 Allow: /testimonials
 Allow: /contact
 
