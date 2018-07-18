@@ -108,18 +108,27 @@
 #searchSubmit {
 	border: none;
 }
-
-#mapGridSwitch {
-	padding: 16px;
+.findButton {
 	background-color: #555555;
-	float: right;
+	padding: 16px;
 	margin: 16px;
 }
 
-#mapGridSwitch:hover {
+.findButton:hover {
 	background-color: #333333;
 }
 
-#map {
+#findButtons {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+#sortArray {
+	padding: 16px;
+	margin: 16px;
+}
+
+#map, #searchThisArea {
 	display: none;
 }

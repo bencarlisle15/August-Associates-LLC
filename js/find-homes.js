@@ -3,7 +3,7 @@ var pageNumber = 0;
 window.onscroll = function(ev) {
 	if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight && document.getElementById("mapGridSwitch").value == "grid") {
 		//gets the next set of houses
-		initAllHomes(++pageNumber);
+		loadMoreHomes();
 	}
 };
 
@@ -33,12 +33,12 @@ var formatter = new Intl.NumberFormat('en-US', {
 
 //get info from url
 editSettings();
-//initialize all houses
-initAllHomes(0);
-
+// initAllHomes(0);
 //if for some reason it doesn't load automatically
 function loadMoreHomes() {
-	initAllHomes(++pageNumber);
+	if (length >= 40) {
+		initAllHomes(++pageNumber);
+	}
 }
 
 function editSettings() {
@@ -54,28 +54,63 @@ function editSettings() {
 			if (key == "searchMinPrice" || key == "searchMaxPrice") {
 				val = formatter.format(val);
 			}
-			document.getElementById(key).value = removePluses(val);
+			if (key == "map" && val =="true") {
+				switchView();
+			} else if (document.getElementById(key)) {
+				document.getElementById(key).value = removePluses(val);
+			}
 		}
 	}
+}
+
+function resetSearch() {
+	window.location.href = "/find-homes";
+}
+
+function searchArea() {
+	var radius = 156543.03392 * Math.cos(map.getCenter().lat() * Math.PI / 180) / Math.pow(2, map.getZoom());
+	console.log(radius);
+	var extra = "radius=" + radius + "&lat=" + map.getCenter().lat() + "&lng=" + map.getCenter().lng() + "&map=true";
+	var url = buildUrl();
+	url += url.length > 0 ? "&" : "?";
+	window.location.href = "/find-homes" + url + extra;
+}
+
+function sortArray() {
+	var val = document.getElementById("sortArray").value;
+	var url = buildUrl();
+	url += url.length > 0 ? "&" : "?";
+	window.location.href = "/find-homes" + url + "sortby=" + val;
 }
 
 function removePluses(str) {
 	return str.split('+').join(' ');
 }
 
-//get properties based off of new query
 function getProperties() {
-	//recusrively removes all children; theres probably a better solution but this one is quick enough and sufficient
-	removeChildren(document.getElementById("houses"));
-	function removeChildren(node) {
-		while (node.firstChild) {
-			removeChildren(node.firstChild);
-			node.removeChild(node.firstChild);
+	window.location.href = "/find-homes"+buildUrl();
+	// console.log(buildUrl());
+}
+
+function buildUrl() {
+	var inputs = document.querySelectorAll("#searchAddresses, #searchCities, #searchZips, #searchPropertyType, #searchMinPrice, #searchMaxPrice, #searchMinFeet, #searchMaxFeet, #searchBeds, #searchBaths");
+	var urlAdd = "";
+	for (var i = 0; i < inputs.length; i++) {
+		if (inputs[i].value != '') {
+			var val = inputs[i].value;
+			if (inputs[i].id == "searchMinPrice" || inputs[i].id == "searchMaxPrice") {
+				val = val.replace(/(,)/g, '').substr(1);
+			}
+			urlAdd += (urlAdd.length > 0 ? "&" : "?") + inputs[i].id + "=" + addPluses(val);
 		}
-	};
-	//remove the map markers
-	removeAllMarkers();
-	initAllHomes(0);
+	}
+	return urlAdd;
+}
+
+var length;
+
+function addPluses(str) {
+	return str.split(' ').join('+');
 }
 
 function initAllHomes(pageNumber) {
@@ -86,19 +121,20 @@ function initAllHomes(pageNumber) {
 		if (this.readyState == 4) {
 			if (!this.responseText) {
 				//there was an error but the user doesn't need to know that
-				document.getElementById("loadingHomes").innerHTML = 'No Houses Found';
+				document.getElementById("loadingHomes").innerHTML = 'No More Houses Found';
 			} else {
-				res = JSON.parse(JSON.parse(this.responseText));
+				var res = JSON.parse(JSON.parse(this.responseText));
 				if (!res || !res.length) {
 					//either error or query too specific
-					document.getElementById("loadingHomes").innerHTML = 'No Houses Found';
+					document.getElementById("loadingHomes").innerHTML = 'No More Houses Found';
 				} else {
 					document.getElementById("loadingHomes").innerHTML = 'Loading More Homes...';
+					length = res.length;
 					//set houses with grid and then init map if its the first time
-					setGridHouses(res);
 					if (!pageNumber) {
 						initMap(res);
 					} else {
+						setGridHouses(res);
 						setMapHouses(res);
 					}
 				}
@@ -126,7 +162,7 @@ function initMap(res) {
 		center: {lat: 41.780856, lng: -71.440161},
 		zoom: 7
 	});
-	mapElement.style.width =  document.body.clientWidth + "px";
+	mapElement.style.width =  "100%";
 	mapElement.style.height =  document.body.clientWidth/2 + "px";
 	//sets houses and markers
 	setMapHouses(res);
@@ -202,7 +238,10 @@ function setMapHouses(res) {
 		((location['latMax'] + location['latMin']) / 2.0),
 		((location['lngMax'] + location['lngMin']) / 2.0)
 	));
-	if (map.getZoom() < 8) {
+	if (window.location.href.includes("radius")) {
+		var url = window.location.href;
+		map.setZoom(Math.log2(156543.03392 * Math.cos(map.getCenter().lat() * Math.PI / 180)/(parseInt(url.substring(url.indexOf("radius=") + 7, url.indexOf("&", url.indexOf("radius=")))))));
+	} else if (map.getZoom() < 8) {
 		map.setZoom(8)
 	}
 }
@@ -269,12 +308,16 @@ function switchView() {
 		mapGridSwitch.innerHTML = "Switch to Grid View";
 		document.getElementById("houses").style.display = "none";
 		document.getElementById("loadingHomes").style.display = "none";
+		document.getElementById("sortArray").style.display = "none";
+		document.getElementById("searchThisArea").style.display = "block";
 		document.getElementById("map").style.display = "block";
 	} else {
 		mapGridSwitch.value = "grid";
 		mapGridSwitch.innerHTML = "Switch to Map View";
 		document.getElementById("map").style.display = "none";
+		document.getElementById("searchThisArea").style.display = "none";
 		document.getElementById("loadingHomes").style.display = "block";
+		document.getElementById("sortArray").style.display = "block";
 		document.getElementById("houses").style.display = "flex";
 	}
 }

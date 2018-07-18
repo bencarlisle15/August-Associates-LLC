@@ -25,47 +25,7 @@ xhr.onreadystatechange = function () {
 }
 xhr.send("functionname=ipCheck");
 
-var xhr = new XMLHttpRequest();
-xhr.open("POST", '/phpRequests/getAllRets.php', true);
-xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-xhr.onreadystatechange = function () {
-	if (this.readyState == 4) {
-		res = JSON.parse(JSON.parse(this.responseText));
-		res = res[0];
-		document.getElementById("address").innerHTML = res.FullStreetNum.toProperCase() +", " + res.City.toProperCase() + ", " + res.StateOrProvince.toProperCase() + ", " + res.PostalCode;
-		document.getElementById("description").innerHTML = res.PublicRemarks.toProperCase();
-		var houseSlideshow = document.getElementById("houseSlideshow");
-		var houseWrapper;
-		var image;
-		var dot
-		var dots = document.getElementById("dots");
-		for (var i = 0; i < res.PhotoCount; i++) {
-			houseWrapper = document.createElement("div");
-			image = document.createElement("img");
-			houseWrapper.classList.add("houseWrapper");
-			image.src = "/images/largeRets/" + res.MLSNumber + "/" + i + ".jpg";
-			image.alt = "Picture of the House";
-			image.classList.add("houseImage");
-			houseWrapper.append(image);
-			houseSlideshow.append(houseWrapper);
-			dot = document.createElement("span");
-			dot.classList.add("dot");
-			dot.setAttribute("onclick", "showSlides(" + i + ")");
-			dots.append(dot);
-		}
-		document.addEventListener('DOMContentLoaded', setImageHeight());
-		document.getElementById("price").innerHTML = "Price: " + formatter.format(res.ListPrice);
-		var sqftVal = parseInt(res.SqFtTotal ? res.SqFtTotal : res.ApproxLotSquareFoot);
-		addAttribute("Square Feet", sqftVal);
-		var keys = {"BathsTotal": "Bathrooms", "NumberOfLevels": "Stories", "Fireplace": "Fireplaces", "HeatingSystem": "Heating", "BedsTotal": "Bedrooms", "Pool": "Pool", "WaterAmenities": "Water Amenities", "YearBuilt": "Year Built", "GarageSpaces": "Garage Spaces"};
-		for(var key in keys) {
-			addAttribute(keys[key], res[key]);
-		}
-		initMap(res.FullStreetNum +", " + res.City + ", " + res.StateOrProvince);
-		showSlides(0);
-	}
-}
-xhr.send("MLSNumber=" + id);
+showSlides(0);
 
 window.addEventListener("resize", function() {
 	setImageHeight();

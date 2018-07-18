@@ -49,7 +49,7 @@ function buildUrl() {
 	for (var i = 0; i < inputs.length; i++) {
 		if (inputs[i].value != '') {
 			var val = inputs[i].value;
-			if (inputs[i] == "#searchMinPrice" || inputs[i] == "#searchMaxPrice") {
+			if (inputs[i].id == "searchMinPrice" || inputs[i].id == "searchMaxPrice") {
 				val = val.replace(/(,)/g, '').substr(1);
 			}
 			urlAdd += urlAdd.length > 0 ? "&" : "?" + inputs[i].id + "=" + addPluses(val);
