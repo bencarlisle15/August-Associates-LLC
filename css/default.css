@@ -113,7 +113,7 @@
 }
 
 #checkBox:checked ~ #span1 {
-	transform: rotate(45deg) translate(2px);
+	transform: rotate(45deg) translate(-2px);
 }
 
 
