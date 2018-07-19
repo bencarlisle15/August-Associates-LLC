@@ -8,7 +8,7 @@
 	<body>
 		<?php include('bin/nav.php'); ?>
 		<div id='bigImage'>
-			<img id="largeImage" src='/images/large%20august%20logo.png' alt='August Associates Logo'/>
+			<img id="largeImage" src='/images/augustLargeLogo.png' alt='August Associates Logo'/>
 			<img id='arrow' src='/images/arrow.png' alt='Arrow'/>
 		</div>
 		<div id="linkButtons" class="section">
