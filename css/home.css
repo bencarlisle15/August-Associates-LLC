@@ -50,6 +50,7 @@
 	padding: 0px;
 	flex-direction: row;
 	flex-wrap: wrap;
+	overflow-x: hidden;
 }
 
 .houseLink {
