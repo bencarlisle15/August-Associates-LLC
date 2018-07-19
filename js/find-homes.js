@@ -35,9 +35,7 @@ var formatter = new Intl.NumberFormat('en-US', {
 editSettings();
 //if for some reason it doesn't load automatically
 function loadMoreHomes() {
-	if (length >= 40) {
-		initAllHomes(++pageNumber);
-	}
+	initAllHomes(++pageNumber);
 }
 
 function editSettings() {
@@ -106,8 +104,6 @@ function buildUrl() {
 	return urlAdd;
 }
 
-var length;
-
 function addPluses(str) {
 	return str.split(' ').join('+');
 }
@@ -128,7 +124,6 @@ function initAllHomes(pageNumber) {
 					document.getElementById("loadingHomes").innerHTML = 'No More Houses Found';
 				} else {
 					document.getElementById("loadingHomes").innerHTML = 'Loading More Homes...';
-					length = res.length;
 					setGridHouses(res);
 					setMapHouses(res);
 				}
