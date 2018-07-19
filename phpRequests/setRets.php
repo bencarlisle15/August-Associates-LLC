@@ -20,7 +20,7 @@ echo "End Search\n";
 $ar = $results->toArray();
 echo "Start Photos\n";
 for ($q = 0; $q < sizeof($ar); $q++) {
-	echo $q . " of " . count($ar) . "\n";
+	// echo $q . " of " . count($ar) . "\n";
 	$dir = "../images/rets/" . $ar[$q]['MLSNumber'];
 	// if (file_exists($dir)) {
 	// 	continue;
@@ -55,13 +55,11 @@ $conn = new mysqli("localhost", getDBUser(), getDBPassword(), getDBName());
 if ($conn->connect_error) {
 	die("Connection failed: " . $conn->connect_error . "\n");
 }
-echo "Connected successfully\n";
 $query = "UPDATE RetsData SET json_data='" . $conn->real_escape_string($data) . "'";
-if (mysqli_query($conn, $query)) {
-	echo "New record updated successfully\n";
-} else {
-	echo "Error: " . $sql . "\n" . $conn->error . "\n";
-}
+mysqli_query($conn, $query);
+$_POST['functionname'] = 'sendEmail';
+$_POST['body'] = "Records Updated";
+include('apiRequests.php');
 // $my_file = 'rets-data.json';
 // $handle = fopen($my_file, 'w');
 // fwrite($handle, $data);
