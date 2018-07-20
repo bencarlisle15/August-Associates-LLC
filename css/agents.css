@@ -7,6 +7,10 @@
 	margin: 10px;
 }
 
+.agentWebsite {
+	text-align: center;
+}
+
 #mainBrokerWrapper {
 	width: 100%;
 	display: flex;
@@ -24,6 +28,7 @@
 
 .agentInfo {
 	flex-direction: column;
+	margin-bottom: 50px;
 }
 
 .agentImageWrapper, .agentInfo {
@@ -38,10 +43,6 @@
 
 #agentsNav {
 	border: 1px solid;
-}
-
-.agentInfo {
-	margin-bottom: 50px;
 }
 
 #allAgentsList {
