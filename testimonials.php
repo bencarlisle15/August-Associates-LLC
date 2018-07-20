@@ -35,6 +35,10 @@
 						<p class="testimonialText">Joe is the most knowledeable realtor in the business. He knows construction and building code law. He has my back. He has put my interests above making a commission more than once. Simply said, I trust Joe above anyone in the business and I give my permission to use any or all of my statement in any ad. Dr John DeMello</p>
 						<p class="testimonialName">-Jack</p>
 					</div>
+					<div class="testimonialFrame">
+						<p class="testimonialText">Joe was our realtor 4 years ago when we bought our first home. He was incredibly helpful, patient, and went ABOVE AND BEYOND for us. We are still so very grateful that we had the pleasure of working with him and to have had him working for us.</p>
+						<p class="testimonialName">-Hannah</p>
+					</div>
 				</div>
 				<div id= "addTestimonialsWrapper">
 					<h2 id="testimonialsAddText">Add Your Own</h2>

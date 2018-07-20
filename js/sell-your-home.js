@@ -51,6 +51,7 @@ function constructHouseSellingInfo(xmlText, address, city, state, zip) {
 			var sellCity = document.createElement("h2");
 			var sellAverage = document.createElement("h3");
 			var sellRange = document.createElement("h4");
+			var sellPowered = document.createElement("h5");
 			sellOverlay.id = "sellOverlay";
 			sellOverlay.onclick = function() {
 				document.getElementById("sellSection").removeChild(document.getElementById("sellOverlay"));
@@ -68,10 +69,13 @@ function constructHouseSellingInfo(xmlText, address, city, state, zip) {
 			sellAverage.innerHTML = "Average Price: " + formatter.format(average);
 			sellRange.id = "sellRange";
 			sellRange.innerHTML = "Price Range: " + formatter.format(low) +" - " + formatter.format(high);
+			sellPowered.id = "sellPowered";
+			sellPowered.innerHTML = "Powered by Zillow";
 			sellInfo.append(sellAddress);
 			sellInfo.append(sellCity);
 			sellInfo.append(sellAverage);
 			sellInfo.append(sellRange);
+			sellInfo.append(sellPowered);
 			sellOverlay.append(sellInfo);
 			document.getElementById("sellSection").insertBefore(sellOverlay, document.getElementById("sellHouseForm"));
 			document.getElementById("formSubmit").focus();

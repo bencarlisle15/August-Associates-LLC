@@ -59,19 +59,21 @@
 						</div>
 						<table id='table'>";
 						$sqftVal = (int)($res['SqFtTotal'] ? $res['SqFtTotal'] : $res['ApproxLotSquareFoot']);
-						echo addAttribute("Square Feet", $sqftVal);
+						addAttribute("Square Feet", $sqftVal);
 						$keys = ["BathsTotal" => "Bathrooms", "NumberOfLevels" => "Stories", "Fireplace"=> "Fireplaces", "HeatingSystem"=> "Heating", "BedsTotal"=> "Bedrooms", "Pool"=> "Pool", "WaterAmenities"=> "Water Amenities", "YearBuilt"=> "Year Built", "GarageSpaces"=> "Garage Spaces"];
 						foreach ($keys as $key => $value) {
-							echo addAttribute($value, $res[$key]);
+							addAttribute($value, $res[$key]);
 						}
+						$listingOffice = $res['ListingOfficeName'] ? $res['ListingOfficeName'] : $res['CoListOfficeName'] ? $res['CoListOfficeName'] : $res['SellingOfficeName'] ? $res['SellingOfficeName'] : $res['CoSellingOfficeName'];
+						addAttribute("Listing Office", $listingOffice);
 						echo "</table>
 					</div>";
 					$address = $res['FullStreetNum'] . ", " . $res['City'] . ", " . $res['StateOrProvince'];
 					function addAttribute($keyName, $value) {
-						if ($value == null || $value == "None" || $value == 0 || $value == "0") {
+						if ($value == null || $value == "None") {
 							return;
 						}
-						return "<tr><th class='keys'>" . $keyName . "</th><td class='values'>" . str_replace(",", ", ", $value) . "</td</tr>";
+						echo "<tr><th class='keys'>" . $keyName . "</th><td class='values'>" . str_replace(",", ", ", $value) . "</td</tr>";
 					}
 				?>
 				<div id="map"></div>

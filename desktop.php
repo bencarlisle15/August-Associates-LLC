@@ -81,7 +81,7 @@
 			<div id="infoWrapper" class="infoSection">
 				<h2 id="infoTitle">Our Info</h2>
 				<div id="infoText">
-					<p class="infoElement"><b>Phone: </b> (401) 487-1510</p>
+					<p class="infoElement"><b>Phone: </b> (401) 461-0700</p>
 					<p class="infoElement"><b>Email: </b><a href="mailto:jmccarthy@necompass.com">jmccarthy@necompass.com</a></p>
 					<p class="infoElement"><b>Address: </b><a href="https://www.google.com/maps/place/946+Park+Ave,+Cranston,+RI+02910/@41.7808564,-71.4423498,17z/data=!3m1!4b1!4m5!3m4!1s0x89e44f0e74f416a7:0x9bb4c58a58a98e90!8m2!3d41.7808564!4d-71.4401611">946 Park Avenue, Cranston, RI</a></p>
 				</div>

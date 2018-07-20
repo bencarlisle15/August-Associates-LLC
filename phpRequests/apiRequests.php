@@ -1,5 +1,6 @@
 <?php
 	header('Content-Type: application/json');
+	start:
 	switch($_POST['functionname']) {
 		case 'sendEmail':
 			require_once('../vendor/phpmailer/phpmailer/src/PHPMailer.php');
@@ -9,7 +10,7 @@
 			try {
 				$mail = new PHPMailer\PHPMailer\PHPMailer();
 				$mail->IsSMTP();
-				$mail->SMTPDebug = 2;
+				$mail->SMTPDebug = 0;
 				$mail->SMTPAuth = true;
 				$mail->SMTPSecure = 'ssl';
 				$mail->Host = "mail.augustassociatesllc.net";
@@ -45,8 +46,19 @@
 			require_once('keys.php');
 			echo in_array($_SERVER['REMOTE_ADDR'], getIpAddresses());
 			break;
+		case "addIP":
+			require_once('keys.php');
+			addIPAddress($_SERVER['REMOTE_ADDR'], $_POST['name'], $_POST['email']);
+			break;
+		case "ipReturned":
+			require_once('keys.php');
+			$IPInfo = getIpInfo($_SERVER['REMOTE_ADDR']);
+			$_POST['body'] = "Source: Website Recorded IP\nName: " . $IPInfo['name'] . "\nEmail: " . $IPInfo['email'] . "\nPhone: \nAddress: \nMLS Number: \nNotes: User returned to website on page " . $_SERVER["HTTP_REFERER"];
+			$_POST['functionname'] = 'sendEmail';
+			goto start;
+			break;
 		default:
-			echo isset($_POST['functionname']);
+			echo "An error occured";
 			break;
 	}
 
