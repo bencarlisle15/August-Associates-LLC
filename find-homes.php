@@ -151,7 +151,13 @@
 						}
 						$first = array_slice($json, 0, 40);
 						for ($i = 0; $i < sizeof($first); $i++) {
-							echo "<div class='house' onclick='openHouse(" . $first[$i]['MLSNumber'] . ")'><img class='houseElement houseImage' alt='Picture of House' src='images/rets/" . $first[$i]['MLSNumber'] . "/0.jpg'/><div class='houseInformation'><h4 class='housePrice houseElement'>$" . number_format((float) $first[$i]['ListPrice']) . "</h4><p class='houseElement'>" . ucwords(strtolower($first[$i]['FullStreetNum'])) . "</p><p class='houseElement'>" . $first[$i]['City'] ."</p><p class='houseElement'>" . number_format((float) ($first[$i]['SqFtTotal'] ? $first[$i]['SqFtTotal'] : $first[$i]['ApproxLotSquareFoot'])) . " Square Feet</p></div></div>";
+							echo "<div class='house' onclick='openHouse(" . $first[$i]['MLSNumber'] . ")'><div class='houseImageWrapper'>";
+							if (@getimagesize('images/rets/' . $first[$i]['MLSNumber'] . '/0.jpg')) {
+								echo "<img class='houseElement houseImage' alt='Picture of House' src='images/rets/" . $first[$i]['MLSNumber'] . "/0.jpg'/>";
+							} else {
+								echo "<img class='houseElement houseImage' alt='House not Found' src='images/compass.png'/>";
+							}
+							echo "</div><div class='houseInformation'><h4 class='housePrice houseElement'>$" . number_format((float) $first[$i]['ListPrice']) . "</h4><p class='houseElement'>" . ucwords(strtolower($first[$i]['FullStreetNum'])) . "</p><p class='houseElement'>" . $first[$i]['City'] ."</p><p class='houseElement'>" . number_format((float) ($first[$i]['SqFtTotal'] ? $first[$i]['SqFtTotal'] : $first[$i]['ApproxLotSquareFoot'])) . " Square Feet</p></div></div>";
 						}
 
 						function distanceBetween($lat1,$lon1,$lat2,$lon2) {

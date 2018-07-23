@@ -12,7 +12,7 @@
 			<div id="testimonialsWrapper">
 				<div id="testimonialsList">
 					<div class="testimonialFrame">
-						<p class="testimonialText">Being deployed and in the middle of looking for my 1st home, you guys were the best!! Patient with all my pickiness, wants and needs. I have looked for a LONG time for my \"perfect home\" and you made it possible! I thought the process was nerve wrecking but you stayed level headed and made sure my concerns were felt with. Thank you for making this a smooth and easy process!!!!!</p>
+						<p class="testimonialText">Being deployed and in the middle of looking for my 1st home, you guys were the best!! Patient with all my pickiness, wants and needs. I have looked for a LONG time for my "perfect home" and you made it possible! I thought the process was nerve wrecking but you stayed level headed and made sure my concerns were felt with. Thank you for making this a smooth and easy process!!!!!</p>
 						<p class="testimonialName">-Yronelis</p>
 					</div>
 					<div class="testimonialFrame">
