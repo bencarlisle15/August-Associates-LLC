@@ -35,45 +35,63 @@
 							break;
 						}
 					}
-					echo "<div id='houseSlideshow'>";
-							for ($i = 0; $i < $res['PhotoCount']; $i++) {
-								echo "<div class='houseWrapper'>
-									<img src='images/largeRets/" . $res['MLSNumber'] . "/" . $i . ".jpg' alt='Picture of the House' class='houseImage'/>
-								</div>";
-							}
-					echo "<a onclick='plusSlides(-1)' id='prev'>&#10094;</a>
-						<a onclick='plusSlides(1)'' id='next'>&#10095;</a>
-					</div>
-					<div style='text-align:center' id='dots'>";
-					for ($i = 0; $i < $res['PhotoCount']; $i++) {
-						echo "<span class='dot' onclick='showSlides(" . $i . ")'></span>";
+					if ($res['PhotoCount']) {
+						$total = $res['PhotoCount'];
+						echo "<div id='houseSlideshow'>";
+								for ($i = 0; $i < $res['PhotoCount']; $i++) {
+									if ($i >= 1 && md5(file_get_contents('images/largeRets/' . $res['MLSNumber'] . '/' . ($i-1) . '.jpg')) == md5(file_get_contents('images/largeRets/' . $res['MLSNumber'] . '/' . $i . '.jpg'))) {
+										$total--;
+										continue;
+									}
+									echo "<div class='houseWrapper'>
+										<img src='images/largeRets/" . $res['MLSNumber'] . "/" . $i . ".jpg' alt='Picture of the House' class='houseImage'/>
+									</div>";
+								}
+						echo "<a onclick='plusSlides(-1)' id='prev'>&#10094;</a>
+							<a onclick='plusSlides(1)'' id='next'>&#10095;</a>
+						</div>
+						<div style='text-align:center' id='dots'>";
+						for ($i = 0; $i < $total; $i++) {
+							echo "<span class='dot' onclick='showSlides(" . $i . ")'></span>";
+						}
+						echo "</div>";
 					}
-					echo "</div>
-					<h1 id='address' align = 'center'>" . ucwords(strtolower($res['FullStreetNum'])) . ", " . $res['City'] . ", " . $res['StateOrProvince'] . ", " . $res['PostalCode'] . "</h1>
+					echo "<h1 id='address' align = 'center'>" . toSentenceCase($res['FullStreetNum']) . ", " . $res['City'] . ", " . $res['StateOrProvince'] . ", " . $res['PostalCode'] . "</h1>
 					<h2 id='price'>$" . number_format((float) $res['ListPrice']) . "</h2>
 					<div id='tableAndDescription'>
 						<div id='descriptionAndContact'>
-							<p id='description'>" .  ucwords(strtolower($res['PublicRemarks'])) . "</p>
+							<p id='description'>" .  toSentenceCase($res['PublicRemarks']) . "</p>
 							<h2 id='interested' style='font-weight: bold'>Interested in this Home?</h2>
 							<h2>Call us at <a href='tel:4014610700'>(401) 461-0700</a> or Email us at <a href='mailto:jmccarthy@necompass.com'>jmccarthy@necompass.com</a> to get in touch with an agent</h2>
 						</div>
 						<table id='table'>";
-						$sqftVal = (int)($res['SqFtTotal'] ? $res['SqFtTotal'] : $res['ApproxLotSquareFoot']);
+						$sqftVal = $res['SqFtTotal'] ? $res['SqFtTotal'] : $res['ApproxLotSquareFoot'];
 						addAttribute("Square Feet", $sqftVal);
 						$keys = ["BathsTotal" => "Bathrooms", "NumberOfLevels" => "Stories", "Fireplace"=> "Fireplaces", "HeatingSystem"=> "Heating", "BedsTotal"=> "Bedrooms", "Pool"=> "Pool", "WaterAmenities"=> "Water Amenities", "YearBuilt"=> "Year Built", "GarageSpaces"=> "Garage Spaces"];
 						foreach ($keys as $key => $value) {
 							addAttribute($value, $res[$key]);
 						}
-						$listingOffice = $res['ListingOfficeName'] ? $res['ListingOfficeName'] : $res['CoListOfficeName'] ? $res['CoListOfficeName'] : $res['SellingOfficeName'] ? $res['SellingOfficeName'] : $res['CoSellingOfficeName'];
+						$listingOffice = $res['ListOfficeName'] ? $res['ListOfficeName'] : ($res['CoListOfficeName'] ? $res['CoListOfficeName'] : ($res['SellingOfficeName'] ? $res['SellingOfficeName'] : $res['CoSellingOfficeName']));
 						addAttribute("Listing Office", $listingOffice);
 						echo "</table>
 					</div>";
 					$address = $res['FullStreetNum'] . ", " . $res['City'] . ", " . $res['StateOrProvince'];
+
+					function toSentenceCase($str) {
+						return str_replace("\" ", "\"", ucwords(str_replace("\"", "\" ", strtolower(str_replace('\' ', '\'', ucwords(str_replace('\'', '\' ', strtolower($str))))))));
+					}
+
 					function addAttribute($keyName, $value) {
+						if (is_numeric($value)) {
+							$value = (int) $value;
+							if ($value == 0) {
+								return;
+							}
+						}
 						if ($value == null || $value == "None") {
 							return;
 						}
-						echo "<tr><th class='keys'>" . $keyName . "</th><td class='values'>" . str_replace(",", ", ", $value) . "</td</tr>";
+						echo "<tr><th class='keys'>" . $keyName . "</th><td class='values'>" . toSentenceCase(str_replace(",", ", ", $value)) . "</td</tr>";
 					}
 				?>
 				<div id="map"></div>

@@ -211,8 +211,29 @@ nav {
 	padding: 10px;
 }
 
+#augustJustText {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+#augustImageWrapper {
+	display: flex;
+	justify-content: center;
+	margin-right: 10px;
+}
+
+#augustNavLogo {
+	height: 80px;
+	width: auto;
+}
+
 #augustSloganWrapper {
 	margin-left: 10px;
+	vertical-align: middle;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
 }
 
 #augustName, #augustSlogan {
@@ -331,11 +352,6 @@ p {
 	font-size: 14pt;
 }
 
-#mobileAugustSloganWrapper {
-	margin-left: 30px;
-	font-size: 10pt;
-}
-
 .desktopNavitem:hover {
 	color: #cccccc;
 	border-color: #cccccc;
@@ -356,7 +372,7 @@ p {
 }
 
 #augustName {
-	font-family: 'Libre Baskerville';
+	font-family: 'Libre Baskerville', serif;
 	font-size: 24pt;
 	justify-content: center;
 	align-items: center;
@@ -373,11 +389,6 @@ p {
 
 #mobileAugustSlogan {
 	font-size: 14pt;
-}
-
-#mobileAugustSloganWrapper {
-	margin-left: 30px;
-	font-size: 10pt;
 }
 
 * {
