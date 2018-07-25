@@ -3,7 +3,7 @@ var pageNumber = 0;
 window.onscroll = function(ev) {
 	if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight && document.getElementById("mapGridSwitch").value == "grid") {
 		//gets the next set of houses
-		loadMoreHomes();
+		initAllHomes(++pageNumber);
 	}
 };
 
@@ -31,35 +31,6 @@ var formatter = new Intl.NumberFormat('en-US', {
 	currency: 'USD',
 });
 
-//get info from url
-editSettings();
-//if for some reason it doesn't load automatically
-function loadMoreHomes() {
-	initAllHomes(++pageNumber);
-}
-
-function editSettings() {
-	var url = window.location.href;
-	//checks for params
-	if (url.indexOf("?") >= 0) {
-		var queryUrl = url.substring(url.indexOf("?") + 1).replace("-", " ");
-		var queries = queryUrl.split("&");
-		//splits into key and params and updates the search bar
-		for (var i = 0; i < queries.length; i++) {
-			var key = queries[i].substring(0, queries[i].indexOf("="));
-			var val = queries[i].substring(queries[i].indexOf("=") + 1);
-			if (key == "searchMinPrice" || key == "searchMaxPrice") {
-				val = formatter.format(val);
-			}
-			if (key == "map" && val =="true") {
-				switchView();
-			} else if (document.getElementById(key)) {
-				document.getElementById(key).value = removePluses(val);
-			}
-		}
-	}
-}
-
 function resetSearch() {
 	window.location.href = "/find-homes";
 }
@@ -86,7 +57,6 @@ function removePluses(str) {
 
 function getProperties() {
 	window.location.href = "/find-homes"+buildUrl();
-	// console.log(buildUrl());
 }
 
 function buildUrl() {
@@ -106,40 +76,6 @@ function buildUrl() {
 
 function addPluses(str) {
 	return str.split(' ').join('+');
-}
-
-function initAllHomes(pageNumber) {
-	var xhr = new XMLHttpRequest();
-	xhr.open("POST", '/phpRequests/getAllRets.php', true);
-	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-	xhr.onreadystatechange = function () {
-		if (this.readyState == 4) {
-			if (!this.responseText) {
-				//there was an error but the user doesn't need to know that
-				document.getElementById("loadingHomes").innerHTML = 'No More Houses Found';
-			} else {
-				var res = JSON.parse(JSON.parse(this.responseText));
-				if (!res || !res.length) {
-					//either error or query too specific
-					document.getElementById("loadingHomes").innerHTML = 'No More Houses Found';
-				} else {
-					document.getElementById("loadingHomes").innerHTML = 'Loading More Homes...';
-					setGridHouses(res);
-					setMapHouses(res);
-				}
-			}
-		}
-	}
-	//add params from searchbox so the php can sort it
-	var query = getQuery();
-	xhr.send("pageNumber=" + pageNumber + (query.length > 0 ? ("&" + query) : ""));
-}
-
-function setGridHouses(res) {
-	for(var i=0; i < res.length; i++) {
-		//creates new house
-		document.getElementById("houses").append(createHouse(res[i]));
-	}
 }
 
 //array of all google map markers REQUIERD
@@ -164,10 +100,10 @@ function removeAllMarkers() {
 	}
 	markerArray = [];
 }
-
+//location boundaries
+var locationPos = {latMax: 0, latMin: 0, lngMax: 0, lngMin: 0};
 function setMapHouses(res) {
 	//gets the max and min of the lat and lng of the markers in order to frame them
-	var location = {latMax: 0, latMin: 0, lngMax: 0, lngMin: 0};
 	res.forEach(function(resHouse) {
 		//get last and lng from house
 		var lat = resHouse.Latitude;
@@ -207,25 +143,25 @@ function setMapHouses(res) {
 			}
 		});
 		//updates frame
-		if (location['latMin'] == 0 || lat < location['latMin']) {
-			location['latMin'] = lat;
+		if (locationPos['latMin'] == 0 || lat < locationPos['latMin']) {
+			locationPos['latMin'] = lat;
 		}
-		if (location['latMax'] == 0 || lat > location['latMax']) {
-			location['latMax'] = lat;
+		if (locationPos['latMax'] == 0 || lat > locationPos['latMax']) {
+			locationPos['latMax'] = lat;
 		}
-		if (location['lngMin'] == 0 || lng < location['lngMin']) {
-			location['lngMin'] = lng;
+		if (locationPos['lngMin'] == 0 || lng < locationPos['lngMin']) {
+			locationPos['lngMin'] = lng;
 		}
-		if (location['lngMax'] == 0 || lng > location['lngMax']) {
-			location['lngMax'] = lng;
+		if (locationPos['lngMax'] == 0 || lng > locationPos['lngMax']) {
+			locationPos['lngMax'] = lng;
 		}
 		//adds marker to the array
 		markerArray.push(marker);
 	});
 	//sets center and zoom from frame
 	map.setCenter(new google.maps.LatLng(
-		((location['latMax'] + location['latMin']) / 2.0),
-		((location['lngMax'] + location['lngMin']) / 2.0)
+		((locationPos['latMax'] + locationPos['latMin']) / 2.0),
+		((locationPos['lngMax'] + locationPos['lngMin']) / 2.0)
 	));
 	if (window.location.href.includes("radius")) {
 		var url = window.location.href;
@@ -243,41 +179,6 @@ function roundToLetter(num) {
 	return String(Math.round(num / 1000)) + "K"
 }
 
-//Creates house with html elements
-function createHouse(resToUse) {
-	var house = document.createElement("div");
-	var houseImage = document.createElement("img");
-	var houseInfo = document.createElement("div");
-	var price = document.createElement("h4");
-	var address = document.createElement("p");
-	var city = document.createElement("p");
-	var sqft = document.createElement("p");
-	house.classList.add("house");
-	house.setAttribute("onclick", "openHouse(" + resToUse.MLSNumber + ")");
-	houseImage.classList.add("houseElement");
-	houseImage.classList.add("houseImage");
-	houseImage.style.width = "300px";
-	houseImage.alt = "Picture of House";
-	houseImage.src = "images/rets/" + resToUse.MLSNumber + "/0.jpg";
-	houseInfo.classList.add("houseInformation");
-	price.classList.add("houseElement");
-	price.align = "right";
-	price.innerHTML = formatter.format(resToUse.ListPrice);
-	address.classList.add("houseElement");
-	address.innerHTML = resToUse.FullStreetNum.toProperCase();
-	city.classList.add("houseElement");
-	city.innerHTML = resToUse.City.toProperCase();
-	sqft.classList.add("houseElement");
-	sqft.innerHTML = parseInt(resToUse.SqFtTotal ? resToUse.SqFtTotal : resToUse.ApproxLotSquareFoot) + " Square Feet";
-	houseInfo.append(price);
-	houseInfo.append(address);
-	houseInfo.append(city);
-	houseInfo.append(sqft);
-	house.append(houseImage);
-	house.append(houseInfo);
-	return house;
-}
-
 //Adds the clicked house to an overlay
 function showOverlay(res) {
 	var house = createHouse(res);
@@ -291,6 +192,7 @@ function removeHouseOverlay() {
 }
 
 function switchView() {
+	//swtich from map to grid view
 	var mapGridSwitch = document.getElementById("mapGridSwitch");
 	if (mapGridSwitch.value =="grid") {
 		mapGridSwitch.value = "map";

@@ -9,34 +9,43 @@ var formatter = new Intl.NumberFormat('en-US', {
 	currency: 'USD',
 });
 
+//check if the ip address is already present in the database
 var xhr = new XMLHttpRequest();
 xhr.open("POST", '/phpRequests/apiRequests.php', true);
 xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 xhr.onreadystatechange = function () {
 	if (this.readyState == 4) {
+		//checks if the user has visited a find-your-home page before
 		if (!sessionStorage.houseNumber) {
 			sessionStorage.houseNumber = 1;
+		//if the ip address was found
 		} else if (this.responseText) {
+			//creates lead alerting that the uesr has returned
 			var xhr = new XMLHttpRequest();
 			xhr.open("POST", '/phpRequests/apiRequests.php', true);
 			xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 			xhr.send("functionname=ipReturned");
 			sessionStorage.houseNumber = 1;
 		} else if (sessionStorage.houseNumber < 2) {
+			//increases the views the user has
 			sessionStorage.houseNumber++;
 		} else {
+			//requires user to make a lead
 			addInformationForm();
 		}
 	}
 }
 xhr.send("functionname=ipCheck");
 
+//show the first slide
 showSlides(0);
 
+//reset the images on resize
 window.addEventListener("resize", function() {
 	setImageHeight();
 })
 
+//adds the lead maker overlay
 function addInformationForm() {
 	var infoWrapper = document.getElementById("infoWrapper");
 	document.getElementById("infoOverlay").style.display = "block";
@@ -51,6 +60,7 @@ function addInformationForm() {
 	}
 }
 
+//removes the lead maker overlay
 function removeInformationForm() {
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", '/phpRequests/apiRequests.php', true);
@@ -69,6 +79,7 @@ function removeInformationForm() {
 	}
 }
 
+//submits lead
 function submitInfoForm() {
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", '/phpRequests/apiRequests.php', true);
@@ -82,6 +93,7 @@ function createBody() {
 	return body;
 }
 
+//prevents clicking from outside the lead maker when it is present
 function insideClickHandler(e) {
 	if (!e) {
 		var e = window.event;
@@ -89,30 +101,42 @@ function insideClickHandler(e) {
 	e.cancelBubble = true;
 }
 
+//resets the image height so they all have the same height
 function setImageHeight() {
 	var maxRatio = 0;
 	var max;
 	var images = document.getElementsByClassName("houseImage");
 	var imageArray = [];
 	var loaded = 0;
+	//finds the maximum height and width ratio between all the images
 	for (var i = 0; i < images.length; i++) {
+		//adds the image to the array to get it later
 		imageArray.push(new Image());
+		//when the image is loaded and has dimensions
 		imageArray[i].onload = function() {
+			//increases the amount of pictures that have loaded
 			loaded++;
-			var height = this.naturalHeight/this.naturalWidth;
-			if (maxRatio < height) {
-				maxRatio = height;
+			var ratio = this.naturalHeight/this.naturalWidth;
+			if (maxRatio < ratio) {
+				maxRatio = ratio;
 			}
+			//updates the maxRatio if apllicable
 		};
+		//sets the src to the correct one
 		imageArray[i].src = images[i].src;
+		//this is done after the onload is set so that there is not possible of the src being loaded before the onload is set (therefore keep it this way)
 	}
+	//starts checkLoaded immediatly after the loop
 	(function checkLoaded() {
+		//checks if all the images have loaded
 		if (loaded == images.length) {
+			//determines what the height should be for the slideshow
 			max = maxRatio * getWidth("#houseSlideshow");
 			max = Math.round(max);
 			if (!max) {
 				return;
 			}
+			//updates wrapper heights and slideshow height
 			var wrappers = document.getElementsByClassName("houseWrapper");
 			for (var i = 0; i < wrappers.length; i++) {
 				wrappers[i].style.height = max + "px";
@@ -124,35 +148,16 @@ function setImageHeight() {
 	})();
 }
 
-function addAttribute(keyName, value) {
-	if (value == null || value == "None" || value == 0 || value == "0") {
-		return;
-	}
-	var row = document.createElement("tr");
-	var header = document.createElement("th");
-	var data = document.createElement("td");
-	header.classList.add("keys");
-	header.innerHTML = keyName;
-	data.classList.add("values");
-	data.innerHTML = String(value).replace(",", ", ");
-	row.append(header);
-	row.append(data);
-	document.getElementById("table").append(row);
-}
-
-function initMap(address) {
+//inits the map
+function initMap(location) {
+	var pos = JSON.parse(location);
 	var map = new google.maps.Map(document.getElementById('map'), {
-		center: {lat: -34.397, lng: 150.644},
+		center: {lat: pos[0], lng: pos[1]},
 		zoom: 17
 	});
-	new google.maps.Geocoder().geocode({
-		'address': address
-	}, function (results, status) {
-		map.setCenter(results[0].geometry.location);
-		new google.maps.Marker({
-			map: map,
-			position: results[0].geometry.location
-		});
+	new google.maps.Marker({
+		map: map,
+		position: {lat: pos[0], lng: pos[1]}
 	});
 }
 
