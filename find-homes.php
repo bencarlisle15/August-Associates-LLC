@@ -177,7 +177,7 @@
 							for ($i = 0; $i < sizeof($first); $i++) {
 								echo "<div class='house' onclick='openHouse(" . $first[$i]['MLSNumber'] . ")'><div class='houseImageWrapper'>";
 								//checks if the image is valid and only adds it if it is
-								if (@getimagesize('images/rets/' . $first[$i]['MLSNumber'] . '/0.jpg')) {
+								if (@getimagesize('images/rets/' . $first[$i]['MLSNumber'] . '/0.jpg') || @getimagesize('testing/images/rets/' . $first[$i]['MLSNumber'] . '/0.jpg')) {
 									echo "<img class='houseElement houseImage' alt='Picture of House' src='images/rets/" . $first[$i]['MLSNumber'] . "/0.jpg'/>";
 								} else {
 									echo "<img class='houseElement houseImage' alt='House not Found' src='images/compass.png'/>";
