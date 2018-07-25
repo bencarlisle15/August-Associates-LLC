@@ -202,12 +202,10 @@
 				</div>
 				<h2 id="loadingHomes" style="text-align: center">Loading More Homes...</h2>
 			</div>
+			<h6 id="useInfo">“IDX information is provided exclusively for consumers’ personal, non-commercial use and may not be used for any purpose other than to identify prospective properties consumers may be interested in purchasing. Information is deemed reliable but is not guaranteed.  © 2018 State-Wide Multiple Listing Service. All rights reserved.”</h6>
 			<div id="mapHouseWrapper" onclick="removeHouseOverlay()">
 			</div>
 			<div id="map">
-			</div>
-			<div id="useInfoWrapper">
-				<h6 id="useInfo">“IDX information is provided exclusively for consumers’ personal, non-commercial use and may not be used for any purpose other than to identify prospective properties consumers may be interested in purchasing. Information is deemed reliable but is not guaranteed.  © 2018 State-Wide Multiple Listing Service. All rights reserved.”</h6>
 			</div>
 		</div>
 		<?php include('bin/footer.html'); ?>
