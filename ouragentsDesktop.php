@@ -39,10 +39,10 @@
 						<img class="agentImage" src="/images/joseph.jpg" alt="Joseph McCarthy"/>
 					</div>
 					<div class="agentInfo">
-						<h1 class="agentName agentElement">Joseph McCarthy</h1>
-						<p class="agentParagraph agentElement">Joe has been in service & sales businesses for 24 years. In recent years, he has focused his knowledge & skills in the real estate industry. His ability to speak two languages (Spanish) has made it easier to communicate with a vast majority of people. Joe is intuitive and sensitive to everyone's needs for honest, sincere assistance in the sometimes - puzzling, home-buying & marketing quests.</p>
-						<h3 class="agentEmail agentElement">Email: <a href="mailto:jmccarthy@necompass.com">jmccarthy@necompass.com</a></h3>
-						<h3 class="agentWebsite agentElement">Facebook: <a href="https://www.facebook.com/profile.php?id=100012283484334">facebook.com/profile.php?id=100012283484334</a></h3>
+						<h1 class="agentName agentElement">Bob Nasiatka</h1>
+						<p class="agentParagraph agentElement">Being a realtor for eleven years has allowed me to pair my knowledge with my passion. I have bought and sold my own investment properties since 1997, eventually expanding that endeavor into managing other client’s properties as well. The culmination of that hard work was the establishment of my property management company, R&R Realty, in 2005.</br></br>Complementing my years of experience, I work hard to stay on real estate’s cutting edge by using the latest industry technology. This allows me to equip both my buyers and sellers with the most up to date information. As a life-long Rhode Island resident, I also have a unique perspective on current trends in the Southeastern New England markets. Clients choose to work with me for my years of experience, ethics and commitment to service. My business is 90% referral and 10% new business which I proudly believe speaks volumes about my client’s satisfaction.</p>
+						<h3 class="agentEmail agentElement">Email: <a href="mailto:bob@necompass.com">bob@necompass.com</a></h3>
+						<h3 class="agentWebsite agentElement">Facebook: <a href="https://www.facebook.com/robert.nasiatka.98">facebook.com/robert.nasiatka.98</a></h3>
 					</div>
 				</div>
 				<div class="agentWrapper">
