@@ -1,5 +1,5 @@
-function createBody(name, email, address, city, state, zip, mlsNumber) {
-	return "Source: Website House Price Page Form\nName: " + name + "\nEmail: " + email + "\nPhone: \nAddress: " + address + ", " + city + ", " + zip + ", " + document.getElementById("formState").value + "\nMLS Number: " + mlsNumber + "\nNotes: Price for address";
+function createBody(name, email, address, city, state, zip) {
+	return "Source: Website House Price Page Form\nName: " + name + "\nEmail: " + email + "\nPhone: \nAddress: " + address + ", " + city + ", " + zip + ", " + document.getElementById("formState").value + "\nMLS Number: \nNotes: Price for address";
 }
 
 function submitForm() {
@@ -62,9 +62,13 @@ function constructHouseSellingInfo(xmlText, address, city, state, zip) {
 			sellRange.id = "sellRange";
 			sellRange.innerHTML = "Price Range: " + formatter.format(low) +" - " + formatter.format(high);
 			sellPowered.id = "sellPowered";
-			sellPowered.innerHTML = "Zestimate Powered by Zillow";
+			var link = xmlText.substring(xmlText.indexOf("<homedetails>") + 13, xmlText.indexOf("</homedetails>"));
+			sellPowered.innerHTML = "Zestimate Powered by Zillow, <a href='" + link  + "'> See more details for " + address + " on Zillow</a>";
 			sellImage.src = "https://www.zillow.com/widgets/GetVersionedResource.htm?path=/static/logos/Zillowlogo_200x50.gif"
-			sellImage.alt = "Zillow Real Estate Search";
+			sellImage.onclick = function() {
+				open("http://www.zillow.com/");
+			};
+			sellImage.alt = "Real Estate on Zillow";
 			sellImage.style.height = "50px";
 			sellImage.style.width = "200px";
 			sellInfo.append(sellAddress);
@@ -81,22 +85,7 @@ function constructHouseSellingInfo(xmlText, address, city, state, zip) {
 		var xhr = new XMLHttpRequest();
 		xhr.open("POST", '/phpRequests/apiRequests.php', true);
 		xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-		xhr.onreadystatechange = function () {
-			if (this.readyState == 4) {
-				var mlsNumber = "";
-				var newText = this.responseText;
-				console.log(this.responseText);
-				if (newText.includes("<mls>")) {
-					mlsNumber = newText.substring(newText.indexOf("<mls>") + 6, newText.indexOf("</mls>"));
-				}
-				var xhr = new XMLHttpRequest();
-				xhr.open("POST", '/phpRequests/apiRequests.php', true);
-				xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-				xhr.send("functionname=sendEmail&body=" + createBody(document.getElementById("formName").value, document.getElementById("formEmail").value, address, city, state, zip, mlsNumber));
-			}
-		}
-		var zillowId = xmlText.substring(xmlText.indexOf("<zpid>") + 6, xmlText.indexOf("</zpid>"));
-		xhr.send("functionname=getMLSNumber&zillowId=" + zillowId);
+		xhr.send("functionname=sendEmail&body=" + createBody(document.getElementById("formName").value, document.getElementById("formEmail").value, address, city, state, zip));
 }
 function getHouseSellingInfo(address, city, state, zip) {
 	var xhr = new XMLHttpRequest();
