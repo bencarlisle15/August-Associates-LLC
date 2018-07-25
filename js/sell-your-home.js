@@ -1,13 +1,5 @@
-function submitContactForm() {
-	var xhr = new XMLHttpRequest();
-	xhr.open("POST", '/phpRequests/apiRequests.php', true);
-	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-	xhr.send("functionname=sendEmail&body=" + createBody());
-}
-
-function createBody() {
-	var body = "Source: Website House Price Page Form\nName: " + document.getElementById("formName").value + "\nEmail: " + document.getElementById("formEmail").value + "\nPhone: \nAddress: " + document.getElementById("formAddress").value + ", " + document.getElementById("formCity").value + ", " + document.getElementById("formZip").value + ", " + document.getElementById("formState").value + "\nMLS Number: \nNotes: Price for address"
-	return body;
+function createBody(name, email, address, city, state, zip, mlsNumber) {
+	return "Source: Website House Price Page Form\nName: " + name + "\nEmail: " + email + "\nPhone: \nAddress: " + address + ", " + city + ", " + zip + ", " + document.getElementById("formState").value + "\nMLS Number: " + mlsNumber + "\nNotes: Price for address";
 }
 
 function submitForm() {
@@ -17,7 +9,6 @@ function submitForm() {
 	var state = document.getElementById("formState").value;
 	createCloudCMA(address, city, zip, state);
 	getHouseSellingInfo(address, city, state, zip);
-	submitContactForm();
 }
 
 function createAddress() {
@@ -52,6 +43,7 @@ function constructHouseSellingInfo(xmlText, address, city, state, zip) {
 			var sellAverage = document.createElement("h3");
 			var sellRange = document.createElement("h4");
 			var sellPowered = document.createElement("h5");
+			var sellImage = document.createElement("img");
 			sellOverlay.id = "sellOverlay";
 			sellOverlay.onclick = function() {
 				document.getElementById("sellSection").removeChild(document.getElementById("sellOverlay"));
@@ -70,17 +62,41 @@ function constructHouseSellingInfo(xmlText, address, city, state, zip) {
 			sellRange.id = "sellRange";
 			sellRange.innerHTML = "Price Range: " + formatter.format(low) +" - " + formatter.format(high);
 			sellPowered.id = "sellPowered";
-			sellPowered.innerHTML = "Powered by Zillow";
+			sellPowered.innerHTML = "Zestimate Powered by Zillow";
+			sellImage.src = "https://www.zillow.com/widgets/GetVersionedResource.htm?path=/static/logos/Zillowlogo_200x50.gif"
+			sellImage.alt = "Zillow Real Estate Search";
+			sellImage.style.height = "50px";
+			sellImage.style.width = "200px";
 			sellInfo.append(sellAddress);
 			sellInfo.append(sellCity);
 			sellInfo.append(sellAverage);
 			sellInfo.append(sellRange);
 			sellInfo.append(sellPowered);
+			sellInfo.append(sellImage);
 			sellOverlay.append(sellInfo);
 			document.getElementById("sellSection").insertBefore(sellOverlay, document.getElementById("sellHouseForm"));
 			document.getElementById("formSubmit").focus();
 			document.getElementById("formSubmit").blur();
 		}
+		var xhr = new XMLHttpRequest();
+		xhr.open("POST", '/phpRequests/apiRequests.php', true);
+		xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+		xhr.onreadystatechange = function () {
+			if (this.readyState == 4) {
+				var mlsNumber = "";
+				var newText = this.responseText;
+				console.log(this.responseText);
+				if (newText.includes("<mls>")) {
+					mlsNumber = newText.substring(newText.indexOf("<mls>") + 6, newText.indexOf("</mls>"));
+				}
+				var xhr = new XMLHttpRequest();
+				xhr.open("POST", '/phpRequests/apiRequests.php', true);
+				xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+				xhr.send("functionname=sendEmail&body=" + createBody(document.getElementById("formName").value, document.getElementById("formEmail").value, address, city, state, zip, mlsNumber));
+			}
+		}
+		var zillowId = xmlText.substring(xmlText.indexOf("<zpid>") + 6, xmlText.indexOf("</zpid>"));
+		xhr.send("functionname=getMLSNumber&zillowId=" + zillowId);
 }
 function getHouseSellingInfo(address, city, state, zip) {
 	var xhr = new XMLHttpRequest();

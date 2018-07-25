@@ -24,7 +24,7 @@ xhr.onreadystatechange = function () {
 			var xhr = new XMLHttpRequest();
 			xhr.open("POST", '/phpRequests/apiRequests.php', true);
 			xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-			xhr.send("functionname=ipReturned");
+			xhr.send("functionname=ipReturned&MLSNumber=" + id);
 			sessionStorage.houseNumber = 1;
 		} else if (sessionStorage.houseNumber < 2) {
 			//increases the views the user has
@@ -36,6 +36,10 @@ xhr.onreadystatechange = function () {
 	}
 }
 xhr.send("functionname=ipCheck");
+
+function createBody(name, email, address, city, state, zip, mlsNumber) {
+	return "Source: Website House Price Page Form\nName: " + name + "\nEmail: " + email + "\nPhone: \nAddress: " + address + ", " + city + ", " + zip + ", " + document.getElementById("formState").value + "\nMLS Number: " + mlsNumber + "\nNotes: Price for address";
+}
 
 //show the first slide
 showSlides(0);

@@ -11,6 +11,12 @@
 	cursor: pointer;
 }
 
+#zestimateDisclaimer {
+	width: 100%;
+	text-align: center;
+	font-size: 12pt;
+}
+
 #sellNav {
 	border: 1px solid;
 }

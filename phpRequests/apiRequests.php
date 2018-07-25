@@ -39,6 +39,12 @@
 			$url = "http://www.zillow.com/webservice/GetSearchResults.htm?zws-id=" . getZillowAPI() . "&address=" . addPluses($_POST['address']) . "&citystatezip=" . $_POST['zip'] . "&rentzestimate=true";
 			echo file_get_contents($url);
 			break;
+		case 'getMLSNumber':
+			//returns mlsNumber from zillow id
+			require_once('keys.php');
+			$url = "http://www.zillow.com/webservice/GetUpdatedPropertyDetails.htm?zws-id=" . getZillowAPI() . "&zpid=" . $_POST['zillowId'];
+			echo file_get_contents($url);
+			break;
 		case 'sendCMA':
 			//creates cma
 			require_once('keys.php');
@@ -59,7 +65,7 @@
 			//sends email with recroded ip info
 			require_once('keys.php');
 			$IPInfo = getIpInfo($_SERVER['REMOTE_ADDR']);
-			$_POST['body'] = "Source: Website Recorded IP\nName: " . $IPInfo['name'] . "\nEmail: " . $IPInfo['email'] . "\nPhone: \nAddress: \nMLS Number: \nNotes: User returned to website on page " . $_SERVER["HTTP_REFERER"];
+			$_POST['body'] = "Source: Website Recorded IP\nName: " . $IPInfo['name'] . "\nEmail: " . $IPInfo['email'] . "\nPhone: \nAddress: \nMLS Number: " . $_POST['MLSNumber'] . "\nNotes: User returned to website on page " . $_SERVER["HTTP_REFERER"];
 			$_POST['functionname'] = 'sendEmail';
 			//sorry
 			goto start;

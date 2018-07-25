@@ -59,6 +59,41 @@ function getProperties() {
 	window.location.href = "/find-homes"+buildUrl();
 }
 
+//Creates house with html elements
+function createHouse(resToUse) {
+	var house = document.createElement("div");
+	var houseImage = document.createElement("img");
+	var houseInfo = document.createElement("div");
+	var price = document.createElement("h4");
+	var address = document.createElement("p");
+	var city = document.createElement("p");
+	var sqft = document.createElement("p");
+	house.classList.add("house");
+	house.setAttribute("onclick", "openHouse(" + resToUse.MLSNumber + ")");
+	houseImage.classList.add("houseElement");
+	houseImage.classList.add("houseImage");
+	houseImage.style.width = "300px";
+	houseImage.alt = "Picture of House";
+	houseImage.src = "images/rets/" + resToUse.MLSNumber + "/0.jpg";
+	houseInfo.classList.add("houseInformation");
+	price.classList.add("houseElement");
+	price.align = "right";
+	price.innerHTML = formatter.format(resToUse.ListPrice);
+	address.classList.add("houseElement");
+	address.innerHTML = resToUse.FullStreetNum.toProperCase();
+	city.classList.add("houseElement");
+	city.innerHTML = resToUse.City.toProperCase();
+	sqft.classList.add("houseElement");
+	sqft.innerHTML = parseInt(resToUse.SqFtTotal ? resToUse.SqFtTotal : resToUse.ApproxLotSquareFoot) + " Square Feet";
+	houseInfo.append(price);
+	houseInfo.append(address);
+	houseInfo.append(city);
+	houseInfo.append(sqft);
+	house.append(houseImage);
+	house.append(houseInfo);
+	return house;
+}
+
 function buildUrl() {
 	var inputs = document.querySelectorAll("#searchAddresses, #searchCities, #searchZips, #searchPropertyType, #searchMinPrice, #searchMaxPrice, #searchMinFeet, #searchMaxFeet, #searchBeds, #searchBaths");
 	var urlAdd = "";

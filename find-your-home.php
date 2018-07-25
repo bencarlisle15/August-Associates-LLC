@@ -87,7 +87,8 @@
 						$listingOffice = $res['ListOfficeName'] ? $res['ListOfficeName'] : ($res['CoListOfficeName'] ? $res['CoListOfficeName'] : ($res['SellingOfficeName'] ? $res['SellingOfficeName'] : ($res['CoSellingOfficeName'] ? $res['CoSellingOfficeName'] : 'Listing Office Not Found')));
 						//adds attribute
 						addAttribute("Listing Office", $listingOffice);
-						echo "</table>
+						echo "<tr><th class='keys'>Source</th><td class='values'>Rhode Island MLS</td</tr>
+						</table>
 					</div>";
 					$address = $res['FullStreetNum'] . ", " . $res['City'] . ", " . $res['StateOrProvince'];
 
@@ -113,6 +114,9 @@
 					}
 				?>
 				<div id="map"></div>
+				<div id="useInfoWrapper">
+					<h6 id="useInfo">“IDX information is provided exclusively for consumers’ personal, non-commercial use and may not be used for any purpose other than to identify prospective properties consumers may be interested in purchasing. Information is deemed reliable but is not guaranteed.  © 2018 State-Wide Multiple Listing Service. All rights reserved.”</h6>
+				</div>
 			</div>
 		</div>
 		<?php include('bin/footer.html'); ?>
