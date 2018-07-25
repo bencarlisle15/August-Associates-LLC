@@ -44,7 +44,7 @@
 						//loops through photos to add them to the slideshow
 							for ($i = 0; $i < $res['PhotoCount']; $i++) {
 								//determines if the photo is a duplicate or doesn't exist
-								if (!file_exists('images/largeRets/' . $res['MLSNumber'] . '/' . $i . '.jpg') || $i >= 1 && md5(file_get_contents('images/largeRets/' . $res['MLSNumber'] . '/' . ($i-1) . '.jpg')) == md5(file_get_contents('images/largeRets/' . $res['MLSNumber'] . '/' . $i . '.jpg'))) {
+								if (!file_exists('images/largeRets/' . $res['MLSNumber'] . '/' . $i . '.jpg') && !file_exists('testing/images/largeRets/' . $res['MLSNumber'] . '/' . $i . '.jpg') || $i >= 1 && md5(file_get_contents('images/largeRets/' . $res['MLSNumber'] . '/' . ($i-1) . '.jpg')) == md5(file_get_contents('images/largeRets/' . $res['MLSNumber'] . '/' . $i . '.jpg'))) {
 									//decreases the total number of photos
 									$total--;
 									continue;
