@@ -2,6 +2,15 @@
 	text-align:center;
 }
 
+#useInfo {
+	position: fixed;
+	bottom: 0px;
+	width: 100%;
+	background-color: #EBF5F6;
+	margin: 0px;
+	padding: 1px;
+}
+
 #findNav {
 	border: 1px solid;
 }
