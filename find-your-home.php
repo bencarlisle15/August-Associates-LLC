@@ -126,11 +126,9 @@
 		</div>
 		<?php include('bin/footer.html'); ?>
 		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTXHu0_banpDsOMFQSDHOxoqdooVQxreI"></script>
+		<script src="/js/load.js" async></script>
+		<script src="/js/find-your-home.js"></script>
 		<script>
-			<?php
-				include('js/load.js');
-				include('js/find-your-home.js');
-			?>
 			//inits map to position
 			initMap('<?php echo json_encode([$res['Latitude'], $res['Longitude']]);?>');
 		</script>

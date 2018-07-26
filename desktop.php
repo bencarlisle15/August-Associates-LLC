@@ -100,11 +100,7 @@
 			</div>
 		</div>
 		<?php include('bin/footer.html'); ?>
-		<script>
-			<?php
-				include('js/load.js');
-				include('js/home.js');
-			?>
-		</script>
+		<script src="/js/load.js" async></script>
+		<script src="/js/home.js" async></script>
 	</body>
 </html>

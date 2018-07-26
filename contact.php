@@ -34,11 +34,7 @@
 			</div>
 		</div>
 		<?php include('bin/footer.html'); ?>
-		<script>
-			<?php
-				include('js/load.js');
-				include('js/contact.js');
-			?>
-		</script>
+		<script src="/js/load.js" async></script>
+		<script src="/js/contact.js" async></script>
 	</body>
 </html>

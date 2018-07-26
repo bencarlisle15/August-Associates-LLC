@@ -74,11 +74,7 @@
 		</div>
 		<p id="zestimateDisclaimer">&copy; Zillow, Inc., 2006-2016. Use is subject to <a href="/corp/Terms.htm">Terms of Use</a><br /><a href="/wikipages/What-is-a-Zestimate/">What's a Zestimate?</a></p>
 		<?php include('bin/footer.html'); ?>
-		<script>
-			<?php
-				include('js/load.js');
-				include('js/sell-your-home.js');
-			?>
-		</script>
+		<script src="/js/load.js" async></script>
+		<script src="/js/sell-your-home.js" async></script>
 	</body>
 </html>

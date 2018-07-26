@@ -1,3 +1,5 @@
+document.addEventListener('DOMContentLoaded', beginFunctions());
+
 //when the user scrolls to the bottom while in grid mode
 var pageNumber = 0;
 window.onscroll = function(ev) {
@@ -7,12 +9,14 @@ window.onscroll = function(ev) {
 	}
 };
 
-//all currency input
-var vals = ["searchMinPrice","searchMaxPrice"];
-for (var i in vals) {
-	document.getElementById(vals[i]).addEventListener("keyup", function() {
-		this.value = formatCurrency(this.value);
-	});
+function beginFunctions() {
+	//all currency input
+	var vals = ["searchMinPrice","searchMaxPrice"];
+	for (var i in vals) {
+		document.getElementById(vals[i]).addEventListener("keyup", function() {
+			this.value = formatCurrency(this.value);
+		});
+	}
 }
 
 //edits search bar info

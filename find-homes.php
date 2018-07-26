@@ -230,11 +230,9 @@
 		</div>
 		<?php include('bin/footer.html'); ?>
 		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTXHu0_banpDsOMFQSDHOxoqdooVQxreI"></script>
+		<script src="/js/load.js" async></script>
+		<script src="/js/find-homes.js"></script>
 		<script>
-			<?php
-				include('js/load.js');
-				include('js/find-homes.js');
-			?>
 			//parses houses to json
 			var json = JSON.parse(<?php echo json_encode(json_encode($rets)); ?>);
 			//inits map from json
@@ -243,7 +241,6 @@
 				//either error or query too specific
 				document.getElementById("loadingHomes").innerHTML = 'No More Houses Found';
 			}
-
 			function initAllHomes(pageNumber) {
 				document.getElementById("houses").innerHTML += "<?php $rets = getSetRets($pageNumber++) ?>";
 				//parses houses to json

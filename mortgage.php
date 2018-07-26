@@ -21,11 +21,7 @@
 		</form>
 	</div>
 	<?php include('bin/footer.html'); ?>
-	<script>
-		<?php
-			include('js/load.js');
-			include('js/mortgage.js');
-		?>
-	</script>
+	<script src="/js/load.js" async></script>
+	<script src="/js/mortgage.js" async></script>
 </body>
 </html>

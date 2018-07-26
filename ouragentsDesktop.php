@@ -80,8 +80,6 @@
 			</div>
 		</div>
 		<?php include('bin/footer.html'); ?>
-		<script>
-			<?php include('js/load.js'); ?>
-		</script>
+		<script src="/js/load.js" async></script>
 	</body>
 </html>
