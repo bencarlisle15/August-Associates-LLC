@@ -1,14 +1,13 @@
 		<?php include('bin/head.php'); ?>
-		<style>
-			<?php include('css/sell-your-home.css'); ?>
-		</style>
+		<link rel="stylesheet" type="text/css" href="/css/sell-your-home.css">
+		<link rel="canonical" href="https://www.augustassociatesllc.net/sell-your-home" />
 		<title>August Associates LLC - Sell Your Home</title>
 		<meta name="description" content="See how much your home could be worth here. August Associates, your valued guide in real estate." />
 	</head>
 	<body>
 		<?php include('bin/nav.php'); ?>
 		<div id="sellSection" class="section">
-			<h1 id="sellTitle">See How Much Your House is Worth</h1>
+			<h2 id="sellTitle">See How Much Your House is Worth</h2>
 			<form id="sellHouseForm" action="javascript:submitForm()">
 				<input type="text" title="Name" id="formName" placeholder="Name" class="formLineElement" required>
 				<input type="email" title="Email" id="formEmail" class="formLineElement" placeholder="Email">
@@ -75,12 +74,11 @@
 		</div>
 		<p id="zestimateDisclaimer">&copy; Zillow, Inc., 2006-2016. Use is subject to <a href="/corp/Terms.htm">Terms of Use</a><br /><a href="/wikipages/What-is-a-Zestimate/">What's a Zestimate?</a></p>
 		<?php include('bin/footer.html'); ?>
+		<script>
+			<?php
+				include('js/load.js');
+				include('js/sell-your-home.js');
+			?>
+		</script>
 	</body>
 </html>
-
-<script>
-	<?php
-		include('js/load.js');
-		include('js/sell-your-home.js');
-	?>
-</script>

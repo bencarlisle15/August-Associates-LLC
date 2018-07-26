@@ -67,18 +67,14 @@ for ($q = 0; $q < sizeof($ar); $q++) {
 		file_put_contents($largeDir . "/" . $i . ".jpg", $largePhotos[$i]->getContent());
 	}
 }
-// $data = json_encode($ar);
-// $conn = new mysqli("localhost", getDBUser(), getDBPassword(), getDBName());
-// if ($conn->connect_error) {
-// 	die("Connection failed: " . $conn->connect_error . "\n");
-// }
-// $query = "UPDATE RetsData SET json_data='" . $conn->real_escape_string($data) . "'";
-// mysqli_query($conn, $query);
+$data = json_encode($ar);
+$conn = new mysqli("localhost", getDBUser(), getDBPassword(), getDBName());
+if ($conn->connect_error) {
+	die("Connection failed: " . $conn->connect_error . "\n");
+}
+$query = "UPDATE RetsData SET json_data='" . $conn->real_escape_string($data) . "'";
+mysqli_query($conn, $query);
 $_POST['functionname'] = 'sendEmail';
 $_POST['body'] = "Records Updated";
 include('apiRequests.php');
-// $my_file = 'rets-data.json';
-// $handle = fopen($my_file, 'w');
-// fwrite($handle, $data);
-// fclose($handle);
 ?>

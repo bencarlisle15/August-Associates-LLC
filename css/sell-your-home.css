@@ -21,6 +21,10 @@
 	border: 1px solid;
 }
 
+#sellTitle {
+	font-size: 24pt;
+}
+
 #sellInfo {
 	position:absolute;
 	top: 50%;

@@ -1,14 +1,13 @@
 		<?php include('bin/head.php'); ?>
-		<style>
-			<?php include('css/find-homes.css'); ?>
-		</style>
+		<link rel="stylesheet" type="text/css" href="/css/find-homes.css">
+		<link rel="canonical" href="https://www.augustassociatesllc.net/find-homes" />
 		<title>August Associates LLC - Find Homes</title>
 		<meta name="description" content="Search for your new home here. August Associates, your valued guide in real estate." />
 	</head>
 	<body>
 		<?php include('bin/nav.php'); ?>
 		<div id="homesSection" class="section">
-			<h1 id="findTitle">Find Your New Home</h1>
+			<h2 id="findTitle">Find Your New Home</h2>
 			<div id="searchBox">
 				<form id= "searchForm" action="javascript:getProperties()">
 					<div class="searchFormLine">
@@ -156,35 +155,56 @@
 												});
 												break;
 										}
-										continue;
+										continue 2;
 								}
 								//removes dashes
 								$val = str_replace("-", " ", $val);
 								for ($i = 0; $i < sizeof($json); $i++) {
 									//checks if the house matches the requirements
 									//if change is 0 then check if its an int and they vals are not equal, if its not an int then it checks if the two vals are not equal and the houseval is not in the paramsval, if change is -1 then checks if the houseval is greater than the paramval, if change is 1 then it checks if the houseval is less than the paramsval
-									if ($change == 0 && (is_int($json[$i][$key]) ? ($json[$i][$key] != $val) : (strtolower($json[$i][$key]) != strtolower($val) && $json[$i][$key] && $val && strpos(strtolower($val), strtolower($json[$i][$key])) === false)) || $change == -1 && $json[$i][$key] > $val || $change == 1 && $json[$i][$key] < $val) {
+									if (isInvalid(strtolower($json[$i][$key]), strtolower($val), $change)) {
 										//removes from json by unsetting it;
-										unset($json[$i]);
+										unset($json[$i--]);
+										$json = array_values($json);
 									}
 								}
 								//resets the array values;
-								$json = array_values($json);
+							}
+							if (!isset($_GET['sortby'])) {
+								usort($json, function($a, $b) {
+									return $a['PropertyType'] == "Single Family" ? -1 : 1;
+								});
 							}
 							//gets the first 40 houses
 							$pageSize = 40;
 							$first = array_slice($json, $pageSize * $pageNumber, $pageSize * ($pageNumber + 1));
 							for ($i = 0; $i < sizeof($first); $i++) {
-								echo "<div class='house' onclick='openHouse(" . $first[$i]['MLSNumber'] . ")'><div class='houseImageWrapper'>";
+								echo "<div class='house' onclick='openHouse(" . htmlspecialchars($first[$i]['MLSNumber']) . ")'><div class='houseImageWrapper'>";
 								//checks if the image is valid and only adds it if it is
+								//checks both testing and current since for the main branch
 								if (@getimagesize('images/rets/' . $first[$i]['MLSNumber'] . '/0.jpg') || @getimagesize('testing/images/rets/' . $first[$i]['MLSNumber'] . '/0.jpg')) {
-									echo "<img class='houseElement houseImage' alt='Picture of House' src='images/rets/" . $first[$i]['MLSNumber'] . "/0.jpg'/>";
+									echo "<img class='houseElement houseImage' alt='Picture of House' src='images/rets/" . htmlspecialchars($first[$i]['MLSNumber']) . "/0.jpg'/>";
 								} else {
 									echo "<img class='houseElement houseImage' alt='House not Found' src='images/compass.png'/>";
 								}
-								echo "</div><div class='houseInformation'><h4 class='housePrice houseElement'>$" . number_format((float) $first[$i]['ListPrice']) . "</h4><p class='houseElement'>" . ucwords(strtolower($first[$i]['FullStreetNum'])) . "</p><p class='houseElement'>" . $first[$i]['City'] ."</p><p class='houseElement'>" . number_format((float) ($first[$i]['SqFtTotal'] ? $first[$i]['SqFtTotal'] : $first[$i]['ApproxLotSquareFoot'])) . " Square Feet</p></div></div>";
+								echo "</div><div class='houseInformation'><h4 class='housePrice houseElement'>$" . number_format((float) $first[$i]['ListPrice']) . "</h4><p class='houseElement'>" . htmlspecialchars(ucwords(strtolower($first[$i]['FullStreetNum']))) . "</p><p class='houseElement'>" . htmlspecialchars($first[$i]['City']) ."</p><p class='houseElement'>" . htmlspecialchars(number_format((float) ($first[$i]['SqFtTotal'] ? $first[$i]['SqFtTotal'] : $first[$i]['ApproxLotSquareFoot']))) . " Square Feet</p></div></div>";
 							}
 							return $first;
+						}
+
+						function isInvalid($arVal, $paramVal, $change) {
+							if ($change == 0) {
+								if (is_int($arVal)) {
+									return $arVal != $paramVal;
+								} else  {
+									if (!$arVal) {
+										return true;
+									}
+									return $arVal != $paramVal && $paramVal && strpos($paramVal, $arVal) === false && strpos($arVal, $paramVal) === false;
+								}
+							} else {
+								return $change == -1 && $arVal > $paramVal || $change == 1 && $arVal < $paramVal;
+							}
 						}
 
 						//determines the fistance between two lat and lng vals
@@ -200,7 +220,7 @@
 						}
 					?>
 				</div>
-				<h2 id="loadingHomes" style="text-align: center">Loading More Homes...</h2>
+				<h2 id="loadingHomes">Loading More Homes...</h2>
 			</div>
 			<h6 id="useInfo">“IDX information is provided exclusively for consumers’ personal, non-commercial use and may not be used for any purpose other than to identify prospective properties consumers may be interested in purchasing. Information is deemed reliable but is not guaranteed.  © 2018 State-Wide Multiple Listing Service. All rights reserved.”</h6>
 			<div id="mapHouseWrapper" onclick="removeHouseOverlay()">
@@ -209,33 +229,32 @@
 			</div>
 		</div>
 		<?php include('bin/footer.html'); ?>
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTXHu0_banpDsOMFQSDHOxoqdooVQxreI"></script>
+		<script>
+			<?php
+				include('js/load.js');
+				include('js/find-homes.js');
+			?>
+			//parses houses to json
+			var json = JSON.parse(<?php echo json_encode(json_encode($rets)); ?>);
+			//inits map from json
+			initMap(json);
+			if (!json || !json.length) {
+				//either error or query too specific
+				document.getElementById("loadingHomes").innerHTML = 'No More Houses Found';
+			}
+
+			function initAllHomes(pageNumber) {
+				document.getElementById("houses").innerHTML += "<?php $rets = getSetRets($pageNumber++) ?>";
+				//parses houses to json
+				var json = JSON.parse(<?php echo json_encode(json_encode($rets)); ?>);
+				//inits map from json
+				setMapHouses(json);
+				if (!json || !json.length) {
+					//either error or query too specific
+					document.getElementById("loadingHomes").innerHTML = 'No More Houses Found';
+				}
+			}
+		</script>
 	</body>
 </html>
-
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTXHu0_banpDsOMFQSDHOxoqdooVQxreI"></script>
-<script>
-<?php
-	include('js/load.js');
-	include('js/find-homes.js');
-?>
-//parses houses to json
-var json = JSON.parse(<?php echo json_encode(json_encode($rets)); ?>);
-//inits map from json
-initMap(json);
-if (!json || !json.length) {
-	//either error or query too specific
-	document.getElementById("loadingHomes").innerHTML = 'No More Houses Found';
-}
-
-function initAllHomes(pageNumber) {
-	document.getElementById("houses").innerHTML += "<?php $rets = getSetRets($pageNumber++) ?>";
-	//parses houses to json
-	var json = JSON.parse(<?php echo json_encode(json_encode($rets)); ?>);
-	//inits map from json
-	setMapHouses(json);
-	if (!json || !json.length) {
-		//either error or query too specific
-		document.getElementById("loadingHomes").innerHTML = 'No More Houses Found';
-	}
-}
-</script>

@@ -11,8 +11,16 @@
 	padding: 1px;
 }
 
+#findTitle {
+	font-size: 24pt;
+}
+
 #findNav {
 	border: 1px solid;
+}
+
+#loadingHomes {
+	text-align: center;
 }
 
 #housesWrapper {

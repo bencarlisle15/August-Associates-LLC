@@ -1,14 +1,13 @@
 		<?php include('bin/head.php'); ?>
-		<style>
-			<?php include('css/testimonials.css'); ?>
-		</style>
+		<link rel="stylesheet" type="text/css" href="/css/testimonials.css">
+		<link rel="canonical" href="https://www.augustassociatesllc.net/testimonials" />
 		<title>August Associates LLC - Testimonials</title>
 		<meta name="description" content="View our testimonials or add your own. August Associates, your valued guide in real estate." />
 	</head>
 	<body>
 		<?php include('bin/nav.php'); ?>
 		<div id="testimonialsSection" class="section">
-			<h1 id="testimonialsName">Testimonials</h1>
+			<h2 id="testimonialsName">Testimonials</h2>
 			<div id="testimonialsWrapper">
 				<div id="testimonialsList">
 					<div class="testimonialFrame">
@@ -51,12 +50,11 @@
 			</div>
 		</div>
 		<?php include('bin/footer.html'); ?>
+		<script>
+			<?php
+				include('js/load.js');
+				include('js/testimonials.js');
+			?>
+		</script>
 	</body>
 </html>
-
-<script>
-	<?php
-		include('js/load.js');
-		include('js/testimonials.js');
-	?>
-</script>

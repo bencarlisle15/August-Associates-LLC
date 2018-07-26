@@ -11,6 +11,10 @@
 	position: relative;
 }
 
+#address {
+	font-size: 24pt;
+}
+
 .houseWrapper {
 	max-width: 600px;
 	width: auto;
@@ -102,6 +106,14 @@
 	margin: 8px;
 }
 
+#dots {
+	text-align:center;
+}
+
+#interested {
+	font-weight: bold;
+}
+
 .keys, .values {
 	border: 1px solid black;
 	text-align: left;
@@ -146,6 +158,7 @@
 #infoForm {
 	display: flex;
 	flex-direction: column;
+	border: 1px;
 }
 
 .infoFormElement {

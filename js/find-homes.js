@@ -15,6 +15,30 @@ for (var i in vals) {
 	});
 }
 
+//edits search bar info
+(function editSettings() {
+	var url = window.location.href;
+	//checks for params
+	if (url.indexOf("?") >= 0) {
+		var queryUrl = url.substring(url.indexOf("?") + 1).replace("-", " ");
+		var queries = queryUrl.split("&");
+		//splits into key and params and updates the search bar
+		for (var i = 0; i < queries.length; i++) {
+			var key = queries[i].substring(0, queries[i].indexOf("="));
+			var val = queries[i].substring(queries[i].indexOf("=") + 1);
+			if (key == "searchMinPrice" || key == "searchMaxPrice") {
+				val = formatter.format(val);
+			} else if (key == "map" && val =="true") {
+				switchView();
+			} else if (key == "sortby") {
+				document.getElementById("sortArray").value = val;
+			} else if (document.getElementById(key)) {
+				document.getElementById(key).value = removePluses(val);
+			}
+		}
+	}
+})();
+
 //automatically updates currency input
 function formatCurrency(oldVal) {
 	var num = oldVal.replace(/(,)/g, '');
@@ -37,7 +61,6 @@ function resetSearch() {
 
 function searchArea() {
 	var radius = 156543.03392 * Math.cos(map.getCenter().lat() * Math.PI / 180) / Math.pow(2, map.getZoom());
-	console.log(radius);
 	var extra = "radius=" + radius + "&lat=" + map.getCenter().lat() + "&lng=" + map.getCenter().lng() + "&map=true";
 	var url = buildUrl();
 	url += url.length > 0 ? "&" : "?";
@@ -57,41 +80,6 @@ function removePluses(str) {
 
 function getProperties() {
 	window.location.href = "/find-homes"+buildUrl();
-}
-
-//Creates house with html elements
-function createHouse(resToUse) {
-	var house = document.createElement("div");
-	var houseImage = document.createElement("img");
-	var houseInfo = document.createElement("div");
-	var price = document.createElement("h4");
-	var address = document.createElement("p");
-	var city = document.createElement("p");
-	var sqft = document.createElement("p");
-	house.classList.add("house");
-	house.setAttribute("onclick", "openHouse(" + resToUse.MLSNumber + ")");
-	houseImage.classList.add("houseElement");
-	houseImage.classList.add("houseImage");
-	houseImage.style.width = "300px";
-	houseImage.alt = "Picture of House";
-	houseImage.src = "images/rets/" + resToUse.MLSNumber + "/0.jpg";
-	houseInfo.classList.add("houseInformation");
-	price.classList.add("houseElement");
-	price.align = "right";
-	price.innerHTML = formatter.format(resToUse.ListPrice);
-	address.classList.add("houseElement");
-	address.innerHTML = resToUse.FullStreetNum.toProperCase();
-	city.classList.add("houseElement");
-	city.innerHTML = resToUse.City.toProperCase();
-	sqft.classList.add("houseElement");
-	sqft.innerHTML = parseInt(resToUse.SqFtTotal ? resToUse.SqFtTotal : resToUse.ApproxLotSquareFoot) + " Square Feet";
-	houseInfo.append(price);
-	houseInfo.append(address);
-	houseInfo.append(city);
-	houseInfo.append(sqft);
-	house.append(houseImage);
-	house.append(houseInfo);
-	return house;
 }
 
 function buildUrl() {
@@ -216,8 +204,39 @@ function roundToLetter(num) {
 
 //Adds the clicked house to an overlay
 function showOverlay(res) {
-	var house = createHouse(res);
+	var house = document.createElement("div");
+	var houseImageWrapper = document.createElement("div");
+	var houseImage = document.createElement("img");
+	var houseInfo = document.createElement("div");
+	var price = document.createElement("h4");
+	var address = document.createElement("p");
+	var city = document.createElement("p");
+	var sqft = document.createElement("p");
+	house.classList.add("house");
+	house.setAttribute("onclick", "openHouse(" + res.MLSNumber + ")");
 	house.id = "mapHouse";
+	houseImageWrapper.classList.add('houseImageWrapper');
+	houseImageWrapper.append(houseImage);
+	houseImage.classList.add("houseElement");
+	houseImage.classList.add("houseImage");
+	houseImage.alt = "Picture of House";
+	houseImage.src = "images/rets/" + res.MLSNumber + "/0.jpg";
+	houseInfo.classList.add("houseInformation");
+	price.classList.add("houseElement");
+	price.align = "right";
+	price.innerHTML = formatter.format(res.ListPrice);
+	address.classList.add("houseElement");
+	address.innerHTML = res.FullStreetNum.toProperCase();
+	city.classList.add("houseElement");
+	city.innerHTML = res.City.toProperCase();
+	sqft.classList.add("houseElement");
+	sqft.innerHTML = parseInt(res.SqFtTotal ? res.SqFtTotal : res.ApproxLotSquareFoot) + " Square Feet";
+	houseInfo.append(price);
+	houseInfo.append(address);
+	houseInfo.append(city);
+	houseInfo.append(sqft);
+	house.append(houseImageWrapper);
+	house.append(houseInfo);
 	document.getElementById("mapHouseWrapper").append(house);
 	document.getElementById("mapHouseWrapper").style.display = "block";
 }

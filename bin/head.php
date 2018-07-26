@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 	<head>
 		<meta charset="UTF-8">
 		<?php
@@ -12,14 +12,10 @@
 		?>
 		<link rel="manifest" href="/manifest.webmanifest">
 		<meta name="theme-color" content="#383493">
+		<meta name="mobile-web-app-capable" content="yes">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="icon" href="/images/icon.png" type="image/ico" />
-		<style>
-			<?php
-				include($_SERVER['DOCUMENT_ROOT'].'/css/default.css');
-			?>
-		</style>
-		<!-- <link rel="stylesheet" href="../css/default.css"> -->
+		<link rel="stylesheet" type="text/css" href="/css/default.css">
 		<script type="application/ld+json"> {
 			"@context": "http://schema.org",
 			"@type": "Organization",
