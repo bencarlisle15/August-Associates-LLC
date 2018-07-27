@@ -18,7 +18,7 @@
 							<option title="Property Type" value="" selected>Property Type</option>
 							<option title="Single Family" value="Single Family">Single Family</option>
 							<option title="Rental" value="Rental">Rental</option>
-							<option title="Multi Family" value="2-4 Units Multi Family">Multifamily	</option>
+							<option title="Multi Family" value="Multi Family">Multifamily	</option>
 							<option title="Condo" value="Condominium">Condo</option>
 							<option title="Vacant Land" value="Vacant Land">Vacant Land</option>
 						</select>
@@ -38,12 +38,12 @@
 			</div>
 			<div id="findButtons">
 				<button id="searchThisArea" class="findButton" onclick="searchArea()">Search This Area</button>
-				<select id="sortArray" onchange="sortArray()" title="Sort By">
+				<select id="sortArray" class="findButton" onchange="getProperties()" title="Sort By">
 					<option title="Sort By" value="" selected>Sort By</option>
-					<option title="Price (Low to High)" value="plh">Price (Low to High)</option>
-					<option title="Price (High to Low)" value="phl">Price (High to Low)</option>
-					<option title="Size (Low to High)" value="slh">Size (Low to High)</option>
-					<option title="Size (High to Low)" value="shl">Size (High to Low)</option>
+					<option title="Price (Low to High)" value="plh">Price &#x21C8;</option>
+					<option title="Price (High to Low)" value="phl">Price &#x21CA;</option>
+					<option title="Size (Low to High)" value="slh">Size &#x21C8;</option>
+					<option title="Size (High to Low)" value="shl">Size &#x21CA;</option>
 				</select>
 				<button id="resetSearch" class="findButton" onclick="resetSearch()">Reset Search</button>
 				<button id="mapGridSwitch" class="findButton" value = "grid" onclick="switchView()">Switch to Map View</button>
@@ -64,12 +64,17 @@
 							$json = json_decode($result, true);
 							//uses the keys and vals from the params
 							foreach ($_GET as $key => $val) {
+								//removes dashes
+								$val = str_replace("-", " ", $val);
 								//change shows that this all vals need to be higher than it (1), lower than it (-1) or the same as or include it (0)
 								$change = 0;
 								//updates key to the correct one
 								switch ($key) {
 									case "searchPropertyType":
 										$key = "PropertyType";
+										if ($val == "Multi Family") {
+											$val = "2-4 Units Multi Family";
+										}
 										break;
 									case "searchMinPrice":
 										$key = "ListPrice";
@@ -127,7 +132,7 @@
 									case "map":
 										continue;
 									//sorts the houses
-									case "sortby":
+									case "sortArray":
 										//what to sort by
 										switch ($val) {
 											//price low to high
@@ -157,8 +162,6 @@
 										}
 										continue 2;
 								}
-								//removes dashes
-								$val = str_replace("-", " ", $val);
 								for ($i = 0; $i < sizeof($json); $i++) {
 									//checks if the house matches the requirements
 									//if change is 0 then check if its an int and they vals are not equal, if its not an int then it checks if the two vals are not equal and the houseval is not in the paramsval, if change is -1 then checks if the houseval is greater than the paramval, if change is 1 then it checks if the houseval is less than the paramsval
@@ -170,7 +173,7 @@
 								}
 								//resets the array values;
 							}
-							if (!isset($_GET['sortby'])) {
+							if (!isset($_GET['sortArray'])) {
 								usort($json, function($a, $b) {
 									return $a['PropertyType'] == "Single Family" ? -1 : 1;
 								});

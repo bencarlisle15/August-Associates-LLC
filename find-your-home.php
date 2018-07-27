@@ -47,36 +47,34 @@
 						$total = $res['PhotoCount'];
 						echo "<div id='houseSlideshow'>";
 						//loops through photos to add them to the slideshow
-							for ($i = 0; $i < $res['PhotoCount']; $i++) {
-								//determines if the photo is a duplicate or doesn't exist
-								if (!file_exists('images/largeRets/' . $res['MLSNumber'] . '/' . $i . '.jpg') && !file_exists('testing/images/largeRets/' . $res['MLSNumber'] . '/' . $i . '.jpg') || $i >= 1 && md5(file_get_contents('images/largeRets/' . $res['MLSNumber'] . '/' . ($i-1) . '.jpg')) == md5(file_get_contents('images/largeRets/' . $res['MLSNumber'] . '/' . $i . '.jpg'))) {
-									//decreases the total number of photos
-									$total--;
-									continue;
-								}
-								//adds the image
-								echo "<div class='houseWrapper'>
-									<img src='images/largeRets/" . htmlspecialchars($res['MLSNumber']) . "/" . $i . ".jpg' alt='Picture of the House' class='houseImage'/>
-								</div>";
+						for ($i = 0; $i < $res['PhotoCount']; $i++) {
+							//determines if the photo is a duplicate or doesn't exist
+							if (!file_exists('images/largeRets/' . $res['MLSNumber'] . '/' . $i . '.jpg') && !file_exists('testing/images/largeRets/' . $res['MLSNumber'] . '/' . $i . '.jpg') || $i >= 1 && md5(file_get_contents('images/largeRets/' . $res['MLSNumber'] . '/' . ($i-1) . '.jpg')) == md5(file_get_contents('images/largeRets/' . $res['MLSNumber'] . '/' . $i . '.jpg'))) {
+								//decreases the total number of photos
+								$total--;
+								continue;
 							}
-						echo "<a onclick='plusSlides(-1)' id='prev'>&#10094;</a>
-							<a onclick='plusSlides(1)' id='next'>&#10095;</a>
-						</div>
-						<div id='dots'>";
-						//adds a dot for each image
-						for ($i = 0; $i < $total; $i++) {
-							echo "<span class='dot' onclick='showSlides(" . $i . ")'></span>";
+							//adds the image
+							echo "<div class='houseWrapper'>
+								<img src='images/largeRets/" . htmlspecialchars($res['MLSNumber']) . "/" . $i . ".jpg' alt='Picture of the House' class='houseImage'/>
+							</div>";
+						}
+						if ($total) {
+							echo "<a onclick='plusSlides(-1)' id='prev'>&#10094;</a>
+								<a onclick='plusSlides(1)' id='next'>&#10095;</a>
+							</div>
+							<div id='dots'>";
+							//adds a dot for each image
+							for ($i = 0; $i < $total; $i++) {
+								echo "<span class='dot' onclick='showSlides(" . $i . ")'></span>";
+							}
 						}
 						echo "</div>";
 					}
 					echo "<h2 id='address'>" . htmlspecialchars(toSentenceCase($res['FullStreetNum'])) . ", " . htmlspecialchars($res['City']) . ", " . htmlspecialchars($res['StateOrProvince']) . ", " . $res['PostalCode'] . "</h2>
 					<h2 id='price'>$" . htmlspecialchars(number_format((float) $res['ListPrice'])) . "</h2>
 					<div id='tableAndDescription'>
-						<div id='descriptionAndContact'>
-							<p id='description'>" .  htmlspecialchars(toSentenceCase($res['PublicRemarks'])) . "</p>
-							<h2 id='interested'>Interested in this Home?</h2>
-							<h2>Call us at <a href='tel:4014610700'>(401) 461-0700</a> or Email us at <a href='mailto:jmccarthy@necompass.com'>jmccarthy@necompass.com</a> to get in touch with an agent</h2>
-						</div>
+						<p id='description'>" .  htmlspecialchars(toSentenceCase($res['PublicRemarks'])) . "</p>
 						<table id='table'>";
 						//determines which sqft to use
 						$sqftVal = $res['SqFtTotal'] ? $res['SqFtTotal'] : $res['ApproxLotSquareFoot'];
@@ -95,6 +93,8 @@
 						echo "<tr><th class='keys'>Source</th><td class='values'>Rhode Island MLS</td></tr>
 						</table>
 					</div>";
+					echo "<h2 id='interested'>Interested in this Home?</h2>
+					<h2>Call us at <a href='tel:4014610700'>(401) 461-0700</a> or Email us at <a href='mailto:jmccarthy@necompass.com'>jmccarthy@necompass.com</a> to get in touch with an agent</h2>";
 					$address = $res['FullStreetNum'] . ", " . $res['City'] . ", " . $res['StateOrProvince'];
 
 					//capitolizes the first letter after spaces, ', and "
