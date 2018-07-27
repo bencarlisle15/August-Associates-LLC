@@ -36,8 +36,8 @@
 	}
 }
 
-.infoElement > a:link {
-	text-decoration: none;
+.infoElement > a:hover {
+	text-decoration: underline;
 }
 
 #imageWrapper, #infoText {

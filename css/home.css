@@ -11,6 +11,10 @@
 	justify-content: center;
 }
 
+#homesSection {
+	padding-top: 0px;
+}
+
 #arrow {
 	position: absolute;
 	width: 11.5%;
@@ -48,6 +52,7 @@
 #houses {
 	display: flex;
 	margin: 0px;
+	margin-top: 25px;
 	padding: 0px;
 	flex-direction: row;
 	flex-wrap: wrap;
@@ -107,8 +112,8 @@
 	text-align: center;
 }
 
-.infoElement > a:link {
-	text-decoration: none;
+.infoElement > a:hover {
+	text-decoration: underline;
 }
 
 #facebookWrapper {
