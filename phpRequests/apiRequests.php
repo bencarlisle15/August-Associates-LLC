@@ -52,9 +52,14 @@
 			file_get_contents($url);
 			break;
 		case 'ipCheck':
-			//checks if ip is in the list
 			require_once('keys.php');
-			echo in_array($_SERVER['REMOTE_ADDR'], getIpAddresses());
+			//checks if ip is in the ignore list
+			if (in_array($_SERVER['REMOTE_ADDR'], getIpIgnoredAddresses())) {
+				echo -1;
+			} else {
+				//checks if ip is in users list
+				echo in_array($_SERVER['REMOTE_ADDR'], getIpAddresses());
+			}
 			break;
 		case "addIP":
 			//adds ip to the list

@@ -11,6 +11,10 @@
 	cursor: pointer;
 }
 
+#mortgageTitle {
+	font-size: 24pt;
+}
+
 #mortgageNav {
 	border: 1px solid;
 }

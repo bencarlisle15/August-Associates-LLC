@@ -1,14 +1,13 @@
 	<?php include('bin/head.php'); ?>
-	<style>
-		<?php include('css/mortgage.css'); ?>
-	</style>
+	<link rel="stylesheet" type="text/css" href="/css/mortgage.css">
+	<link rel="canonical" href="https://www.augustassociatesllc.net/mortgage" />
 	<title>August Associates LLC - Mortgage Calculator</title>
 	<meta name="description" content="Calculate what you would pay for your mortgage. August Associates, your valued guide in real estate." />
 </head>
 <body>
 	<?php include('bin/nav.php'); ?>
 	<div id="mortgageSection" class="section">
-		<h1 id="mortgageTitle">See What You Would Pay Per Month</h1>
+		<h2 id="mortgageTitle">See What You Would Pay Per Month</h2>
 		<form id="mortgageForm" action="javascript:submitMortgageForm()">
 			<div id="mortgageHouseAndDown">
 				<input type="text" title="House Cost" id="mortgageHouseCost" class="mortgageElement" placeholder="House Cost" required>
@@ -22,12 +21,7 @@
 		</form>
 	</div>
 	<?php include('bin/footer.html'); ?>
+	<script src="/js/load.js" async></script>
+	<script src="/js/mortgage.js" async></script>
 </body>
 </html>
-
-<script>
-	<?php
-		include('js/load.js');
-		include('js/mortgage.js');
-	?>
-</script>

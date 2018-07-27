@@ -1,7 +1,6 @@
 		<?php include('bin/head.php'); ?>
-		<style>
-			<?php include('css/contact.css'); ?>
-		</style>
+		<link rel="stylesheet" type="text/css" href="/css/contact.css">
+		<link rel="canonical" href="https://www.augustassociatesllc.net/contact" />
 		<title>August Associates LLC - Contact Us</title>
 		<meta name="description" content="Contact us for any questions or concerns. August Associates, your valued guide in real estate." />
 	</head>
@@ -14,7 +13,7 @@
 						<img id="contactLogo" alt="August Associates Logo" src="/images/august%20splash.png"/>
 					</div>
 					<div id="infoWrapper">
-						<h1 id="infoTitle">Our Info</h1>
+						<h2 id="infoTitle">Our Info</h2>
 						<div id="infoText">
 							<p class="infoElement"><b>Phone: </b> (401) 461-0700</p>
 							<p class="infoElement"><b>Email: </b><a href="mailto:jmccarthy@necompass.com">jmccarthy@necompass.com</a></p>
@@ -23,7 +22,7 @@
 					</div>
 				</div>
 				<div id="contactFormWrapper" class="contactWrapperSection">
-					<h1 id="contactUsTitle">Contact Us</h1>
+					<h2 id="contactUsTitle">Contact Us</h2>
 					<form id="contactForm" action="javascript:submitContactForm()">
 						<input type="text" title="Name" id="contactFormName" placeholder="Name" class="contactFormElement" required>
 						<input type="email" title="Email" id="contactFormEmail" placeholder="Email" class="contactFormElement">
@@ -35,12 +34,7 @@
 			</div>
 		</div>
 		<?php include('bin/footer.html'); ?>
+		<script src="/js/load.js" async></script>
+		<script src="/js/contact.js" async></script>
 	</body>
 </html>
-
-<script>
-	<?php
-		include('js/load.js');
-		include('js/contact.js');
-	?>
-</script>

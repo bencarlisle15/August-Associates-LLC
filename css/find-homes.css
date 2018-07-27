@@ -11,8 +11,16 @@
 	padding: 1px;
 }
 
+#findTitle {
+	font-size: 24pt;
+}
+
 #findNav {
 	border: 1px solid;
+}
+
+#loadingHomes {
+	text-align: center;
 }
 
 #housesWrapper {
@@ -138,6 +146,15 @@
 	margin: 16px;
 }
 
+@media only screen and (max-width: 700px) {
+	.findButton {
+		padding: 4px;
+		margin: 4px;
+		font-size: 12pt;
+		max-width: 30%;
+	}
+}
+
 .findButton:hover {
 	background-color: #333333;
 }
@@ -145,12 +162,13 @@
 #findButtons {
 	display: flex;
 	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: center;
 	justify-content: space-between;
 }
 
 #sortArray {
-	padding: 16px;
-	margin: 16px;
+	background-color: white;
 }
 
 #map, #searchThisArea {

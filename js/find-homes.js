@@ -1,3 +1,5 @@
+document.addEventListener('DOMContentLoaded', beginFunctions());
+
 //when the user scrolls to the bottom while in grid mode
 var pageNumber = 0;
 window.onscroll = function(ev) {
@@ -7,13 +9,44 @@ window.onscroll = function(ev) {
 	}
 };
 
-//all currency input
-var vals = ["searchMinPrice","searchMaxPrice"];
-for (var i in vals) {
-	document.getElementById(vals[i]).addEventListener("keyup", function() {
-		this.value = formatCurrency(this.value);
-	});
+//styles currency
+var formatter = new Intl.NumberFormat('en-US', {
+	style: 'currency',
+	currency: 'USD',
+});
+
+function beginFunctions() {
+	//all currency input
+	var vals = ["searchMinPrice","searchMaxPrice"];
+	for (var i in vals) {
+		document.getElementById(vals[i]).addEventListener("keyup", function() {
+			this.value = formatCurrency(this.value);
+		});
+	}
 }
+
+//edits search bar info
+(function editSettings() {
+	var url = window.location.href;
+	//checks for params
+	if (url.indexOf("?") >= 0) {
+		var queryUrl = url.substring(url.indexOf("?") + 1).replace("-", " ");
+		var queries = queryUrl.split("&");
+		//splits into key and params and updates the search bar
+		for (var i = 0; i < queries.length; i++) {
+			var key = queries[i].substring(0, queries[i].indexOf("="));
+			var val = queries[i].substring(queries[i].indexOf("=") + 1);
+			if (key == "searchMinPrice" || key == "searchMaxPrice") {
+				val = formatter.format(val);
+			} else if (key == "map" && val =="true") {
+				switchView();
+			}
+			if (document.getElementById(key)) {
+				document.getElementById(key).value = removePluses(val);
+			}
+		}
+	}
+})();
 
 //automatically updates currency input
 function formatCurrency(oldVal) {
@@ -25,30 +58,16 @@ function formatCurrency(oldVal) {
 	return val;
 }
 
-//styles currency
-var formatter = new Intl.NumberFormat('en-US', {
-	style: 'currency',
-	currency: 'USD',
-});
-
 function resetSearch() {
 	window.location.href = "/find-homes";
 }
 
 function searchArea() {
 	var radius = 156543.03392 * Math.cos(map.getCenter().lat() * Math.PI / 180) / Math.pow(2, map.getZoom());
-	console.log(radius);
 	var extra = "radius=" + radius + "&lat=" + map.getCenter().lat() + "&lng=" + map.getCenter().lng() + "&map=true";
-	var url = buildUrl();
+	var url = getQuery();
 	url += url.length > 0 ? "&" : "?";
 	window.location.href = "/find-homes" + url + extra;
-}
-
-function sortArray() {
-	var val = document.getElementById("sortArray").value;
-	var url = buildUrl();
-	url += url.length > 0 ? "&" : "?";
-	window.location.href = "/find-homes" + url + "sortby=" + val;
 }
 
 function removePluses(str) {
@@ -56,58 +75,23 @@ function removePluses(str) {
 }
 
 function getProperties() {
-	window.location.href = "/find-homes"+buildUrl();
+	window.location.href = "/find-homes" + getQuery();
 }
 
-//Creates house with html elements
-function createHouse(resToUse) {
-	var house = document.createElement("div");
-	var houseImage = document.createElement("img");
-	var houseInfo = document.createElement("div");
-	var price = document.createElement("h4");
-	var address = document.createElement("p");
-	var city = document.createElement("p");
-	var sqft = document.createElement("p");
-	house.classList.add("house");
-	house.setAttribute("onclick", "openHouse(" + resToUse.MLSNumber + ")");
-	houseImage.classList.add("houseElement");
-	houseImage.classList.add("houseImage");
-	houseImage.style.width = "300px";
-	houseImage.alt = "Picture of House";
-	houseImage.src = "images/rets/" + resToUse.MLSNumber + "/0.jpg";
-	houseInfo.classList.add("houseInformation");
-	price.classList.add("houseElement");
-	price.align = "right";
-	price.innerHTML = formatter.format(resToUse.ListPrice);
-	address.classList.add("houseElement");
-	address.innerHTML = resToUse.FullStreetNum.toProperCase();
-	city.classList.add("houseElement");
-	city.innerHTML = resToUse.City.toProperCase();
-	sqft.classList.add("houseElement");
-	sqft.innerHTML = parseInt(resToUse.SqFtTotal ? resToUse.SqFtTotal : resToUse.ApproxLotSquareFoot) + " Square Feet";
-	houseInfo.append(price);
-	houseInfo.append(address);
-	houseInfo.append(city);
-	houseInfo.append(sqft);
-	house.append(houseImage);
-	house.append(houseInfo);
-	return house;
-}
-
-function buildUrl() {
-	var inputs = document.querySelectorAll("#searchAddresses, #searchCities, #searchZips, #searchPropertyType, #searchMinPrice, #searchMaxPrice, #searchMinFeet, #searchMaxFeet, #searchBeds, #searchBaths");
-	var urlAdd = "";
-	for (var i = 0; i < inputs.length; i++) {
-		if (inputs[i].value != '') {
-			var val = inputs[i].value;
-			if (inputs[i].id == "searchMinPrice" || inputs[i].id == "searchMaxPrice") {
-				val = val.replace(/(,)/g, '').substr(1);
-			}
-			urlAdd += (urlAdd.length > 0 ? "&" : "?") + inputs[i].id + "=" + addPluses(val);
-		}
-	}
-	return urlAdd;
-}
+// function buildUrl() {
+// 	var inputs = document.querySelectorAll("#searchAddresses, #searchCities, #searchZips, #searchPropertyType, #searchMinPrice, #searchMaxPrice, #searchMinFeet, #searchMaxFeet, #searchBeds, #searchBaths");
+// 	var urlAdd = "";
+// 	for (var i = 0; i < inputs.length; i++) {
+// 		if (inputs[i].value != '') {
+// 			var val = inputs[i].value;
+// 			if (inputs[i].id == "searchMinPrice" || inputs[i].id == "searchMaxPrice") {
+// 				val = val.replace(/(,)/g, '').substr(1);
+// 			}
+// 			urlAdd += (urlAdd.length > 0 ? "&" : "?") + inputs[i].id + "=" + addPluses(val);
+// 		}
+// 	}
+// 	return urlAdd;
+// }
 
 function addPluses(str) {
 	return str.split(' ').join('+');
@@ -216,8 +200,39 @@ function roundToLetter(num) {
 
 //Adds the clicked house to an overlay
 function showOverlay(res) {
-	var house = createHouse(res);
+	var house = document.createElement("div");
+	var houseImageWrapper = document.createElement("div");
+	var houseImage = document.createElement("img");
+	var houseInfo = document.createElement("div");
+	var price = document.createElement("h4");
+	var address = document.createElement("p");
+	var city = document.createElement("p");
+	var sqft = document.createElement("p");
+	house.classList.add("house");
+	house.setAttribute("onclick", "openHouse(" + res.MLSNumber + ")");
 	house.id = "mapHouse";
+	houseImageWrapper.classList.add('houseImageWrapper');
+	houseImageWrapper.append(houseImage);
+	houseImage.classList.add("houseElement");
+	houseImage.classList.add("houseImage");
+	houseImage.alt = "Picture of House";
+	houseImage.src = "images/rets/" + res.MLSNumber + "/0.jpg";
+	houseInfo.classList.add("houseInformation");
+	price.classList.add("houseElement");
+	price.align = "right";
+	price.innerHTML = formatter.format(res.ListPrice);
+	address.classList.add("houseElement");
+	address.innerHTML = res.FullStreetNum.toProperCase();
+	city.classList.add("houseElement");
+	city.innerHTML = res.City.toProperCase();
+	sqft.classList.add("houseElement");
+	sqft.innerHTML = parseInt(res.SqFtTotal ? res.SqFtTotal : res.ApproxLotSquareFoot) + " Square Feet";
+	houseInfo.append(price);
+	houseInfo.append(address);
+	houseInfo.append(city);
+	houseInfo.append(sqft);
+	house.append(houseImageWrapper);
+	house.append(houseInfo);
 	document.getElementById("mapHouseWrapper").append(house);
 	document.getElementById("mapHouseWrapper").style.display = "block";
 }
@@ -252,47 +267,48 @@ function switchView() {
 function getQuery() {
 	var query = "";
 	if (document.getElementById("searchPropertyType").value != "") {
-		query += "&PropertyType=" + document.getElementById("searchPropertyType").value;
+		query += "&searchPropertyType=" + addPluses(document.getElementById("searchPropertyType").value);
 	}
 	if (document.getElementById("searchMinPrice").value != "") {
-		query += "&ListPrice=" + document.getElementById("searchMinPrice").value.replace(/(,)/g, '').substr(1) + ">";
+		query += "&searchMinPrice=" + addPluses(document.getElementById("searchMinPrice").value.replace(/(,)/g, '').substr(1));
 	}
 	if (document.getElementById("searchMaxPrice").value != "") {
-		var key = "&ListPrice=";
-		if (query.includes(key)) {
-			key = "&ListPrice2=";
-		}
-		query += key + document.getElementById("searchMaxPrice").value.replace(/(,)/g, '').substr(1) + "<";
+		query += "&searchMaxPrice=" + addPluses(document.getElementById("searchMaxPrice").value.replace(/(,)/g, '').substr(1));
 	}
 
 	if (document.getElementById("searchMinFeet").value != "") {
-		query += "&SqFtTotal=" + document.getElementById("searchMinFeet").value + ">";
+		query += "&searchMinFeet=" + addPluses(document.getElementById("searchMinFeet").value);
 	}
 
 	if (document.getElementById("searchMaxFeet").value != "") {
-		query += "&SqFtTotal=" + document.getElementById("searchMinFeet").value + "<";
+		query += "&searchMaxFeet=" + addPluses(document.getElementById("searchMaxFeet").value);
 	}
 
 	if (document.getElementById("searchBeds").value != "") {
-		query += "&BedsTotal=" + document.getElementById("searchBeds").value + ">";
+		query += "&searchBeds=" + addPluses(document.getElementById("searchBeds").value);
 	}
 
 	if (document.getElementById("searchBaths").value != "") {
-		query += "&BathsTotal=" + document.getElementById("searchBaths").value + ">";
+		query += "&searchBaths=" + addPluses(document.getElementById("searchBaths").value);
 	}
 
 	if (document.getElementById("searchAddresses").value != "") {
-		query += "&FullStreetNum=" + document.getElementById("searchAddresses").value;
+		query += "&searchAddresses=" + addPluses(document.getElementById("searchAddresses").value);
 	}
 
 	if (document.getElementById("searchCities").value != "") {
-		query += "&City=" + document.getElementById("searchCities").value;
+		query += "&searchCities=" + addPluses(document.getElementById("searchCities").value);
 	}
 
 	if (document.getElementById("searchZips").value != "") {
-		query += "&PostalCode=" + document.getElementById("searchZips").value;
+		query += "&searchZips=" + addPluses(document.getElementById("searchZips").value);
 	}
-	return query.length == 0 ? "" : query.substring(1);
+
+	if (document.getElementById("sortArray").value != "") {
+		query += "&sortArray=" + addPluses(document.getElementById("sortArray").value);
+	}
+
+	return query.length == 0 ? "" : ("?" + query.substring(1));
 }
 
 //if a grid house is clicked

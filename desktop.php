@@ -1,7 +1,6 @@
 		<?php include('bin/head.php'); ?>
-		<style>
-			<?php include('css/home.css'); ?>
-		</style>
+		<link rel="stylesheet" type="text/css" href="/css/home.css">
+		<link rel="canonical" href="https://www.augustassociatesllc.net/" />
 		<title>August Associates LLC - Rhode Island Real Estate</title>
 		<meta name="description" content="August Associates is a real estate agency looking to help you buy or sell a home. North, South, East, West, your valued guide in real estate" />
 	</head>
@@ -88,7 +87,7 @@
 			</div>
 			<div id="contactWrapper" class="infoSection">
 				<h2 id="contactTitle">Contact Us</h2>
-				<form id="contactForm" border="1px" action="javascript:submitContactForm()">
+				<form id="contactForm" action="javascript:submitContactForm()">
 					<input type="text" title="Name" id="contactFormName" placeholder="Name" class="contactFormElement" required>
 					<input type="email" title="Email" id="contactFormEmail" placeholder="Email" class="contactFormElement">
 					<input type="tel" title="Phone" id="contactFormPhone" placeholder="Phone Number" class="contactFormElement">
@@ -101,11 +100,7 @@
 			</div>
 		</div>
 		<?php include('bin/footer.html'); ?>
+		<script src="/js/load.js" async></script>
+		<script src="/js/home.js" async></script>
 	</body>
 </html>
-	<script>
-		<?php
-			include('js/load.js');
-			include('js/home.js');
-		?>
-	</script>

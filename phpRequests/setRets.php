@@ -37,13 +37,13 @@ for ($q = 0; $q < sizeof($ar); $q++) {
 	// } else {
 	// 	echo "New Folder\n";
 	// }
-	if (!file_exists($dir)) {
-		mkdir($dir);
-	} else if (iterator_count(new FilesystemIterator($dir, FilesystemIterator::SKIP_DOTS)) - 1 == $ar[$q]['PhotoCount']) {
-		echo "Done\n";
-		continue;
-	}
-	echo "Downloading " . $ar[$q]['MLSNumber'] . "\n";
+	// if (!file_exists($dir)) {
+	// 	mkdir($dir);
+	// } else if (iterator_count(new FilesystemIterator($dir, FilesystemIterator::SKIP_DOTS)) - 1 == $ar[$q]['PhotoCount']) {
+	// 	echo "Done\n";
+	// 	continue;
+	// }
+	// echo "Downloading " . $ar[$q]['MLSNumber'] . "\n";
 	if (!file_exists($dir)) {
 		mkdir($dir);
 	}
@@ -52,13 +52,13 @@ for ($q = 0; $q < sizeof($ar); $q++) {
 		file_put_contents($dir . "/" . $i . ".jpg", $photos[$i]->getContent());
 	}
 	$largeDir = "../images/largeRets/" . $ar[$q]['MLSNumber'];
-	if (!file_exists($largeDir)) {
-		mkdir($largeDir);
-	} else if (iterator_count(new FilesystemIterator($largeDir, FilesystemIterator::SKIP_DOTS)) - 1 == $ar[$q]['PhotoCount']) {
-		echo "Done\n";
-		continue;
-	}
-	echo "Downloading Large " . $ar[$q]['MLSNumber'] . "\n";
+	// if (!file_exists($largeDir)) {
+	// 	mkdir($largeDir);
+	// } else if (iterator_count(new FilesystemIterator($largeDir, FilesystemIterator::SKIP_DOTS)) - 1 == $ar[$q]['PhotoCount']) {
+	// 	echo "Done\n";
+	// 	continue;
+	// }
+	// echo "Downloading Large " . $ar[$q]['MLSNumber'] . "\n";
 	if (!file_exists($largeDir)) {
 		mkdir($largeDir);
 	}
@@ -67,18 +67,14 @@ for ($q = 0; $q < sizeof($ar); $q++) {
 		file_put_contents($largeDir . "/" . $i . ".jpg", $largePhotos[$i]->getContent());
 	}
 }
-// $data = json_encode($ar);
-// $conn = new mysqli("localhost", getDBUser(), getDBPassword(), getDBName());
-// if ($conn->connect_error) {
-// 	die("Connection failed: " . $conn->connect_error . "\n");
-// }
-// $query = "UPDATE RetsData SET json_data='" . $conn->real_escape_string($data) . "'";
-// mysqli_query($conn, $query);
+$data = json_encode($ar);
+$conn = new mysqli("localhost", getDBUser(), getDBPassword(), getDBName());
+if ($conn->connect_error) {
+	die("Connection failed: " . $conn->connect_error . "\n");
+}
+$query = "UPDATE RetsData SET json_data='" . $conn->real_escape_string($data) . "'";
+mysqli_query($conn, $query);
 $_POST['functionname'] = 'sendEmail';
 $_POST['body'] = "Records Updated";
 include('apiRequests.php');
-// $my_file = 'rets-data.json';
-// $handle = fopen($my_file, 'w');
-// fwrite($handle, $data);
-// fclose($handle);
 ?>

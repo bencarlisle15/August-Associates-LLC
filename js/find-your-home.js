@@ -15,17 +15,20 @@ xhr.open("POST", '/phpRequests/apiRequests.php', true);
 xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 xhr.onreadystatechange = function () {
 	if (this.readyState == 4) {
+		console.log(this.responseText)
 		//checks if the user has visited a find-your-home page before
 		if (!sessionStorage.houseNumber) {
 			sessionStorage.houseNumber = 1;
 		//if the ip address was found
-		} else if (this.responseText) {
+		} else if (this.responseText == 1) {
 			//creates lead alerting that the uesr has returned
 			var xhr = new XMLHttpRequest();
 			xhr.open("POST", '/phpRequests/apiRequests.php', true);
 			xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 			xhr.send("functionname=ipReturned&MLSNumber=" + id);
 			sessionStorage.houseNumber = 1;
+		} else if (this.responseText == -1) {
+			return;
 		} else if (sessionStorage.houseNumber < 2) {
 			//increases the views the user has
 			sessionStorage.houseNumber++;
@@ -43,11 +46,6 @@ function createBody(name, email, address, city, state, zip, mlsNumber) {
 
 //show the first slide
 showSlides(0);
-
-//reset the images on resize
-window.addEventListener("resize", function() {
-	setImageHeight();
-})
 
 //adds the lead maker overlay
 function addInformationForm() {
@@ -105,53 +103,6 @@ function insideClickHandler(e) {
 	e.cancelBubble = true;
 }
 
-//resets the image height so they all have the same height
-function setImageHeight() {
-	var maxRatio = 0;
-	var max;
-	var images = document.getElementsByClassName("houseImage");
-	var imageArray = [];
-	var loaded = 0;
-	//finds the maximum height and width ratio between all the images
-	for (var i = 0; i < images.length; i++) {
-		//adds the image to the array to get it later
-		imageArray.push(new Image());
-		//when the image is loaded and has dimensions
-		imageArray[i].onload = function() {
-			//increases the amount of pictures that have loaded
-			loaded++;
-			var ratio = this.naturalHeight/this.naturalWidth;
-			if (maxRatio < ratio) {
-				maxRatio = ratio;
-			}
-			//updates the maxRatio if apllicable
-		};
-		//sets the src to the correct one
-		imageArray[i].src = images[i].src;
-		//this is done after the onload is set so that there is not possible of the src being loaded before the onload is set (therefore keep it this way)
-	}
-	//starts checkLoaded immediatly after the loop
-	(function checkLoaded() {
-		//checks if all the images have loaded
-		if (loaded == images.length) {
-			//determines what the height should be for the slideshow
-			max = maxRatio * getWidth("#houseSlideshow");
-			max = Math.round(max);
-			if (!max) {
-				return;
-			}
-			//updates wrapper heights and slideshow height
-			var wrappers = document.getElementsByClassName("houseWrapper");
-			for (var i = 0; i < wrappers.length; i++) {
-				wrappers[i].style.height = max + "px";
-			}
-			document.getElementById("houseSlideshow").style.height = max + "px";
-		} else {
-			window.setTimeout(checkLoaded, 1);
-		}
-	})();
-}
-
 //inits the map
 function initMap(location) {
 	var pos = JSON.parse(location);
@@ -192,6 +143,6 @@ function showSlides(n) {
 	for (i = 0; i < dots.length; i++) {
 		dots[i].className = dots[i].className.replace("active", "");
 	}
-	slides[currentSlide].style.display = "block";
+	slides[currentSlide].style.display = "flex";
 	dots[currentSlide].className += " active";
 }

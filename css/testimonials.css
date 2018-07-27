@@ -57,6 +57,10 @@
 	flex-direction: column;
 }
 
+#testimonialsName {
+	font-size: 24pt;
+}
+
 #testimonialsImages, #addTestimonialsWrapper {
 	flex: 1;
 	justify-content: center;

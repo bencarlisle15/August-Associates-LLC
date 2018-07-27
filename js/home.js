@@ -1,21 +1,19 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', beginFunctions());
+
+function beginFunctions() {
 	editArrow();
-	setTimeout(function() {
-		editArrow();
-	}, 1000);
-});
+	//all currency input
+	var vals = ["searchMinPrice","searchMaxPrice"];
+	for (var i in vals) {
+		document.getElementById(vals[i]).addEventListener("keyup", function() {
+			this.value = formatCurrency(this.value);
+		});
+	}
+}
 
 window.addEventListener("resize", function() {
 	editArrow()
 });
-
-//all currency input
-var vals = ["searchMinPrice","searchMaxPrice"];
-for (var i in vals) {
-	document.getElementById(vals[i]).addEventListener("keyup", function() {
-		this.value = formatCurrency(this.value);
-	});
-}
 
 //automatically updates currency input
 function formatCurrency(oldVal) {
