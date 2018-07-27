@@ -6,12 +6,6 @@ m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 ga('create', 'UA-XXXX-Y', 'auto');
 ga('send', 'pageview');
 
-document.addEventListener('DOMContentLoaded', editHeight());
-
-window.addEventListener("resize", function() {
-	editHeight()
-});
-
 String.prototype.toProperCase = function() {
 	var i, j, str, lowers, uppers;
 	str = this.replace(/([^\W_]+[^\s-]*) */g, function(txt) {
@@ -36,26 +30,4 @@ function getWidth(elem) {
 
 function getHeight(elem) {
 	return parseInt(window.getComputedStyle(document.querySelector(elem), null).height);
-}
-
-function editHeight() {
-	var navHeight = getHeight("nav");
-	var footerHeight = getHeight("footer")
-	if (!navHeight) {
-		document.addEventListener('DOMContentLoaded', function() {
-			editHeight();
-		});
-		return;
-	} else {
-		document.body.childNodes[3].style.marginTop = navHeight + 20 + "px";
-		document.getElementsByTagName("nav")[0].style.top = "0px";
-	}
-	if (!footerHeight) {
-		document.addEventListener('DOMContentLoaded', function() {
-			editHeight();
-		});
-		return;
-	} else {
-		document.body.style.paddingBottom = footerHeight + 20 + "px";
-	}
 }

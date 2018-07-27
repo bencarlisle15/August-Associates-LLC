@@ -40,9 +40,9 @@ function constructHouseSellingInfo(xmlText, address, city, state, zip) {
 			var sellInfo = document.createElement("div");
 			var sellAddress = document.createElement("h2");
 			var sellCity = document.createElement("h2");
-			var sellAverage = document.createElement("h3");
-			var sellRange = document.createElement("h4");
-			var sellPowered = document.createElement("h5");
+			var sellAverage = document.createElement("h2");
+			var sellRange = document.createElement("h3");
+			var sellPowered = document.createElement("h4");
 			var sellImage = document.createElement("img");
 			sellOverlay.id = "sellOverlay";
 			sellOverlay.onclick = function() {
