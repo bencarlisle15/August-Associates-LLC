@@ -13,13 +13,23 @@
 		"@context": "http://schema.org",
 		"@type": "Organization",
 		"url": "http://www.augustassociatesllc.com",
+		"logo": "http://www.augustassociatesllc.net/images/august logo.png",
 		"contactPoint": [
 			{ "@type": "ContactPoint",
 			"telephone": "+1(401) 487-1510",
 			"contactType": "Customer Service"
+			}
+		],
+		"sameAs": [
+			"http://www.facebook.com/necompass",
+			"https://www.linkedin.com/company/august-associates-llc/"
+		],
+		"potentialAction": {
+			"@type": "SearchAction",
+			"target": "https://augustassociatesllc.net/find-homes?searchCities={search_term_string}",
+			"query-input": "required name=search_term_string"
 		}
-	]
-	}</script>
+	} </script>
 	<style amp-custom>
 		<?php
 			include($_SERVER['DOCUMENT_ROOT'].'/css/default.css');
