@@ -6,7 +6,6 @@
 		<link rel="canonical" href="https://www.m.augustassociatesllc.net/ouragents" />
 		<title>Agents - August Associates LLC</title>
 		<meta name="description" content="Meet our agents looking to help you buy or sell a home. August Associates, your valued guide in real estate."/>
-		<link rel="canonical" href="http://www.augustassociatesllc.com/ouragents"/>
 	</head>
 	<body>
 		<?php include('bin/nav.php'); ?>

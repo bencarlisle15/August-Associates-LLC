@@ -12,7 +12,7 @@
 	foreach ($inputs as $input) {
 		$val = $_POST[$input];
 		if ($val != '') {
-			$urlAdd .= (strlen($urlAdd) > 0 ? "&" : "?") . $input . "=" .  str_replace(' ', ' ', $val);
+			$urlAdd .= (strlen($urlAdd) > 0 ? "&" : "?") . $input . "=" .  str_replace(' ', '-', $val);
 		}
 	}
 	header('AMP-Redirect-To:' . $URL . '/find-homes.php' . $urlAdd);

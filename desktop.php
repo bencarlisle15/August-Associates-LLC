@@ -1,6 +1,7 @@
 		<?php include('bin/head.php'); ?>
 		<link rel="stylesheet" type="text/css" href="/css/home.css">
 		<link rel="canonical" href="https://www.augustassociatesllc.net/" />
+		<link rel="amphtml" href="https://www.m.augustassociatesllc.net/">
 		<title>August Associates LLC - Rhode Island Real Estate</title>
 		<meta name="description" content="August Associates is a real estate agency looking to help you buy or sell a home. North, South, East, West, your valued guide in real estate" />
 	</head>
