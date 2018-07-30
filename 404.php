@@ -14,6 +14,5 @@
 			<button class="errorElement" onclick="window.location.href='/contact'">Report a Problem</button>
 		</div>
 		<?php include($_SERVER['DOCUMENT_ROOT'].'/bin/footer.html'); ?>
-		<script src="/js/load.js"></script>
 	</body>
 </html>

@@ -15,7 +15,6 @@ xhr.open("POST", '/phpRequests/apiRequests.php', true);
 xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 xhr.onreadystatechange = function () {
 	if (this.readyState == 4) {
-		console.log(this.responseText)
 		//checks if the user has visited a find-your-home page before
 		if (!sessionStorage.houseNumber) {
 			sessionStorage.houseNumber = 1;

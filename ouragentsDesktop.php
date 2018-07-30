@@ -29,14 +29,14 @@
 					</div>
 					<div class="agentInfo">
 						<h3 class="agentName agentElement">Wendy Grave</h3>
-						<p class="agentParagraph agentElement">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum molestie volutpat cursus. Phasellus lobortis est quis arcu pellentesque consequat. In nec purus ornare, ultrices purus eu, tempor augue. Sed sollicitudin tortor nec nibh hendrerit, vitae luctus velit aliquam. Fusce ornare ultrices quam, et posuere leo sollicitudin id.</p>
+						<p class="agentParagraph agentElement">Experienced Realtor with a demonstrated history of working in the real estate industry. Skilled in Microsoft Excel, Customer Service, Microsoft Word, Data Entry, and Microsoft PowerPoint. Strong real estate professional graduated from University of Rhode.</p>
 						<h4 class="agentEmail agentElement">Email: <a href="mailto:wgrave@necompass.com">wgrave@necompass.com</a></h4>
 						<h4 class="agentWebsite agentElement">Website: <a href="http://www.wendygrave.com">wendygrave.com</a></h4>
 					</div>
 				</div>
 				<div class="agentWrapper">
 					<div class="agentImageWrapper">
-						<img class="agentImage" src="/images/joseph.jpg" alt="Joseph McCarthy"/>
+						<img class="agentImage" src="https://i.stack.imgur.com/34AD2.jpg" alt="Joseph McCarthy"/>
 					</div>
 					<div class="agentInfo">
 						<h3 class="agentName agentElement">Bob Nasiatka</h3>
@@ -47,7 +47,7 @@
 				</div>
 				<div class="agentWrapper">
 					<div class="agentImageWrapper">
-						<img class="agentImage" src="/images/wendy.jpg" alt="Wendy Grave"/>
+						<img class="agentImage" src="https://i.stack.imgur.com/34AD2.jpg" alt="Wendy Grave"/>
 					</div>
 					<div class="agentInfo">
 						<h3 class="agentName agentElement">Rick Delmastro</h3>
@@ -56,31 +56,8 @@
 						<!-- <h4 class="agentWebsite agentElement">Website: <a href="http://www.wendygrave.com">wendygrave.com</a></h4> -->
 					</div>
 				</div>
-				<div class="agentWrapper">
-					<div class="agentImageWrapper">
-						<img class="agentImage" src="/images/joseph.jpg" alt="Joseph McCarthy"/>
-					</div>
-					<div class="agentInfo">
-						<h3 class="agentName agentElement">Joseph McCarthy</h3>
-						<p class="agentParagraph agentElement">Joe has been in service & sales businesses for 24 years. In recent years, he has focused his knowledge & skills in the real estate industry. His ability to speak two languages (Spanish) has made it easier to communicate with a vast majority of people. Joe is intuitive and sensitive to everyone's needs for honest, sincere assistance in the sometimes - puzzling, home-buying & marketing quests.</p>
-						<h4 class="agentEmail agentElement">Email: <a href="mailto:jmccarthy@necompass.com">jmccarthy@necompass.com</a></h4>
-						<h4 class="agentWebsite agentElement">Facebook: <a href="https://www.facebook.com/profile.php?id=100012283484334">facebook.com/profile.php?id=100012283484334</a></h4>
-					</div>
-				</div>
-				<div class="agentWrapper">
-					<div class="agentImageWrapper">
-						<img class="agentImage" src="/images/wendy.jpg" alt="Wendy Grave"/>
-					</div>
-					<div class="agentInfo">
-						<h3 class="agentName agentElement">Wendy Grave</h3>
-						<p class="agentParagraph agentElement">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum molestie volutpat cursus. Phasellus lobortis est quis arcu pellentesque consequat. In nec purus ornare, ultrices purus eu, tempor augue. Sed sollicitudin tortor nec nibh hendrerit, vitae luctus velit aliquam. Fusce ornare ultrices quam, et posuere leo sollicitudin id.</p>
-						<h4 class="agentEmail agentElement">Email: <a href="mailto:wgrave@necompass.com">wgrave@necompass.com</a></h4>
-						<h4 class="agentWebsite agentElement">Website: <a href="http://www.wendygrave.com">wendygrave.com</a></h4>
-					</div>
-				</div>
 			</div>
 		</div>
 		<?php include('bin/footer.html'); ?>
-		<script src="/js/load.js" async></script>
 	</body>
 </html>

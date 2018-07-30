@@ -320,14 +320,12 @@ button:hover, .button:hover {
 	max-height: 50px;
 	justify-content: space-between;
 	position: absolute;
+	white-space: nowrap;
 	bottom: 0;
 }
 
 #siteMap {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
-	overflow-x: auto;
+	display: none;
 }
 
 #copyright {

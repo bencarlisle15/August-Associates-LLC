@@ -37,31 +37,31 @@ for ($q = 0; $q < sizeof($ar); $q++) {
 	// } else {
 	// 	echo "New Folder\n";
 	// }
-	// if (!file_exists($dir)) {
-	// 	mkdir($dir);
-	// } else if (iterator_count(new FilesystemIterator($dir, FilesystemIterator::SKIP_DOTS)) - 1 == $ar[$q]['PhotoCount']) {
-	// 	echo "Done\n";
-	// 	continue;
-	// }
-	// echo "Downloading " . $ar[$q]['MLSNumber'] . "\n";
 	if (!file_exists($dir)) {
 		mkdir($dir);
+	} else if (iterator_count(new FilesystemIterator($dir, FilesystemIterator::SKIP_DOTS)) - 1 == $ar[$q]['PhotoCount']) {
+		// echo "Done\n";
+		continue;
 	}
+	echo "Downloading " . $ar[$q]['MLSNumber'] . "\n";
+	// if (!file_exists($dir)) {
+	// 	mkdir($dir);
+	// }
 	$photos = $rets->GetObject("Property", "Photo", $ar[$q]['Matrix_Unique_ID'], "*", 0);
 	for ($i = 0; $i < count($photos); $i++) {
 		file_put_contents($dir . "/" . $i . ".jpg", $photos[$i]->getContent());
 	}
 	$largeDir = "../images/largeRets/" . $ar[$q]['MLSNumber'];
-	// if (!file_exists($largeDir)) {
-	// 	mkdir($largeDir);
-	// } else if (iterator_count(new FilesystemIterator($largeDir, FilesystemIterator::SKIP_DOTS)) - 1 == $ar[$q]['PhotoCount']) {
-	// 	echo "Done\n";
-	// 	continue;
-	// }
-	// echo "Downloading Large " . $ar[$q]['MLSNumber'] . "\n";
 	if (!file_exists($largeDir)) {
 		mkdir($largeDir);
+	} else if (iterator_count(new FilesystemIterator($largeDir, FilesystemIterator::SKIP_DOTS)) - 1 == $ar[$q]['PhotoCount']) {
+		// echo "Done\n";
+		continue;
 	}
+	echo "Downloading Large " . $ar[$q]['MLSNumber'] . "\n";
+	// if (!file_exists($largeDir)) {
+	// 	mkdir($largeDir);
+	// }
 	$largePhotos = $rets->GetObject("Property", "LargePhoto", $ar[$q]['Matrix_Unique_ID'], "*", 0);
 	for ($i = 0; $i < count($largePhotos); $i++) {
 		file_put_contents($largeDir . "/" . $i . ".jpg", $largePhotos[$i]->getContent());

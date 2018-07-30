@@ -102,7 +102,6 @@
 			</div>
 		</div>
 		<?php include('bin/footer.html'); ?>
-		<script src="/js/load.js" async></script>
 		<script src="/js/home.js" async></script>
 	</body>
 </html>
