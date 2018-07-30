@@ -233,7 +233,6 @@
 		</div>
 		<?php include('bin/footer.html'); ?>
 		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTXHu0_banpDsOMFQSDHOxoqdooVQxreI"></script>
-		<script src="/js/load.js" async></script>
 		<script src="/js/find-homes.js"></script>
 		<script>
 			//parses houses to json

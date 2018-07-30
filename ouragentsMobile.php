@@ -11,6 +11,7 @@
 	<body>
 		<?php include('bin/nav.php'); ?>
 		<div class="agentSection">
+			<h2 id="ourAgentsTitle">Agents</h2>
 			<div id="mainBrokerWrapper">
 				<div class="agentWrapper">
 					<div class="agentImageWrapper">
@@ -31,14 +32,14 @@
 					</div>
 					<div class="agentInfo">
 						<h2 class="agentName agentElement">Wendy Grave</h2>
-						<p class="agentParagraph agentElement">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum molestie volutpat cursus. Phasellus lobortis est quis arcu pellentesque consequat. In nec purus ornare, ultrices purus eu, tempor augue. Sed sollicitudin tortor nec nibh hendrerit, vitae luctus velit aliquam. Fusce ornare ultrices quam, et posuere leo sollicitudin id.</p>
+						<p class="agentParagraph agentElement">Experienced Realtor with a demonstrated history of working in the real estate industry. Skilled in Microsoft Excel, Customer Service, Microsoft Word, Data Entry, and Microsoft PowerPoint. Strong real estate professional graduated from University of Rhode.</p>
 						<h3 class="agentEmail agentElement">Email: <a href="mailto:wgrave@necompass.com">wgrave@necompass.com</a></h3>
 						<h3 class="agentWebsite agentElement">Website: <a href="http://www.wendygrave.com">wendygrave.com</a></h3>
 					</div>
 				</div>
 				<div class="agentWrapper">
 					<div class="agentImageWrapper">
-						<amp-img class="agentImage" width="250" height="374" src="/images/joseph.jpg" alt="Joseph McCarthy"></amp-img>
+						<amp-img class="agentImage" width="240" height="240" src="https://i.stack.imgur.com/34AD2.jpg" alt="Joseph McCarthy"></amp-img>
 					</div>
 					<div class="agentInfo">
 						<h2 class="agentName agentElement">Bob Nasiatka</h2>
@@ -49,29 +50,7 @@
 				</div>
 				<div class="agentWrapper">
 					<div class="agentImageWrapper">
-						<amp-img class="agentImage" width="250" height="280" src="/images/wendy.jpg" alt="Wendy Grave"></amp-img>
-					</div>
-					<div class="agentInfo">
-						<h2 class="agentName agentElement">Wendy Grave</h2>
-						<p class="agentParagraph agentElement">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum molestie volutpat cursus. Phasellus lobortis est quis arcu pellentesque consequat. In nec purus ornare, ultrices purus eu, tempor augue. Sed sollicitudin tortor nec nibh hendrerit, vitae luctus velit aliquam. Fusce ornare ultrices quam, et posuere leo sollicitudin id.</p>
-						<h3 class="agentEmail agentElement">Email: <a href="mailto:wgrave@necompass.com">wgrave@necompass.com</a></h3>
-						<h3 class="agentWebsite agentElement">Website: <a href="http://www.wendygrave.com">wendygrave.com</a></h3>
-					</div>
-				</div>
-				<div class="agentWrapper">
-					<div class="agentImageWrapper">
-						<amp-img class="agentImage" width="250" height="374" src="/images/joseph.jpg" alt="Joseph McCarthy"></amp-img>
-					</div>
-					<div class="agentInfo">
-						<h2 class="agentName agentElement">Joseph McCarthy</h2>
-						<p class="agentParagraph agentElement">Joe has been in service & sales businesses for 24 years. In recent years, he has focused his knowledge & skills in the real estate industry. His ability to speak two languages (Spanish) has made it easier to communicate with a vast majority of people. Joe is intuitive and sensitive to everyone's needs for honest, sincere assistance in the sometimes - puzzling, home-buying & marketing quests.</p>
-						<h3 class="agentEmail agentElement">Email: <a href="mailto:jmccarthy@necompass.com">jmccarthy@necompass.com</a></h3>
-						<h3 class="agentWebsite agentElement">Facebook: <a href="https://www.facebook.com/profile.php?id=100012283484334">facebook.com/profile.php?id=100012283484334</a></h3>
-					</div>
-				</div>
-				<div class="agentWrapper">
-					<div class="agentImageWrapper">
-						<amp-img class="agentImage" width="250" height="280" src="/images/wendy.jpg" alt="Wendy Grave"></amp-img>
+						<amp-img class="agentImage" width="240" height="240" src="https://i.stack.imgur.com/34AD2.jpg" alt="Wendy Grave"></amp-img>
 					</div>
 					<div class="agentInfo">
 						<h2 class="agentName agentElement">Wendy Grave</h2>

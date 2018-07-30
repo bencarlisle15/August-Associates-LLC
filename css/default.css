@@ -37,7 +37,8 @@
 
 .section {
 	padding-top: 15px;
-	padding: 10px;
+	margin-bottom: 50px;
+	margin-top: 110px;
 }
 
 #menuToggle {
@@ -140,7 +141,6 @@
 	flex: 1;
 	width: auto;
 	padding: 10px;
-	text-decoration: none;
 	border-radius: 5px;
 }
 
@@ -163,8 +163,6 @@
 	display: block;
 	padding: 5px;
 	color: #383493;
-	text-decoration: none;
-
 }
 
 #mobileAgentsWrapper:hover > #mobileAgentsList {
@@ -196,6 +194,7 @@ textarea {
 }
 
 h1, h2 {
+	font-size: 24pt;
 	text-align: center;
 }
 
@@ -260,7 +259,6 @@ nav {
 	margin: auto;
 	height: auto;
 	padding: 10px;
-	text-decoration: none;
 }
 
 #agentsList {
@@ -277,7 +275,6 @@ nav {
 	display: block;
 	padding: 5px;
 	color: #383493;
-	text-decoration: none;
 }
 
 #agentsWrapper:hover > #agentsList {
@@ -320,9 +317,15 @@ button:hover, .button:hover {
 	height: auto;
 	padding: 10px;
 	width: 100%;
+	max-height: 50px;
 	justify-content: space-between;
 	position: absolute;
+	white-space: nowrap;
 	bottom: 0;
+}
+
+#siteMap {
+	display: none;
 }
 
 #copyright {
@@ -331,14 +334,22 @@ button:hover, .button:hover {
 	font-size: 12pt;
 }
 
+a {
+	text-decoration: none;
+}
+
 .footerLink {
 	font-size: 12pt;
 	color: #cccccc;
 	margin-left: 5px;
 }
 
+.footerLink:hover {
+	text-decoration: underline;
+}
+
 p {
-	font-size: 16pt;
+	font-size: 14pt;
 	text-align:justify;
 	margin: 20px;
 }
@@ -350,6 +361,11 @@ p {
 
 #mobileAugustSlogan {
 	font-size: 14pt;
+}
+
+#desktopNav {
+	height: 90px;
+	max-height: 90px;
 }
 
 .desktopNavitem:hover {

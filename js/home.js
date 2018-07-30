@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', beginFunctions());
 
 function beginFunctions() {
-	editArrow();
 	//all currency input
 	var vals = ["searchMinPrice","searchMaxPrice"];
 	for (var i in vals) {
@@ -11,10 +10,6 @@ function beginFunctions() {
 	}
 }
 
-window.addEventListener("resize", function() {
-	editArrow()
-});
-
 //automatically updates currency input
 function formatCurrency(oldVal) {
 	var num = oldVal.replace(/(,)/g, '');
@@ -23,18 +18,6 @@ function formatCurrency(oldVal) {
 		val = '$'+ val;
 	}
 	return val;
-}
-
-function editArrow() {
-	var top = parseInt(document.getElementById("bigImage").style.marginTop);
-	if (top > 0 && getHeight("#largeImage")*0.12 > 0) {
-		document.getElementById("arrow").style.top = top + getHeight("#largeImage")*0.11 + "px";
-	} else {
-		document.getElementById("arrow").style.top = 89 + getHeight("#largeImage")*0.11 + "px";
-		setTimeout(function() {
-			editArrow();
-		}, 100);
-	}
 }
 
 function submitSearch() {

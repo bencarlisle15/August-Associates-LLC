@@ -3,12 +3,9 @@
 	flex-direction: row;
 	flex-wrap: wrap;
 	width: 45%;
-	min-width: 300px;
+	justify-content: center;
+	min-width: 450px;
 	margin: 10px;
-}
-
-#infoTitle, #contactUsTitle {
-	font-size: 24pt;
 }
 
 .agentWebsite {
@@ -31,17 +28,19 @@
 }
 
 .agentInfo {
+	display: flex;
+	flex-wrap: wrap;
 	flex-direction: column;
 	margin-bottom: 50px;
 }
 
 .agentImageWrapper, .agentInfo {
 	display: flex;
-	flex: 3;
+	flex: 1;
 	align-items: center;
 	justify-content: center;
 	align-self: center;
-	min-width: 150px;
+	min-width: 250px;
 	margin: 0px;
 }
 

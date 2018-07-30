@@ -21,7 +21,6 @@
 		</form>
 	</div>
 	<?php include('bin/footer.html'); ?>
-	<script src="/js/load.js" async></script>
 	<script src="/js/mortgage.js" async></script>
 </body>
 </html>

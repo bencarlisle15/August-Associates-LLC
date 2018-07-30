@@ -11,6 +11,10 @@
 	justify-content: center;
 }
 
+#homesSection {
+	padding-top: 0px;
+}
+
 #arrow {
 	position: absolute;
 	width: 11.5%;
@@ -18,6 +22,7 @@
 	left: 0;
 	right: 0;
 	margin: auto;
+	top: calc(2.3vw + 110px);
 	z-index: 1;
 	animation: rotate 30s linear infinite;
 }
@@ -47,6 +52,7 @@
 #houses {
 	display: flex;
 	margin: 0px;
+	margin-top: 25px;
 	padding: 0px;
 	flex-direction: row;
 	flex-wrap: wrap;
@@ -106,8 +112,8 @@
 	text-align: center;
 }
 
-.infoElement > a:link {
-	text-decoration: none;
+.infoElement > a:hover {
+	text-decoration: underline;
 }
 
 #facebookWrapper {
