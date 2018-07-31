@@ -60,7 +60,7 @@
 							<option title="Property Type" value="" selected>Property Type</option>
 							<option title="Single Family" value="Single Family">Single Family</option>
 							<option title="Rental" value="Rental">Rental</option>
-							<option title="Multi Family" value="	2-4 Units Multi Family">Multifamily	</option>
+							<option title="Multi Family" value="Multi Family">Multifamily	</option>
 							<option title="Condo" value="Condominium">Condo</option>
 							<option title="Vacant Land" value="Vacant Land">Vacant Land</option>
 						</select>

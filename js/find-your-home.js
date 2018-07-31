@@ -4,10 +4,6 @@ if (url.includes("?id=")) {
 } else {
 	window.location.replace('/404');
 }
-var formatter = new Intl.NumberFormat('en-US', {
-	style: 'currency',
-	currency: 'USD',
-});
 
 //check if the ip address is already present in the database
 var xhr = new XMLHttpRequest();

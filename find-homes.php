@@ -138,25 +138,25 @@
 											//price low to high
 											case "plh":
 												usort($json, function($a, $b) {
-													return $a['ListPrice'] < $b['ListPrice'] ? -1 : 1;
+													return $a['ListPrice'] - $b['ListPrice'];
 												});
 												break;
 											//price high to low
 											case "phl":
 												usort($json, function($a, $b) {
-													return $a['ListPrice'] > $b['ListPrice'] ? -1 : 1;
+													return $b['ListPrice'] - $a['ListPrice'];
 												});
 												break;
 											//square feet low to high
 											case "slh":
 												usort($json, function($a, $b) {
-													return (int)($a['SqFtTotal'] ? $a['SqFtTotal'] : $a['ApproxLotSquareFoot']) < (int)($b['SqFtTotal'] ? $b['SqFtTotal'] : $b['ApproxLotSquareFoot']) ? -1 : 1;
+													return (int) ($a['SqFtTotal'] ? $a['SqFtTotal'] : $a['ApproxLotSquareFoot']) - (int) ($b['SqFtTotal'] ? $b['SqFtTotal'] : $b['ApproxLotSquareFoot']);
 												});
 												break;
 											//square feet high to low
 											case "shl":
 												usort($json, function($a, $b) {
-													return (int)($a['SqFtTotal'] ? $a['SqFtTotal'] : $a['ApproxLotSquareFoot']) > (int)($b['SqFtTotal'] ? $b['SqFtTotal'] : $b['ApproxLotSquareFoot']) ? -1 : 1;
+													return (int) ($b['SqFtTotal'] ? $b['SqFtTotal'] : $b['ApproxLotSquareFoot']) - (int) ($a['SqFtTotal'] ? $a['SqFtTotal'] : $a['ApproxLotSquareFoot']);
 												});
 												break;
 										}
@@ -175,7 +175,10 @@
 							}
 							if (!isset($_GET['sortArray'])) {
 								usort($json, function($a, $b) {
-									return $a['PropertyType'] == "Single Family" ? -1 : 1;
+									if (!strcasecmp($a['ListOfficeName'], 'August Associates LLC')) {
+										return -1;
+									}
+									return $b['PhotoCount'] - $a['PhotoCount'];
 								});
 							}
 							//gets the first 40 houses
