@@ -42,7 +42,8 @@ function constructHouseSellingInfo(xmlText, address, city, state, zip) {
 			var sellCity = document.createElement("h2");
 			var sellAverage = document.createElement("h2");
 			var sellRange = document.createElement("h3");
-			var sellPowered = document.createElement("h4");
+			var betterQuote = document.createElement("h3");
+			var sellPowered = document.createElement("h6");
 			var sellImage = document.createElement("img");
 			sellOverlay.id = "sellOverlay";
 			sellOverlay.onclick = function() {
@@ -61,6 +62,8 @@ function constructHouseSellingInfo(xmlText, address, city, state, zip) {
 			sellAverage.innerHTML = "Average Price: " + formatter.format(average);
 			sellRange.id = "sellRange";
 			sellRange.innerHTML = "Price Range: " + formatter.format(low) +" - " + formatter.format(high);
+			betterQuote.id = "sellBetterQuote";
+			betterQuote.innerHTML = "Looking for a more accurate estimate? Call us at (401) 461-0700 or email us at <a href='mailto:jmccarthy@necompass.com'>jmccarthy@necompass.com</a> for more information";
 			sellPowered.id = "sellPowered";
 			var link = xmlText.substring(xmlText.indexOf("<homedetails>") + 13, xmlText.indexOf("</homedetails>"));
 			sellPowered.innerHTML = "Zestimate Powered by Zillow, <a href='" + link  + "'> See more details for " + address + " on Zillow</a>";
@@ -75,6 +78,7 @@ function constructHouseSellingInfo(xmlText, address, city, state, zip) {
 			sellInfo.append(sellCity);
 			sellInfo.append(sellAverage);
 			sellInfo.append(sellRange);
+			sellInfo.append(betterQuote);
 			sellInfo.append(sellPowered);
 			sellInfo.append(sellImage);
 			sellOverlay.append(sellInfo);

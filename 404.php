@@ -6,7 +6,7 @@
 	</head>
 	<body>
 		<?php include($_SERVER['DOCUMENT_ROOT'].'/bin/nav.php'); ?>
-		<div class="errorPage">
+		<div class="errorPage section">
 			<h2 class="errorCode errorElement">404</h2>
 			<h2 class="errorElement">Oops, looks like this page doesn't exist.</h2>
 			<h3 class="errorElement">You should probably head back to the homepage or report a problem if you want</h3>
