@@ -26,11 +26,8 @@
 				$mail->AddAddress("augustassociatesllc@gmail.com");
 				// $mail->AddAddress("joseph.mccarthy@fivestreet.me");
 				$mail->Send();
-				echo 'success';
 			} catch (phpmailerException $e) {
-				echo $e->errorMessage();
 			} catch (Exception $e) {
-				echo $e->getMessage();
 			}
 		break;
 		case 'getEstimate':

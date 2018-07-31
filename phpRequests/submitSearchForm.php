@@ -15,7 +15,14 @@
 			$urlAdd .= (strlen($urlAdd) > 0 ? "&" : "?") . $input . "=" .  str_replace(' ', '-', $val);
 		}
 	}
-	header("AMP-Redirect-To: " . $URL . '/find-homes' . $urlAdd);
-	header("Location: " . $URL . '/find-homes' . $urlAdd);
-	echo json_encode("Success");
+	if (!$detect) {
+		require_once '../vendor/mobiledetect/mobiledetectlib/Mobile_Detect.php';
+		$detect = new Mobile_Detect;
+	}
+	if ($detect->isMobile() || substr($_SERVER[HTTP_HOST], 0, 5) == "www.m" || $_SERVER[HTTP_HOST][0] == 'm') {
+		header("AMP-Redirect-To: " . $URL . '/find-homes' . $urlAdd);
+	} else {
+		header("Location: " . $URL . '/find-homes' . $urlAdd);
+	}
+	echo json_encode([]);
 ?>

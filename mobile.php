@@ -72,7 +72,7 @@
 						<option title="Property Type" value="" selected>Property Type</option>
 						<option title="Single Family" value="Single Family">Single Family</option>
 						<option title="Rental" value="Rental">Rental</option>
-						<option title="Multi Family" value="	2-4 Units Multi Family">Multifamily	</option>
+						<option title="Multi Family" value="Multi Family">Multifamily	</option>
 						<option title="Condo" value="Condominium">Condo</option>
 						<option title="Vacant Land" value="Vacant Land">Vacant Land</option>
 					</select>
@@ -90,7 +90,7 @@
 				</div>
 			</form>
 		</div>
-		<amp-youtube id='video'data-videoid="l3QDvupOIbY" layout="responsive" width="480" height="270"/>
+		<amp-youtube id='video'data-videoid="l3QDvupOIbY" layout="responsive" width="480" height="270"></amp-youtube>
 		<div id="infoWrapper">
 			<h2 id="infoTitle">Our Info</h2>
 			<div id="infoText">
@@ -101,11 +101,11 @@
 		</div>
 		<div id="contactWrapper">
 			<h2 id="contactTitle">Contact Us</h2>
-			<form id="contactForm" method="POST"  action-xhr="/phpRequests/submitContactForm.php" target="_top" on="submit: contactForm.clear">
-				<input type="text" title="Name" id="contactFormName" placeholder="Name" class="contactFormElement" required>
-				<input type="email" title="Email" id="contactFormEmail" placeholder="Email" class="contactFormElement">
-				<input type="tel" title="Phone" id="contactFormPhone" placeholder="Phone Number" class="contactFormElement">
-				<textarea rows="10" title="Text" id="contactFormText" placeholder="Enter your Message Here" class="contactFormElement" required></textarea>
+			<form id="contactForm" method="POST"  action-xhr="/phpRequests/submitContactForm.php" target="_top" on="submit-success: contactForm.clear; submit-error: contactForm.clear">
+				<input type="text" name="contactFormName" title="Name" id="contactFormName" placeholder="Name" class="contactFormElement" required>
+				<input type="email" name="contactFormEmail" title="Email" id="contactFormEmail" placeholder="Email" class="contactFormElement">
+				<input type="tel" name="contactFormPhone" title="Phone" id="contactFormPhone" placeholder="Phone Number" class="contactFormElement">
+				<textarea rows="10" name="contactFormText" title="Text" id="contactFormText" placeholder="Enter your Message Here" class="contactFormElement" required></textarea>
 				<button id="contactFormSubmit" class="contactFormElement">Submit</button>
 			</form>
 		</div>
