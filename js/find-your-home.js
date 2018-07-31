@@ -19,7 +19,7 @@ xhr.onreadystatechange = function () {
 		if (!sessionStorage.houseNumber) {
 			sessionStorage.houseNumber = 1;
 		//if the ip address was found
-		} else if (this.responseText == 1) {
+	} else if (this.responseText == 1) {
 			//creates lead alerting that the uesr has returned
 			var xhr = new XMLHttpRequest();
 			xhr.open("POST", '/phpRequests/apiRequests.php', true);
@@ -48,14 +48,18 @@ showSlides(0);
 
 //adds the lead maker overlay
 function addInformationForm() {
-	var infoWrapper = document.getElementById("infoWrapper");
-	document.getElementById("infoOverlay").style.display = "block";
+	var infoOverlay = document.createElement("div");
+	infoOverlay.id = "infoOverlay";
+	infoOverlay.innerHTML =  "<div id='infoFormWrapper'><h2 id='formTooManyUses'>You Have Used Up Your Three Free Views</h2><h2 id='formInfo'>Enter Your Name and Email to View this Property</h2><form id='infoForm' action='javascript:submitInfoForm()'><input type='text' id='infoFormName' class='infoFormElement' placeholder='Name' required><input type='email' id='infoFormEmail' placeholder='Email' class='infoFormElement' required><input type='tel' id='infoFormPhone' placeholder='Phone Number' class='infoFormElement'><button id='infoFormSubmit' class='infoFormElement'>Submit</button></form></div>";
+	document.getElementById("yourHomeSection").prepend(infoOverlay);
+	// var infoWrapper = document.getElementById("infoWrapper");
+	// document.getElementById("infoOverlay").style.display = "block";
 	infoWrapper.style.color = "transparent";
 	infoWrapper.style.textShadow = "0 0 20px rgba(0,0,0,5)";
 	infoWrapper.style.userSelect = "none";
 	infoWrapper.style.cursor = "default";
 	document.getElementById("map").style.visibility = "hidden";
-	var links = document.getElementById("descriptionAndContact").getElementsByTagName("a");
+	var links = document.getElementById("yourHomeSection").getElementsByTagName("a");
 	for (var i = 0; i < links.length; i++) {
 		links[i].style.visibility = "hidden";
 	}

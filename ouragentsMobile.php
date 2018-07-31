@@ -52,13 +52,25 @@
 						<amp-img class="agentImage" width="240" height="240" src="https://i.stack.imgur.com/34AD2.jpg" alt="Wendy Grave"></amp-img>
 					</div>
 					<div class="agentInfo">
-						<h2 class="agentName agentElement">Wendy Grave</h2>
-						<p class="agentParagraph agentElement">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum molestie volutpat cursus. Phasellus lobortis est quis arcu pellentesque consequat. In nec purus ornare, ultrices purus eu, tempor augue. Sed sollicitudin tortor nec nibh hendrerit, vitae luctus velit aliquam. Fusce ornare ultrices quam, et posuere leo sollicitudin id.</p>
-						<h3 class="agentEmail agentElement">Email: <a href="mailto:wgrave@necompass.com">wgrave@necompass.com</a></h3>
-						<h3 class="agentWebsite agentElement">Website: <a href="http://www.wendygrave.com">wendygrave.com</a></h3>
+						<h3 class="agentName agentElement">Rick Delmastro</h3>
+						<p class="agentParagraph agentElement">As a relatively new Real Estate Sales Associate of about 1 year, I have gained invaluable knowledge and experience through my affiliation with August Associates, LLC. My personal reason for becoming involved in the Real Estate industry was my interests in business (have owned my own for almost 30 years), investments, and most importantly my desire to assist you, the client, in the sometimes arduous task of buying or selling a home. As a youth football, baseball and lacrosse coach over the past 14 years, I have developed great lasting relationships with players and parents alike, who have appreciated my genuine help-driven style. My main focus is to protect the interests of the client, and I strive to make their experience as pleasurable as possible. I am proud to be a member of this excellent “team”.</p>
+						<h4 class="agentEmail agentElement">Email: <a href="mailto:rick@necompass.com">rick@necompass.com</a></h4>
+						<!-- <h4 class="agentWebsite agentElement">Website: <a href="http://www.wendygrave.com">wendygrave.com</a></h4> -->
 					</div>
 				</div>
 			</div>
+			<div class="agentWrapper">
+				<div class="agentImageWrapper">
+					<amp-img class="agentImage" width="240" height="240" src="https://i.stack.imgur.com/34AD2.jpg" alt="Wendy Grave"></amp-img>
+				</div>
+				<div class="agentInfo">
+					<h3 class="agentName agentElement">Kari Hernandez</h3>
+					<p class="agentParagraph agentElement">As a Realtor specializing in residential properties, Kari brings an abundant amount of energy, creativity and dedication to her work. Kari first discovered her passion for real estate while working as a Real Estate Administrator and attending college full time. She studied Business Administration and graduated in 2006 with a Bachelors degree in Business Management from Rhode Island College. Kari later transitioned into the Banking/Financial industry where she gained valuable skills and experience that she uses daily in real estate negotiations, educating and building interpersonal relationships with home buyers and sellers and effectively marketing the team's listings.<br/><br/>Friends and clients describe her as ambitious, detailed oriented yet personable and fun to be around. Kari enjoys artistic projects, exploring local restaurants and likes to spend time with her family during her free time. She is wife of a loving firefighter, mom of three boys and actively participates in her community's baseball little league and is a board member of her neighborhood Parent-Teacher Committee.</p>
+					<h4 class="agentEmail agentElement">Email: <a href="mailto:kari@necompass.com">kari@necompass.com</a></h4>
+					<h4 class="agentWebsite agentElement">Facebook: <a href="https://www.facebook.com/KHernandezRealtor/">facebook.com/KHernandezRealtor</a></h4>
+				</div>
+			</div>
+		</div>
 		</div>
 		<?php include('bin/footer.html'); ?>
 	</body>

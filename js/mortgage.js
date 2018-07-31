@@ -22,33 +22,18 @@ function submitMortgageForm() {
 	var downPayment = document.getElementById("mortgageDownPayment").value.replace(/(,)/g, '').substr(1);
 	var houseCost = document.getElementById("mortgageHouseCost").value.replace(/(,)/g, '').substr(1);
 	var interestPowered = Math.pow(1+interest, years*12);
-	if (interestPowered == 1) {
-		document.getElementById("mortgageMonthlyCost").innerHTML = "Your Monthly Cost Could Not Be Calculated";
-		addMortgageOverlay();
-	} else {
-		var mortgageMonthlyCost = (houseCost-downPayment)*interest*interestPowered/(interestPowered-1);
-		var formatter = new Intl.NumberFormat('en-US', {
-			style: 'currency',
-			currency: 'USD',
-		});
-		var mortgageOverlay = document.createElement("div");
-		var mortgageElement = document.createElement("h2");
-		var mortgageInfo = document.createElement("div");
-		mortgageOverlay.id = "mortgageOverlay";
-		mortgageOverlay.onclick = function() {
-			document.getElementById("mortgageSection").removeChild(document.getElementById("mortgageOverlay"));
-		}
-		mortgageInfo.id = "mortgageInfo";
-		mortgageInfo.onclick = function(e) {
-			var event = e ? e : window.event;
-			event.cancelBubble = true;
-		}
-		mortgageElement.id = "mortgageMonthlyCost";
-		mortgageElement.innerHTML = "Your Monthly Cost is " + formatter.format(mortgageMonthlyCost);
-		mortgageInfo.append(mortgageElement);
-		mortgageOverlay.append(mortgageInfo);
-		document.getElementById("mortgageSection").insertBefore(mortgageOverlay, document.getElementById("mortgageForm"));
-		document.getElementById("mortgageSubmit").focus();
-		document.getElementById("mortgageSubmit").blur();
+	var mortgageMonthlyCost = (houseCost-downPayment)*interest*interestPowered/(interestPowered-1);
+	var mortgageOverlay = document.createElement("div");
+	mortgageOverlay.id = "mortgageOverlay";
+	mortgageOverlay.onclick = function() {
+		document.getElementById("mortgageSection").removeChild(document.getElementById("mortgageOverlay"));
+	}
+	mortgageOverlay.innerHTML = "<div id='mortgageInfo'><h2 id='mortgageMonthlyCost'>" + (interestPowered == 1 ? "Your Monthly Cost Could Not Be Calculated" : ("Your Monthly Cost is " + formatCurrency(mortgageMonthlyCost))) + "</h2></div>";
+	document.getElementById("mortgageSection").prepend(mortgageOverlay);
+	document.getElementById("mortgageSubmit").focus();
+	document.getElementById("mortgageSubmit").blur();
+	document.getElementById("mortgageInfo").onclick = function(e) {
+		var event = e ? e : window.event;
+		event.cancelBubble = true;
 	}
 }
