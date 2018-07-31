@@ -1,6 +1,6 @@
 		<?php include('bin/head.php'); ?>
 		<link rel="stylesheet" type="text/css" href="/css/home.css">
-		<link rel="canonical" href="https://www.augustassociatesllc.net/" />
+		<!-- <link rel="canonical" href="https://www.augustassociatesllc.net/" /> -->
 		<link rel="amphtml" href="https://www.m.augustassociatesllc.net/">
 		<title>August Associates LLC - Rhode Island Real Estate</title>
 		<meta name="description" content="August Associates is a real estate agency looking to help you buy or sell a home. North, South, East, West, your valued guide in real estate" />
@@ -51,12 +51,12 @@
 			</div>
 			<div id="searchBox">
 				<h2 id="searchHomes">Search Homes</h2>
-				<form id= "searchForm" action="javascript:submitSearch()">
+				<form id= "searchForm" method="POST" action="phpRequests/submitSearchForm">
 					<div class="searchFormLine">
-						<input type="text" title="Addresses" id="searchAddresses" placeholder="Addresses" class="searchElement">
-						<input type="text" title="Cities" id="searchCities" placeholder="Cities" class="searchElement">
-						<input type="text" title="Zipcodes" id="searchZips" placeholder="Zipcodes" class="searchElement">
-						<select id="searchPropertyType" title="Property Type" class="searchElement">
+						<input name="searchAddresses" type="text" title="Addresses" id="searchAddresses" placeholder="Addresses" class="searchElement">
+						<input name="searchCities" type="text" title="Cities" id="searchCities" placeholder="Cities" class="searchElement">
+						<input name="searchZips" type="text" title="Zipcodes" id="searchZips" placeholder="Zipcodes" class="searchElement">
+						<select name="searchPropertyType" id="searchPropertyType" title="Property Type" class="searchElement">
 							<option title="Property Type" value="" selected>Property Type</option>
 							<option title="Single Family" value="Single Family">Single Family</option>
 							<option title="Rental" value="Rental">Rental</option>
@@ -66,12 +66,12 @@
 						</select>
 					</div>
 					<div class="searchFormLine">
-						<input type="text" title="Min Price" id="searchMinPrice" placeholder="Min Price" class="searchElement">
-						<input type="text" title="Max Price" id="searchMaxPrice" placeholder="Max Price" class="searchElement">
-						<input type="number" title="Min Bedrooms" id="searchBeds" placeholder="Min Bedrooms" class="searchElement">
-						<input type="number" title="Min Bathrooms" id="searchBaths" placeholder="Min Bathrooms" class="searchElement">
-						<input type="number" title="Min Square Feet" id="searchMinFeet" placeholder="Min Square Feet" class="searchElement">
-						<input type="number" title="Max Square Feet" id="searchMaxFeet" placeholder="Max Square Feet" class="searchElement">
+						<input name="searchMinPrice" type="text" title="Min Price" id="searchMinPrice" placeholder="Min Price" class="searchElement">
+						<input name="searchMaxPrice" type="text" title="Max Price" id="searchMaxPrice" placeholder="Max Price" class="searchElement">
+						<input name="searchBeds" type="number" title="Min Bedrooms" id="searchBeds" placeholder="Min Bedrooms" class="searchElement">
+						<input name="searchBaths" type="number" title="Min Bathrooms" id="searchBaths" placeholder="Min Bathrooms" class="searchElement">
+						<input name="searchMinFeet" type="number" title="Min Square Feet" id="searchMinFeet" placeholder="Min Square Feet" class="searchElement">
+						<input name="searchMaxFeet" type="number" title="Max Square Feet" id="searchMaxFeet" placeholder="Max Square Feet" class="searchElement">
 					</div>
 					<div id="searchSubmitWrapper" class="searchFormLine">
 						<button id="searchSubmit" class="searchElement">Search</button>

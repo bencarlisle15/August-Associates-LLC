@@ -6,7 +6,7 @@
 	</head>
 	<body>
 		<?php include('bin/nav.php'); ?>
-		<div class="errorPage">
+		<div class="errorPage section">
 			<h2 class="errorCode errorElement">503</h2>
 			<h2 class="errorDescription errorElement">Oops, looks like this page is down for maintenance, check back soon.</h2>
 			<h3 class="errorWhatToDo errorElement">You should probably head back to the homepage or report a problem if you want</h3>

@@ -20,29 +20,6 @@ function formatCurrency(oldVal) {
 	return val;
 }
 
-function submitSearch() {
-	window.location.href = "/find-homes"+buildUrl();
-}
-
-function buildUrl() {
-	var inputs = document.querySelectorAll("#searchAddresses, #searchCities, #searchZips, #searchPropertyType, #searchMinPrice, #searchMaxPrice, #searchMinFeet, #searchMaxFeet, #searchBeds, #searchBaths");
-	var urlAdd = "";
-	for (var i = 0; i < inputs.length; i++) {
-		if (inputs[i].value != '') {
-			var val = inputs[i].value;
-			if (inputs[i].id == "searchMinPrice" || inputs[i].id == "searchMaxPrice") {
-				val = val.replace(/(,)/g, '').substr(1);
-			}
-			urlAdd += (urlAdd.length > 0 ? "&" : "?") + inputs[i].id + "=" + addPluses(val);
-		}
-	}
-	return urlAdd;
-}
-
-function addPluses(str) {
-	return str.split(' ').join('+');
-}
-
 function submitContactForm() {
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", '/phpRequests/apiRequests.php', true);

@@ -11,10 +11,15 @@
 	cursor: pointer;
 }
 
+#sellBetterQuote > a:hover {
+	text-decoration: underline;
+}
+
 #zestimateDisclaimer {
 	width: 100%;
 	text-align: center;
 	font-size: 12pt;
+	margin: 0px;
 }
 
 #sellNav {

@@ -15,6 +15,7 @@
 			$urlAdd .= (strlen($urlAdd) > 0 ? "&" : "?") . $input . "=" .  str_replace(' ', '-', $val);
 		}
 	}
-	header('AMP-Redirect-To:' . $URL . '/find-homes.php' . $urlAdd);
+	header("AMP-Redirect-To: " . $URL . '/find-homes' . $urlAdd);
+	header("Location: " . $URL . '/find-homes' . $urlAdd);
 	echo json_encode("Success");
 ?>
