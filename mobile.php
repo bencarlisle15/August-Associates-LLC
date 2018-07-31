@@ -9,6 +9,7 @@
 		<script async custom-element="amp-facebook-like" src="https://cdn.ampproject.org/v0/amp-facebook-like-0.1.js"></script>
 		<script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
 		<script async custom-element="amp-social-share" src="https://cdn.ampproject.org/v0/amp-social-share-0.1.js"></script>
+		<script async custom-element="amp-youtube" src="https://cdn.ampproject.org/v0/amp-youtube-0.1.js"></script>
 	</head>
 	<body>
 		<?php include('bin/nav.php'); ?>
@@ -89,6 +90,7 @@
 				</div>
 			</form>
 		</div>
+		<amp-youtube id='video'data-videoid="l3QDvupOIbY" layout="responsive" width="480" height="270"/>
 		<div id="infoWrapper">
 			<h2 id="infoTitle">Our Info</h2>
 			<div id="infoText">

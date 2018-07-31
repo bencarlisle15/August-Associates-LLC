@@ -78,6 +78,7 @@
 					</div>
 				</form>
 			</div>
+			<iframe id="video" src="https://www.youtube.com/embed/l3QDvupOIbY?rel=0" allowfullscreen></iframe>
 			<div id="infoContact">
 				<div id="infoWrapper" class="infoSection">
 					<h2 id="infoTitle">Our Info</h2>

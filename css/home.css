@@ -2,6 +2,22 @@
 	border: 1px solid;
 }
 
+#video {
+	margin: auto;
+	display: block;
+	max-width: 100%;
+	width: 50vw;
+	height: 28.125vw;
+	border: 0px;
+}
+
+@media only screen and (max-width: 600px) {
+	#video {
+		width: 100vw;
+		height: 56.25vw;
+	}
+}
+
 #largeImage {
 	width: 100%;
 }
@@ -127,6 +143,8 @@
 	width: 500px;
 	height:500px;
 	border: 0px;
+	min-width: 300px;
+	max-width: 100%;
 }
 
 
