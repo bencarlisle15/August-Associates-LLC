@@ -9,24 +9,8 @@ window.onscroll = function(ev) {
 	}
 };
 
-//styles currency
-var formatter = new Intl.NumberFormat('en-US', {
-	style: 'currency',
-	currency: 'USD',
-});
-
 function beginFunctions() {
-	//all currency input
-	var vals = ["searchMinPrice","searchMaxPrice"];
-	for (var i in vals) {
-		document.getElementById(vals[i]).addEventListener("keyup", function() {
-			this.value = formatCurrency(this.value);
-		});
-	}
-}
-
-//edits search bar info
-(function editSettings() {
+	//edits settings
 	var url = window.location.href;
 	//checks for params
 	if (url.indexOf("?") >= 0) {
@@ -37,16 +21,23 @@ function beginFunctions() {
 			var key = queries[i].substring(0, queries[i].indexOf("="));
 			var val = queries[i].substring(queries[i].indexOf("=") + 1);
 			if (key == "searchMinPrice" || key == "searchMaxPrice") {
-				val = formatter.format(val);
+				val = formatCurrency(val);
 			} else if (key == "map" && val =="true") {
 				switchView();
 			}
 			if (document.getElementById(key)) {
-				document.getElementById(key).value = removePluses(val);
+				document.getElementById(key).value = val.replace('+', ' ');;
 			}
 		}
 	}
-})();
+	//all currency input
+	var vals = ["searchMinPrice","searchMaxPrice"];
+	for (var i in vals) {
+		document.getElementById(vals[i]).addEventListener("keyup", function() {
+			this.value = formatCurrency(this.value);
+		});
+	}
+}
 
 //automatically updates currency input
 function formatCurrency(oldVal) {
@@ -68,10 +59,6 @@ function searchArea() {
 	var url = getQuery();
 	url += url.length > 0 ? "&" : "?";
 	window.location.href = "/find-homes" + url + extra;
-}
-
-function removePluses(str) {
-	return str.split('+').join(' ');
 }
 
 function getProperties() {
@@ -220,11 +207,11 @@ function showOverlay(res) {
 	houseInfo.classList.add("houseInformation");
 	price.classList.add("houseElement");
 	price.align = "right";
-	price.innerHTML = formatter.format(res.ListPrice);
+	price.innerHTML = formatCurrency(res.ListPrice);
 	address.classList.add("houseElement");
-	address.innerHTML = res.FullStreetNum.toProperCase();
+	address.innerHTML = res.FullStreetNum;
 	city.classList.add("houseElement");
-	city.innerHTML = res.City.toProperCase();
+	city.innerHTML = res.City;
 	sqft.classList.add("houseElement");
 	sqft.innerHTML = parseInt(res.SqFtTotal ? res.SqFtTotal : res.ApproxLotSquareFoot) + " Square Feet";
 	houseInfo.append(price);
