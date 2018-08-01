@@ -7,12 +7,19 @@
 	header("Access-Control-Allow-Origin: ". str_replace('.', '-', $URL . '/*') .".cdn.ampproject.org");
 	header("Access-Control-Allow-Credentials: true");
 	header("Access-Control-Expose-Headers: AMP-Access-Control-Allow-Source-Origin");
-	$inputs = ["searchAddresses", "searchCities", "searchZips", "searchPropertyType", "searchMinPrice", "searchMaxPrice", "searchMinFeet", "searchMaxFeet", "searchBeds", "searchBaths"];
+	$inputs = ["searchAddresses", "searchCities", "searchZips", "searchPropertyType", "searchMinPrice", "searchMaxPrice", "searchMinFeet", "searchMaxFeet", "searchBeds", "searchBaths", "sortArray", "searchAreaInput"];
 	$urlAdd = "";
 	foreach ($inputs as $input) {
 		$val = $_POST[$input];
 		if ($val != '') {
-			$urlAdd .= (strlen($urlAdd) > 0 ? "&" : "?") . $input . "=" .  str_replace(' ', '-', $val);
+			if ($input == "searchMinPrice" || $input == "searchMaxPrice") {
+				$val = str_replace(",", "", str_replace("$", "", $val));
+			}
+			if ($input == "searchAreaInput") {
+				$urlAdd .= (strlen($urlAdd) > 0 ? "&" : "?") . $val;
+			} else {
+				$urlAdd .= (strlen($urlAdd) > 0 ? "&" : "?") . $input . "=" .  str_replace(' ', '-', $val);
+			}
 		}
 	}
 	if (!$detect) {

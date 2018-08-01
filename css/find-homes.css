@@ -112,14 +112,14 @@
 }
 
 #searchBox {
-	margin: 10px;
-}
-
-#searchForm {
 	border: 1px solid black;
 	border-radius: 5px;
 	padding: 8px;
 	background-color: white;
+}
+
+#searchAreaInput {
+	display: none;
 }
 
 .searchFormLine {
@@ -135,6 +135,10 @@
 	box-sizing: border-box;
 	min-width: 100px;
 	flex: 1;
+}
+
+#searchForm {
+	margin: 10px;
 }
 
 #searchSubmit {

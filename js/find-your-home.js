@@ -48,8 +48,6 @@ function addInformationForm() {
 	infoOverlay.id = "infoOverlay";
 	infoOverlay.innerHTML =  "<div id='infoFormWrapper'><h2 id='formTooManyUses'>You Have Used Up Your Three Free Views</h2><h2 id='formInfo'>Enter Your Name and Email to View this Property</h2><form id='infoForm' action='javascript:submitInfoForm()'><input type='text' id='infoFormName' class='infoFormElement' placeholder='Name' required><input type='email' id='infoFormEmail' placeholder='Email' class='infoFormElement' required><input type='tel' id='infoFormPhone' placeholder='Phone Number' class='infoFormElement'><button id='infoFormSubmit' class='infoFormElement'>Submit</button></form></div>";
 	document.getElementById("yourHomeSection").prepend(infoOverlay);
-	// var infoWrapper = document.getElementById("infoWrapper");
-	// document.getElementById("infoOverlay").style.display = "block";
 	infoWrapper.style.color = "transparent";
 	infoWrapper.style.textShadow = "0 0 20px rgba(0,0,0,5)";
 	infoWrapper.style.userSelect = "none";
@@ -94,14 +92,6 @@ function createBody() {
 	return body;
 }
 
-//prevents clicking from outside the lead maker when it is present
-function insideClickHandler(e) {
-	if (!e) {
-		var e = window.event;
-	}
-	e.cancelBubble = true;
-}
-
 //inits the map
 function initMap(location) {
 	var pos = JSON.parse(location);
@@ -126,7 +116,7 @@ function showSlides(n) {
 	var slideIndex;
 	var slides = document.getElementsByClassName("houseWrapper");
 	var dots = document.getElementsByClassName("dot");
-	if (slides.length == 0 || dots.length == 0) {
+	if (!slides.length || !dots.length) {
 		return;
 	}
 	currentSlide = n;
