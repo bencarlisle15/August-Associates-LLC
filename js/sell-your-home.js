@@ -54,14 +54,7 @@ function constructHouseSellingInfo(xmlText, address, city, state, zip) {
 		xhr.open("POST", '/phpRequests/apiRequests.php', true);
 		xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 		xhr.send("functionname=sendEmail&body=" + createBody(document.getElementById("formName").value, document.getElementById("formEmail").value, address, city, state, zip));
-}	//sets center and zoom from frame
-	map.setCenter(new google.maps.LatLng(((locationPos['latMax'] + locationPos['latMin']) / 2.0), ((locationPos['lngMax'] + locationPos['lngMin']) / 2.0)));
-	if (window.location.href.includes("radius")) {
-		var url = window.location.href;
-		map.setZoom(Math.log2(156543.03392 * Math.cos(map.getCenter().lat() * Math.PI / 180)/(parseInt(url.substring(url.indexOf("radius=") + 7, url.indexOf("&", url.indexOf("radius=")))))));
-	} else if (map.getZoom() < 8) {
-		map.setZoom(8);
-	}
+}
 
 function getHouseSellingInfo(address, city, state, zip) {
 	var xhr = new XMLHttpRequest();

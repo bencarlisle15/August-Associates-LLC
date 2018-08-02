@@ -13,11 +13,12 @@ $config->setOption('use_post_method', true);
 $rets = new \PHRETS\Session($config);
 $bulletin = $rets->Login();
 echo "Start Search\n";
-$limit = $argc == 1 ? 50000 : $argv[1];
-$results = $rets->Search('Property', 'Listing', '(Status=AA,AU,CS)',  ['Limit' => $limit]);
+$limit = $argc == 1 ? 99999999 : $argv[1];
+$results = $rets->Search('Property', 'Listing', '(Status=AA,AU,CS),(CurrentPrice=299999-)',  ['Limit' => $limit/2]);
+$results2 = $rets->Search('Property', 'Listing', '(Status=AA,AU,CS),(CurrentPrice=300000+)',  ['Limit' => $limit/2]);
 echo "End Search\n";
 // $data = $results->toJSON();
-$ar = $results->toArray();
+$ar = array_merge($results->toArray(), $results2->toArray());
 echo "Start Photos\n";
 for ($q = 0; $q < sizeof($ar); $q++) {
 	echo $q . " of " . count($ar) . "\n";

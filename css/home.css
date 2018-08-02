@@ -133,14 +133,14 @@
 }
 
 #facebookWrapper {
-	display:flex;
+	display: flex;
 	width: 500px;
 	max-width: 100%;
 	justify-content: center;
 }
 
 #facebookFrame {
-	width: 500px;
+	width: 350px;
 	height:500px;
 	border: 0px;
 	min-width: 300px;
