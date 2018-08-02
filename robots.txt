@@ -1,3 +1,7 @@
+User-agent: Googlebot-Image
+Disallow: /images/AugustAssociateLargeLogo.png
+Disallow: /images/arrow.png
+
 User-Agent: *
 Disallow:
 Allow: /
