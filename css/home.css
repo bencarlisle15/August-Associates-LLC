@@ -19,7 +19,15 @@
 }
 
 #largeImage {
+	width: 50%;
+	align-self: center;
+}
+
+#bigImage {
+	background-color: white;
 	width: 100%;
+	display: flex;
+	justify-content: center;
 }
 
 #imageWrapper {
@@ -33,12 +41,12 @@
 
 #arrow {
 	position: absolute;
-	width: 11.5%;
+	width: 9.8%;
 	display: block;
 	left: 0;
 	right: 0;
 	margin: auto;
-	top: calc(2.3vw + 110px);
+	top: calc(2.1vw + 110px);
 	z-index: 1;
 	animation: rotate 30s linear infinite;
 }

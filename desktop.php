@@ -9,7 +9,7 @@
 		<?php include('bin/nav.php'); ?>
 		<div id="homesSection" class="section">
 			<div id='bigImage'>
-				<img id="largeImage" src='/images/augustLargeLogo.png' alt='August Associates Logo'/>
+				<img id="largeImage" src='/images/AugustAssociateLargeLogo.png' alt='August Associates Logo'/>
 				<img id='arrow' src='/images/arrow.png' alt='Arrow'/>
 			</div>
 			<div id="linkButtons">
