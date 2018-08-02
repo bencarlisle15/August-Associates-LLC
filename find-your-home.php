@@ -103,7 +103,7 @@
 						if ($value == null || $value == "None") {
 							return;
 						}
-						echo "<tr><th class='keys'>" . htmlspecialchars($keyName) . "</th><td class='values'>" . htmlspecialchars(toSentenceCase(str_replace(",", ", ", $value))) . "</td></tr>";
+						echo "<tr><th class='keys'>" . htmlspecialchars($keyName) . "</th><td class='values'>" . htmlspecialchars(str_replace("August Associates,  Llc", "August Associates LLC", toSentenceCase(str_replace(",", ", ", $value)))) . "</td></tr>";
 					}
 				?>
 				<div id="map"></div>

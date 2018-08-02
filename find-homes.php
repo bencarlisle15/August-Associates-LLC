@@ -176,7 +176,9 @@
 							}
 							if (!isset($_GET['sortArray'])) {
 								usort($json, function($a, $b) {
-									if (!strcasecmp($a['ListOfficeName'], 'August Associates LLC')) {
+									if ($b['ListOfficeName'] == 'August Associates, LLC') {
+										return 1;
+									} else if ($a['ListOfficeName'] == 'August Associates, LLC') {
 										return -1;
 									}
 									return $b['PhotoCount'] - $a['PhotoCount'];
