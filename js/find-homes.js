@@ -56,32 +56,8 @@ function resetSearch() {
 function searchArea() {
 	var radius = 156543.03392 * Math.cos(map.getCenter().lat() * Math.PI / 180) / Math.pow(2, map.getZoom());
 	var extra = "radius=" + radius + "&lat=" + map.getCenter().lat() + "&lng=" + map.getCenter().lng() + "&map=true";
-	var url = getQuery();
-	url += url.length > 0 ? "&" : "?";
-	window.location.href = "/find-homes" + url + extra;
-}
-
-function getProperties() {
-	window.location.href = "/find-homes" + getQuery();
-}
-
-// function buildUrl() {
-// 	var inputs = document.querySelectorAll("#searchAddresses, #searchCities, #searchZips, #searchPropertyType, #searchMinPrice, #searchMaxPrice, #searchMinFeet, #searchMaxFeet, #searchBeds, #searchBaths");
-// 	var urlAdd = "";
-// 	for (var i = 0; i < inputs.length; i++) {
-// 		if (inputs[i].value != '') {
-// 			var val = inputs[i].value;
-// 			if (inputs[i].id == "searchMinPrice" || inputs[i].id == "searchMaxPrice") {
-// 				val = val.replace(/(,)/g, '').substr(1);
-// 			}
-// 			urlAdd += (urlAdd.length > 0 ? "&" : "?") + inputs[i].id + "=" + addPluses(val);
-// 		}
-// 	}
-// 	return urlAdd;
-// }
-
-function addPluses(str) {
-	return str.split(' ').join('+');
+	document.getElementById("searchAreaInput").value = extra;
+	document.getElementById("searchForm").submit();
 }
 
 //array of all google map markers REQUIERD
@@ -97,6 +73,14 @@ function initMap(res) {
 	mapElement.style.height =  document.body.clientWidth/2 + "px";
 	//sets houses and markers
 	setMapHouses(res);
+	//sets center and zoom from frame
+	map.setCenter(new google.maps.LatLng(((locationPos['latMax'] + locationPos['latMin']) / 2.0), ((locationPos['lngMax'] + locationPos['lngMin']) / 2.0)));
+	if (window.location.href.includes("radius")) {
+		var url = window.location.href;
+		map.setZoom(Math.log2(156543.03392 * Math.cos(map.getCenter().lat() * Math.PI / 180)/(parseInt(url.substring(url.indexOf("radius=") + 7, url.indexOf("&", url.indexOf("radius=")))))));
+	} else if (map.getZoom() < 8) {
+		map.setZoom(8);
+	}
 }
 
 //removes all markers
@@ -115,7 +99,7 @@ function setMapHouses(res) {
 		var lat = resHouse.Latitude;
 		var lng = resHouse.Longitude;
 		//geocding errors are entirely possible
-		if (lat == null || lng == null) {
+		if (!lat || !lng) {
 			return;
 		}
 		//creates new marker
@@ -123,7 +107,7 @@ function setMapHouses(res) {
 			map: map,
 			//cannot have same zIndex some zIndex is created by id
 			//why does I have resHouse.MLSNumber/1 you ask? because for some reason using just resHouse.MLSNumber draws an error  ¯\_(ツ)_/¯
-			zIndex: resHouse.MLSNumber/1,
+			zIndex: parseInt(resHouse.MLSNumber),
 			icon: {
 				url: "/images/marker.png",
 				scaledSize: new google.maps.Size(75,50),
@@ -138,43 +122,31 @@ function setMapHouses(res) {
 		marker.addListener('click', function() {
 			//checks if the map is centered on the marker already and is zoomed in significantly
 			if (map.getZoom() >= 14 && Math.abs(map.getCenter().lat() - this.getPosition().lat()) < 0.0000000000001 && Math.abs(map.getCenter().lng() - this.getPosition().lng()) < 0.0000000000001) {
-				showOverlay(resHouse)
+				showOverlay(resHouse);
 			} else {
 				//moves to the marker and somes to it
 				map.panTo(this.getPosition());
 				if (map.getZoom() < 14) {
 					map.setZoom(14);
 				}
-
 			}
 		});
 		//updates frame
-		if (locationPos['latMin'] == 0 || lat < locationPos['latMin']) {
+		if (!locationPos['latMin'] || lat < locationPos['latMin']) {
 			locationPos['latMin'] = lat;
 		}
-		if (locationPos['latMax'] == 0 || lat > locationPos['latMax']) {
+		if (!locationPos['latMax'] || lat > locationPos['latMax']) {
 			locationPos['latMax'] = lat;
 		}
-		if (locationPos['lngMin'] == 0 || lng < locationPos['lngMin']) {
+		if (!locationPos['lngMin'] || lng < locationPos['lngMin']) {
 			locationPos['lngMin'] = lng;
 		}
-		if (locationPos['lngMax'] == 0 || lng > locationPos['lngMax']) {
+		if (!locationPos['lngMax'] || lng > locationPos['lngMax']) {
 			locationPos['lngMax'] = lng;
 		}
 		//adds marker to the array
 		markerArray.push(marker);
 	});
-	//sets center and zoom from frame
-	map.setCenter(new google.maps.LatLng(
-		((locationPos['latMax'] + locationPos['latMin']) / 2.0),
-		((locationPos['lngMax'] + locationPos['lngMin']) / 2.0)
-	));
-	if (window.location.href.includes("radius")) {
-		var url = window.location.href;
-		map.setZoom(Math.log2(156543.03392 * Math.cos(map.getCenter().lat() * Math.PI / 180)/(parseInt(url.substring(url.indexOf("radius=") + 7, url.indexOf("&", url.indexOf("radius=")))))));
-	} else if (map.getZoom() < 8) {
-		map.setZoom(8)
-	}
 }
 
 //Adds K and M to create the price
@@ -250,53 +222,6 @@ function switchView() {
 	}
 }
 
-//checks the values of the search in order to generate a query
-function getQuery() {
-	var query = "";
-	if (document.getElementById("searchPropertyType").value != "") {
-		query += "&searchPropertyType=" + addPluses(document.getElementById("searchPropertyType").value);
-	}
-	if (document.getElementById("searchMinPrice").value != "") {
-		query += "&searchMinPrice=" + addPluses(document.getElementById("searchMinPrice").value.replace(/(,)/g, '').substr(1));
-	}
-	if (document.getElementById("searchMaxPrice").value != "") {
-		query += "&searchMaxPrice=" + addPluses(document.getElementById("searchMaxPrice").value.replace(/(,)/g, '').substr(1));
-	}
-
-	if (document.getElementById("searchMinFeet").value != "") {
-		query += "&searchMinFeet=" + addPluses(document.getElementById("searchMinFeet").value);
-	}
-
-	if (document.getElementById("searchMaxFeet").value != "") {
-		query += "&searchMaxFeet=" + addPluses(document.getElementById("searchMaxFeet").value);
-	}
-
-	if (document.getElementById("searchBeds").value != "") {
-		query += "&searchBeds=" + addPluses(document.getElementById("searchBeds").value);
-	}
-
-	if (document.getElementById("searchBaths").value != "") {
-		query += "&searchBaths=" + addPluses(document.getElementById("searchBaths").value);
-	}
-
-	if (document.getElementById("searchAddresses").value != "") {
-		query += "&searchAddresses=" + addPluses(document.getElementById("searchAddresses").value);
-	}
-
-	if (document.getElementById("searchCities").value != "") {
-		query += "&searchCities=" + addPluses(document.getElementById("searchCities").value);
-	}
-
-	if (document.getElementById("searchZips").value != "") {
-		query += "&searchZips=" + addPluses(document.getElementById("searchZips").value);
-	}
-
-	if (document.getElementById("sortArray").value != "") {
-		query += "&sortArray=" + addPluses(document.getElementById("sortArray").value);
-	}
-
-	return query.length == 0 ? "" : ("?" + query.substring(1));
-}
 
 //if a grid house is clicked
 function openHouse(id) {

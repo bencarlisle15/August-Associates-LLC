@@ -8,7 +8,7 @@ for (var i in vals) {
 
 //automatically updates currency input
 function formatCurrency(oldVal) {
-	var num = oldVal.replace(/(,)/g, '');
+	var num = String(oldVal).replace(/(,)/g, '');
 	var val = num.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,");
 	if (val.slice(0,1)!='$' && val != '') {
 		val = '$'+ val;
@@ -28,7 +28,7 @@ function submitMortgageForm() {
 	mortgageOverlay.onclick = function() {
 		document.getElementById("mortgageSection").removeChild(document.getElementById("mortgageOverlay"));
 	}
-	mortgageOverlay.innerHTML = "<div id='mortgageInfo'><h2 id='mortgageMonthlyCost'>" + (interestPowered == 1 ? "Your Monthly Cost Could Not Be Calculated" : ("Your Monthly Cost is " + formatCurrency(mortgageMonthlyCost))) + "</h2></div>";
+	mortgageOverlay.innerHTML = "<div id='mortgageInfo'><h2 id='mortgageMonthlyCost'>" + (!isFinite(mortgageMonthlyCost) ? "Your Monthly Cost Could Not Be Calculated" : ("Your Monthly Cost is " + formatCurrency(mortgageMonthlyCost.toFixed(2)))) + "</h2></div>";
 	document.getElementById("mortgageSection").prepend(mortgageOverlay);
 	document.getElementById("mortgageSubmit").focus();
 	document.getElementById("mortgageSubmit").blur();

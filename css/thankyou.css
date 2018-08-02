@@ -1,0 +1,16 @@
+#homeNav {
+	border: 1px solid;
+}
+
+#thanksSection {
+	display: flex;
+	flex-direction: column;
+}
+
+.thanksElement {
+	margin: 20px auto;
+	display: block;
+	width: 50%;
+	z-index: 4;
+	text-align: center;
+}

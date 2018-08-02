@@ -39,7 +39,7 @@
 					<p class="caption">Providence</p>
 				</div>
 			</div>
-			<div id="whoMissionInfo">
+			<div id="whoMissionInfo" style="display:none">
 				<div id='whoWrapper' class="whoSection">
 					<h2 id='whoTitle'>Who We Are</h2>
 					<p id='whoInfo'>Lorem ipsum nam porta nibh non arcu aliquet lobortis. Integer a egestas sem. Suspendisse lacinia erat sit amet turpis tempus auctor. Pellentesque cursus augue sapien, vitae consectetur diam lobortis ut. Pellentesque cursus augue sapien, vitae consectetur diam lobortis ut.</p>
@@ -78,7 +78,7 @@
 					</div>
 				</form>
 			</div>
-			<iframe id="video" src="https://www.youtube.com/embed/l3QDvupOIbY?rel=0" allowfullscreen></iframe>
+			<iframe id="video" src="https://www.youtube.com/embed/l3QDvupOIbY?rel=0" title="Rhode Island Video" allowfullscreen></iframe>
 			<div id="infoContact">
 				<div id="infoWrapper" class="infoSection">
 					<h2 id="infoTitle">Our Info</h2>
@@ -99,7 +99,7 @@
 					</form>
 				</div>
 				<div id="facebookWrapper" class="infoSection">
-					<iframe id="facebookFrame" title="Facebook Page" src="https://www.facebook.com/plugins/page?href=https%3A%2F%2Fwww.facebook.com%2FJoseph-McCarthy-Real-Estate-Broker-642396402607701%2F&tabs=timeline&width=500&height=500&small_header=true&adapt_container_width=true&hide_cover=true&show_facepile=true&appId"></iframe>
+					<iframe id="facebookFrame" title="Facebook Page" src="https://www.facebook.com/plugins/page?href=https%3A%2F%2Fwww.facebook.com%2FJoseph-McCarthy-Real-Estate-Broker-642396402607701%2F&tabs=timeline&width=350&height=500&small_header=true&adapt_container_width=true&hide_cover=true&show_facepile=true&appId"></iframe>
 				</div>
 			</div>
 		</div>

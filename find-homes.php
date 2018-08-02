@@ -8,13 +8,13 @@
 		<?php include('bin/nav.php'); ?>
 		<div id="homesSection" class="section">
 			<h2 id="findTitle">Find Your New Home</h2>
-			<div id="searchBox">
-				<form id= "searchForm" action="javascript:getProperties()">
+			<form id= "searchForm" method="POST"action="phpRequests/submitSearchForm.php">
+				<div id="searchBox">
 					<div class="searchFormLine">
-						<input type="text" title="Addresses" id="searchAddresses" placeholder="Addresses" class="searchElement">
-						<input type="text" title="Cities" id="searchCities" placeholder="Cities" class="searchElement">
-						<input type="text" title="Zipcodes" id="searchZips" placeholder="Zipcodes" class="searchElement">
-						<select id="searchPropertyType" title="Property Type" class="searchElement">
+						<input name="searchAddresses" type="text" title="Addresses" id="searchAddresses" placeholder="Addresses" class="searchElement">
+						<input name="searchCities" type="text" title="Cities" id="searchCities" placeholder="Cities" class="searchElement">
+						<input name="searchZips" type="text" title="Zipcodes" id="searchZips" placeholder="Zipcodes" class="searchElement">
+						<select name="searchPropertyType" id="searchPropertyType" title="Property Type" class="searchElement">
 							<option title="Property Type" value="" selected>Property Type</option>
 							<option title="Single Family" value="Single Family">Single Family</option>
 							<option title="Rental" value="Rental">Rental</option>
@@ -24,30 +24,31 @@
 						</select>
 					</div>
 					<div class="searchFormLine">
-						<input type="text" title="Min Price" id="searchMinPrice" placeholder="Min Price" class="searchElement">
-						<input type="text" title="Max Price" id="searchMaxPrice" placeholder="Max Price" class="searchElement">
-						<input type="number" title="Min Bedrooms" id="searchBeds" placeholder="Min Bedrooms" class="searchElement">
-						<input type="number" title="Min Bathrooms" id="searchBaths" placeholder="Min Bathrooms" class="searchElement">
-						<input type="number" title="Min Square Feet" id="searchMinFeet" placeholder="Min Square Feet" class="searchElement">
-						<input type="number" title="Max Square Feet" id="searchMaxFeet" placeholder="Max Square Feet" class="searchElement">
+						<input name="searchMinPrice" type="text" title="Min Price" id="searchMinPrice" placeholder="Min Price" class="searchElement">
+						<input name="searchMaxPrice" type="text" title="Max Price" id="searchMaxPrice" placeholder="Max Price" class="searchElement">
+						<input name="searchBeds" type="number" title="Min Bedrooms" id="searchBeds" placeholder="Min Bedrooms" class="searchElement">
+						<input name="searchBaths" type="number" title="Min Bathrooms" id="searchBaths" placeholder="Min Bathrooms" class="searchElement">
+						<input name="searchMinFeet" type="number" title="Min Square Feet" id="searchMinFeet" placeholder="Min Square Feet" class="searchElement">
+						<input name="searchMaxFeet" type="number" title="Max Square Feet" id="searchMaxFeet" placeholder="Max Square Feet" class="searchElement">
 					</div>
 					<div id="searchSubmitWrapper" class="searchFormLine">
 						<button id="searchSubmit" class="searchElement">Search</button>
 					</div>
-				</form>
-			</div>
-			<div id="findButtons">
-				<button id="searchThisArea" class="findButton" onclick="searchArea()">Search This Area</button>
-				<select id="sortArray" class="findButton" onchange="getProperties()" title="Sort By">
-					<option title="Sort By" value="" selected>Sort By</option>
-					<option title="Price (Low to High)" value="plh">Price &#x21C8;</option>
-					<option title="Price (High to Low)" value="phl">Price &#x21CA;</option>
-					<option title="Size (Low to High)" value="slh">Size &#x21C8;</option>
-					<option title="Size (High to Low)" value="shl">Size &#x21CA;</option>
-				</select>
-				<button id="resetSearch" class="findButton" onclick="resetSearch()">Reset Search</button>
-				<button id="mapGridSwitch" class="findButton" value = "grid" onclick="switchView()">Switch to Map View</button>
-			</div>
+				</div>
+				<div id="findButtons">
+					<input id="searchAreaInput" name="searchAreaInput">
+					<button id="searchThisArea" name="searchThisArea" class="findButton" type="button" onclick="searchArea()" value="">Search This Area</button>
+					<select id="sortArray" name="sortArray" class="findButton" onchange="this.form.submit()" title="Sort By">
+						<option title="Sort By" value="" selected>Sort By</option>
+						<option title="Price (Low to High)" value="plh">Price &#x21C8;</option>
+						<option title="Price (High to Low)" value="phl">Price &#x21CA;</option>
+						<option title="Size (Low to High)" value="slh">Size &#x21C8;</option>
+						<option title="Size (High to Low)" value="shl">Size &#x21CA;</option>
+					</select>
+					<button id="resetSearchButton" class="findButton" type="button" onclick="resetSearch()">Reset Search</button>
+					<button id="mapGridSwitch" class="findButton" type="button" value="grid" onclick="switchView()">Switch to Map View</button>
+				</div>
+			</form>
 			<div id="housesWrapper">
 				<div id="houses">
 					<?php
@@ -121,16 +122,16 @@
 												$json = array_values($json);
 											}
 										}
-										continue;
+										continue 2;
 									//only used for radius
 									case "lat":
-										continue;
+										continue 2;
 									//only used for radius
 									case "lng":
-										continue;
+										continue 2;
 									//only used for js
 									case "map":
-										continue;
+										continue 2;
 									//sorts the houses
 									case "sortArray":
 										//what to sort by
@@ -199,7 +200,7 @@
 						}
 
 						function isInvalid($arVal, $paramVal, $change) {
-							if ($change == 0) {
+							if (!$change) {
 								if (is_int($arVal)) {
 									return $arVal != $paramVal;
 								} else  {

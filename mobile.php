@@ -16,11 +16,11 @@
 		<div id='imageWrapper'>
 			<amp-img width='350px' height='350px' id='whoLogo' alt='August Associates Logo' src='/images/august%20splash.png'></amp-img>
 		</div>
-		<div id='whoWrapper'>
+		<div id='whoWrapper' style="display:none">
 			<h2 id='whoTitle'>Who We Are</h2>
 			<p id='whoInfo'>Lorem ipsum nam porta nibh non arcu aliquet lobortis. Integer a egestas sem. Suspendisse lacinia erat sit amet turpis tempus auctor. Pellentesque cursus augue sapien, vitae consectetur diam lobortis ut. Pellentesque cursus augue sapien, vitae consectetur diam lobortis ut.</p>
 		</div>
-		<div id='missionWrapper'>
+		<div id='missionWrapper' style="display:none;">
 			<h2 id='missionTitle'>Our Mission</h2>
 			<p id='missionInfo'>Lorem ipsum nam porta nibh non arcu aliquet lobortis. Integer a egestas sem. Suspendisse lacinia erat sit amet turpis tempus auctor. Pellentesque cursus augue sapien, vitae consectetur diam lobortis ut. Pellentesque cursus augue sapien, vitae consectetur diam lobortis ut.</p>
 		</div>
@@ -90,7 +90,7 @@
 				</div>
 			</form>
 		</div>
-		<amp-youtube id='video'data-videoid="l3QDvupOIbY" layout="responsive" width="480" height="270"></amp-youtube>
+		<amp-youtube id='video'data-videoid="l3QDvupOIbY" title="Rhode Island Video" layout="responsive" width="480" height="270"></amp-youtube>
 		<div id="infoWrapper">
 			<h2 id="infoTitle">Our Info</h2>
 			<div id="infoText">
@@ -110,13 +110,6 @@
 			</form>
 		</div>
 		<div id="socialButtons">
-			<div id="facebookSocialWrapper">
-				<amp-facebook-like id="fbLike" width="70px" height="20px"
-					layout="fixed"
-					data-layout="button_count"
-					data-href="https://www.facebook.com/necompass/">
-				</amp-facebook-like>
-			</div>
 			<amp-social-share type="twitter" width="60" height="44"
 				data-param-text="Visit August Associates LLC at"
 				data-param-url="https://www.augustassociatesllc.com" aria-label="Twitter">
@@ -129,6 +122,13 @@
 				data-param-text="Visit August Associates LLC at https://www.augustassociatesllc.com"
 				data-param-url="https://plus.google.com/u/1/114941366286269838561" aria-label="Google+">
 			</amp-social-share>
+			<div id="facebookSocialWrapper">
+				<amp-facebook-like id="fbLike" width="70px" height="20px"
+					layout="fixed"
+					data-layout="button_count"
+					data-href="https://www.facebook.com/necompass/">
+				</amp-facebook-like>
+			</div>
 		</div>
 		<?php include('bin/footer.html'); ?>
 	</body>

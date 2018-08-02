@@ -82,7 +82,7 @@
 						</table>
 					</div>";
 					echo "<h2 id='interested'>Interested in this Home?</h2>
-					<h2>Call us at <a href='tel:4014610700'>(401) 461-0700</a> or Email us at <a href='mailto:jmccarthy@necompass.com'>jmccarthy@necompass.com</a> to get in touch with an agent</h2>";
+					<h2 id='interestedContact'>Call us at <a href='tel:4014610700'>(401) 461-0700</a> or Email us at <a href='mailto:jmccarthy@necompass.com'>jmccarthy@necompass.com</a> to get in touch with an agent</h2>";
 					$address = $res['FullStreetNum'] . ", " . $res['City'] . ", " . $res['StateOrProvince'];
 
 					//capitolizes the first letter after spaces, ', and "
@@ -95,7 +95,7 @@
 						//converts ti int if it is a number and ensures its not 0
 						if (is_numeric($value)) {
 							$value = (int) $value;
-							if ($value == 0) {
+							if (!$value) {
 								return;
 							}
 						}

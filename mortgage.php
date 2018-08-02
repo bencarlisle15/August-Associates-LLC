@@ -17,7 +17,7 @@
 				<input type="number" title="Mortgage Length (Years)" id="mortgageYears" class="mortgageElement" placeholder="Mortgage Length (Years)">
 				<input type="number" title="Yearly Interst (%)" step="0.001" id="mortgageInterest" class="mortgageElement" placeholder="Yearly Interest (%)">
 			</div>
-			<button id="mortgageSubmit" class="mortgageElement">Calculate</button>
+			<button id="mortgageSubmit" type="submit" class="mortgageElement">Calculate</button>
 		</form>
 	</div>
 	<?php include('bin/footer.html'); ?>
