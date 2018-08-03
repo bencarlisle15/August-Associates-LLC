@@ -3,7 +3,7 @@ Disallow: /images/AugustAssociateLargeLogo.png
 Disallow: /images/arrow.png
 
 User-Agent: *
-Disallow:
+Disallow: /resources
 Allow: /
 Allow: /find-homes
 Allow: /sell-your-home

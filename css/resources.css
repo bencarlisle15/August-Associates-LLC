@@ -1,0 +1,29 @@
+.resourceTable {
+	flex: 1;
+	border: 1px solid black;
+	border-collapse: collapse;
+	min-width: 300px;
+	margin: 8px;
+}
+
+.resourceTitle {
+	text-align: center;
+	font-size: 16pt;
+}
+
+.headerRow {
+	font-size: 14pt;
+}
+
+.resourceName, .resourceWebsite, .resourceInfo {
+	border: 1px solid black;
+	text-align: left;
+	padding: 8px;
+}
+
+.typeSection {
+	display: flex;
+	margin: 10px;
+	justify-content: center;
+	flex-direction: column;
+}

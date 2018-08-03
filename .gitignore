@@ -1,6 +1,5 @@
 .htaccess
 phpRequests/keys.php
-phpRequests/rets-data.json
 composer.json
 composer.lock
 */error_log
