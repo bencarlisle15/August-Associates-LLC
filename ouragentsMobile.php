@@ -1,9 +1,9 @@
-		<?php
-			include('bin/amp-head.php');
-			include('css/agents-mobile.css');
-		?>
+			<?php
+				include('bin/amp-head.php');
+				include('css/agents-mobile.css');
+			?>
 		</style>
-		<link rel="canonical" href="https://www.augustassociatesllc.net/ouragents" />
+		<link rel="canonical" href="https://www.augustassociatesllc.net/ouragents"/>
 		<title>Agents - August Associates LLC</title>
 		<meta name="description" content="Meet our agents looking to help you buy or sell a home. August Associates, your valued guide in real estate."/>
 	</head>

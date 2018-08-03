@@ -13,7 +13,7 @@
 		"@context": "http://schema.org",
 		"@type": "Organization",
 		"url": "http://www.augustassociatesllc.com",
-		"logo": "http://www.augustassociatesllc.net/images/august logo.png",
+		"logo": "http://www.augustassociatesllc.net/images/august%20logo.png",
 		"contactPoint": [
 			{ "@type": "ContactPoint",
 			"telephone": "+1(401) 487-1510",

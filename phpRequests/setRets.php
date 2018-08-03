@@ -1,5 +1,6 @@
 <?php
 ini_set('memory_limit', '-1');
+set_time_limit(0);
 require_once("../vendor/autoload.php");
 require_once("keys.php");
 $config = new \PHRETS\Configuration;
@@ -38,12 +39,12 @@ for ($q = 0; $q < sizeof($ar); $q++) {
 	// } else {
 	// 	echo "New Folder\n";
 	// }
-	if (!file_exists($dir)) {
-		mkdir($dir);
-	} else if (iterator_count(new FilesystemIterator($dir, FilesystemIterator::SKIP_DOTS)) - 1 == $ar[$q]['PhotoCount']) {
-		// echo "Done\n";
-		continue;
-	}
+	// if (!file_exists($dir)) {
+	// 	mkdir($dir);
+	// } else if (iterator_count(new FilesystemIterator($dir, FilesystemIterator::SKIP_DOTS)) - 1 == $ar[$q]['PhotoCount']) {
+	// 	// echo "Done\n";
+	// 	continue;
+	// }
 	echo "Downloading " . $ar[$q]['MLSNumber'] . "\n";
 	// if (!file_exists($dir)) {
 	// 	mkdir($dir);
@@ -53,12 +54,12 @@ for ($q = 0; $q < sizeof($ar); $q++) {
 		file_put_contents($dir . "/" . $i . ".jpg", $photos[$i]->getContent());
 	}
 	$largeDir = "../images/largeRets/" . $ar[$q]['MLSNumber'];
-	if (!file_exists($largeDir)) {
-		mkdir($largeDir);
-	} else if (iterator_count(new FilesystemIterator($largeDir, FilesystemIterator::SKIP_DOTS)) - 1 == $ar[$q]['PhotoCount']) {
-		// echo "Done\n";
-		continue;
-	}
+	// if (!file_exists($largeDir)) {
+	// 	mkdir($largeDir);
+	// } else if (iterator_count(new FilesystemIterator($largeDir, FilesystemIterator::SKIP_DOTS)) - 1 == $ar[$q]['PhotoCount']) {
+	// 	// echo "Done\n";
+	// 	continue;
+	// }
 	echo "Downloading Large " . $ar[$q]['MLSNumber'] . "\n";
 	// if (!file_exists($largeDir)) {
 	// 	mkdir($largeDir);
