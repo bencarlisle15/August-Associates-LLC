@@ -5,8 +5,7 @@
 #video {
 	margin: auto;
 	display: block;
-	max-width: 100%;
-	width: 50vw;
+	width: 50%;
 	height: 28.125vw;
 	border: 0px;
 }
@@ -20,14 +19,13 @@
 
 #largeImage {
 	width: 50%;
-	align-self: center;
+	display: block;
+	margin: auto;
 }
 
 #bigImage {
 	background-color: white;
 	width: 100%;
-	display: flex;
-	justify-content: center;
 }
 
 #imageWrapper {
@@ -42,12 +40,8 @@
 #arrow {
 	position: absolute;
 	width: 9.8%;
-	display: block;
-	left: 0;
-	right: 0;
-	margin: auto;
+	left: 45.1%;
 	top: calc(2.1vw + 110px);
-	z-index: 1;
 	animation: rotate 30s linear infinite;
 }
 
@@ -64,7 +58,6 @@
 	display: flex;
 	flex: 1;
 	flex-direction: column;
-	align-items: center;
 	cursor: pointer;
 }
 
@@ -75,17 +68,13 @@
 
 #houses {
 	display: flex;
-	margin: 0px;
 	margin-top: 25px;
-	padding: 0px;
 	flex-direction: row;
 	flex-wrap: wrap;
-	overflow-x: hidden;
 }
 
 .houseLink {
-	width: 100%;
-	height: auto;
+	width: calc(100% - 2px);
 	border: 1px solid black;
 }
 
@@ -102,7 +91,6 @@
 }
 
 #searchForm {
-	border-radius: 5px;
 	padding: 8px;
 }
 
@@ -142,8 +130,6 @@
 
 #facebookWrapper {
 	display: flex;
-	width: 500px;
-	max-width: 100%;
 	justify-content: center;
 }
 
@@ -152,12 +138,10 @@
 	height:500px;
 	border: 0px;
 	min-width: 300px;
-	max-width: 100%;
 }
 
 
 #linkButtons, #whoMissionInfo, #infoContact {
-	max-width: 100%;
 	display: flex;
 	flex-wrap: wrap;
 	flex-direction: row;
@@ -165,6 +149,5 @@
 
 .linkButton, .whoSection, .infoSection {
 	flex: 1;
-	align-self: center;
 	margin: 5px;
 }

@@ -18,24 +18,24 @@
 				<a class="linkButton button" href="/testimonials">See Our Testimonials</a>
 			</div>
 			<div id="houses">
-				<div class="houseImageWrapper" onclick="window.location.href='/find-homes?searchCities=Cranston'">
-					<img class="houseLink" alt="Cranston Image" src="/images/cranston.jpg"/>
+				<div class="houseImageWrapper">
+					<img class="houseLink" onclick="window.location.href='/find-homes?searchCities=Cranston'" alt="Cranston Image" src="/images/cranston.jpg"/>
 					<p class="caption">Cranston</p>
 				</div>
-				<div class="houseImageWrapper" onclick="window.location.href='/find-homes?searchCities=Warwick'">
-					<img class="houseLink" alt="Warwick Image" src="/images/warwick.jpg"/>
+				<div class="houseImageWrapper">
+					<img class="houseLink" onclick="window.location.href='/find-homes?searchCities=Warwick'" alt="Warwick Image" src="/images/warwick.jpg"/>
 					<p class="caption">Warwick</p>
 				</div>
-				<div class="houseImageWrapper" onclick="window.location.href='/find-homes?searchCities=North-Kingstown'">
-					<img class="houseLink" alt="North Kingstown Image" src="/images/nk.jpg"/>
+				<div class="houseImageWrapper">
+					<img class="houseLink" onclick="window.location.href='/find-homes?searchCities=North-Kingstown'" alt="North Kingstown Image" src="/images/nk.jpg"/>
 					<p class="caption">North Kingstown</p>
 				</div>
-				<div class="houseImageWrapper" onclick="window.location.href='/find-homes?searchCities=East-Greenwich'">
-					<img class="houseLink" alt="East Greenwich Image" src="/images/east.jpg"/>
+				<div class="houseImageWrapper">
+					<img class="houseLink" onclick="window.location.href='/find-homes?searchCities=East-Greenwich'" alt="East Greenwich Image" src="/images/east.jpg"/>
 					<p class="caption">East Greenwich</p>
 				</div>
-				<div class="houseImageWrapper" onclick="window.location.href='/find-homes?searchCities=Providence'">
-					<img class="houseLink" alt="Providence Image" src="/images/providence.jpg"/>
+				<div class="houseImageWrapper">
+					<img class="houseLink" onclick="window.location.href='/find-homes?searchCities=Providence'" alt="Providence Image" src="/images/providence.jpg"/>
 					<p class="caption">Providence</p>
 				</div>
 			</div>
