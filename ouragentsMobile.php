@@ -9,12 +9,13 @@
 	</head>
 	<body>
 		<?php include('bin/nav.php'); ?>
-		<div class="agentSection">
+		<div class="section">
 			<h2 id="ourAgentsTitle">Agents</h2>
-			<div id="mainBrokerWrapper">
-				<div class="agentWrapper">
+			<amp-img id="allAgents" width="400px" height="122px" src="/images/group.png" alt="All Agents"></amp-img>
+			<div id="totalOverview">
+				<div id="mainBrokerWrapper" class="agentWrapper">
 					<div class="agentImageWrapper">
-						<amp-img class="agentImage" width="250" height="374" src="/images/joseph.jpg" alt="Joseph McCarthy"></amp-img>
+						<amp-img class="agentImage" width="250" height="250" src="/images/joseph.jpg" alt="Joseph McCarthy"></amp-img>
 					</div>
 					<div class="agentInfo">
 						<h2 class="agentName agentElement">Joseph McCarthy</h2>
@@ -27,7 +28,7 @@
 			<div id="allAgentsList">
 				<div class="agentWrapper">
 					<div class="agentImageWrapper">
-						<amp-img class="agentImage" width="250" height="280" src="/images/wendy.jpg" alt="Wendy Grave"></amp-img>
+						<amp-img class="agentImage" width="250" height="250" src="/images/wendy.jpg" alt="Wendy Grave"></amp-img>
 					</div>
 					<div class="agentInfo">
 						<h2 class="agentName agentElement">Wendy Grave</h2>
@@ -38,7 +39,7 @@
 				</div>
 				<div class="agentWrapper">
 					<div class="agentImageWrapper">
-						<amp-img class="agentImage" width="240" height="240" src="https://i.stack.imgur.com/34AD2.jpg" alt="Bob Nasiatka"></amp-img>
+						<amp-img class="agentImage"width="250" height="250" src="/images/bob.jpg" alt="Bob Nasiatka"></amp-img>
 					</div>
 					<div class="agentInfo">
 						<h2 class="agentName agentElement">Bob Nasiatka</h2>
@@ -49,7 +50,7 @@
 				</div>
 				<div class="agentWrapper">
 					<div class="agentImageWrapper">
-						<amp-img class="agentImage" width="240" height="240" src="https://i.stack.imgur.com/34AD2.jpg" alt="Rick Delmastro"></amp-img>
+						<amp-img class="agentImage" width="250" height="250" src="/images/rick.jpg" alt="Rick Delmastro"></amp-img>
 					</div>
 					<div class="agentInfo">
 						<h3 class="agentName agentElement">Rick Delmastro</h3>
@@ -60,7 +61,7 @@
 				</div>
 				<div class="agentWrapper">
 					<div class="agentImageWrapper">
-						<amp-img class="agentImage" width="240" height="240" src="https://i.stack.imgur.com/34AD2.jpg" alt="Kari Hernandez"></amp-img>
+						<amp-img class="agentImage" width="250" height="250" src="/images/kari.jpg" alt="Kari Hernandez"></amp-img>
 					</div>
 					<div class="agentInfo">
 						<h3 class="agentName agentElement">Kari Hernandez</h3>
@@ -71,7 +72,7 @@
 				</div>
 			<!-- <div class="agentWrapper">
 				<div class="agentImageWrapper">
-					<amp-img class="agentImage" width="240" height="240" src="https://i.stack.imgur.com/34AD2.jpg" alt="Debora Rotondo"></amp-img>
+					<amp-img class="agentImage" width="250" height="250" src="/images/debora.jpg" alt="Debora Rotondo"></amp-img>
 				</div>
 				<div class="agentInfo">
 					<h3 class="agentName agentElement">Debora Rotondo</h3>

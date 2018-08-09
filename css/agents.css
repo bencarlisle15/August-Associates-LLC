@@ -8,13 +8,21 @@
 	margin: 10px;
 }
 
+#allAgents {
+	width: 50%;
+	display: block;
+	margin: auto;
+	margin-bottom: 50px;
+}
+
 .agentWebsite {
 	text-align: center;
 }
 
-#mainBrokerWrapper {
+#totalOverview {
 	width: 100%;
 	display: flex;
+	flex-direction: row;
 	justify-content: center;
 }
 
@@ -25,6 +33,10 @@
 
 .agentName {
 	font-size: 16pt;
+}
+
+.agentImage {
+	max-width: 250px;
 }
 
 .agentInfo {

@@ -39,14 +39,14 @@
 					<p class="caption">Providence</p>
 				</div>
 			</div>
-			<div id="whoMissionInfo" style="display:none">
+			<div id="whoMissionInfo">
 				<div id='whoWrapper' class="whoSection">
 					<h2 id='whoTitle'>Who We Are</h2>
 					<p id='whoInfo'>Lorem ipsum nam porta nibh non arcu aliquet lobortis. Integer a egestas sem. Suspendisse lacinia erat sit amet turpis tempus auctor. Pellentesque cursus augue sapien, vitae consectetur diam lobortis ut. Pellentesque cursus augue sapien, vitae consectetur diam lobortis ut.</p>
 				</div>
 				<div id='missionWrapper' class="whoSection">
 					<h2 id='missionTitle'>Our Mission</h2>
-					<p id='missionInfo'>Lorem ipsum nam porta nibh non arcu aliquet lobortis. Integer a egestas sem. Suspendisse lacinia erat sit amet turpis tempus auctor. Pellentesque cursus augue sapien, vitae consectetur diam lobortis ut. Pellentesque cursus augue sapien, vitae consectetur diam lobortis ut.</p>
+					<p id='missionInfo'>Our mission is to provide the highest level of knowledge and expertise for those seeking real estate services.<br/><br/>Our pledge to you is to guide you on the path of meeting your goals with the utmost honesty, integrity and care.<br/><br/>With communication and understanding, we will meet the challenges and achieve YOUR ultimate goal.</p>
 				</div>
 			</div>
 			<div id="searchBox">

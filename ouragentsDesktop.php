@@ -9,8 +9,9 @@
 		<?php include('bin/nav.php'); ?>
 		<div class="section">
 			<h2 id="ourAgentsTitle">Agents</h2>
-			<div id="mainBrokerWrapper">
-				<div class="agentWrapper">
+			<img id="allAgents" src="/images/group.png" alt="All Agents"/>
+			<div id="totalOverview">
+				<div id="mainBrokerWrapper" class="agentWrapper">
 					<div class="agentImageWrapper">
 						<img class="agentImage" src="/images/joseph.jpg" alt="Joseph McCarthy"/>
 					</div>
@@ -36,7 +37,7 @@
 				</div>
 				<div class="agentWrapper">
 					<div class="agentImageWrapper">
-						<img class="agentImage" src="https://i.stack.imgur.com/34AD2.jpg" alt="Joseph McCarthy"/>
+						<img class="agentImage" src="/images/bob.jpg" alt="Bob Nasiatka"/>
 					</div>
 					<div class="agentInfo">
 						<h3 class="agentName agentElement">Bob Nasiatka</h3>
@@ -47,7 +48,7 @@
 				</div>
 				<div class="agentWrapper">
 					<div class="agentImageWrapper">
-						<img class="agentImage" src="https://i.stack.imgur.com/34AD2.jpg" alt="Wendy Grave"/>
+						<img class="agentImage" src="/images/rick.jpg" alt="Rick Delmastro"/>
 					</div>
 					<div class="agentInfo">
 						<h3 class="agentName agentElement">Rick Delmastro</h3>
@@ -58,7 +59,7 @@
 				</div>
 				<div class="agentWrapper">
 					<div class="agentImageWrapper">
-						<img class="agentImage" src="https://i.stack.imgur.com/34AD2.jpg" alt="Wendy Grave"/>
+						<img class="agentImage" src="/images/kari.jpg" alt="Kari Hernandez"/>
 					</div>
 					<div class="agentInfo">
 						<h3 class="agentName agentElement">Kari Hernandez</h3>
@@ -68,17 +69,17 @@
 					</div>
 				</div>
 			</div>
-			<!-- <div class="agentWrapper">
+			<div class="agentWrapper">
 				<div class="agentImageWrapper">
-					<img class="agentImage" src="https://i.stack.imgur.com/34AD2.jpg" alt="Wendy Grave"/>
+					<img class="agentImage" src="/images/debora.jpg" alt="Debora Rotondo"/>
 				</div>
 				<div class="agentInfo">
 					<h3 class="agentName agentElement">Debora Rotondo</h3>
-					<p class="agentParagraph agentElement">As a Realtor specializing in residential properties, Kari brings an abundant amount of energy, creativity and dedication to her work. Kari first discovered her passion for real estate while working as a Real Estate Administrator and attending college full time. She studied Business Administration and graduated in 2006 with a Bachelors degree in Business Management from Rhode Island College. Kari later transitioned into the Banking/Financial industry where she gained valuable skills and experience that she uses daily in real estate negotiations, educating and building interpersonal relationships with home buyers and sellers and effectively marketing the team's listings.<br/><br/>Friends and clients describe her as ambitious, detailed oriented yet personable and fun to be around. Kari enjoys artistic projects, exploring local restaurants and likes to spend time with her family during her free time. She is wife of a loving firefighter, mom of three boys and actively participates in her community's baseball little league and is a board member of her neighborhood Parent-Teacher Committee.</p>
+					<p class="agentParagraph agentElement">Experienced Realtor with a demonstrated history of working in the real estate industry. Skilled in Microsoft Excel, Customer Service, Microsoft Word, Data Entry, and Microsoft PowerPoint. Strong real estate professional graduated from University of Rhode.</p>
 					<h4 class="agentEmail agentElement">Email: <a href="mailto:debora@necompass.com">debora@necompass.com</a></h4>
 					<h4 class="agentWebsite agentElement">Facebook: <a href="https://www.facebook.com/KHernandezRealtor/">facebook.com/KHernandezRealtor</a></h4>
 				</div>
-			</div> -->
+			</div>
 		</div>
 		</div>
 		<?php include('bin/footer.html'); ?>
