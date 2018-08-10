@@ -46,7 +46,7 @@
 				</div>
 				<div id='missionWrapper' class="whoSection">
 					<h2 id='missionTitle'>Our Mission</h2>
-					<p id='missionInfo'>Our mission is to provide the highest level of knowledge and expertise for those seeking real estate services.<br/><br/>Our pledge to you is to guide you on the path of meeting your goals with the utmost honesty, integrity and care.<br/><br/>With communication and understanding, we will meet the challenges and achieve YOUR ultimate goal.</p>
+					<p id='missionInfo'>Our mission is to provide the highest level of knowledge and expertise for those seeking real estate services.<br/><br/>We pledge to guide you on the path of meeting your goals with the utmost honesty, integrity and care.<br/><br/>With communication and understanding, we will meet the challenges and achieve YOUR ultimate goal.</p>
 				</div>
 			</div>
 			<div id="searchBox">

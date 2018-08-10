@@ -48,6 +48,7 @@
 #whoInfo, #missionInfo {
 	min-width: 200px;
 	margin: 10px;
+	text-align: center;
 }
 
 #imageWrapper {

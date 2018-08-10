@@ -16,13 +16,13 @@
 		<div id='imageWrapper'>
 			<amp-img width='350px' height='350px' id='whoLogo' alt='August Associates Logo' src='/images/august%20splash.png'></amp-img>
 		</div>
-		<div id='whoWrapper' style="display:none">
+		<div id='whoWrapper'>
 			<h2 id='whoTitle'>Who We Are</h2>
 			<p id='whoInfo'>Lorem ipsum nam porta nibh non arcu aliquet lobortis. Integer a egestas sem. Suspendisse lacinia erat sit amet turpis tempus auctor. Pellentesque cursus augue sapien, vitae consectetur diam lobortis ut. Pellentesque cursus augue sapien, vitae consectetur diam lobortis ut.</p>
 		</div>
-		<div id='missionWrapper' style="display:none;">
+		<div id='missionWrapper'>
 			<h2 id='missionTitle'>Our Mission</h2>
-			<p id='missionInfo'>Lorem ipsum nam porta nibh non arcu aliquet lobortis. Integer a egestas sem. Suspendisse lacinia erat sit amet turpis tempus auctor. Pellentesque cursus augue sapien, vitae consectetur diam lobortis ut. Pellentesque cursus augue sapien, vitae consectetur diam lobortis ut.</p>
+			<p id='missionInfo'>Our mission is to provide the highest level of knowledge and expertise for those seeking real estate services.<br/><br/>We pledge to guide you on the path of meeting your goals with the utmost honesty, integrity and care.<br/><br/>With communication and understanding, we will meet the challenges and achieve YOUR ultimate goal.</p>
 		</div>
 		<div id="linkButtons" class="section">
 			<a class="linkButton button" href="/find-homes">Find Your Perfect Home</a>
