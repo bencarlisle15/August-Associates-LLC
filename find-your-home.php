@@ -3,19 +3,10 @@
 			ini_set('memory_limit', '-1');
 			require_once("phpRequests/keys.php");
 			$conn = new mysqli("localhost", getDBUser(), getDBPassword(), getDBName());
-			$query = "SELECT json_data FROM RetsData";
-			$resultQuery = mysqli_query($conn, $query);
-			$result = $resultQuery->fetch_assoc()['json_data'];
-			$json = json_decode($result, true);
-			for ($i = 0; $i < sizeof($json); $i++) {
-				//looks through all the data to find the house with the right MLSNumber
-				if ($json[$i]['MLSNumber'] == $_GET['id']) {
-					$res = $json[$i];
-					break;
-				}
-			}
-			//house not found add 404
-			if ($res == null) {
+			$query = "SELECT * FROM Data WHERE `MLSNumber`=" . $_GET['id'];
+			$result = mysqli_query($conn, $query);
+			$res = $result->fetch_assoc();
+			if (!$result || !$res) {
 				require('404.php');
 				die();
 			}
@@ -57,7 +48,7 @@
 						}
 						echo "</div>";
 					}
-					echo "<h2 id='address'>" . htmlspecialchars(toSentenceCase($res['FullStreetNum'])) . ", " . htmlspecialchars($res['City']) . ", " . htmlspecialchars($res['StateOrProvince']) . ", " . $res['PostalCode'] . "</h2>
+					echo "<h2 id='address'>" . htmlspecialchars(toSentenceCase($res['FullStreetNum'])) . ", " . htmlspecialchars(toSentenceCase($res['City'])) . ", " . $res['PostalCode'] . "</h2>
 					<h2 id='price'>$" . htmlspecialchars(number_format((float) $res['ListPrice'])) . "</h2>
 					<div id='tableAndDescription'>
 						<p id='description'>" .  htmlspecialchars(toSentenceCase($res['PublicRemarks'])) . "</p>

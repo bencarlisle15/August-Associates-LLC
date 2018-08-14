@@ -95,7 +95,11 @@ function initMap(res) {
 	map.setCenter(new google.maps.LatLng(((locationPos['latMax'] + locationPos['latMin']) / 2.0), ((locationPos['lngMax'] + locationPos['lngMin']) / 2.0)));
 	if (window.location.href.includes("radius")) {
 		var url = window.location.href;
-		map.setZoom(Math.log2(156543.03392 * Math.cos(map.getCenter().lat() * Math.PI / 180)/(parseInt(url.substring(url.indexOf("radius=") + 7, url.indexOf("&", url.indexOf("radius=")))))));
+		var radius = Math.log2(156543.03392 * Math.cos(map.getCenter().lat() * Math.PI / 180)/(parseFloat(url.substring(url.indexOf("radius=") + 7, url.indexOf("&", url.indexOf("radius="))))));
+		var lat = parseFloat(url.substring(url.indexOf("lat=") + 4, url.indexOf("&", url.indexOf("lat="))));
+		var lng = parseFloat(url.substring(url.indexOf("lng=") + 4, url.includes("map") ? url.indexOf("&", url.indexOf("lng=")) : url.length));
+		map.setZoom(radius);
+		map.setCenter(new google.maps.LatLng(lat, lng));
 	} else if (map.getZoom() < 8) {
 		map.setZoom(8);
 	}
@@ -178,40 +182,18 @@ function roundToLetter(num) {
 //Adds the clicked house to an overlay
 function showOverlay(res) {
 	var house = document.createElement("div");
-	var houseImageWrapper = document.createElement("div");
-	var houseImage = document.createElement("img");
-	var houseInfo = document.createElement("div");
-	var price = document.createElement("h4");
-	var address = document.createElement("p");
-	var city = document.createElement("p");
-	var sqft = document.createElement("p");
 	house.classList.add("house");
 	house.setAttribute("onclick", "openHouse(" + res.MLSNumber + ")");
 	house.id = "mapHouse";
-	houseImageWrapper.classList.add('houseImageWrapper');
-	houseImageWrapper.append(houseImage);
-	houseImage.classList.add("houseElement");
-	houseImage.classList.add("houseImage");
-	houseImage.alt = "Picture of House";
-	houseImage.src = "images/rets/" + res.MLSNumber + "/0.jpg";
-	houseInfo.classList.add("houseInformation");
-	price.classList.add("houseElement");
-	price.align = "right";
-	price.innerHTML = formatCurrency(res.ListPrice);
-	address.classList.add("houseElement");
-	address.innerHTML = res.FullStreetNum;
-	city.classList.add("houseElement");
-	city.innerHTML = res.City;
-	sqft.classList.add("houseElement");
-	sqft.innerHTML = parseInt(res.SqFtTotal ? res.SqFtTotal : res.ApproxLotSquareFoot) + " Square Feet";
-	houseInfo.append(price);
-	houseInfo.append(address);
-	houseInfo.append(city);
-	houseInfo.append(sqft);
-	house.append(houseImageWrapper);
-	house.append(houseInfo);
+	house.innerHTML = "<div class='houseImageWrapper'><img class='houseElement houseImage' alt='Picture of House' src='images/rets/" + res.MLSNumber + "/0.jpg'/></div><div class='houseInformation'><h4 class='housePrice houseElement'>" + formatCurrency(res.ListPrice) + "</h4><p class='houseElement'>" + toTitleCase(res.FullStreetNum) + "</p><p class='houseElement'>" +toTitleCase(res.City) + "</p><p class='houseElement'>" + parseInt(res.SqFtTotal) + " Square Feet</p></div>";
 	document.getElementById("mapHouseWrapper").append(house);
 	document.getElementById("mapHouseWrapper").style.display = "block";
+}
+
+function toTitleCase(str) {
+	return str.replace(/\w\S*/g, function(txt){
+		return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+	});
 }
 
 function removeHouseOverlay() {
