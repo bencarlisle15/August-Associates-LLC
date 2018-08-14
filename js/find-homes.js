@@ -3,9 +3,21 @@ document.addEventListener('DOMContentLoaded', beginFunctions());
 //when the user scrolls to the bottom while in grid mode
 var pageNumber = 0;
 window.onscroll = function(ev) {
-	if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight && document.getElementById("mapGridSwitch").value == "grid") {
-		//gets the next set of houses
-		initAllHomes(++pageNumber);
+	if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight - 2 && document.getElementById("mapGridSwitch").value == "grid") {
+		var xhr = new XMLHttpRequest();
+		xhr.open("POST", 'find-homes', true);
+		xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+		xhr.onreadystatechange = function () {
+			if (this.readyState == 4) {
+				//gets the next set of houses
+				var parsed = JSON.parse(this.responseText)
+				var json = JSON.parse(JSON.parse(parsed[0]));
+				var echoed = parsed[1];
+				setMapHouses(json);
+				document.getElementById("houses").innerHTML += echoed;
+			}
+		}
+		xhr.send("pageNumber=" + (++pageNumber));
 	}
 };
 
@@ -96,8 +108,8 @@ function setMapHouses(res) {
 	//gets the max and min of the lat and lng of the markers in order to frame them
 	res.forEach(function(resHouse) {
 		//get last and lng from house
-		var lat = resHouse.Latitude;
-		var lng = resHouse.Longitude;
+		var lat = parseFloat(resHouse.Latitude);
+		var lng = parseFloat(resHouse.Longitude);
 		//geocding errors are entirely possible
 		if (!lat || !lng) {
 			return;
@@ -154,7 +166,7 @@ function roundToLetter(num) {
 	if (num > 950000) {
 		return String(Math.round(num / 1000000)) + "M";
 	}
-	return String(Math.round(num / 1000)) + "K"
+	return String(Math.round(num / 1000)) + "K";
 }
 
 //Adds the clicked house to an overlay

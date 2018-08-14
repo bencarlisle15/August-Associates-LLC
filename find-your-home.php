@@ -43,9 +43,7 @@
 								continue;
 							}
 							//adds the image
-							echo "<div class='houseWrapper'>
-								<img src='images/largeRets/" . htmlspecialchars($res['MLSNumber']) . "/" . $i . ".jpg' alt='Picture of the House' class='houseImage'/>
-							</div>";
+							echo "<div class='houseWrapper'><img src='images/largeRets/" . htmlspecialchars($res['MLSNumber']) . "/" . $i . ".jpg' alt='Picture of the House' class='houseImage'/></div>";
 						}
 						if ($total) {
 							echo "<a onclick='plusSlides(-1)' id='prev'>&#10094;</a>
@@ -64,15 +62,15 @@
 					<div id='tableAndDescription'>
 						<p id='description'>" .  htmlspecialchars(toSentenceCase($res['PublicRemarks'])) . "</p>
 						<table id='table'>";
-						//determines which sqft to use
-						$sqftVal = $res['SqFtTotal'] ? $res['SqFtTotal'] : $res['ApproxLotSquareFoot'];
-						//adds attribute
-						addAttribute("Square Feet", $sqftVal);
 						//list of all attributes to use sorted by ['RetsName' => 'Visible name']
-						$keys = ["BathsTotal" => "Bathrooms", "NumberOfLevels" => "Stories", "Fireplace"=> "Fireplaces", "HeatingSystem"=> "Heating", "BedsTotal"=> "Bedrooms", "Pool"=> "Pool", "WaterAmenities"=> "Water Amenities", "YearBuilt"=> "Year Built", "GarageSpaces"=> "Garage Spaces"];
+						$keys = ["SqFtTotal" => "Living Area Size", "BathsTotal" => "Bathrooms", "NumberOfLevels" => "Stories", "Fireplace"=> "Fireplaces", "HeatingSystem"=> "Heating", "BedsTotal"=> "Bedrooms", "Pool"=> "Pool", "WaterAmenities"=> "Water Amenities", "YearBuilt"=> "Year Built", "GarageSpaces"=> "Garage Spaces", "ApproxLotSquareFoot" => "Lot Size"];
 						//adds all the attirbutes;
 						foreach ($keys as $key => $value) {
-							addAttribute($value, $res[$key]);
+							$val = $res[$key];
+							if ($key == "ApproxLotSquareFoot" || $key == "SqFtTotal") {
+								$val = number_format($val) . " Ft";
+							}
+							addAttribute($value, $val);
 						}
 						//determines the correct list office to use
 						$listingOffice = $res['ListOfficeName'] ? $res['ListOfficeName'] : ($res['CoListOfficeName'] ? $res['CoListOfficeName'] : ($res['SellingOfficeName'] ? $res['SellingOfficeName'] : ($res['CoSellingOfficeName'] ? $res['CoSellingOfficeName'] : 'Listing Office Not Found')));
@@ -103,7 +101,7 @@
 						if ($value == null || $value == "None") {
 							return;
 						}
-						echo "<tr><th class='keys'>" . htmlspecialchars($keyName) . "</th><td class='values'>" . htmlspecialchars(str_replace("August Associates,  Llc", "August Associates LLC", toSentenceCase(str_replace(",", ", ", $value)))) . "</td></tr>";
+						echo "<tr><th class='keys'>" . htmlspecialchars($keyName) . "</th><td class='values'>" . htmlspecialchars(str_replace("August Associates,  Llc", "August Associates LLC", strpos($value, "Ft") ? $value : toSentenceCase(str_replace(",", ", ", $value)))) . "</td></tr>";
 					}
 				?>
 				<div id="map"></div>

@@ -18,7 +18,7 @@
 		</div>
 		<div id='whoWrapper'>
 			<h2 id='whoTitle'>Who We Are</h2>
-			<p id='whoInfo'>Lorem ipsum nam porta nibh non arcu aliquet lobortis. Integer a egestas sem. Suspendisse lacinia erat sit amet turpis tempus auctor. Pellentesque cursus augue sapien, vitae consectetur diam lobortis ut. Pellentesque cursus augue sapien, vitae consectetur diam lobortis ut.</p>
+			<p id='whoInfo'>With 20 years of working in a primary residential real estate for a corporate concern, Joseph McCarthy derived at the start of creating his own boutique style full service real estate brokerage August Associates LLC Your Valued Guide In Real Estate.<br/>Serving Rhode Island and Massachusetts and other parts of the globe, August Associates is comprised of 5 associates with a diverse culture of business practices. All our associates are licensed REALTORS® and are committed to the educational and professional development of the real estate community.<br/>We will maintain a presence and a voice that may affect the future of your property.<br/>Through the latest technology and old fashion techniques, we will guide you forward.</p>
 		</div>
 		<div id='missionWrapper'>
 			<h2 id='missionTitle'>Our Mission</h2>

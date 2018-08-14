@@ -108,7 +108,6 @@
 
 #whoInfo, #missionInfo {
 	min-width: 200px;
-	font-size: 14pt;
 	text-align:justify;
 }
 
@@ -150,4 +149,8 @@
 .linkButton, .whoSection, .infoSection {
 	flex: 1;
 	margin: 5px;
+}
+
+.whoSection {
+	margin: 100px;
 }

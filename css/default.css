@@ -198,7 +198,8 @@ textarea {
 }
 
 h1, h2 {
-	font-size: 24pt;
+	font-size: 30pt;
+	font-weight: bold;
 	text-align: center;
 }
 
@@ -241,6 +242,7 @@ nav {
 
 #augustName, #augustSlogan {
 	margin: 0px;
+	font-weight: normal;
 }
 
 #menuItems {
@@ -353,7 +355,7 @@ a {
 }
 
 p {
-	font-size: 14pt;
+	font-size: 18pt;
 	text-align:justify;
 	margin: 20px;
 }

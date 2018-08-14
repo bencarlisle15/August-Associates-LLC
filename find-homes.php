@@ -1,4 +1,122 @@
-		<?php include('bin/head.php'); ?>
+		<?php
+			$pageNumber = 0;
+			//gets the rets data from the database
+			ini_set('memory_limit', '-1');
+			require_once("phpRequests/keys.php");
+			$conn = new mysqli("localhost", getDBUser(), getDBPassword(), getDBName());
+			$query = "SELECT * FROM Data WHERE ";
+			//uses the keys and vals from the params
+			foreach ($_GET as $key => $val) {
+				//removes dashes
+				$val = str_replace("-", " ", $val);
+				//change shows that this all vals need to be higher than it (1), lower than it (-1) or the same as or include it (0)
+				$change = 0;
+				//updates key to the correct one
+				switch ($key) {
+					case "searchPropertyType":
+						$key = "PropertyType";
+						if ($val == "Multi Family") {
+							$val = "2-4 Units Multi Family";
+						}
+						break;
+					case "searchMinPrice":
+						$key = "ListPrice";
+						$change = 1;
+						break;
+					case "searchMaxPrice":
+						$key = "ListPrice";
+						$change = -1;
+						break;
+					case "searchMinFeet":
+						$key = "SqFtTotal";
+						$change = 1;
+						break;
+					case "searchMaxFeet":
+						$key = "SqFtTotal";
+						$change = -1;
+						break;
+					case "searchBeds":
+						$key = "BedsTotal";
+						$change = 1;
+						break;
+					case "searchBaths":
+						$key = "BathsTotal";
+						$change = 1;
+						break;
+					case "searchAddresses":
+						$key = "FullStreetNum";
+						break;
+					case "searchCities":
+						$key = "City";
+						break;
+					case "searchZips":
+						$key = "PostalCode";
+						break;
+					case "radius":
+						$lat = $_GET['lat'];
+						$lng = $_GET['lng'];
+						$query .= "(" . $val . " >= 12742 * atan2(sqrt(sin((`Latitude` - " . $lat . ") * 0.0087222222) * sin((`Latitude` - " . $lat . ") * 0.0087222222) + cos(" . $lat . " * 0.0174444444) * cos(`Latitude` * 0.0174444444) * sin((`Longitude` - " . $lng . ") * 0.0087222222) * sin((`Longitude` - " . $lng . ") * 0.0087222222)), sqrt(1-sin((`Latitude` - " . $lat . ") * 0.0087222222) * sin((`Latitude` - " . $lat . ") * 0.0087222222) + cos(" . $lat . " * 0.0174444444) * cos(`Latitude` * 0.0174444444) * sin((`Longitude` - " . $lng . ") * 0.0087222222) * sin((`Longitude` - " . $lng . ") * 0.0087222222)))) && ";
+						continue 2;
+					//only used for radius
+					case "lat":
+						continue 2;
+					//only used for radius
+					case "lng":
+						continue 2;
+					//only used for js
+					case "map":
+						continue 2;
+					case "sortArray":
+						continue 2;
+				}
+				if (!$change) {
+					$query .= "(INSTR('" . $val . "', `" . $key . "`) > 0 OR INSTR(`" . $key . "`, '" . $val . "') > 0 OR '" . $val . "' = `" . $key . "` OR) && ";
+				} else if ($change == -1) {
+					$query .= "`" . $key ."`*1 <= " . $val . " && ";
+				} else if ($change == 1) {
+					$query .= "`" . $key ."`*1 >= " . $val . " && ";
+				}
+				//resets the array values;
+			}
+			if (!count($_GET)) {
+				$query .= "1";
+			} else {
+				$query = substr($query, 0, strlen($query) - 3);
+			}
+			$query .= " ORDER BY ";
+			if (isset($_GET['sortArray'])) {
+				//what to sort by
+				switch ($_GET['sortArray']) {
+					//price low to high
+					case "plh":
+						$query .= "ListPrice*1 ASC";
+						break;
+					//price high to low
+					case "phl":
+						$query .= "ListPrice*1 DESC";
+						break;
+					//square feet low to high
+					case "slh":
+						$query .= "SqFtTotal*1 ASC";
+						break;
+					//square feet high to low
+					case "shl":
+						$query .= "SqFtTotal*1 DESC";
+						break;
+				}
+				$query .= ", ";
+			}
+			$query .= "CASE `ListOfficeName` WHEN 'August Associates, LLC' THEN 1 ELSE 2 END, PhotoCount*1 DESC";
+			if ($_SERVER["REQUEST_METHOD"] == "POST") {
+				ob_start();
+				$rets = getNextSet($_POST['pageNumber']);
+				$str = ob_get_contents();
+				ob_end_clean();
+				echo json_encode([json_encode(json_encode($rets)), $str]);
+				return;
+			}
+			include('bin/head.php');
+		?>
 		<link rel="stylesheet" type="text/css" href="/css/find-homes.css">
 		<link rel="canonical" href="https://www.augustassociatesllc.net/find-homes" />
 		<title>August Associates LLC - Find Homes</title>
@@ -18,7 +136,7 @@
 							<option title="Property Type" value="" selected>Property Type</option>
 							<option title="Single Family" value="Single Family">Single Family</option>
 							<option title="Rental" value="Rental">Rental</option>
-							<option title="Multi Family" value="Multi Family">Multifamily	</option>
+							<option title="Multi Family" value="Multi Family">Multi Family</option>
 							<option title="Condo" value="Condominium">Condo</option>
 							<option title="Vacant Land" value="Vacant Land">Vacant Land</option>
 						</select>
@@ -52,180 +170,26 @@
 			<div id="housesWrapper">
 				<div id="houses">
 					<?php
-						$pageNumber = 0;
-						$rets = getSetRets($pageNumber++);
-						function getSetRets($pageNumber) {
-							//gets the rets data from the database
-							ini_set('memory_limit', '-1');
-							require_once("phpRequests/keys.php");
-							$conn = new mysqli("localhost", getDBUser(), getDBPassword(), getDBName());
-							$query = "SELECT json_data FROM RetsData";
-							$resultQuery = mysqli_query($conn, $query);
-							$result = $resultQuery->fetch_assoc()['json_data'];
-							$json = json_decode($result, true);
-							//uses the keys and vals from the params
-							foreach ($_GET as $key => $val) {
-								//removes dashes
-								$val = str_replace("-", " ", $val);
-								//change shows that this all vals need to be higher than it (1), lower than it (-1) or the same as or include it (0)
-								$change = 0;
-								//updates key to the correct one
-								switch ($key) {
-									case "searchPropertyType":
-										$key = "PropertyType";
-										if ($val == "Multi Family") {
-											$val = "2-4 Units Multi Family";
-										}
-										break;
-									case "searchMinPrice":
-										$key = "ListPrice";
-										$change = 1;
-										break;
-									case "searchMaxPrice":
-										$key = "ListPrice";
-										$change = -1;
-										break;
-									case "searchMinFeet":
-										$key = "SqFtTotal";
-										$change = 1;
-										break;
-									case "searchMaxFeet":
-										$key = "SqFtTotal";
-										$change = -1;
-										break;
-									case "searchBeds":
-										$key = "BedsTotal";
-										$change = 1;
-										break;
-									case "searchBaths":
-										$key = "BathsTotal";
-										$change = 1;
-										break;
-									case "searchAddresses":
-										$key = "FullStreetNum";
-										break;
-									case "searchCities":
-										$key = "City";
-										break;
-									case "searchZips":
-										$key = "PostalCode";
-										break;
-									case "radius":
-										//rempoves all
-										for ($i = 0; $i < sizeof($json); $i++) {
-											//determines the distanceBetween the points
-											$dist = distanceBetween($_GET['lat'], $_GET['lng'], $json[$i]['Latitude'], $json[$i]['Longitude']);
-											//removes the house if it is too far away
-											if ($dist >= $val*0.79863) {
-												unset($json[$i]);
-												$i--;
-												$json = array_values($json);
-											}
-										}
-										continue 2;
-									//only used for radius
-									case "lat":
-										continue 2;
-									//only used for radius
-									case "lng":
-										continue 2;
-									//only used for js
-									case "map":
-										continue 2;
-									//sorts the houses
-									case "sortArray":
-										//what to sort by
-										switch ($val) {
-											//price low to high
-											case "plh":
-												usort($json, function($a, $b) {
-													return $a['ListPrice'] - $b['ListPrice'];
-												});
-												break;
-											//price high to low
-											case "phl":
-												usort($json, function($a, $b) {
-													return $b['ListPrice'] - $a['ListPrice'];
-												});
-												break;
-											//square feet low to high
-											case "slh":
-												usort($json, function($a, $b) {
-													return (int) ($a['SqFtTotal'] ? $a['SqFtTotal'] : $a['ApproxLotSquareFoot']) - (int) ($b['SqFtTotal'] ? $b['SqFtTotal'] : $b['ApproxLotSquareFoot']);
-												});
-												break;
-											//square feet high to low
-											case "shl":
-												usort($json, function($a, $b) {
-													return (int) ($b['SqFtTotal'] ? $b['SqFtTotal'] : $b['ApproxLotSquareFoot']) - (int) ($a['SqFtTotal'] ? $a['SqFtTotal'] : $a['ApproxLotSquareFoot']);
-												});
-												break;
-										}
-										continue 2;
-								}
-								for ($i = 0; $i < sizeof($json); $i++) {
-									//checks if the house matches the requirements
-									//if change is 0 then check if its an int and they vals are not equal, if its not an int then it checks if the two vals are not equal and the houseval is not in the paramsval, if change is -1 then checks if the houseval is greater than the paramval, if change is 1 then it checks if the houseval is less than the paramsval
-									if (isInvalid(strtolower($json[$i][$key]), strtolower($val), $change)) {
-										//removes from json by unsetting it;
-										unset($json[$i--]);
-										$json = array_values($json);
-									}
-								}
-								//resets the array values;
-							}
-							if (!isset($_GET['sortArray'])) {
-								usort($json, function($a, $b) {
-									if ($b['ListOfficeName'] == 'August Associates, LLC') {
-										return 1;
-									} else if ($a['ListOfficeName'] == 'August Associates, LLC') {
-										return -1;
-									}
-									return $b['PhotoCount'] - $a['PhotoCount'];
-								});
-							}
-							//gets the first 40 houses
-							$pageSize = 40;
-							$first = array_slice($json, $pageSize * $pageNumber, $pageSize * ($pageNumber + 1));
-							for ($i = 0; $i < sizeof($first); $i++) {
-								echo "<div class='house' onclick='openHouse(" . htmlspecialchars($first[$i]['MLSNumber']) . ")'><div class='houseImageWrapper'>";
+						$rets = getNextSet(0);
+						function getNextSet($pageNumber) {
+							global $query, $conn;
+							$newQuery = $query . " LIMIT 40 OFFSET " . 40*$pageNumber++;
+							// echo $newQuery;
+							$json = [];
+							$result = mysqli_query($conn, $newQuery);
+							while($row = $result->fetch_assoc()) {
+								array_push($json, $row);
+								echo "<div class='house' onclick='openHouse(" . htmlspecialchars($row['MLSNumber']) . ")'><div class='houseImageWrapper'>";
 								//checks if the image is valid and only adds it if it is
 								//checks both testing and current since for the main branch
-								if (@getimagesize('images/rets/' . $first[$i]['MLSNumber'] . '/0.jpg') || @getimagesize('testing/images/rets/' . $first[$i]['MLSNumber'] . '/0.jpg')) {
-									echo "<img class='houseElement houseImage' alt='Picture of House' src='images/rets/" . htmlspecialchars($first[$i]['MLSNumber']) . "/0.jpg'/>";
+								if (@getimagesize('images/rets/' . $row['MLSNumber'] . '/0.jpg') || @getimagesize('testing/images/rets/' . $row['MLSNumber'] . '/0.jpg')) {
+									echo "<img class='houseElement houseImage' alt='Picture of House' src='images/rets/" . htmlspecialchars($row['MLSNumber']) . "/0.jpg'/>";
 								} else {
 									echo "<img class='houseElement houseImage' alt='House not Found' src='images/compass.png'/>";
 								}
-								echo "</div><div class='houseInformation'><h4 class='housePrice houseElement'>$" . number_format((float) $first[$i]['ListPrice']) . "</h4><p class='houseElement'>" . htmlspecialchars(ucwords(strtolower($first[$i]['FullStreetNum']))) . "</p><p class='houseElement'>" . htmlspecialchars($first[$i]['City']) ."</p><p class='houseElement'>" . htmlspecialchars(number_format((float) ($first[$i]['SqFtTotal'] ? $first[$i]['SqFtTotal'] : $first[$i]['ApproxLotSquareFoot']))) . " Square Feet</p></div></div>";
+								echo "</div><div class='houseInformation'><h4 class='housePrice houseElement'>$" . number_format((float) $row['ListPrice']) . "</h4><p class='houseElement'>" . htmlspecialchars(ucwords(strtolower($row['FullStreetNum']))) . "</p><p class='houseElement'>" . htmlspecialchars($row['City']) ."</p><p class='houseElement'>" . htmlspecialchars(number_format((float) $row['SqFtTotal'])) . " Square Feet</p></div></div>";
 							}
-							return $first;
-						}
-
-						function isInvalid($arVal, $paramVal, $change) {
-							if (!$change) {
-								if (is_int($arVal)) {
-									return $arVal != $paramVal;
-								} else  {
-									if (!$arVal) {
-										return true;
-									}
-									return $arVal != $paramVal && $paramVal && strpos($paramVal, $arVal) === false && strpos($arVal, $paramVal) === false;
-								}
-							} else {
-								return $change == -1 && $arVal > $paramVal || $change == 1 && $arVal < $paramVal;
-							}
-						}
-
-						//determines the fistance between two lat and lng vals
-						function distanceBetween($lat1,$lng1,$lat2,$lng2) {
-							$pi180 = M_PI / 180;
-							//distance between lats converts to rad
-							$dLat =  ($lat2-$lat1) * $pi180;
-							//distance between lang converts to rad
-							$dLon = ($lng2-$lng1) * $pi180;
-							//uses Haversine formula to calculate distance between
-							$a = sin($dLat/2) * sin($dLat/2) + cos($lat1 * $pi180) * cos($lat2 * $pi180) * sin($dLon/2) * sin($dLon/2);
-							return 12742 * atan2(sqrt($a), sqrt(1-$a));
+							return $json;
 						}
 					?>
 				</div>
@@ -248,17 +212,6 @@
 			if (!json || !json.length) {
 				//either error or query too specific
 				document.getElementById("loadingHomes").innerHTML = 'No More Houses Found';
-			}
-			function initAllHomes(pageNumber) {
-				document.getElementById("houses").innerHTML += "<?php $rets = getSetRets($pageNumber++) ?>";
-				//parses houses to json
-				var json = JSON.parse(<?php echo json_encode(json_encode($rets)); ?>);
-				//inits map from json
-				setMapHouses(json);
-				if (!json || !json.length) {
-					//either error or query too specific
-					document.getElementById("loadingHomes").innerHTML = 'No More Houses Found';
-				}
 			}
 		</script>
 	</body>

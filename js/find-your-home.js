@@ -94,14 +94,17 @@ function createBody() {
 
 //inits the map
 function initMap(location) {
+	if (!location) {
+		return;
+	}
 	var pos = JSON.parse(location);
 	var map = new google.maps.Map(document.getElementById('map'), {
-		center: {lat: pos[0], lng: pos[1]},
+		center: {lat: parseInt(pos[0]), lng: parseInt(pos[1])},
 		zoom: 17
 	});
 	new google.maps.Marker({
 		map: map,
-		position: {lat: pos[0], lng: pos[1]}
+		position: {lat: parseInt(pos[0]), lng: parseInt(pos[1])}
 	});
 }
 
