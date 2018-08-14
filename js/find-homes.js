@@ -5,7 +5,7 @@ var pageNumber = 0;
 window.onscroll = function(ev) {
 	if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight - 2 && document.getElementById("mapGridSwitch").value == "grid") {
 		var xhr = new XMLHttpRequest();
-		xhr.open("POST", 'find-homes', true);
+		xhr.open("POST", window.location.href, true);
 		xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 		xhr.onreadystatechange = function () {
 			if (this.readyState == 4) {

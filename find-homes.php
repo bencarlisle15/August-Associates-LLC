@@ -70,7 +70,7 @@
 						continue 2;
 				}
 				if (!$change) {
-					$query .= "(INSTR('" . $val . "', `" . $key . "`) > 0 OR INSTR(`" . $key . "`, '" . $val . "') > 0 OR '" . $val . "' = `" . $key . "` OR) && ";
+					$query .= "(INSTR('" . $val . "', `" . $key . "`) > 0 OR INSTR(`" . $key . "`, '" . $val . "') > 0 OR '" . $val . "' = `" . $key . "`) && ";
 				} else if ($change == -1) {
 					$query .= "`" . $key ."`*1 <= " . $val . " && ";
 				} else if ($change == 1) {
