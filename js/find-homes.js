@@ -10,10 +10,12 @@ window.onscroll = function(ev) {
 		xhr.onreadystatechange = function () {
 			if (this.readyState == 4) {
 				//gets the next set of houses
+				//parses to an array of json and echoed data
 				var parsed = JSON.parse(this.responseText)
 				var json = JSON.parse(JSON.parse(parsed[0]));
 				var echoed = parsed[1];
 				setMapHouses(json);
+				//adds echoed to the houses
 				document.getElementById("houses").innerHTML += echoed;
 				if (!json || json.length < 40) {
 					//either error or query too specific

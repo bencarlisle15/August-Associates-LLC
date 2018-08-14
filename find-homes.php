@@ -55,6 +55,7 @@
 					case "radius":
 						$lat = $_GET['lat'];
 						$lng = $_GET['lng'];
+						//uses the haversine formula to calculate the distance between two lat lng values and see if its less tham the radius
 						$query .= "(" . $val . " >= 12742 * atan2(sqrt(sin((`Latitude` - " . $lat . ") * 0.0087222222) * sin((`Latitude` - " . $lat . ") * 0.0087222222) + cos(" . $lat . " * 0.0174444444) * cos(`Latitude` * 0.0174444444) * sin((`Longitude` - " . $lng . ") * 0.0087222222) * sin((`Longitude` - " . $lng . ") * 0.0087222222)), sqrt(1-sin((`Latitude` - " . $lat . ") * 0.0087222222) * sin((`Latitude` - " . $lat . ") * 0.0087222222) + cos(" . $lat . " * 0.0174444444) * cos(`Latitude` * 0.0174444444) * sin((`Longitude` - " . $lng . ") * 0.0087222222) * sin((`Longitude` - " . $lng . ") * 0.0087222222)))) && ";
 						continue 2;
 					//only used for radius
@@ -69,21 +70,30 @@
 					case "sortArray":
 						continue 2;
 				}
-				if (!$change) {
-					$query .= "(INSTR('" . $val . "', `" . $key . "`) > 0 OR INSTR(`" . $key . "`, '" . $val . "') > 0 OR '" . $val . "' = `" . $key . "`) && ";
-				} else if ($change == -1) {
-					$query .= "`" . $key ."`*1 <= " . $val . " && ";
-				} else if ($change == 1) {
-					$query .= "`" . $key ."`*1 >= " . $val . " && ";
+				switch ($change) {
+					case 0:
+						//checks for either substring then for equality
+						$query .= "(INSTR('" . $val . "', `" . $key . "`) > 0 OR INSTR(`" . $key . "`, '" . $val . "') > 0 OR '" . $val . "' = `" . $key . "`) && ";
+						break;
+					case -1:
+						//uses *1 to convert to int
+						$query .= "`" . $key ."`*1 <= " . $val . " && ";
+						break;
+					case 1:
+						//uses *1 to convert to int
+						$query .= "`" . $key ."`*1 >= " . $val . " && ";
+						break;
 				}
+				//makes sure the value is not ""
 				$query .= "LENGTH(`" . $key . "`) > 0 && ";
-				//resets the array values;
 			}
+			//checks if a requirement exists
 			if (!count($_GET)) {
 				$query .= "1";
 			} else {
 				$query = substr($query, 0, strlen($query) - 3);
 			}
+			//sorting
 			$query .= " ORDER BY ";
 			if (isset($_GET['sortArray'])) {
 				//what to sort by
@@ -107,12 +117,18 @@
 				}
 				$query .= ", ";
 			}
+			//automatically puts august to the front and then sorts by photo
 			$query .= "CASE `ListOfficeName` WHEN 'August Associates, LLC' THEN 1 ELSE 2 END, PhotoCount*1 DESC";
+			//post request occurs durring scroll
 			if ($_SERVER["REQUEST_METHOD"] == "POST") {
+				//prevents echo
 				ob_start();
+				//gets json
 				$rets = getNextSet($_POST['pageNumber']);
+				//gets echoed content
 				$str = ob_get_contents();
 				ob_end_clean();
+				//creates array from json and echoed content and sends it
 				echo json_encode([json_encode(json_encode($rets)), $str]);
 				return;
 			}
@@ -173,12 +189,14 @@
 					<?php
 						$rets = getNextSet(0);
 						function getNextSet($pageNumber) {
+							//global variables
 							global $query, $conn;
 							$newQuery = $query . " LIMIT 40 OFFSET " . 40*$pageNumber++;
 							// echo $newQuery;
 							$json = [];
 							$result = mysqli_query($conn, $newQuery);
 							while($row = $result->fetch_assoc()) {
+								//adds result to json
 								array_push($json, $row);
 								echo "<div class='house' onclick='openHouse(" . htmlspecialchars($row['MLSNumber']) . ")'><div class='houseImageWrapper'>";
 								//checks if the image is valid and only adds it if it is
