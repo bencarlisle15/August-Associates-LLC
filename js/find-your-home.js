@@ -64,7 +64,7 @@ function removeInformationForm() {
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", '/phpRequests/apiRequests.php', true);
 	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-	xhr.send("functionname=addIP&name=" + document.getElementById("infoFormName").value.replace(" ", "+") + "&email=" + document.getElementById("infoFormEmail").value.replace(" ", "+"));
+	xhr.send("functionname=addIP&name=" + document.getElementById("infoFormName").value.split(" ").join("+") + "&email=" + document.getElementById("infoFormEmail").value.split(" ").join("+"));
 	var infoWrapper = document.getElementById("infoWrapper");
 	document.getElementById("infoOverlay").style.display = "none";
 	infoWrapper.style.color = "inherit";

@@ -16,7 +16,7 @@ function createAddress() {
 	var city = document.getElementById("formCity").value;
 	var zip = document.getElementById("formZip").value;
 	var state = document.getElementById("formState").value;
-	return addPluses(address) + ",+" + city.replace(' ', '+') + ",+" + state + "+" + zip;
+	return addPluses(address) + ",+" + city.split(' ').join('+') + ",+" + state + "+" + zip;
 }
 
 function createCloudCMA(address, city, zip, state) {

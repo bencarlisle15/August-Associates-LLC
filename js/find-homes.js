@@ -26,7 +26,7 @@ function beginFunctions() {
 	var url = window.location.href;
 	//checks for params
 	if (url.indexOf("?") >= 0) {
-		var queryUrl = url.substring(url.indexOf("?") + 1).replace("-", " ");
+		var queryUrl = url.substring(url.indexOf("?") + 1).split('+').join(' ').split("-").join(" ");
 		var queries = queryUrl.split("&");
 		//splits into key and params and updates the search bar
 		for (var i = 0; i < queries.length; i++) {
@@ -38,7 +38,7 @@ function beginFunctions() {
 				switchView();
 			}
 			if (document.getElementById(key)) {
-				document.getElementById(key).value = val.replace('+', ' ');;
+				document.getElementById(key).value = val;
 			}
 		}
 	}
