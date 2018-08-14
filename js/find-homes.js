@@ -78,9 +78,11 @@ function searchArea() {
 	document.getElementById("searchForm").submit();
 }
 
-//array of all google map markers REQUIERD
+//array of all google map markers REQUIRED
 var markerArray = []
 var map;
+//locations bounds
+var bounds = new google.maps.LatLngBounds();
 function initMap(res) {
 	var mapElement = document.getElementById("map");
 	map = new google.maps.Map(mapElement, {
@@ -91,9 +93,8 @@ function initMap(res) {
 	mapElement.style.height =  document.body.clientWidth/2 + "px";
 	//sets houses and markers
 	setMapHouses(res);
-	//sets center and zoom from frame
-	map.setCenter(new google.maps.LatLng(((locationPos['latMax'] + locationPos['latMin']) / 2.0), ((locationPos['lngMax'] + locationPos['lngMin']) / 2.0)));
 	if (window.location.href.includes("radius")) {
+		//find sets zoom from radius
 		var url = window.location.href;
 		var radius = Math.log2(156543.03392 * Math.cos(map.getCenter().lat() * Math.PI / 180)/(parseFloat(url.substring(url.indexOf("radius=") + 7, url.indexOf("&", url.indexOf("radius="))))));
 		var lat = parseFloat(url.substring(url.indexOf("lat=") + 4, url.indexOf("&", url.indexOf("lat="))));
@@ -112,11 +113,11 @@ function removeAllMarkers() {
 	}
 	markerArray = [];
 }
-//location boundaries
-var locationPos = {latMax: 0, latMin: 0, lngMax: 0, lngMin: 0};
+
+
 function setMapHouses(res) {
 	//gets the max and min of the lat and lng of the markers in order to frame them
-	res.forEach(function(resHouse) {
+	res.forEach(function (resHouse) {
 		//get last and lng from house
 		var lat = parseFloat(resHouse.Latitude);
 		var lng = parseFloat(resHouse.Longitude);
@@ -153,22 +154,12 @@ function setMapHouses(res) {
 				}
 			}
 		});
-		//updates frame
-		if (!locationPos['latMin'] || lat < locationPos['latMin']) {
-			locationPos['latMin'] = lat;
-		}
-		if (!locationPos['latMax'] || lat > locationPos['latMax']) {
-			locationPos['latMax'] = lat;
-		}
-		if (!locationPos['lngMin'] || lng < locationPos['lngMin']) {
-			locationPos['lngMin'] = lng;
-		}
-		if (!locationPos['lngMax'] || lng > locationPos['lngMax']) {
-			locationPos['lngMax'] = lng;
-		}
+		//updates bounds
+		bounds.extend(marker.getPosition());
 		//adds marker to the array
 		markerArray.push(marker);
 	});
+	map.fitBounds(bounds);
 }
 
 //Adds K and M to create the price
@@ -210,11 +201,11 @@ function switchView() {
 		document.getElementById("loadingHomes").style.display = "none";
 		document.getElementById("sortArray").style.display = "none";
 		document.getElementById("searchThisArea").style.display = "block";
-		document.getElementById("map").style.display = "block";
+		document.getElementById("map").style.visibility = "visible";
 	} else {
 		mapGridSwitch.value = "grid";
 		mapGridSwitch.innerHTML = "Switch to Map View";
-		document.getElementById("map").style.display = "none";
+		document.getElementById("map").style.visibility = "hidden";
 		document.getElementById("searchThisArea").style.display = "none";
 		document.getElementById("loadingHomes").style.display = "block";
 		document.getElementById("sortArray").style.display = "block";

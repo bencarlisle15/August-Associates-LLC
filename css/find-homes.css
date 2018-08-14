@@ -175,6 +175,10 @@
 	background-color: white;
 }
 
-#map, #searchThisArea {
+#map {
+	visibility: hidden;
+}
+
+#searchThisArea {
 	display: none;
 }
