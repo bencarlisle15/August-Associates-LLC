@@ -99,12 +99,12 @@ function initMap(location) {
 	}
 	var pos = JSON.parse(location);
 	var map = new google.maps.Map(document.getElementById('map'), {
-		center: {lat: parseInt(pos[0]), lng: parseInt(pos[1])},
+		center: {lat: parseFloat(pos[0]), lng: parseFloat(pos[1])},
 		zoom: 17
 	});
 	new google.maps.Marker({
 		map: map,
-		position: {lat: parseInt(pos[0]), lng: parseInt(pos[1])}
+		position: {lat: parseFloat(pos[0]), lng: parseFloat(pos[1])}
 	});
 }
 

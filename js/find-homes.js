@@ -15,6 +15,10 @@ window.onscroll = function(ev) {
 				var echoed = parsed[1];
 				setMapHouses(json);
 				document.getElementById("houses").innerHTML += echoed;
+				if (!json || json.length < 40) {
+					//either error or query too specific
+					document.getElementById("loadingHomes").innerHTML = 'No More Houses Found';
+				}
 			}
 		}
 		xhr.send("pageNumber=" + (++pageNumber));

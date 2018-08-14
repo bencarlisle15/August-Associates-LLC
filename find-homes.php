@@ -76,6 +76,7 @@
 				} else if ($change == 1) {
 					$query .= "`" . $key ."`*1 >= " . $val . " && ";
 				}
+				$query .= "LENGTH(`" . $key . "`) > 0 && ";
 				//resets the array values;
 			}
 			if (!count($_GET)) {
@@ -209,7 +210,7 @@
 			var json = JSON.parse(<?php echo json_encode(json_encode($rets)); ?>);
 			//inits map from json
 			initMap(json);
-			if (!json || !json.length) {
+			if (!json || json.length < 40) {
 				//either error or query too specific
 				document.getElementById("loadingHomes").innerHTML = 'No More Houses Found';
 			}
