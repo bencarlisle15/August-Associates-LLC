@@ -1,6 +1,6 @@
 	<?php include('bin/head.php'); ?>
 	<link rel="stylesheet" type="text/css" href="/css/mortgage.css">
-	<link rel="canonical" href="https://www.augustassociatesllc.net/mortgage" />
+	<link rel="canonical" href="https://www.augustassociatesllc.com/mortgage" />
 	<title>August Associates LLC - Mortgage Calculator</title>
 	<meta name="description" content="Calculate what you would pay for your mortgage. August Associates, your valued guide in real estate." />
 </head>

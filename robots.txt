@@ -14,4 +14,4 @@ Allow: /ouragents
 Allow: /testimonials
 Allow: /contact
 
-Sitemap: https://www.augustassociatesllc.net/sitemap_location.xml
+Sitemap: https://www.augustassociatesllc.com/sitemap_location.xml

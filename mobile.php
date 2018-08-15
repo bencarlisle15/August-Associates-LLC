@@ -3,7 +3,7 @@
 				include('css/home-mobile.css');
 			?>
 		</style>
-		<link rel="canonical" href="https://www.augustassociatesllc.net/"/>
+		<link rel="canonical" href="https://www.augustassociatesllc.com/"/>
 		<title>August Associates LLC - Rhode Island Real Estate</title>
 		<meta name="description" content="August Associates is a real estate agency looking to help you buy or sell a home. North, South, East, West, your valued guide in real estate" />
 		<script async custom-element="amp-facebook-like" src="https://cdn.ampproject.org/v0/amp-facebook-like-0.1.js"></script>

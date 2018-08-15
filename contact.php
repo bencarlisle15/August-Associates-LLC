@@ -1,6 +1,6 @@
 		<?php include('bin/head.php'); ?>
 		<link rel="stylesheet" type="text/css" href="/css/contact.css">
-		<link rel="canonical" href="https://www.augustassociatesllc.net/contact" />
+		<link rel="canonical" href="https://www.augustassociatesllc.com/contact" />
 		<title>August Associates LLC - Contact Us</title>
 		<meta name="description" content="Contact us for any questions or concerns. August Associates, your valued guide in real estate." />
 	</head>

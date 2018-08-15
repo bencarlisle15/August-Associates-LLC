@@ -1,6 +1,6 @@
 		<?php include('bin/head.php'); ?>
 		<link rel="stylesheet" type="text/css" href="/css/thankyou.css">
-		<link rel="canonical" href="https://www.augustassociatesllc.net/thankyou" />
+		<link rel="canonical" href="https://www.augustassociatesllc.com/thankyou" />
 		<title>August Associates LLC - Thank You</title>
 		<meta name="description" content="Thank you for your interest in August Associates LLC. August Associates, your valued guide in real estate." />
 	</head>

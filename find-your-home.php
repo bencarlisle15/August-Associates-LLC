@@ -12,7 +12,7 @@
 			}
 		?>
 		<link rel="stylesheet" type="text/css" href="/css/find-your-home.css">
-		<link rel="canonical" href="https://www.augustassociatesllc.net/find-your-home" />
+		<link rel="canonical" href="https://www.augustassociatesllc.com/find-your-home" />
 		<title>August Associates LLC - Find Your Home</title>
 		<meta name="description" content="View your new home here. August Associates, your valued guide in real estate." />
 	</head>

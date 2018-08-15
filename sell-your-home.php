@@ -1,6 +1,6 @@
 		<?php include('bin/head.php'); ?>
 		<link rel="stylesheet" type="text/css" href="/css/sell-your-home.css">
-		<link rel="canonical" href="https://www.augustassociatesllc.net/sell-your-home" />
+		<link rel="canonical" href="https://www.augustassociatesllc.com/sell-your-home" />
 		<title>August Associates LLC - Sell Your Home</title>
 		<meta name="description" content="See how much your home could be worth here. August Associates, your valued guide in real estate." />
 	</head>

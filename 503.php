@@ -1,6 +1,6 @@
 		<?php include($_SERVER['DOCUMENT_ROOT'].'/bin/head.php'); ?>
 		<link rel="stylesheet" type="text/css" href="/css/error.css">
-		<link rel="canonical" href="https://www.augustassociatesllc.net/503" />
+		<link rel="canonical" href="https://www.augustassociatesllc.com/503" />
 		<title>August Associates LLC - 503</title>
 		<meta name="description" content="503, this page is down for maintenance. August Associates, your valued guide in real estate." />
 	</head>

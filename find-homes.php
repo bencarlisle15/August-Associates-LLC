@@ -135,7 +135,7 @@
 			include('bin/head.php');
 		?>
 		<link rel="stylesheet" type="text/css" href="/css/find-homes.css">
-		<link rel="canonical" href="https://www.augustassociatesllc.net/find-homes" />
+		<link rel="canonical" href="https://www.augustassociatesllc.com/find-homes" />
 		<title>August Associates LLC - Find Homes</title>
 		<meta name="description" content="Search for your new home here. August Associates, your valued guide in real estate." />
 	</head>

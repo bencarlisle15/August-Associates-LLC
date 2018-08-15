@@ -1,6 +1,6 @@
 		<?php include($_SERVER['DOCUMENT_ROOT'].'/bin/head.php'); ?>
 		<link rel="stylesheet" type="text/css" href="/css/error.css">
-		<link rel="canonical" href="https://www.augustassociatesllc.net/404" />
+		<link rel="canonical" href="https://www.augustassociatesllc.com/404" />
 		<title>August Associates LLC - 404</title>
 		<meta name="description" content="404, this page could not be found. August Associates, your valued guide in real estate." />
 	</head>

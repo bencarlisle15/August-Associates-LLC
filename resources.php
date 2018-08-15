@@ -1,6 +1,6 @@
 		<?php include('bin/head.php'); ?>
 		<link rel="stylesheet" type="text/css" href="/css/resources.css">
-		<link rel="canonical" href="https://www.augustassociatesllc.net/thankyou" />
+		<link rel="canonical" href="https://www.augustassociatesllc.com/resources" />
 		<title>August Associates LLC - Resources</title>
 		<meta name="description" content="Resources provided for you to make your transitions easier. August Associates, your valued guide in real estate." />
 	</head>

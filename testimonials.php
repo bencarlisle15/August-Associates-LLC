@@ -1,6 +1,6 @@
 		<?php include('bin/head.php'); ?>
 		<link rel="stylesheet" type="text/css" href="/css/testimonials.css">
-		<link rel="canonical" href="https://www.augustassociatesllc.net/testimonials" />
+		<link rel="canonical" href="https://www.augustassociatesllc.com/testimonials" />
 		<title>August Associates LLC - Testimonials</title>
 		<meta name="description" content="View our testimonials or add your own. August Associates, your valued guide in real estate." />
 	</head>
