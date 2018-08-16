@@ -23,7 +23,7 @@
 				$mail->Subject = "Website Form";
 				$mail->Body = $_POST['body'];
 				$mail->AddAddress("augustassociatesllc@gmail.com");
-				// $mail->AddAddress("joseph.mccarthy@fivestreet.me");
+				$mail->AddAddress("joseph.mccarthy@fivestreet.me");
 				$mail->Send();
 			} catch (phpmailerException $e) {
 			} catch (Exception $e) {
