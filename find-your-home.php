@@ -3,7 +3,7 @@
 			ini_set('memory_limit', '-1');
 			require_once("phpRequests/keys.php");
 			$conn = new mysqli("localhost", getDBUser(), getDBPassword(), getDBName());
-			$query = "SELECT * FROM Data WHERE `MLSNumber`=" . $_GET['id'];
+			$query = "SELECT * FROM RetsData WHERE `MLSNumber`=" . $_GET['id'];
 			$result = mysqli_query($conn, $query);
 			$res = $result->fetch_assoc();
 			if (!$result || !$res) {
@@ -49,12 +49,12 @@
 						echo "</div>";
 					}
 					echo "<h2 id='address'>" . htmlspecialchars(toSentenceCase($res['FullStreetNum'])) . ", " . htmlspecialchars(toSentenceCase($res['City'])) . ", " . $res['PostalCode'] . "</h2>
-					<h2 id='price'>$" . htmlspecialchars(number_format((float) $res['ListPrice'])) . "</h2>
+					<h2 id='price'>$" . htmlspecialchars(number_format((float) $res['CurrentPrice'])) . "</h2>
 					<div id='tableAndDescription'>
 						<p id='description'>" .  htmlspecialchars(toSentenceCase($res['PublicRemarks'])) . "</p>
 						<table id='table'>";
 						//list of all attributes to use sorted by ['RetsName' => 'Visible name']
-						$keys = ["SqFtTotal" => "Living Area Size", "BathsTotal" => "Bathrooms", "NumberOfLevels" => "Stories", "Fireplace"=> "Fireplaces", "HeatingSystem"=> "Heating", "BedsTotal"=> "Bedrooms", "Pool"=> "Pool", "WaterAmenities"=> "Water Amenities", "YearBuilt"=> "Year Built", "GarageSpaces"=> "Garage Spaces", "ApproxLotSquareFoot" => "Lot Size"];
+						$keys = ["SqFtTotal" => "Living Area Size", "BathsTotal" => "Bathrooms", "NumberOfLevels" => "Stories", "Fireplace"=> "Fireplaces", "HeatingSystem"=> "Heating", "BedsTotal"=> "Bedrooms", "Pool"=> "Pool", "WaterAmenities"=> "Water Amenities", "YearBuilt"=> "Year Built", "GarageSpaces"=> "Garage Spaces", "ApproxLotSquareFoot" => "Lot Size", "ListOfficeName" => "Listing Office"];
 						//adds all the attirbutes;
 						foreach ($keys as $key => $value) {
 							$val = $res[$key];
@@ -63,17 +63,13 @@
 							}
 							addAttribute($value, $val);
 						}
-						//determines the correct list office to use
-						$listingOffice = $res['ListOfficeName'] ? $res['ListOfficeName'] : ($res['CoListOfficeName'] ? $res['CoListOfficeName'] : ($res['SellingOfficeName'] ? $res['SellingOfficeName'] : ($res['CoSellingOfficeName'] ? $res['CoSellingOfficeName'] : 'Listing Office Not Found')));
-						//adds attribute
-						addAttribute("Listing Office", $listingOffice);
 						echo "<tr><th class='keys'>Source</th><td class='values'>Rhode Island MLS</td></tr>
 						</table>
 					</div>";
 					echo "<h2 id='interested'>Interested in this Home?</h2>
 					<h2 id='interestedContact'>Call us at <a href='tel:4014610700'>(401) 461-0700</a> or Email us at <a href='mailto:jmccarthy@necompass.com'>jmccarthy@necompass.com</a> to get in touch with an agent</h2>";
 					//capitalizes the first letter after spaces, ', and "
-					
+
 					function toSentenceCase($str) {
 						return str_replace("\" ", "\"", ucwords(str_replace("\"", "\" ", strtolower(str_replace('\' ', '\'', ucwords(str_replace('\'', '\' ', strtolower($str))))))));
 					}

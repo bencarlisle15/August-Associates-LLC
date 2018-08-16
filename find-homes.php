@@ -4,7 +4,7 @@
 			ini_set('memory_limit', '-1');
 			require_once("phpRequests/keys.php");
 			$conn = new mysqli("localhost", getDBUser(), getDBPassword(), getDBName());
-			$query = "SELECT * FROM Data WHERE ";
+			$query = "SELECT * FROM RetsData WHERE ";
 			//uses the keys and vals from the params
 			foreach ($_GET as $key => $val) {
 				//removes dashes
@@ -20,11 +20,11 @@
 						}
 						break;
 					case "searchMinPrice":
-						$key = "ListPrice";
+						$key = "CurrentPrice";
 						$change = 1;
 						break;
 					case "searchMaxPrice":
-						$key = "ListPrice";
+						$key = "CurrentPrice";
 						$change = -1;
 						break;
 					case "searchMinFeet":
@@ -100,11 +100,11 @@
 				switch ($_GET['sortArray']) {
 					//price low to high
 					case "plh":
-						$query .= "ListPrice*1 ASC";
+						$query .= "CurrentPrice*1 ASC";
 						break;
 					//price high to low
 					case "phl":
-						$query .= "ListPrice*1 DESC";
+						$query .= "CurrentPrice*1 DESC";
 						break;
 					//square feet low to high
 					case "slh":
@@ -206,9 +206,27 @@
 								} else {
 									echo "<img class='houseElement houseImage' alt='House not Found' src='images/compass.png'/>";
 								}
-								echo "</div><div class='houseInformation'><h4 class='housePrice houseElement'>$" . number_format((float) $row['ListPrice']) . "</h4><p class='houseElement'>" . htmlspecialchars(ucwords(strtolower($row['FullStreetNum']))) . "</p><p class='houseElement'>" . htmlspecialchars($row['City']) ."</p><p class='houseElement'>" . htmlspecialchars(number_format((float) $row['SqFtTotal'])) . " Square Feet</p></div></div>";
+								$hasPrevious = $row['PreviousPrice'];
+								echo "</div><div class='houseInformation'><div class='pricesSection'><h3 class='previousPrice'>" . ($hasPrevious ? ("$" . number_format((float) $row['PreviousPrice'])) : "") . "</h3><h3 class='currentPrice " . ($hasPrevious ? "hasPrevious" : "") . "'>$" . number_format((float) $row['CurrentPrice']) . "</h3></div><p class='houseElement'>" . htmlspecialchars(ucwords(strtolower($row['FullStreetNum']))) . "</p><p class='houseElement'>" . htmlspecialchars($row['City']) ."</p><p class='houseElement'>" . getPropertyType($row['PropertyType']) . "</h4><p class='houseElement'>" . htmlspecialchars(number_format((float) $row['SqFtTotal'])) . " Square Feet</p></div></div>";
 							}
 							return $json;
+						}
+
+						function getPropertyType($type) {
+							switch ($type) {
+								case "Rental":
+									return "Rental";
+								case "2-4 Units Multi Family":
+									return "Multi Family";
+								case "Condominium":
+									return "Condo";
+								case "Vacant Land":
+									return "Land";
+								case "Single Family":
+									return "Single Family";
+								default:
+									return "";
+							}
 						}
 					?>
 				</div>

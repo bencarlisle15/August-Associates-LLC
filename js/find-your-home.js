@@ -15,14 +15,14 @@ xhr.onreadystatechange = function () {
 		if (!sessionStorage.houseNumber) {
 			sessionStorage.houseNumber = 1;
 		//if the ip address was found
-	} else if (this.responseText == 1) {
+	} else if (this.responseText == 11) {
 			//creates lead alerting that the uesr has returned
 			var xhr = new XMLHttpRequest();
 			xhr.open("POST", '/phpRequests/apiRequests.php', true);
 			xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 			xhr.send("functionname=ipReturned&MLSNumber=" + id);
 			sessionStorage.houseNumber = 1;
-		} else if (this.responseText == -1) {
+		} else if (this.responseText == -11) {
 			return;
 		} else if (sessionStorage.houseNumber < 2) {
 			//increases the views the user has
@@ -47,7 +47,7 @@ function addInformationForm() {
 	var infoOverlay = document.createElement("div");
 	infoOverlay.id = "infoOverlay";
 	infoOverlay.style.display = "block";
-	infoOverlay.innerHTML =  "<div id='infoFormWrapper'><h2 id='formTooManyUses'>You Have Used Up Your Three Free Views</h2><h2 id='formInfo'>Enter Your Name and Email to View this Property</h2><form id='infoForm' action='javascript:submitInfoForm()'><input type='text' id='infoFormName' class='infoFormElement' placeholder='Name' required><input type='email' id='infoFormEmail' placeholder='Email' class='infoFormElement' required><input type='tel' id='infoFormPhone' placeholder='Phone Number' class='infoFormElement'><button id='infoFormSubmit' class='infoFormElement'>Submit</button></form></div>";
+	infoOverlay.innerHTML = "<div id='infoFormWrapper'><h2 id='formTooManyUses'>You Have Used Up Your Free Views</h2><h2 id='formInfo'>Enter Your Name and Email to View this Property</h2><form id='infoForm' action='javascript:submitInfoForm()'><input type='text' id='infoFormName' class='infoFormElement' placeholder='Name' required><input type='email' id='infoFormEmail' placeholder='Email' class='infoFormElement' required><input type='tel' id='infoFormPhone' placeholder='Phone Number' class='infoFormElement'><h4 id='chooseAgent' class='infoFormElement'>Choose a Specific Agent(s) to Notify</h4><fieldset id='agentFieldset' class='infoFormElement'><div id='checkAgents'><input type='checkbox' class='agentCheck' id='joseph' name='agent' value='joseph'/><label class='agentLabel' for='joseph'>Joseph McCarthy</label><input type='checkbox' class='agentCheck' id='wendy' name='agent' value='wendy'/><label class='agentLabel' for='wendy'>Wendy Grave</label><input type='checkbox' class='agentCheck' id='bob' name='agent' value='bob'/><label class='agentLabel' for='bob'>Bob Nasiatka</label><input type='checkbox' class='agentCheck' id='rick' name='agent' value='rick'/><label class='agentLabel' for='rick'>Rick Delmastro</label><input type='checkbox' class='agentCheck' id='kari' name='agent' value='kari'/><label class='agentLabel' for='kari'>Kari Hernandez</label><input type='checkbox' class='agentCheck' id='debora' name='agent' value='debora'/><label class='agentLabel' for='debora'>Debora Rotondo</label></div></fieldset><button id='infoFormSubmit' class='infoFormElement'>Submit</button></form></div>";
 	document.getElementById("yourHomeSection").prepend(infoOverlay);
 	infoWrapper.style.color = "transparent";
 	infoWrapper.style.textShadow = "0 0 20px rgba(0,0,0,5)";
@@ -84,7 +84,19 @@ function submitInfoForm() {
 	var xhr = new XMLHttpRequest();
 	xhr.open("POST", '/phpRequests/apiRequests.php', true);
 	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-	xhr.send("functionname=sendEmail&body=" + createBody());
+	var sendTo = "&sendto=";
+	var checkboxes = document.getElementsByClassName("agentCheck");
+	for (var i in checkboxes) {
+		if (checkboxes[i].checked) {
+			sendTo += checkboxes[i].value + ",";
+		}
+	}
+	if (sendTo == "&sendTo=") {
+		sendTo = "";
+	} else {
+		sendTo = sendTo.substring(0, sendTo.length - 1);
+	}
+	xhr.send("functionname=sendEmail&body=" + createBody() + sendTo);
 	removeInformationForm();
 }
 

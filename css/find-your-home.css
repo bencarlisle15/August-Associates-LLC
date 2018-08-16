@@ -166,3 +166,20 @@
 .infoFormElement {
 	flex: 1;
 }
+.agentCheck {
+	transform: scale(1.25);
+}
+
+#chooseAgent {
+	text-align: center;
+}
+
+#checkAgents {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.agentLabel {
+	margin: 5px;
+}

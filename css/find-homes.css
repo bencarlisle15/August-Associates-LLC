@@ -30,10 +30,6 @@
 	width: 100%;
 }
 
-.housePrice {
-	text-align: right;
-}
-
 .houseImageWrapper {
 	width: 300px;
 	height: 225px;
@@ -55,7 +51,7 @@
 	border:1px solid black;
 	cursor: pointer;
 	width: 300px;
-	height: 350px;
+	height: 380px;
 	margin: 8px;
 	position: relative;
 	background-color: white;
@@ -102,7 +98,7 @@
 	border:1px solid black;
 	cursor: pointer;
 	width: 300px;
-	height: 350px;
+	height: 380px;
 	background-color: white;
 	position:absolute;
 	top: 50%;
@@ -181,4 +177,23 @@
 
 #searchThisArea {
 	display: none;
+}
+
+.pricesSection {
+	display: flex;
+	align-self: flex-end;
+	margin: 5px;
+}
+
+.hasPrevious {
+	text-decoration: line-through;
+}
+
+.previousPrice {
+	font-weight: bold;
+	color: #FF0000;
+}
+
+.currentPrice, .previousPrice {
+	margin: 2px;
 }

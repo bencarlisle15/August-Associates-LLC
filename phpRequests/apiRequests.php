@@ -23,7 +23,32 @@
 				$mail->Subject = "Website Form";
 				$mail->Body = $_POST['body'];
 				$mail->AddAddress("augustassociatesllc@gmail.com");
-				$mail->AddAddress("joseph.mccarthy@fivestreet.me");
+				if (isset($_GET['sendTo'])) {
+					foreach (explode(",", $_GET["sendTo"]) as $agent) {
+						switch ($agent) {
+							case "joseph":
+								// $mail->AddAddress("josephmccarthy@myleads.io");
+								break;
+							case "wendy":
+								// $mail->AddAddress("wendy.grave@fivestreet.me");
+								break;
+							case "bob":
+								// $mail->AddAddress("bob.nasiatka@fivestreet.me");
+								break;
+							case "rick":
+								// $mail->AddAddress("rick.delmastro@fivestreet.me");
+								break;
+							case "kari":
+								// $mail->AddAddress("kari.hernandez@fivestreet.me");
+								break;
+							case "debora":
+								// $mail->AddAddress("debora.rotondo@fivestreet.me");
+								break;
+						}
+					}
+				} else {
+					// $mail->AddAddress("joseph.mccarthy@fivestreet.me");
+				}
 				$mail->Send();
 			} catch (phpmailerException $e) {
 			} catch (Exception $e) {

@@ -139,7 +139,7 @@ function setMapHouses(res) {
 			//positioned to coordinates
 			position: {lat: lat, lng: lng},
 			//sets bubble text;
-			label: { color: 'black', fontSize: '16px', fontFamily: "Open Sans", text: roundToLetter(resHouse.ListPrice)}
+			label: { color: 'black', fontSize: '16px', fontFamily: "Open Sans", text: roundToLetter(resHouse.CurrentPrice)}
 		});
 		//when a marker is clicked
 		marker.addListener('click', function() {
