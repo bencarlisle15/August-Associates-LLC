@@ -19,7 +19,6 @@ $results = $rets->Search('Property', 'Listing', '(Status=AA,AU,CS),(CurrentPrice
 $results2 = $rets->Search('Property', 'Listing', '(Status=AA,AU,CS),(CurrentPrice=300000+)',  ['Limit' => $limit/2]);
 echo "End Search\n";
 $conn = new mysqli("localhost", getDBUser(), getDBPassword(), getDBName());
-// mysqli_query($conn, "TRUNCATE `Data`");
 // $data = $results->toJSON();
 $ar = array_merge($results->toArray(), $results2->toArray());
 echo "Start Photos\n";
