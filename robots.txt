@@ -4,8 +4,6 @@ Disallow: /images/arrow.png
 
 User-Agent: *
 Disallow: /resources
-Disallow: /agents/wendy
-Disallow: /agents/joseph
 Allow: /
 Allow: /find-homes
 Allow: /sell-your-home

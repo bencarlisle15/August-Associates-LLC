@@ -46,6 +46,7 @@ showSlides(0);
 function addInformationForm() {
 	var infoOverlay = document.createElement("div");
 	infoOverlay.id = "infoOverlay";
+	infoOverlay.style.display = "block";
 	infoOverlay.innerHTML =  "<div id='infoFormWrapper'><h2 id='formTooManyUses'>You Have Used Up Your Three Free Views</h2><h2 id='formInfo'>Enter Your Name and Email to View this Property</h2><form id='infoForm' action='javascript:submitInfoForm()'><input type='text' id='infoFormName' class='infoFormElement' placeholder='Name' required><input type='email' id='infoFormEmail' placeholder='Email' class='infoFormElement' required><input type='tel' id='infoFormPhone' placeholder='Phone Number' class='infoFormElement'><button id='infoFormSubmit' class='infoFormElement'>Submit</button></form></div>";
 	document.getElementById("yourHomeSection").prepend(infoOverlay);
 	infoWrapper.style.color = "transparent";
@@ -72,7 +73,7 @@ function removeInformationForm() {
 	infoWrapper.style.cursor = "inherit";
 	infoWrapper.style.textShadow = "inherit";
 	document.getElementById("map").style.visibility = "inherit";
-	var links = document.getElementById("descriptionAndContact").getElementsByTagName("a");
+	var links = document.getElementById("yourHomeSection").getElementsByTagName("a");
 	for (var i = 0; i < links.length; i++) {
 		links[i].style.visibility = "visible";
 	}

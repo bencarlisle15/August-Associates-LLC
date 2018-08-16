@@ -25,45 +25,43 @@ $ar = array_merge($results->toArray(), $results2->toArray());
 echo "Start Photos\n";
 for ($q = 0; $q < sizeof($ar); $q++) {
 	echo $q . " of " . count($ar) . "\n";
-	if (mysqli_query($conn, "SELECT COUNT(*) FROM Data WHERE `MLSNumber`='" . $ar[$q]['MLSNumber'] . "'")->fetch_assoc()["COUNT(*)"] == "0") {
-		$insertQuery = "INSERT INTO Data (";
-		$keys = [];
-		$vals = [];
-		$databasePosition = getDatabasePosition($ar[$q]['MLSNumber']);
-		if ($databasePosition) {
-			array_push($keys, "Latitude");
-			array_push($vals, "'" .  $conn->real_escape_string($databasePosition['latitude']) . "'");
-			array_push($keys, "Longitude");
-			array_push($vals, "'" .  $conn->real_escape_string($databasePosition['longitude']) . "'");
+	$insertQuery = "INSERT INTO Data (";
+	$keys = [];
+	$vals = [];
+	$databasePosition = getDatabasePosition($ar[$q]['MLSNumber']);
+	if ($databasePosition) {
+		array_push($keys, "Latitude");
+		array_push($vals, "'" .  $conn->real_escape_string($databasePosition['latitude']) . "'");
+		array_push($keys, "Longitude");
+		array_push($vals, "'" .  $conn->real_escape_string($databasePosition['longitude']) . "'");
+	} else {
+		echo "Does not already exist\n";
+		$url = 'http://dev.virtualearth.net/REST/v1/Locations?CountryRegion=US&adminDistrict=' . urlencode($ar[$q]["StateOrProvince"]) . '&postalCode=' . urlencode($ar[$q]["PostalCode"]) . '&addressLine=' . urlencode($ar[$q]["FullStreetNum"]) . '&maxResults=1&key=' . getMapKey();
+		$geo = file_get_contents($url);
+		$geo = json_decode($geo, true);
+		if (!$geo['resourceSets'][0]['resources'][0]['point']['coordinates']) {
+			echo 'Geocoding failed\n';
 		} else {
-			echo "Does not already exist\n";
-			$url = 'http://dev.virtualearth.net/REST/v1/Locations?CountryRegion=US&adminDistrict=' . urlencode($ar[$q]["StateOrProvince"]) . '&postalCode=' . urlencode($ar[$q]["PostalCode"]) . '&addressLine=' . urlencode($ar[$q]["FullStreetNum"]) . '&maxResults=1&key=' . getMapKey();
-			$geo = file_get_contents($url);
-			$geo = json_decode($geo, true);
-			if (!$geo['resourceSets'][0]['resources'][0]['point']['coordinates']) {
-				echo 'Geocoding failed\n';
-			} else {
-				$lat = $geo['resourceSets'][0]['resources'][0]['point']['coordinates'][0];
-				$lng = $geo['resourceSets'][0]['resources'][0]['point']['coordinates'][1];
-				addDatabasePosition($ar[$q]['MLSNumber'], $lat, $lng);
-				$ar[$q]["Latitude"] = $lat;
-				$ar[$q]["Longitude"] = $lng;
-			}
-		 }
-		foreach ($ar[$q] as $key => $value) {
-			array_push($keys, $key);
-			array_push($vals, "'" .  $conn->real_escape_string($value) . "'");
+			$lat = $geo['resourceSets'][0]['resources'][0]['point']['coordinates'][0];
+			$lng = $geo['resourceSets'][0]['resources'][0]['point']['coordinates'][1];
+			addDatabasePosition($ar[$q]['MLSNumber'], $lat, $lng);
+			$ar[$q]["Latitude"] = $lat;
+			$ar[$q]["Longitude"] = $lng;
 		}
-		foreach ($keys as $key ) {
-			$insertQuery .= $key . ", ";
-		}
-		$insertQuery = substr($insertQuery, 0, strlen($insertQuery) - 2) . ") VALUES (";
-		foreach ($vals as $val ) {
-			$insertQuery .= $val . ", ";
-		}
-		$insertQuery = substr($insertQuery, 0, strlen($insertQuery) - 2) . ");";
-		mysqli_query($conn, $insertQuery);
+	 }
+	foreach ($ar[$q] as $key => $value) {
+		array_push($keys, $key);
+		array_push($vals, "'" .  $conn->real_escape_string($value) . "'");
 	}
+	foreach ($keys as $key ) {
+		$insertQuery .= $key . ", ";
+	}
+	$insertQuery = substr($insertQuery, 0, strlen($insertQuery) - 2) . ") VALUES (";
+	foreach ($vals as $val ) {
+		$insertQuery .= $val . ", ";
+	}
+	$insertQuery = substr($insertQuery, 0, strlen($insertQuery) - 2) . ");";
+	mysqli_query($conn, $insertQuery);
 	$dir = "../images/rets/" . $ar[$q]['MLSNumber'];
 	if (!file_exists($dir)) {
 		mkdir($dir);

@@ -20,10 +20,10 @@ function createAddress() {
 }
 
 function createCloudCMA(address, city, zip, state) {
-	// var xhr = new XMLHttpRequest();
-	// xhr.open("POST", '/phpRequests/apiRequests.php', true);
-	// xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-	// xhr.send("functionname=sendCMA&sellerName=" + document.getElementById("formName").value + "&address=" + address + "&city=" + city + "&zip=" + zip + "&state=" + state + "&email=" + document.getElementById("formEmail").value);
+	var xhr = new XMLHttpRequest();
+	xhr.open("POST", '/phpRequests/apiRequests.php', true);
+	xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+	xhr.send("functionname=sendCMA&sellerName=" + document.getElementById("formName").value + "&address=" + address + "&city=" + city + "&zip=" + zip + "&state=" + state + "&email=" + document.getElementById("formEmail").value);
 }
 
 function constructHouseSellingInfo(xmlText, address, city, state, zip) {
