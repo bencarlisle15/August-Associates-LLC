@@ -187,6 +187,18 @@
 			<div id="housesWrapper">
 				<div id="houses">
 					<?php
+						if (isset($_GET['searchCities'])) {
+							switch (strtolower($_GET['searchCities'])) {
+								case "jamestown":
+									$name = "Jamestown";
+									$img = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Claiborne_Pell_Newport_Bridge.jpg/220px-Claiborne_Pell_Newport_Bridge.jpg";
+									$text = "Jamestown is a town in Newport County, Rhode Island in the United States. The population was 5,405 at the 2010 census. Jamestown is situated almost entirely on Conanicut Island, the second largest island in Narragansett Bay. It also includes the uninhabited Dutch Island and Gould Island. Jamestown is ranked as the 444th wealthiest place to live in the United States as of 2016, with a median home sale price of $1,229,039.<br/><br/>According to the United States Census Bureau, the town has an area of 35.3 square miles (91 km2), of which 9.7 square miles (25 km2) is land and 25.6 square miles (66 km2) is water. The total area is 72.55% water.";
+									break;
+							}
+							if ($name) {
+								echo "<div id='additionalInfo'><h2 id='additionalTitle'>Homes in " . $name . "</h2><div id='additionalImageAndText'><img id='additionalImage' src='" . $img . "'/><p id='additionalText'>" . $text .  "</p></div></div>";
+							}
+						}
 						$rets = getNextSet(0);
 						function getNextSet($pageNumber) {
 							//global variables
