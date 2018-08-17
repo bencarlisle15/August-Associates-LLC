@@ -56,7 +56,7 @@
 						$lat = $_GET['lat'];
 						$lng = $_GET['lng'];
 						//uses the haversine formula to calculate the distance between two lat lng values and see if its less tham the radius
-						$query .= "(" . $val . " >= 12742 * atan2(sqrt(sin((`Latitude` - " . $lat . ") * 0.0087222222) * sin((`Latitude` - " . $lat . ") * 0.0087222222) + cos(" . $lat . " * 0.0174444444) * cos(`Latitude` * 0.0174444444) * sin((`Longitude` - " . $lng . ") * 0.0087222222) * sin((`Longitude` - " . $lng . ") * 0.0087222222)), sqrt(1-sin((`Latitude` - " . $lat . ") * 0.0087222222) * sin((`Latitude` - " . $lat . ") * 0.0087222222) + cos(" . $lat . " * 0.0174444444) * cos(`Latitude` * 0.0174444444) * sin((`Longitude` - " . $lng . ") * 0.0087222222) * sin((`Longitude` - " . $lng . ") * 0.0087222222)))) && ";
+						$query .= "(" . $val . " >= 63710000 * atan2(sqrt(sin((`Latitude` - " . $lat . ") * 0.0087222222) * sin((`Latitude` - " . $lat . ") * 0.0087222222) + cos(" . $lat . " * 0.0174444444) * cos(`Latitude` * 0.0174444444) * sin((`Longitude` - " . $lng . ") * 0.0087222222) * sin((`Longitude` - " . $lng . ") * 0.0087222222)), sqrt(1-sin((`Latitude` - " . $lat . ") * 0.0087222222) * sin((`Latitude` - " . $lat . ") * 0.0087222222) + cos(" . $lat . " * 0.0174444444) * cos(`Latitude` * 0.0174444444) * sin((`Longitude` - " . $lng . ") * 0.0087222222) * sin((`Longitude` - " . $lng . ") * 0.0087222222)))) && ";
 						continue 2;
 					//only used for radius
 					case "lat":

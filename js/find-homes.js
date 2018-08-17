@@ -72,7 +72,7 @@ function resetSearch() {
 }
 
 function searchArea() {
-	var radius = 156543.03392 * Math.cos(map.getCenter().lat() * Math.PI / 180) / Math.pow(2, map.getZoom());
+	var radius = document.getElementById("map").clientWidth * 156543.03392 * Math.cos(map.getCenter().lat() * Math.PI / 180) / Math.pow(2, map.getZoom())
 	var extra = "radius=" + radius + "&lat=" + map.getCenter().lat() + "&lng=" + map.getCenter().lng() + "&map=true";
 	document.getElementById("searchAreaInput").value = extra;
 	document.getElementById("searchForm").submit();
@@ -96,10 +96,11 @@ function initMap(res) {
 	if (window.location.href.includes("radius")) {
 		//find sets zoom from radius
 		var url = window.location.href;
-		var radius = Math.log2(156543.03392 * Math.cos(map.getCenter().lat() * Math.PI / 180)/(parseFloat(url.substring(url.indexOf("radius=") + 7, url.indexOf("&", url.indexOf("radius="))))));
+		var r = parseFloat(url.substring(url.indexOf("radius=") + 7, url.indexOf("&", url.indexOf("radius="))));
+		var zoom = Math.log2(document.getElementById("map").clientWidth * 156543.03392 * Math.cos(map.getCenter().lat() * Math.PI / 180)/(r));
 		var lat = parseFloat(url.substring(url.indexOf("lat=") + 4, url.indexOf("&", url.indexOf("lat="))));
 		var lng = parseFloat(url.substring(url.indexOf("lng=") + 4, url.includes("map") ? url.indexOf("&", url.indexOf("lng=")) : url.length));
-		map.setZoom(radius);
+		map.setZoom(zoom);
 		map.setCenter(new google.maps.LatLng(lat, lng));
 	} else if (map.getZoom() < 8) {
 		map.setZoom(8);
@@ -159,7 +160,9 @@ function setMapHouses(res) {
 		//adds marker to the array
 		markerArray.push(marker);
 	});
-	map.fitBounds(bounds);
+	if (!window.location.href.includes("radius")) {
+		map.fitBounds(bounds);
+	}
 }
 
 //Adds K and M to create the price
@@ -202,10 +205,12 @@ function switchView() {
 		document.getElementById("sortArray").style.display = "none";
 		document.getElementById("searchThisArea").style.display = "block";
 		document.getElementById("map").style.visibility = "visible";
+		document.getElementById("map").style.position = "relative";
 	} else {
 		mapGridSwitch.value = "grid";
 		mapGridSwitch.innerHTML = "Switch to Map View";
 		document.getElementById("map").style.visibility = "hidden";
+		document.getElementById("map").style.position = "absolute";
 		document.getElementById("searchThisArea").style.display = "none";
 		document.getElementById("loadingHomes").style.display = "block";
 		document.getElementById("sortArray").style.display = "block";

@@ -55,7 +55,7 @@ for ($q = 0; $q < sizeof($ar); $q++) {
 		if ($listPrice != $ar[$q]['CurrentPrice']) {
 			$ar[$q]['PreviousPrice'] = $listPrice;
 			$ar[$q]['PriceChangeDate'] = $date['mon'] . "/" . $date['mday'];
-		} else if (sizeof($ar[$q]['PriceChangeDate']) && substr($date, 0, 1) != substr($ar[$q]['PriceChangeDate'], 0, 1)) {
+		} else if (sizeof($ar[$q]['PriceChangeDate']) && (substr($date, 0, 1) != substr($ar[$q]['PriceChangeDate'], 0, 1) || intval(substr($date, 2, sizeof($date))) - intval(substr($ar[$q]['PriceChangeDate'], 2, sizeof($ar[$q]['PriceChangeDate']))) < 3)) {
 			$ar[$q]['PreviousPrice'] = "";
 			$ar[$q]['PriceChangeDate'] = "";
 		}
@@ -92,9 +92,9 @@ for ($q = 0; $q < sizeof($ar); $q++) {
 		file_put_contents($largeDir . "/" . $i . ".jpg", $largePhotos[$i]->getContent());
 	}
 }
-$_POST['functionname'] = 'sendEmail';
-$_POST['body'] = "Records Updated";
-include('apiRequests.php');
+// $_POST['functionname'] = 'sendEmail';
+// $_POST['body'] = "Records Updated";
+// include('apiRequests.php');
 
 function getListKey($res) {
 	return $res['ListOfficeName'] ? $res['ListOfficeName'] : ($res['CoListOfficeName'] ? $res['CoListOfficeName'] : ($res['SellingOfficeName'] ? $res['SellingOfficeName'] : ($res['CoSellingOfficeName'] ? $res['CoSellingOfficeName'] : 'Listing Office Not Found')));
