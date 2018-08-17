@@ -1,9 +1,6 @@
 .agentWrapper {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
 	width: 45%;
-	justify-content: center;
+	display: inline-block;
 	min-width: 450px;
 	margin: 10px;
 }
@@ -15,8 +12,8 @@
 	margin-bottom: 50px;
 }
 
-.agentWebsite {
-	text-align: center;
+.agentWebsite, .agentEmail {
+	font-size: 16pt;
 }
 
 #totalOverview {
@@ -26,34 +23,26 @@
 	justify-content: center;
 }
 
-.agentElement {
+.agentParagraph {
 	font-size: 12pt;
+}
+
+.agentElement {
 	margin: 5px;
 }
 
 .agentName {
-	font-size: 16pt;
+	font-size: 20pt;
 }
 
 .agentImage {
 	max-width: 250px;
 }
 
-.agentInfo {
-	display: flex;
-	flex-wrap: wrap;
-	flex-direction: column;
-	margin-bottom: 50px;
-}
-
-.agentImageWrapper, .agentInfo {
-	display: flex;
-	flex: 1;
-	align-items: center;
-	justify-content: center;
-	align-self: center;
+.agentImageWrapper {
+	float:left;
+	margin: 0px 16px 16px 0px;
 	min-width: 250px;
-	margin: 0px;
 }
 
 #agentsNav {
