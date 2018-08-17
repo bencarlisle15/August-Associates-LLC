@@ -22,6 +22,7 @@ $conn = new mysqli("localhost", getDBUser(), getDBPassword(), getDBName());
 // $data = $results->toJSON();
 $ar = array_merge($results->toArray(), $results2->toArray());
 echo "Start Photos\n";
+$time = date("Y-m-d H:i:s");
 for ($q = 0; $q < sizeof($ar); $q++) {
 	echo $q . " of " . count($ar) . "\n";
 	if (!mysqli_query($conn, "SELECT * FROM `RetsData` WHERE `MLSNumber`='" . $ar[$q]['MLSNumber'] . "'")->num_rows) {
@@ -44,7 +45,7 @@ for ($q = 0; $q < sizeof($ar); $q++) {
 				$ar[$q]["Longitude"] = $lng;
 			}
 		}
-		$insertQuery = "INSERT INTO RetsData VALUES(" . getValue($ar, $q, 'MLSNumber') . ", " . getValue($ar, $q, "CurrentPrice") . ", " . getValue($ar, $q, 'PropertyType') . ", " . getValue($ar, $q, 'SqFtTotal') . ", " . getValue($ar, $q, 'BathsTotal') . ", " . getValue($ar, $q, 'BedsTotal') . ", " . getValue($ar, $q, 'FullStreetNum') . ", " . getValue($ar, $q, 'PostalCode') . ", " . getValue($ar, $q, 'Latitude') . ", " . getValue($ar, $q, 'Longitude') . ", " . getValue($ar, $q, 'City') . ", " . getValue($ar, $q, 'PhotoCount') . ", " . getValue($ar, $q, 'PublicRemarks') . ", '" . str_replace("'", "\'", getListKey($ar[$q])) . "', " . getValue($ar, $q, 'NumberOfLevels') . ", " . getValue($ar, $q, 'Fireplace') . ", " . getValue($ar, $q, 'HeatingSystem') . ", " . getValue($ar, $q, 'Pool') . ", " . getValue($ar, $q, 'WaterAmenities') . ", " . getValue($ar, $q, 'YearBuilt') . ", " . getValue($ar, $q, 'GarageSpaces') . ", " . getValue($ar, $q, 'PreviousPrice') . ", " . getValue($ar, $q, 'PriceChangeDate') . ", " . getValue($ar,$q,"ApproxLotSquareFoot") . ");";
+		$insertQuery = "INSERT INTO RetsData VALUES(" . getValue($ar, $q, 'MLSNumber') . ", " . getValue($ar, $q, "CurrentPrice") . ", " . getValue($ar, $q, 'PropertyType') . ", " . getValue($ar, $q, 'SqFtTotal') . ", " . getValue($ar, $q, 'BathsTotal') . ", " . getValue($ar, $q, 'BedsTotal') . ", " . getValue($ar, $q, 'FullStreetNum') . ", " . getValue($ar, $q, 'PostalCode') . ", " . getValue($ar, $q, 'Latitude') . ", " . getValue($ar, $q, 'Longitude') . ", " . getValue($ar, $q, 'City') . ", " . getValue($ar, $q, 'PhotoCount') . ", " . getValue($ar, $q, 'PublicRemarks') . ", '" . str_replace("'", "\'", getListKey($ar[$q])) . "', " . getValue($ar, $q, 'NumberOfLevels') . ", " . getValue($ar, $q, 'Fireplace') . ", " . getValue($ar, $q, 'HeatingSystem') . ", " . getValue($ar, $q, 'Pool') . ", " . getValue($ar, $q, 'WaterAmenities') . ", " . getValue($ar, $q, 'YearBuilt') . ", " . getValue($ar, $q, 'GarageSpaces') . ", " . getValue($ar, $q, 'PreviousPrice') . ", " . getValue($ar, $q, 'PriceChangeDate') . ", " . getValue($ar,$q,"ApproxLotSquareFoot") . ", '" . $time .  "');";
 		if (!mysqli_query($conn, $insertQuery)) {
 			var_dump($insertQuery);
 			die();
@@ -59,7 +60,7 @@ for ($q = 0; $q < sizeof($ar); $q++) {
 			$ar[$q]['PreviousPrice'] = "";
 			$ar[$q]['PriceChangeDate'] = "";
 		}
-		$updateQuery = "UPDATE RetsData SET `MLSNumber`=" . getValue($ar, $q, 'MLSNumber')  . ",`CurrentPrice`=" . getValue($ar, $q, 'CurrentPrice') . ",`PropertyType`=" . getValue($ar, $q, 'PropertyType') . ",`SqFtTotal`=" . getValue($ar, $q, 'SqFtTotal') . ",`BathsTotal`=" . getValue($ar, $q, "BathsTotal") . ",`BedsTotal`=" . getValue($ar, $q, 'BedsTotal') . ",`FullStreetNum`=" . getValue($ar, $q, 'FullStreetNum') . ",`PostalCode`=" . getValue($ar, $q, 'PostalCode') . ",`Latitude`=" . getValue($ar, $q, 'Latitude') . ",`Longitude`=" . getValue($ar, $q, 'Longitude') . ",`City`=" . getValue($ar, $q,'City') . ",`PhotoCount`=" . getValue($ar, $q, 'PhotoCount') . ",`PublicRemarks`=" . getValue($ar,$q,'PublicRemarks') . ",`ListOfficeName`='" . str_replace("'", "\'", getListKey($ar[$q])) . "',`NumberOfLevels`=" . getValue($ar, $q, 'NumberOfLevels') . ",`Fireplace`=" . getValue($ar, $q,'Fireplace') . ",`HeatingSystem`=" . getValue($ar, $q, "HeatingSystem") . ",`Pool`=" . getValue($ar, $q,'Pool') . ",`WaterAmenities`=" . getValue($ar,$q, 'WaterAmenities') . ",`YearBuilt`=" . getValue($ar, $q,'YearBuilt') . ",`GarageSpaces`=" . getValue($ar,$q,'GarageSpaces') . ",`PreviousPrice`=" . getValue($ar,$q,'PreviousPrice') . ",`PriceChangeDate`=" . getValue($ar,$q,'PriceChangeDate') . ",`ApproxLotSquareFoot`=" . getValue($ar,$q,'ApproxLotSquareFoot') . " WHERE `MLSNumber`='" . $ar[$q]['MLSNumber'] . "';";
+		$updateQuery = "UPDATE RetsData SET `MLSNumber`=" . getValue($ar, $q, 'MLSNumber')  . ",`CurrentPrice`=" . getValue($ar, $q, 'CurrentPrice') . ",`PropertyType`=" . getValue($ar, $q, 'PropertyType') . ",`SqFtTotal`=" . getValue($ar, $q, 'SqFtTotal') . ",`BathsTotal`=" . getValue($ar, $q, "BathsTotal") . ",`BedsTotal`=" . getValue($ar, $q, 'BedsTotal') . ",`FullStreetNum`=" . getValue($ar, $q, 'FullStreetNum') . ",`PostalCode`=" . getValue($ar, $q, 'PostalCode') . ",`Latitude`=" . getValue($ar, $q, 'Latitude') . ",`Longitude`=" . getValue($ar, $q, 'Longitude') . ",`City`=" . getValue($ar, $q,'City') . ",`PhotoCount`=" . getValue($ar, $q, 'PhotoCount') . ",`PublicRemarks`=" . getValue($ar,$q,'PublicRemarks') . ",`ListOfficeName`='" . str_replace("'", "\'", getListKey($ar[$q])) . "',`NumberOfLevels`=" . getValue($ar, $q, 'NumberOfLevels') . ",`Fireplace`=" . getValue($ar, $q,'Fireplace') . ",`HeatingSystem`=" . getValue($ar, $q, "HeatingSystem") . ",`Pool`=" . getValue($ar, $q,'Pool') . ",`WaterAmenities`=" . getValue($ar,$q, 'WaterAmenities') . ",`YearBuilt`=" . getValue($ar, $q,'YearBuilt') . ",`GarageSpaces`=" . getValue($ar,$q,'GarageSpaces') . ",`PreviousPrice`=" . getValue($ar,$q,'PreviousPrice') . ",`PriceChangeDate`=" . getValue($ar,$q,'PriceChangeDate') . ",`ApproxLotSquareFoot`=" . getValue($ar,$q,'ApproxLotSquareFoot') . ",`submit_time`='" . $time . "' WHERE `MLSNumber`='" . $ar[$q]['MLSNumber'] . "';";
 		if (!mysqli_query($conn, $updateQuery)) {
 			var_dump($updateQuery);
 			die();
@@ -92,6 +93,8 @@ for ($q = 0; $q < sizeof($ar); $q++) {
 		file_put_contents($largeDir . "/" . $i . ".jpg", $largePhotos[$i]->getContent());
 	}
 }
+var_dump(mysqli_query($conn, "DELETE FROM `RetsData` WHERE `submit_time`!='" . $time . "'")->fetch_assoc());
+var_dump(mysqli_query($conn, "SELECT * FROM `RetsData` WHERE `submit_time`!='" . $time . "'")->fetch_assoc());
 // $_POST['functionname'] = 'sendEmail';
 // $_POST['body'] = "Records Updated";
 // include('apiRequests.php');
