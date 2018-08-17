@@ -54,7 +54,7 @@
 						<p id='description'>" .  htmlspecialchars(toSentenceCase($res['PublicRemarks'])) . "</p>
 						<table id='table'>";
 						//list of all attributes to use sorted by ['RetsName' => 'Visible name']
-						$keys = ["SqFtTotal" => "Living Area Size", "BathsTotal" => "Bathrooms", "NumberOfLevels" => "Stories", "Fireplace"=> "Fireplaces", "HeatingSystem"=> "Heating", "BedsTotal"=> "Bedrooms", "Pool"=> "Pool", "WaterAmenities"=> "Water Amenities", "YearBuilt"=> "Year Built", "GarageSpaces"=> "Garage Spaces", "ApproxLotSquareFoot" => "Lot Size", "ListOfficeName" => "Listing Office"];
+						$keys = ["SqFtTotal" => "Living Area Size", "BathsTotal" => "Bathrooms", "NumberOfLevels" => "Stories", "Fireplace"=> "Fireplace", "HeatingSystem"=> "Heating", "BedsTotal"=> "Bedrooms", "Pool"=> "Pool", "WaterAmenities"=> "Water Amenities", "YearBuilt"=> "Year Built", "GarageSpaces"=> "Garage Spaces", "ApproxLotSquareFoot" => "Lot Size", "ListOfficeName" => "Listing Office"];
 						//adds all the attirbutes;
 						foreach ($keys as $key => $value) {
 							$val = $res[$key];
@@ -84,7 +84,7 @@
 							}
 						}
 						//checks if value is valid
-						if ($value == null || $value == "None") {
+						if ($value == null || $value == "None" || $value === " Ft") {
 							return;
 						}
 						echo "<tr><th class='keys'>" . htmlspecialchars($keyName) . "</th><td class='values'>" . htmlspecialchars(str_replace("August Associates,  Llc", "August Associates LLC", strpos($value, "Ft") ? $value : toSentenceCase(str_replace(",", ", ", $value)))) . "</td></tr>";
