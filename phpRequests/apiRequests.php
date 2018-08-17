@@ -27,27 +27,27 @@
 					foreach (explode(",", $_GET["sendTo"]) as $agent) {
 						switch ($agent) {
 							case "joseph":
-								// $mail->AddAddress("josephmccarthy@myleads.io");
+								$mail->AddAddress("josephmccarthy@myleads.io");
 								break;
 							case "wendy":
-								// $mail->AddAddress("wendy.grave@fivestreet.me");
+								$mail->AddAddress("wendy.grave@fivestreet.me");
 								break;
+								$mail->AddAddress("bob.nasiatka@fivestreet.me");
 							case "bob":
-								// $mail->AddAddress("bob.nasiatka@fivestreet.me");
 								break;
 							case "rick":
-								// $mail->AddAddress("rick.delmastro@fivestreet.me");
+								$mail->AddAddress("rick.delmastro@fivestreet.me");
 								break;
 							case "kari":
-								// $mail->AddAddress("kari.hernandez@fivestreet.me");
+								$mail->AddAddress("kari.hernandez@fivestreet.me");
 								break;
 							case "debora":
-								// $mail->AddAddress("debora.rotondo@fivestreet.me");
+								$mail->AddAddress("debora.rotondo@fivestreet.me");
 								break;
 						}
 					}
 				} else {
-					// $mail->AddAddress("joseph.mccarthy@fivestreet.me");
+					$mail->AddAddress("joseph.mccarthy@fivestreet.me");
 				}
 				$mail->Send();
 			} catch (phpmailerException $e) {

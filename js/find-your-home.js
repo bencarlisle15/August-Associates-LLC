@@ -15,14 +15,14 @@ xhr.onreadystatechange = function () {
 		if (!sessionStorage.houseNumber) {
 			sessionStorage.houseNumber = 1;
 		//if the ip address was found
-	} else if (this.responseText == 11) {
+	} else if (this.responseText == 1) {
 			//creates lead alerting that the uesr has returned
 			var xhr = new XMLHttpRequest();
 			xhr.open("POST", '/phpRequests/apiRequests.php', true);
 			xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 			xhr.send("functionname=ipReturned&MLSNumber=" + id);
 			sessionStorage.houseNumber = 1;
-		} else if (this.responseText == -11) {
+		} else if (this.responseText == -1) {
 			return;
 		} else if (sessionStorage.houseNumber < 2) {
 			//increases the views the user has
