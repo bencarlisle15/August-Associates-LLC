@@ -9,3 +9,6 @@ vendor/
 testing/
 images/rets/
 images/largeRets/
+content/
+wp-content/
+wp-cli.yml
