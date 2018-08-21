@@ -214,7 +214,7 @@ function switchView() {
 		document.getElementById("searchThisArea").style.display = "none";
 		document.getElementById("loadingHomes").style.display = "block";
 		document.getElementById("sortArray").style.display = "block";
-		document.getElementById("houses").style.display = "flex";
+		document.getElementById("houses").style.display = "grid";
 	}
 }
 

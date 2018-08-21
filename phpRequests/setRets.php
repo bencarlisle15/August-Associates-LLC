@@ -36,6 +36,8 @@ for ($q = 0; $q < sizeof($ar); $q++) {
 			$geo = file_get_contents($url);
 			$geo = json_decode($geo, true);
 			if (!$geo['resourceSets'][0]['resources'][0]['point']['coordinates']) {
+				$lat = 0;
+				$lng = 0;
 				echo 'Geocoding failed\n';
 			} else {
 				$lat = $geo['resourceSets'][0]['resources'][0]['point']['coordinates'][0];
@@ -51,6 +53,29 @@ for ($q = 0; $q < sizeof($ar); $q++) {
 			die();
 		}
 	} else {
+		if (!$ar[$q]['Latitude'] || !$ar[$q]['Longitude']) {
+			$databasePosition = getDatabasePosition($ar[$q]['MLSNumber']);
+			if ($databasePosition) {
+				$ar[$q]["Latitude"] = $databasePosition['latitude'];
+				$ar[$q]["Longitude"] = $databasePosition['longitude'];
+			} else {
+				echo "Does not already exist\n";
+				$url = 'http://dev.virtualearth.net/REST/v1/Locations?CountryRegion=US&adminDistrict=' . urlencode($ar[$q]["StateOrProvince"]) . '&postalCode=' . urlencode($ar[$q]["PostalCode"]) . '&addressLine=' . urlencode($ar[$q]["FullStreetNum"]) . '&maxResults=1&key=' . getMapKey();
+				$geo = file_get_contents($url);
+				$geo = json_decode($geo, true);
+				if (!$geo['resourceSets'][0]['resources'][0]['point']['coordinates']) {
+					$lat = 0;
+					$lng = 0;
+					echo 'Geocoding failed\n';
+				} else {
+					$lat = $geo['resourceSets'][0]['resources'][0]['point']['coordinates'][0];
+					$lng = $geo['resourceSets'][0]['resources'][0]['point']['coordinates'][1];
+					addDatabasePosition($ar[$q]['MLSNumber'], $lat, $lng);
+					$ar[$q]["Latitude"] = $lat;
+					$ar[$q]["Longitude"] = $lng;
+				}
+			}
+		}
 		$listPrice = mysqli_query($conn, "SELECT CurrentPrice FROM RetsData WHERE `MLSNumber`='" . $ar[$a]['MLSNumber'] . "';")->fetch_assoc()['CurrentPrice'];
 		$date = getdate();
 		if ($listPrice != $ar[$q]['CurrentPrice']) {
