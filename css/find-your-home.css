@@ -111,9 +111,8 @@
 	text-align:center;
 }
 
-#interested {
-	font-size: 24pt;
-	font-weight: bold;
+#interested, #interestedContact {
+	font-size: 18pt;
 }
 
 .keys, .values {

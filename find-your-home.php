@@ -67,7 +67,7 @@
 						</table>
 					</div>";
 					echo "<h2 id='interested'>Interested in this Home?</h2>
-					<h2 id='interestedContact'>Call us at <a href='tel:4014610700'>(401) 461-0700</a> or Email us at <a href='mailto:jmccarthy@necompass.com'>jmccarthy@necompass.com</a> to get in touch with an agent</h2>";
+					<h2 id='interestedContact'>Call us at <a href='tel:4014610700'>(401) 461-0700</a> or Email us at <a href='mailto:info@augustassociatesllc.com'>info@augustassociatesllc.com</a> to get in touch with an agent</h2>";
 					//capitalizes the first letter after spaces, ', and "
 
 					function toSentenceCase($str) {
