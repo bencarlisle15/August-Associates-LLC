@@ -260,7 +260,7 @@
 			initMap(json);
 			if (!json || json.length < 40) {
 				//either error or query too specific
-				document.getElementById("loadingHomes").innerHTML = 'No More Houses Found';
+				document.getElementById("loadingHomes").innerHTML = 'No More Houses Found. Try Changing Your Search Parameters';
 			}
 		</script>
 	</body>
