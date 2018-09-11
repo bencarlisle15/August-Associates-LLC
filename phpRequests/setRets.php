@@ -118,8 +118,7 @@ for ($q = 0; $q < sizeof($ar); $q++) {
 		file_put_contents($largeDir . "/" . $i . ".jpg", $largePhotos[$i]->getContent());
 	}
 }
-var_dump(mysqli_query($conn, "DELETE FROM `RetsData` WHERE `submit_time`!='" . $time . "'")->fetch_assoc());
-var_dump(mysqli_query($conn, "SELECT * FROM `RetsData` WHERE `submit_time`!='" . $time . "'")->fetch_assoc());
+mysqli_query($conn, "DELETE FROM `RetsData` WHERE `submit_time`!='" . $time . "'");
 // $_POST['functionname'] = 'sendEmail';
 // $_POST['body'] = "Records Updated";
 // include('apiRequests.php');

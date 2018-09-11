@@ -38,6 +38,10 @@
 						<p class="testimonialText">Joe was our realtor 4 years ago when we bought our first home. He was incredibly helpful, patient, and went ABOVE AND BEYOND for us. We are still so very grateful that we had the pleasure of working with him and to have had him working for us.</p>
 						<p class="testimonialName">-Hannah</p>
 					</div>
+					<div class="testimonialFrame">
+						<p class="testimonialText">Joseph helped me buy my first condo and did a great job in providing guidance along the first time home buyers process. He was very patient and excited to help me reach my goal of owning property. A few years later, Joseph utilized his vast knowledge of the area and expertise to help me obtain the best value for my property.</p>
+						<p class="testimonialName">-Christian</P>
+					</div>
 				</div>
 				<div id= "addTestimonialsWrapper">
 					<h2 id="testimonialsAddText">Add Your Own</h2>

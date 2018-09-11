@@ -59,7 +59,7 @@
 						foreach ($keys as $key => $value) {
 							$val = $res[$key];
 							if ($key == "ApproxLotSquareFoot" || $key == "SqFtTotal") {
-								$val = number_format($val) . " Ft";
+								$val = number_format((float)$val) . " Ft";
 							}
 							addAttribute($value, $val);
 						}

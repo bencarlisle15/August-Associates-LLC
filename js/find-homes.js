@@ -19,7 +19,7 @@ window.onscroll = function(ev) {
 				document.getElementById("houses").innerHTML += echoed;
 				if (!json || json.length < 40) {
 					//either error or query too specific
-					document.getElementById("loadingHomes").innerHTML = 'No More Houses Found. Try Changing Your Search Parameters';
+					document.getElementById("loadingHomes").innerHTML = 'No More Properties Found. Try Changing Your Search Parameters';
 				}
 			}
 		}
