@@ -19,6 +19,10 @@
 						<p class="testimonialName">-Georgina</p>
 					</div>
 					<div class="testimonialFrame">
+						<p class="testimonialText">My experience with Joseph was extremely positive. I got two offers within two days of being on the market, and I was willing to accept a number---in CASH--that I was comfortable with. I wanted expediency, but Joe told me to give him a few days and he'd get me a bit more. I agreed, and he did get me more.</br>After meeting with several real estate people, I knew immediately that Joe would handle my sale. Although he deploys modern day statistical analysis, he's  got an old school streak in him as well---he can read people, and understands what buyers and sellers want, need, and will accept. Like a good baseball manager, he uses a mix of new school Sabermetrics and time-honored people skills to get the desired result. And he SHOULD know what he's doing---he's been at it in RI forever. I would highly recommend him, and if I ever were to do any more RE transactions, he'd be my first choice.</p>
+						<p class= "testimonialName">-Richard</p>
+					</div>
+					<div class="testimonialFrame">
 						<p class="testimonialText">Joseph has sold a few of our homes. I wouldn't even think of considering any other realtor. Joseph understand his clients needs and is brilliant in negotiating the best price.</p>
 						<p class="testimonialName">-Phoebe</p>
 					</div>
@@ -41,6 +45,10 @@
 					<div class="testimonialFrame">
 						<p class="testimonialText">Joseph helped me buy my first condo and did a great job in providing guidance along the first time home buyers process. He was very patient and excited to help me reach my goal of owning property. A few years later, Joseph utilized his vast knowledge of the area and expertise to help me obtain the best value for my property.</p>
 						<p class="testimonialName">-Christian</P>
+					</div>
+					<div class="testimonialFrame">
+						<p class="testimonialText">I bought a new home in North Kingstown RI with Joseph McCarthy's help. I was out of town while the home was being built. Joseph was very proactive about checking on the progress and keeping me updated. He was very professional and helpful throughout the process.</p>
+						<p class= "testimonialName">-Suzanne</p>
 					</div>
 				</div>
 				<div id= "addTestimonialsWrapper">
