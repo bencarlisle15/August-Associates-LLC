@@ -12,7 +12,7 @@
 }
 
 #findTitle {
-	font-size: 24pt;
+	font-size: 20pt;
 }
 
 #findNav {
@@ -31,8 +31,8 @@
 }
 
 .houseImageWrapper {
-	width: 300px;
-	height: 225px;
+	width: 225px;
+	height: 168.75px;
 	display: flex;
 	justify-content: center;
 	padding: 0px;
@@ -45,7 +45,7 @@
 	flex-direction: row;*/
 	justify-content: center;
 	grid-gap: 8px;
-	grid-template-columns: repeat(auto-fill, 302px);
+	grid-template-columns: repeat(auto-fill, 227px);
 }
 
 #additionalInfo {
@@ -83,8 +83,8 @@
 	border-radius: 5px;
 	border:1px solid black;
 	cursor: pointer;
-	width: 300px;
-	height: 380px;
+	width: 225px;
+	height: 285px;
 	/* margin: 8px; */
 	position: relative;
 	background-color: white;
@@ -100,7 +100,7 @@
 .houseElement {
 	display: block;
 	margin: 0px;
-	font-size: 14pt;
+	font-size: 11pt;
 }
 
 .houseInformation {
@@ -108,8 +108,9 @@
 	flex-direction: column;
 	position: absolute;
 	bottom: 8px;
-	width: 284px;
+	width: 215px;
 	margin: 8px;
+	max-height: 104px;
 }
 
 #mapHouseWrapper {
@@ -130,8 +131,8 @@
 	border-radius: 5px;
 	border:1px solid black;
 	cursor: pointer;
-	width: 300px;
-	height: 380px;
+	width: 225px;
+	height: 285px;
 	background-color: white;
 	position:absolute;
 	top: 50%;
@@ -217,7 +218,6 @@
 .pricesSection {
 	display: flex;
 	align-self: flex-end;
-	margin: 5px;
 }
 
 .hasPrevious {
@@ -231,4 +231,5 @@
 
 .currentPrice, .previousPrice {
 	margin: 2px;
+	font-size: 13pt;
 }

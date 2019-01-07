@@ -13,7 +13,7 @@
 }
 
 .agentWebsite, .agentEmail {
-	font-size: 16pt;
+	font-size: 12pt;
 }
 
 #totalOverview {
@@ -24,7 +24,7 @@
 }
 
 .agentParagraph {
-	font-size: 12pt;
+	font-size: 10pt;
 }
 
 .agentElement {
@@ -35,9 +35,15 @@
 	font-size: 20pt;
 }
 
+#ourAgentsTitle {
+	font-size: 20pt;
+}
+
 .agentImage {
 	max-width: 250px;
 }
+
+#ourAgentsT
 
 .agentImageWrapper {
 	float:left;

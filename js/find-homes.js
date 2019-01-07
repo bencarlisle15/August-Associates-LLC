@@ -1,5 +1,4 @@
 document.addEventListener('DOMContentLoaded', beginFunctions());
-
 //when the user scrolls to the bottom while in grid mode
 var pageNumber = 0;
 window.onscroll = function(ev) {
@@ -179,9 +178,21 @@ function showOverlay(res) {
 	house.classList.add("house");
 	house.setAttribute("onclick", "openHouse(" + res.MLSNumber + ")");
 	house.id = "mapHouse";
-	house.innerHTML = "<div class='houseImageWrapper'><img class='houseElement houseImage' alt='Picture of House' src='images/rets/" + res.MLSNumber + "/0.jpg'/></div><div class='houseInformation'><h4 class='housePrice houseElement'>" + formatCurrency(res.ListPrice) + "</h4><p class='houseElement'>" + toTitleCase(res.FullStreetNum) + "</p><p class='houseElement'>" +toTitleCase(res.City) + "</p><p class='houseElement'>" + parseInt(res.SqFtTotal) + " Square Feet</p></div>";
+	house.innerHTML = "<div class='houseImageWrapper'><img class='houseElement houseImage' alt='Picture of House' src='images/rets/" + res.MLSNumber + "/0.jpg'/></div><div class='houseInformation'><div class='pricesSection'><h3 class='previousPrice'>" + getPreviousPrice(res) + "</h3><h3 class='currentPrice '>" + formatCurrency(res.CurrentPrice) + "</h3></div><p class='houseElement'>" + toTitleCase(res.FullStreetNum) + "</p><p class='houseElement'>" +toTitleCase(res.City) + "</p><p class='houseElement'>" + parseInt(res.SqFtTotal) + " Square Feet</p></div>";
 	document.getElementById("mapHouseWrapper").append(house);
 	document.getElementById("mapHouseWrapper").style.display = "block";
+}
+
+function getPreviousPrice(res) {
+  if (res.PreviousPrice) {
+    var currentLength = formatCurrency(res.CurrentPrice).length;
+    var previous = formatCurrency(res.PreviousPrice);
+    if (currentLength + previous.length > 25) {
+      return "";
+    }
+    return previous;
+  }
+  return "";
 }
 
 function toTitleCase(str) {
