@@ -1,5 +1,5 @@
-function createBody(name, email, address, city, state, zip) {
-	return "Source: Website House Price Page Form\nName: " + name + "\nEmail: " + email + "\nPhone: \nAddress: " + address + ", " + city + ", " + zip + ", " + document.getElementById("formState").value + "\nMLS Number: \nNotes: Price for address";
+function createBody(name, email, phone, address, city, state, zip) {
+	return "Source: Website House Price Page Form\nName: " + name + "\nEmail: " + email + "\nPhone: " + phone + "\nAddress: " + address + ", " + city + ", " + zip + ", " + document.getElementById("formState").value + "\nMLS Number: \nNotes: Price for address";
 }
 
 function submitForm() {
@@ -53,7 +53,7 @@ function constructHouseSellingInfo(xmlText, address, city, state, zip) {
 		var xhr = new XMLHttpRequest();
 		xhr.open("POST", '/phpRequests/apiRequests.php', true);
 		xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-		xhr.send("functionname=sendEmail&body=" + createBody(document.getElementById("formName").value, document.getElementById("formEmail").value, address, city, state, zip));
+		xhr.send("functionname=sendEmail&body=" + createBody(document.getElementById("formName").value, document.getElementById("formEmail").value, document.getElementById("formPhone").value, address, city, state, zip));
 }
 
 function getHouseSellingInfo(address, city, state, zip) {

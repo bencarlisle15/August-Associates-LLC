@@ -10,11 +10,11 @@
 			<h2 id="sellTitle">See How Much Your House is Worth</h2>
 			<form id="sellHouseForm" action="javascript:submitForm()">
 				<input type="text" title="Name" id="formName" placeholder="Name" class="formLineElement" required>
-				<input type="email" title="Email" id="formEmail" class="formLineElement" placeholder="Email">
+				<input type="email" title="Email" id="formEmail" class="formLineElement" placeholder="Email" required>
+				<input type="tel" title="Phone" id="formPhone" class="formLineElement" placeholder="Phone Number" class="contactFormElement">
 				<input type="text" title="Address" id="formAddress" placeholder="Address" class="formLineElement" required>
 				<div id="formLine">
 					<input type="text" title="City" id="formCity" class="formLineElement" placeholder="City" required>
-					<input type="number" title="Zipcode" class="formLineElement" id="formZip" placeholder="Zipcode" required>
 					<select title="State" id="formState" class="formLineElement">
 						<option title="AL" value="AL">AL</option>
 						<option title="AK" value="AK">AK</option>
@@ -68,6 +68,7 @@
 						<option title="WV" value="WV">WV</option>
 						<option title="WY" value="WY">WY</option>
 					</select>
+					<input type="number" title="Zipcode" class="formLineElement" id="formZip" placeholder="Zipcode" required>
 				</div>
 				<button id="formSubmit" class="formLineElement">Submit</button>
 			</form>
