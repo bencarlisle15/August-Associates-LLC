@@ -41,7 +41,7 @@
 	position: absolute;
 	width: 9.8%;
 	left: 45.1%;
-	top: calc(2.1vw + 110px);
+	top: calc(2.1vw + 70px);
 	animation: rotate 30s linear infinite;
 }
 

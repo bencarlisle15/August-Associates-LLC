@@ -11,6 +11,32 @@
 				die();
 			}
 		?>
+		<div id="fb-root"></div>
+		<script>(function(d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) return;
+			js = d.createElement(s); js.id = id;
+			js.src = "https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.0";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));</script>
+		<script>window.twttr = (function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0],
+		    t = window.twttr || {};
+		  if (d.getElementById(id)) return t;
+		  js = d.createElement(s);
+		  js.id = id;
+		  js.src = "https://platform.twitter.com/widgets.js";
+		  fjs.parentNode.insertBefore(js, fjs);
+
+		  t._e = [];
+		  t.ready = function(f) {
+		    t._e.push(f);
+		  };
+
+		  return t;
+		}(document, "script", "twitter-wjs"));</script>
+		<script type="text/javascript" async defer src="//assets.pinterest.com/js/pinit.js"></script>
+
 		<link rel="stylesheet" type="text/css" href="/css/find-your-home.css">
 		<link rel="canonical" href="https://www.augustassociatesllc.com/find-your-home" />
 		<title>August Associates LLC - Find Your Home</title>
@@ -48,7 +74,11 @@
 						}
 						echo "</div>";
 					}
-					echo "<h2 id='address'>" . htmlspecialchars(toSentenceCase($res['FullStreetNum'])) . ", " . htmlspecialchars(toSentenceCase($res['City'])) . ", " . $res['PostalCode'] . "</h2>
+					$url = "https://www.augustassociatesllc.com/find-your-home?id=" . $_GET['id'];
+					echo "<div id='addressSocialWrapper'><p/><h2 id='address'>" . htmlspecialchars(toSentenceCase($res['FullStreetNum'])) . ", " . htmlspecialchars(toSentenceCase($res['City'])) . ", " . $res['PostalCode'] . "</h2><div class='fb-share-button'
+    data-href='" . $url . "'
+    data-layout='button_count'>
+  </div><div><a class='twitter-share-button' data-url='" . $url . "' href='https://twitter.com/intent/tweet'>Tweet</a></div></div>
 					<h2 id='price'>$" . htmlspecialchars(number_format((float) $res['CurrentPrice'])) . "</h2>
 					<div id='tableAndDescription'>
 						<p id='description'>" .  htmlspecialchars(toSentenceCase($res['PublicRemarks'])) . "</p>

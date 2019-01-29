@@ -6,6 +6,11 @@
 	text-decoration: underline;
 }
 
+#addressSocialWrapper {
+	display: flex;
+	justify-content: space-between;
+}
+
 #houseSlideshow {
 	background-color: #cccccc;
 	margin: 0px auto;
