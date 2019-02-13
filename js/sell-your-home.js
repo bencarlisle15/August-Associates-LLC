@@ -9,6 +9,14 @@ function submitForm() {
 	var state = document.getElementById("formState").value;
 	createCloudCMA(address, city, zip, state);
 	getHouseSellingInfo(address, city, state, zip);
+	redirectToThankYou();
+}
+
+function redirectToThankYou() {
+	var url = "https://www.augustassociatesllc.com/content/thank-you/";
+	setTimeout(function () {
+		window.location.replace(url);
+	}, 10000);
 }
 
 function createAddress() {
