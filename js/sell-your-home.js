@@ -1,5 +1,5 @@
 function createBody(name, email, phone, address, city, state, zip) {
-	return "Source: Website House Price Page Form\nName: " + name + "\nEmail: " + email + "\nPhone: " + phone + "\nAddress: " + address + ", " + city + ", " + zip + ", " + document.getElementById("formState").value + "\nMLS Number: \nNotes: Price for address";
+	return "Source: Website House Price Page Form -Seller\nName: " + name + "\nEmail: " + email + "\nPhone: " + phone + "\nAddress: " + address + ", " + city + ", " + zip + ", " + document.getElementById("formState").value + "\nMLS Number: \nNotes: Price for address";
 }
 
 function submitForm() {
