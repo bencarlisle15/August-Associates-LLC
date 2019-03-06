@@ -7,6 +7,10 @@ function submitForm() {
 	var city = document.getElementById("formCity").value;
 	var zip = document.getElementById("formZip").value;
 	var state = document.getElementById("formState").value;
+	window.dataLayer = window.dataLayer || [];
+	window.dataLayer.push({
+		'event': 'homevalueComplete'
+	});
 	createCloudCMA(address, city, zip, state);
 	getHouseSellingInfo(address, city, state, zip);
 	redirectToThankYou();
