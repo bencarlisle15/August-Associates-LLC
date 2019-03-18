@@ -68,16 +68,6 @@
 						<h4 class="agentWebsite agentElement">Facebook: <a href="https://www.facebook.com/KHernandezRealtor/">facebook.com/KHernandezRealtor</a></h4>
 					</div>
 				</div>
-				<div class="agentWrapper">
-					<div class="agentImageWrapper">
-						<amp-img class="agentImage" width="250" height="250" src="/images/debora.jpg" alt="Debora Rotondo"></amp-img>
-					</div>
-					<div class="agentInfo">
-						<h3 class="agentName agentElement">Debora Rotondo</h3>
-						<p class="agentParagraph agentElement">Debora is a licensed Realtor&reg; who is a true relationship builder and knows communication is key to understanding the needs of each client. The exciting pursuit of buying, selling or investing in real estate is a major financial decision and Debora will guide each client every step of the way. Debora is also a floral designer and former proprietor of a floral shop. With her artistic abilities, Debora loves to share her ideas with her clients’ in regard to the aesthetic aspects of their real estate interests.<br/><br/>As a licensee several years back, Debora shifted her focus working as a Real Estate Project Manager for a non-profit, community development corporation. As part of the project management team her work consisted of identifying properties for acquisition, with the broad understanding of funding programs, project budgets and project performance. Her endless experiences bring her back into the field of real estate, taking her ‘A’ Game to AUGUST ASSOCIATES LLC, YOUR VALUED GUIDE IN REAL ESTATE.</p>
-						<h4 class="agentEmail agentElement">Email: <a href="mailto:debora@necompass.com">debora@necompass.com</a></h4>
-					</div>
-				</div>
 			</div>
 		</div>
 		<?php include('bin/footer.html'); ?>

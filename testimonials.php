@@ -59,6 +59,7 @@
 					<h2 id="testimonialsAddText">Add Your Own</h2>
 					<form id="testimonialsForm" action="javascript:submitTestimonialsForm()">
 						<input type="text" title="Name" id="testimonialsFormName" placeholder="Name" required>
+						<input type="email" title="Email" id="testimonialsFormEmail" placeholder="Email" required>
 						<textarea rows="10" title="Text" id="testimonialsFormText" placeholder="Enter your Message Here" required></textarea>
 						<button id="testimonialsFormSubmit">Submit</button>
 					</form>

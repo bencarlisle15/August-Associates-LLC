@@ -7,5 +7,5 @@ function submitTestimonialsForm() {
 }
 
 function createBody() {
-	return "Website Testimonial Page Add Testimonial Form\nName: " + document.getElementById("testimonialsFormName").value + "\nTestimonial: " +  document.getElementById("testimonialsFormText").value;
+	return "Source: Website Testimonial Page Add Testimonial Form\nName: " + document.getElementById("testimonialsFormName").value + " \nEmail: " + document.getElementById("testimonialsFormEmail").value + " \nPhone: \nAddress: \nMLS Number: \nNotes: Testimonial: " +  document.getElementById("testimonialsFormText").value;
 }
