@@ -51,23 +51,25 @@
 					if (!file_exists($dir)) {
 						$dir = "testing/images/largeRets/";
 					}
+					$empty = md5(file_get_contents($dir . "not_found.txt"));
 					//if the are photos, create a slideshow
 					if ($res['PhotoCount']) {
 						$total = $res['PhotoCount'];
-						echo "<div id='houseSlideshow'>";
+						$toWrite = "<div id='houseSlideshow'>";
 						//loops through photos to add them to the slideshow
 						for ($i = 0; $i < $res['PhotoCount']; $i++) {
 							//determines if the photo is a duplicate or doesn't exist
-
-							if (!file_exists($dir . $res['MLSNumber'] . '/' . $i . '.jpg') || $i >= 1 && file_exists($dir . $res['MLSNumber'] . '/' . ($i-1) . '.jpg') && md5(file_get_contents($dir . $res['MLSNumber'] . '/' . ($i-1) . '.jpg')) == md5(file_get_contents($dir . $res['MLSNumber'] . '/' . $i . '.jpg'))) {
+							$hash = md5(file_get_contents($dir . $res['MLSNumber'] . '/' . $i . '.jpg'));
+							if (!file_exists($dir . $res['MLSNumber'] . '/' . $i . '.jpg') || $i >= 1 && file_exists($dir . $res['MLSNumber'] . '/' . ($i-1) . '.jpg') && md5(file_get_contents($dir . $res['MLSNumber'] . '/' . ($i-1) . '.jpg')) == $hash || $hash == $empty) {
 								//decreases the total number of photos
 								$total--;
 								continue;
 							}
 							//adds the image
-							echo "<div class='houseWrapper'><img src='" . $dir . htmlspecialchars($res['MLSNumber']) . "/" . $i . ".jpg' alt='Picture of the House' class='houseImage'/></div>";
+							$toWrite .= "<div class='houseWrapper'><img src='" . $dir . htmlspecialchars($res['MLSNumber']) . "/" . $i . ".jpg' alt='Picture of the House' class='houseImage'/></div>";
 						}
 						if ($total) {
+							echo $toWrite;
 							echo "<a onclick='plusSlides(-1)' id='prev'>&#10094;</a>
 								<a onclick='plusSlides(1)' id='next'>&#10095;</a>
 							</div>
