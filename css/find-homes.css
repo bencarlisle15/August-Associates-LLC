@@ -101,6 +101,8 @@
 	display: block;
 	margin: 0px;
 	font-size: 11pt;
+	overflow: hidden;
+	white-space: nowrap;
 }
 
 .houseInformation {
