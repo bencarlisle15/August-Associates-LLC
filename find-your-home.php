@@ -47,6 +47,10 @@
 		<div id="yourHomeSection" class="section">
 			<div id="infoWrapper">
 				<?php
+					$dir = "images/largeRets/";
+					if (!file_exists($dir)) {
+						$dir = "testing/images/largeRets";
+					}
 					//if the are photos, create a slideshow
 					if ($res['PhotoCount']) {
 						$total = $res['PhotoCount'];
@@ -54,13 +58,14 @@
 						//loops through photos to add them to the slideshow
 						for ($i = 0; $i < $res['PhotoCount']; $i++) {
 							//determines if the photo is a duplicate or doesn't exist
-							if (!file_exists('images/largeRets/' . $res['MLSNumber'] . '/' . $i . '.jpg') && !file_exists('testing/images/largeRets/' . $res['MLSNumber'] . '/' . $i . '.jpg') || $i >= 1 && md5(file_get_contents('images/largeRets/' . $res['MLSNumber'] . '/' . ($i-1) . '.jpg')) == md5(file_get_contents('images/largeRets/' . $res['MLSNumber'] . '/' . $i . '.jpg'))) {
+
+							if (!file_exists($dir . $res['MLSNumber'] . '/' . $i . '.jpg') || $i >= 1 && file_exists($dir . $res['MLSNumber'] . '/' . ($i-1) . '.jpg') && md5(file_get_contents($dir . $res['MLSNumber'] . '/' . ($i-1) . '.jpg')) == md5(file_get_contents($dir . $res['MLSNumber'] . '/' . $i . '.jpg'))) {
 								//decreases the total number of photos
 								$total--;
 								continue;
 							}
 							//adds the image
-							echo "<div class='houseWrapper'><img src='images/largeRets/" . htmlspecialchars($res['MLSNumber']) . "/" . $i . ".jpg' alt='Picture of the House' class='houseImage'/></div>";
+							echo "<div class='houseWrapper'><img src='" $dir . htmlspecialchars($res['MLSNumber']) . "/" . $i . ".jpg' alt='Picture of the House' class='houseImage'/></div>";
 						}
 						if ($total) {
 							echo "<a onclick='plusSlides(-1)' id='prev'>&#10094;</a>
