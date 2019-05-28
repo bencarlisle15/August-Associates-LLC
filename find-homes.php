@@ -201,6 +201,10 @@
 						}
 						$rets = getNextSet(0);
 						function getNextSet($pageNumber) {
+							$dir = "images/largeRets/";
+							if (!file_exists($dir)) {
+								$dir = "testing/images/largeRets/";
+							}
 							//global variables
 							global $query, $conn;
 							$newQuery = $query . " LIMIT 40 OFFSET " . 40*$pageNumber++;
@@ -213,8 +217,8 @@
 								echo "<div class='house' onclick='openHouse(" . htmlspecialchars($row['MLSNumber']) . ")'><div class='houseImageWrapper'>";
 								//checks if the image is valid and only adds it if it is
 								//checks both testing and current since for the main branch
-								if (@getimagesize('images/rets/' . $row['MLSNumber'] . '/0.jpg') || @getimagesize('testing/images/rets/' . $row['MLSNumber'] . '/0.jpg')) {
-									echo "<img class='houseElement houseImage' alt='Picture of House' src='images/rets/" . htmlspecialchars($row['MLSNumber']) . "/0.jpg'/>";
+								if (@getimagesize($dir . $row['MLSNumber'] . '/0.jpg')) {
+									echo "<img class='houseElement houseImage' alt='Picture of House' src='" . $dir . htmlspecialchars($row['MLSNumber']) . "/0.jpg'/>";
 								} else {
 									echo "<img class='houseElement houseImage' alt='House not Found' src='images/compass.png'/>";
 								}
@@ -225,7 +229,7 @@
 						}
 
 						function squareFeet($row) {
-							$returnVal = number_format((float) $row['ApproxLotSquareFoot']) . "  Square Feet";
+							$returnVal = number_format((float) $row['SqFtTotal']) . "  Square Feet";
 							if ($returnVal <= 0) {
 								$returnVal = "Lot Size Not Listed";
 							}
