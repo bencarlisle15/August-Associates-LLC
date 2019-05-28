@@ -65,7 +65,7 @@
 								continue;
 							}
 							//adds the image
-							echo "<div class='houseWrapper'><img src='" $dir . htmlspecialchars($res['MLSNumber']) . "/" . $i . ".jpg' alt='Picture of the House' class='houseImage'/></div>";
+							echo "<div class='houseWrapper'><img src='" . $dir . htmlspecialchars($res['MLSNumber']) . "/" . $i . ".jpg' alt='Picture of the House' class='houseImage'/></div>";
 						}
 						if ($total) {
 							echo "<a onclick='plusSlides(-1)' id='prev'>&#10094;</a>
