@@ -49,7 +49,7 @@
 				<?php
 					$dir = "images/largeRets/";
 					if (!file_exists($dir)) {
-						$dir = "testing/images/largeRets";
+						$dir = "testing/images/largeRets/";
 					}
 					//if the are photos, create a slideshow
 					if ($res['PhotoCount']) {
