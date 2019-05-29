@@ -5,7 +5,6 @@ var houseWrapper = document.getElementById("housesWrapper");
 var houses = document.getElementById("houses");
 houseWrapper.onscroll = function(ev) {
 	if (houses.getBoundingClientRect().bottom <= window.innerHeight + 50) {
-		console.log("Adding more")
 		var xhr = new XMLHttpRequest();
 		xhr.open("POST", window.location.href, true);
 		xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
