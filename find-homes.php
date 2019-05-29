@@ -133,147 +133,68 @@
 		return;
 	}
 	include('bin/head.php');
-?>
-		<link rel="stylesheet" type="text/css" href="/css/find-homes.css">
-		<link rel="canonical" href="https://www.augustassociatesllc.com/find-homes" />
-		<title>August Associates LLC - Find Homes</title>
-		<meta name="description" content="Search for your new home here. August Associates, your valued guide in real estate." />
-	</head>
-	<body>
-		<?php include('bin/nav.php'); ?>
-		<div id="homesSection" class="section">
-			<h2 id="findTitle">Find Your New Home</h2>
-			<form id= "searchForm" method="POST"action="phpRequests/submitSearchForm.php">
-				<div id="searchBox">
-					<div class="searchFormLine">
-						<input name="searchAddresses" type="text" title="Addresses" id="searchAddresses" placeholder="Addresses" class="searchElement">
-						<input name="searchCities" type="text" title="Cities" id="searchCities" placeholder="Cities" class="searchElement">
-						<input name="searchZips" type="text" title="Zipcodes" id="searchZips" placeholder="Zipcodes" class="searchElement">
-						<select name="searchPropertyType" id="searchPropertyType" title="Property Type" class="searchElement">
-							<option title="Property Type" value="" selected>Property Type</option>
-							<option title="Single Family" value="Single Family">Single Family</option>
-							<option title="Rental" value="Rental">Rental</option>
-							<option title="Multi Family" value="Multi Family">Multi Family</option>
-							<option title="Condo" value="Condominium">Condo</option>
-							<option title="Vacant Land" value="Vacant Land">Vacant Land</option>
-						</select>
-					</div>
-					<div class="searchFormLine">
-						<input name="searchMinPrice" type="text" title="Min Price" id="searchMinPrice" placeholder="Min Price" class="searchElement">
-						<input name="searchMaxPrice" type="text" title="Max Price" id="searchMaxPrice" placeholder="Max Price" class="searchElement">
-						<input name="searchBeds" type="number" title="Min Bedrooms" id="searchBeds" placeholder="Min Bedrooms" class="searchElement">
-						<input name="searchBaths" type="number" title="Min Bathrooms" id="searchBaths" placeholder="Min Bathrooms" class="searchElement">
-						<input name="searchMinFeet" type="number" title="Min Square Feet" id="searchMinFeet" placeholder="Min Square Feet" class="searchElement">
-						<input name="searchMaxFeet" type="number" title="Max Square Feet" id="searchMaxFeet" placeholder="Max Square Feet" class="searchElement">
-					</div>
-					<div id="searchSubmitWrapper" class="searchFormLine">
-						<button id="searchSubmit" class="searchElement">Search</button>
-					</div>
-				</div>
-				<div id="findButtons">
-					<input id="searchAreaInput" name="searchAreaInput">
-					<button id="searchThisArea" name="searchThisArea" class="findButton" type="button" onclick="searchArea()" value="">Search This Area</button>
-					<select id="sortArray" name="sortArray" class="findButton" onchange="this.form.submit()" title="Sort By">
-						<option title="Sort By" value="" selected>Sort By</option>
-						<option title="Price (Low to High)" value="plh">Price &#x21C8;</option>
-						<option title="Price (High to Low)" value="phl">Price &#x21CA;</option>
-						<option title="Size (Low to High)" value="slh">Size &#x21C8;</option>
-						<option title="Size (High to Low)" value="shl">Size &#x21CA;</option>
-					</select>
-					<button id="resetSearchButton" class="findButton" type="button" onclick="resetSearch()">Reset Search</button>
-					<button id="mapGridSwitch" class="findButton" type="button" value="grid" onclick="switchView()">Switch to Map View</button>
-				</div>
-			</form>
-			<div id="housesWrapper">
-				<div id="houses">
-					<?php
-						if (isset($_GET['searchCities'])) {
-							switch (strtolower($_GET['searchCities'])) {
-								case "jamestown":
-									$name = "Jamestown";
-									$img = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Claiborne_Pell_Newport_Bridge.jpg/220px-Claiborne_Pell_Newport_Bridge.jpg";
-									$text = "Jamestown is a town in Newport County, Rhode Island in the United States. The population was 5,405 at the 2010 census. Jamestown is situated almost entirely on Conanicut Island, the second largest island in Narragansett Bay. It also includes the uninhabited Dutch Island and Gould Island. Jamestown is ranked as the 444th wealthiest place to live in the United States as of 2016, with a median home sale price of $1,229,039.<br/><br/>According to the United States Census Bureau, the town has an area of 35.3 square miles (91 km2), of which 9.7 square miles (25 km2) is land and 25.6 square miles (66 km2) is water. The total area is 72.55% water.";
-									break;
-							}
-							if ($name) {
-								echo "<div id='additionalInfo'><h2 id='additionalTitle'>Homes in " . $name . "</h2><div id='additionalImageAndText'><img id='additionalImage' src='" . $img . "'/><p id='additionalText'>" . $text .  "</p></div></div>";
-							}
-						}
-						$rets = getNextSet(0);
-						function getNextSet($pageNumber) {
-							$dir = "images/largeRets/";
-							if (!file_exists($dir)) {
-								$dir = "testing/images/largeRets/";
-							}
-							//global variables
-							global $query, $conn;
-							$newQuery = $query . " LIMIT 40 OFFSET " . 40*$pageNumber++;
-							// echo $newQuery;
-							$json = [];
-							$result = mysqli_query($conn, $newQuery);
-							while($row = $result->fetch_assoc()) {
-								//adds result to json
-								array_push($json, $row);
-								echo "<div class='house' onclick='openHouse(" . htmlspecialchars($row['MLSNumber']) . ")'><div class='houseImageWrapper'>";
-								//checks if the image is valid and only adds it if it is
-								//checks both testing and current since for the main branch
-								if (@getimagesize($dir . $row['MLSNumber'] . '/0.jpg')) {
-									echo "<img class='houseElement houseImage' alt='Picture of House' src='" . $dir . htmlspecialchars($row['MLSNumber']) . "/0.jpg'/>";
-								} else {
-									echo "<img class='houseElement houseImage' alt='House not Found' src='images/compass.png'/>";
-								}
-								$hasPrevious = $row['PreviousPrice'];
-								echo "</div><div class='houseInformation'><div class='pricesSection'><h3 class='previousPrice'>" . ($hasPrevious ? ("$" . number_format((float) $row['PreviousPrice'])) : "") . "</h3><h3 class='currentPrice " . ($hasPrevious ? "hasPrevious" : "") . "'>$" . number_format((float) $row['CurrentPrice']) . "</h3></div><p class='houseElement'>" . htmlspecialchars(ucwords(strtolower($row['FullStreetNum']))) . "</p><p class='houseElement'>" . htmlspecialchars($row['City']) ."</p><p class='houseElement'>" . getPropertyType($row['PropertyType']) . "</h4><p class='houseElement'>" . htmlspecialchars(squareFeet($row)) . "</p></div></div>";
-							}
-							return $json;
-						}
 
-						function squareFeet($row) {
-							$returnVal = number_format((float) $row['SqFtTotal']) . "  Square Feet";
-							if ($returnVal <= 0) {
-								$returnVal = "Lot Size Not Listed";
-							}
-							return $returnVal;
-						}
-
-						function getPropertyType($type) {
-							switch ($type) {
-								case "Rental":
-									return "Rental";
-								case "2-4 Units Multi Family":
-									return "Multi Family";
-								case "Condominium":
-									return "Condo";
-								case "Vacant Land":
-									return "Land";
-								case "Single Family":
-									return "Single Family";
-								default:
-									return "";
-							}
-						}
-					?>
-				</div>
-				<h2 id="loadingHomes">Loading More Homes...</h2>
-			</div>
-			<h6 id="useInfo">“IDX information is provided exclusively for consumers’ personal, non-commercial use and may not be used for any purpose other than to identify prospective properties consumers may be interested in purchasing. Information is deemed reliable but is not guaranteed.  © 2018 State-Wide Multiple Listing Service. All rights reserved.”</h6>
-			<div id="mapHouseWrapper" onclick="removeHouseOverlay()">
-			</div>
-			<div id="map">
-			</div>
-		</div>
-		<?php include('bin/footer.html'); ?>
-		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTXHu0_banpDsOMFQSDHOxoqdooVQxreI"></script>
-		<script src="/js/find-homes.js"></script>
-		<script>
-			//parses houses to json
-			var json = JSON.parse(<?php echo json_encode(json_encode($rets)); ?>);
-			//inits map from json
-			initMap(json);
-			if (!json || json.length < 40) {
-				//either error or query too specific
-				document.getElementById("loadingHomes").innerHTML = 'No More Properties Found. Try Changing Your Search Parameters';
+	function getNextSet($pageNumber) {
+		$dir = "images/largeRets/";
+		if (!file_exists($dir)) {
+			$dir = "testing/images/largeRets/";
+		}
+		//global variables
+		global $query, $conn;
+		$newQuery = $query . " LIMIT 40 OFFSET " . 40*$pageNumber++;
+		// echo $newQuery;
+		$json = [];
+		$result = mysqli_query($conn, $newQuery);
+		while($row = $result->fetch_assoc()) {
+			//adds result to json
+			array_push($json, $row);
+			echo "<div class='house' onclick='openHouse(" . htmlspecialchars($row['MLSNumber']) . ")'><div class='houseImageWrapper'>";
+			//checks if the image is valid and only adds it if it is
+			//checks both testing and current since for the main branch
+			if (@getimagesize($dir . $row['MLSNumber'] . '/0.jpg')) {
+				echo "<img class='houseElement houseImage' alt='Picture of House' src='" . $dir . htmlspecialchars($row['MLSNumber']) . "/0.jpg'/>";
+			} else {
+				echo "<img class='houseElement houseImage' alt='House not Found' src='images/compass.png'/>";
 			}
-		</script>
-	</body>
+			$hasPrevious = $row['PreviousPrice'];
+			echo "</div><div class='houseInformation'><div class='pricesSection'><h3 class='previousPrice'>" . ($hasPrevious ? ("$" . number_format((float) $row['PreviousPrice'])) : "") . "</h3><h3 class='currentPrice " . ($hasPrevious ? "hasPrevious" : "") . "'>$" . number_format((float) $row['CurrentPrice']) . "</h3></div><p class='houseElement'>" . htmlspecialchars(ucwords(strtolower($row['FullStreetNum']))) . "</p><p class='houseElement'>" . htmlspecialchars($row['City']) ."</p><p class='houseElement'>" . getPropertyType($row['PropertyType']) . "</h4><p class='houseElement'>" . htmlspecialchars(squareFeet($row)) . "</p></div></div>";
+		}
+		return $json;
+	}
+
+	function squareFeet($row) {
+		$returnVal = number_format((float) $row['SqFtTotal']) . "  Square Feet";
+		if ($returnVal <= 0) {
+			$returnVal = "Lot Size Not Listed";
+		}
+		return $returnVal;
+	}
+
+	function getPropertyType($type) {
+		switch ($type) {
+			case "Rental":
+				return "Rental";
+			case "2-4 Units Multi Family":
+				return "Multi Family";
+			case "Condominium":
+				return "Condo";
+			case "Vacant Land":
+				return "Land";
+			case "Single Family":
+				return "Single Family";
+			default:
+				return "";
+		}
+	}
+?>
+
+		<?php
+			include('bin/nav.php');
+			if ($detect->isMobile() || substr($_SERVER[HTTP_HOST], 0, 5) == "www.m" || $_SERVER[HTTP_HOST][0] == 'm') {
+				include('find-homesMobile.php');
+			} else {
+				include('find-homesDesktop.php');
+			}
+			include('bin/footer.html');
+		?>
 </html>
